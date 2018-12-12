@@ -117,7 +117,6 @@ public class MainPlayer extends Player{
     }
 
     /**
-    TODO: make movement change relative to frame time
     * Draws the player to the Window
     * @param g the graphics context
     */
@@ -127,7 +126,7 @@ public class MainPlayer extends Player{
       Point mousePos = new Point();
       transform.setToTranslation(Drawing.width()*0.5 - 50, Drawing.height()*0.5 - 50);
       //TODO fix mouse rotation
-      transform.rotate(mousePos.getY(),  mousePos.getX(), 50, 50);
+      //transform.rotate(mousePos.getY(),  mousePos.getX(), 50, 50);
       ((Graphics2D)(g)).drawImage(img, transform, null);
 
       //draws the equipped item
