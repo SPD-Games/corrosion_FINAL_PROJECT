@@ -23,4 +23,6 @@ import corrosion.entity.projectile.Arrow;
 public class Rifle{
   public Rifle(){
   }
+  
+  
 }
