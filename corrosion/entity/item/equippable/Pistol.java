@@ -65,21 +65,7 @@ public class Pistol extends equippable{
   
   public void draw(Graphics g, long t){}
   
-  public void attack(Point p){
-    //checks if crossbow is reloaded
-    if (sprite.isState(SHOOT_READY, false)){
-      //creates a new arrow
-      new Arrow(player, p.getX(), p.getY());
-      //starts shoot animation
-      sprite.startAnimation(1);
-    }
-  }
-
-
   
-  public void attack2(Point p){
-    reload();
-  }
 
   public void reload(){
     if (sprite.isState(RELOAD_READY, false)){
