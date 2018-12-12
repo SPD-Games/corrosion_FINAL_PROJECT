@@ -37,7 +37,7 @@ public class Drawing extends JPanel{
       repaint();
     }
   };
-  private Timer frameTimer = new Timer(0, newFrameListener);//no fps limit
+  private Timer frameTimer = new Timer(2, newFrameListener);//500fps limit
 
   /**
   * Gets the current fps

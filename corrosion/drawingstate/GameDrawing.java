@@ -8,6 +8,7 @@ package corrosion.drawingstate;
 import java.awt.*;
 
 import corrosion.Drawing;
+import corrosion.entity.player.*;
 
 public class GameDrawing extends DrawingState{
 
@@ -15,7 +16,9 @@ public class GameDrawing extends DrawingState{
   * Initiates the drawing state
   */
   public void init(){
+    Player.init();
 
+    MainPlayer.spawn(0, 0);
   }
 
   /**
@@ -32,6 +35,7 @@ public class GameDrawing extends DrawingState{
     //draw entities
 
     //draw mainplayer
+    MainPlayer.getMainPlayer().draw(g, t);
 
     //draw static menus
   }

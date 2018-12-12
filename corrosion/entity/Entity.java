@@ -12,7 +12,7 @@ import java.awt.geom.AffineTransform;
 
 abstract public class Entity{
   protected double xPos,yPos,rotation;
-
+  protected AffineTransform transform = new AffineTransform();
   /**
   * Main Constructor
   * @param x the x position of the Entity

@@ -6,6 +6,137 @@
 
 package corrosion.entity.player;
 
-public class MainPlayer{
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import javax.swing.*;
 
+import corrosion.Drawing;
+import corrosion.entity.player.Player;
+
+public class MainPlayer extends Player{
+    private static MainPlayer mainPlayer;
+
+    //direction the player is moving (keyboard input)
+    private boolean up, down, left, right;
+
+    /**
+    * Gets the main player Object
+    * @return the main player Object
+    */
+    public static MainPlayer getMainPlayer(){
+      return mainPlayer;
+    }
+
+    /**
+    * Creates the new MainPlayer
+    * @param xPos the x position of the player
+    * @param yPos the y position of the
+    */
+    public static void spawn(double xPos, double yPos){
+      mainPlayer = new MainPlayer(xPos, yPos);
+    }
+
+    /**
+     * Main Constructor
+     * @param xPos x position of the position
+     * @param yPos y position of the position
+    */
+    public MainPlayer(double xPos, double yPos){
+      super(xPos, yPos);
+      //equipped = new CrossBow(this);
+    }
+
+    /**
+     * Sets the value of up
+     * @param up the up to set
+     */
+    public void setUp(boolean up) {
+    	this.up = up;
+    }
+
+    /**
+     * Sets the value of left
+     * @param left the left to set
+     */
+    public void setLeft(boolean left) {
+    	this.left = left;
+    }
+
+    /**
+     * Sets the value of down
+     * @param down the down to set
+     */
+    public void setDown(boolean down) {
+    	this.down = down;
+    }
+
+    /**
+      * Sets the value of right
+     * @param right the right to set
+     */
+    public void setRight(boolean right) {
+    	this.right = right;
+    }
+
+    /**
+    * TODO synchronized it
+    * Uses the equipped item
+    * @param p the point relative to the location of the player that was attacked (mouse input)
+    */
+    public void attack(Point p){
+      if(equipped == null){
+
+      } else {
+        equipped.attack(p);
+      }
+    }
+
+    /**
+    * TODO synchronized it
+    * Uses the secondary function of the equipped item
+    * @param p the point relative to the location of the player that was attacked (mouse input)
+    */
+    public void attack2(Point p){
+      if(equipped == null){
+
+      } else {
+        equipped.attack2(p);
+      }
+    }
+
+    /**
+    * TODO synchronized it
+    * reloads the equipped item
+    */
+    public void reload(){
+      if(equipped == null){
+
+      } else {
+        equipped.reload();
+      }
+    }
+
+    /**
+    TODO: make movement change relative to frame time
+    * Draws the player to the Window
+    * @param g the graphics context
+    */
+    public void draw(Graphics g, long t){
+      //get the currsor location for aiming the equipped item
+      //Point mousePos = Mouse.getPosition();
+      Point mousePos = new Point();
+      transform.setToTranslation(Drawing.width()*0.5 - 50, Drawing.height()*0.5 - 50);
+      //TODO fix mouse rotation
+      transform.rotate(mousePos.getY(),  mousePos.getX(), 50, 50);
+      ((Graphics2D)(g)).drawImage(img, transform, null);
+
+      //draws the equipped item
+      drawEquipped(g);
+      //TODO make it so its not faster diagonal
+      //moves the player
+      if (up){yPos -= t * 0.5;}
+      if (down){yPos += t * 0.5;}
+      if (left){xPos -= t * 0.5;}
+      if (right){xPos += t * 0.5;}
+    }
 }
