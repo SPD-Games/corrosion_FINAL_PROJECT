@@ -31,7 +31,7 @@ public class GameDrawing extends DrawingState{
 
     //draw entities
 
-    //draw player
+    //draw mainplayer
 
     //draw static menus
   }

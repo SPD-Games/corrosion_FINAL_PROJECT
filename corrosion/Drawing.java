@@ -68,6 +68,8 @@ public class Drawing extends JPanel{
   */
   public Drawing(){
     panel = this;
+
+    //start drawing and fps timers
     fpsTimer.start();
     frameTimer.start();
   }

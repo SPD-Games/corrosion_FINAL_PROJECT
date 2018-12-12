@@ -46,6 +46,19 @@ abstract public class Entity{
   }
 
   /**
+   * Sets the positon
+   * @param x the x value of the Position
+   * @param y the y value of the Position
+   * @param y the angle in radians
+   *
+  */
+  public void setPos(double x, double y, double rotation){
+    this.xPos = x;
+    this.yPos = y;
+    this.rotation = rotation;
+  }
+
+  /**
    * Gets the x value of position
    * @return the x value of the Position
   */

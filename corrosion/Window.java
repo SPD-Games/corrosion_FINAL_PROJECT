@@ -9,12 +9,24 @@ import javax.swing.JFrame;
 import corrosion.Drawing;
 
 public class Window extends JFrame {
+
+  private static Window window;
+
+  /**
+  * Gets the main Window
+  * @return the main window
+  */
+  public static Window getWindow(){
+    return window;
+  }
+
   /**
    * Main Constructor
   */
   public Window() {
     //sets up the window
     init();
+    window = this;
   }
 
   /**
