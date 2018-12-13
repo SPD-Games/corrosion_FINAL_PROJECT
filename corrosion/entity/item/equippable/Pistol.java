@@ -1,4 +1,4 @@
-//Henry Lim
+//Henry Lim, Edward Pei
 //Dec 12, 2018
 //Pistol class
 package corrosion.entity.item.equippable;
