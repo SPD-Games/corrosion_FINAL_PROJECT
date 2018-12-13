@@ -7,5 +7,23 @@ package corrosion.entity.item;
 import corrosion.entity.Entity;
 
 abstract public class Item extends Entity{
-  //TODO cant implement till inventory is implemented
+  /**
+  * Main Constructor
+  * @param x the x position of the Item
+  * @param y the y position of the Item
+  * @param r the rotation applied to the Item
+  */
+  public Item(double x, double y, double r){
+    super(x,y,r);
+  }
+
+  /**
+  * Main Constructor
+  * @param x the x position of the Item
+  * @param y the y position of the Item
+  * @param r the rotation applied to the Item
+  */
+  public Item(){
+    super();
+  }
 }

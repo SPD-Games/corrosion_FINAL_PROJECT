@@ -125,7 +125,7 @@ public class MainPlayer extends Player{
     public void draw(Graphics g, long t){
       //get the currsor location for aiming the equipped item
       Point mousePos = Mouse.getPosition();
-      transform.setToTranslation(-xPos-50, -yPos-50);
+      transform.setToTranslation(xPos-50, yPos-50);
       //TODO fix mouse rotation
       transform.rotate(mousePos.getY(),  mousePos.getX(), 50, 50);
       ((Graphics2D)(g)).drawImage(img, transform, null);
@@ -134,9 +134,9 @@ public class MainPlayer extends Player{
       drawEquipped(g);
       //TODO make it so its not faster diagonal
       //moves the player
-      if (up){yPos += t * 0.5;}
-      if (down){yPos -= t * 0.5;}
-      if (left){xPos += t * 0.5;}
-      if (right){xPos -= t * 0.5;}
+      if (up){yPos -= t * 0.5;}
+      if (down){yPos += t * 0.5;}
+      if (left){xPos -= t * 0.5;}
+      if (right){xPos += t * 0.5;}
     }
 }

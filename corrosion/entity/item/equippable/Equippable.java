@@ -19,7 +19,18 @@ abstract public class Equippable extends Item{
    * @param p the player that has the crossbow equipped
   */
   public Equippable(Player p){
+    this(0,0,0);
     player = p;
+  }
+
+  /**
+  * Main Constructor
+  * @param x the x position of the Equippable
+  * @param y the y position of the Equippable
+  * @param r the rotation applied to the Equippable
+  */
+  public Equippable(double x, double y, double r){
+    super(x,y,r);
   }
 
   /**

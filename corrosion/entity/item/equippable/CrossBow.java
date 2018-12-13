@@ -17,6 +17,7 @@ import java.awt.Point;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 
+import corrosion.entity.item.*;
 import corrosion.Sprite;
 import corrosion.entity.Entity;
 import corrosion.entity.player.Player;
@@ -66,26 +67,39 @@ public class CrossBow extends Equippable{
   }
 
   /**
+   * Main Constructor
+   * @param p the player that has the crossbow equipped
+  */
+  public CrossBow(double xPos, double yPos, double rotation){
+    super(xPos,yPos,rotation);
+    this.sprite = new Sprite(icon, new int[]{1,2}, sprites, new int[]{500,50});
+  }
+
+  /**
   * Draws a crossbow equipped to the player
   * @param g the graphics context
   */
   public void drawEquipped(Graphics g){
     transform = player.getTransform();
     transform.translate(-18, -110);
-    ((Graphics2D)(g)).drawImage(sprite.getFrame(), player.getTransform(), null);
+    ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
-  public void draw(Graphics g, long t){}
+  public void draw(Graphics g, long t){
+    transform.setToTranslation(xPos -18, yPos -110);
+    ((Graphics2D)(g)).drawImage(sprite.getIcon(), transform, null);
+  }
 
   /**
   * Shoots an arrow
   * @param p the pointer position on the screen relative to the player
   */
   public void attack(Point p){
+    System.out.println(p);
     //checks if crossbow is reloaded
     if (sprite.isState(SHOOT_READY, false)){
       //creates a new arrow
-      //new Arrow(player, p.getX(), p.getY());
+      new Arrow(player, p.getX(), p.getY());
       //starts shoot animation
       sprite.startAnimation(1);
     }
