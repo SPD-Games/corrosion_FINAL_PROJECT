@@ -11,6 +11,9 @@ import corrosion.Drawing;
 import corrosion.entity.player.*;
 import corrosion.entity.item.equippable.*;
 import corrosion.input.*;
+import java.awt.geom.AffineTransform;
+
+
 public class GameDrawing extends DrawingState{
 
   public static double zoom = 0.5;
@@ -45,6 +48,10 @@ public class GameDrawing extends DrawingState{
     MainPlayer.getMainPlayer().draw(g, t);
 
     //draw static menus
+    ((Graphics2D)g).setTransform(new AffineTransform());
+    //((Graphics2D)g).scale(3, 3);
+    String fps = Drawing.getFps()+ "";
+    g.drawChars(fps.toCharArray(), 0, fps.length(), 50, 50);
   }
 
 
