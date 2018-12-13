@@ -1,8 +1,9 @@
 //Henry Lim
-//Dec. 13, 2018
-//Rifle class
+//December 13th, 2018
+//Bow class
+
 package corrosion.entity.item.equippable;
-//imports
+
 import javax.swing.Timer;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -20,23 +21,26 @@ import corrosion.entity.Entity;
 import corrosion.entity.player.Player;
 //import corrosion.entity.projectile.Arrow;
 
-public class Rifle extends Equippable{
-    //TODO move all images and draw handling in Usable
+public class CrossBow extends Equippable{
+  //TODO move all images and draw handling in Usable
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[2][];
 
   private final int[] SHOOT_READY = {0,3};
   private final int[] RELOAD_READY = {1,2};
   public Sprite sprite;
-  
+
+  /**
+  * Initializes the player class
+  */
   public static void init(){
     try{
       //loads icon
-      icon = ImageIO.read(new File("sprites/rifle/icon.png"));
+      icon = ImageIO.read(new File("sprites/crossbow/icon.png"));
       //loads relaod animations
       sprites[0] = new BufferedImage[4];
       for (int i = 1; i <= 4; ++i){
-        sprites[0][i-1] = ImageIO.read(new File("sprites/rifle/animation/frame" + i + ".png"));
+        sprites[0][i-1] = ImageIO.read(new File("sprites/crossbow/animation/frame" + i + ".png"));
       }
 
       //loads shooting animations
@@ -46,16 +50,24 @@ public class Rifle extends Equippable{
       }
     }catch(Exception e){
       //exits on error with message
-      System.out.println("Reading Rifle Sprite: " + e);
+      System.out.println("Reading CrossBow Sprite: " + e);
       System.exit(-1);
     }
   }
-  
-  public Rifle(Player p){
+
+  /**
+   * Main Constructor
+   * @param p the player that has the crossbow equipped
+  */
+  public CrossBow(Player p){
     super(p);
     this.sprite = new Sprite(icon, new int[]{1,2}, sprites, new int[]{500,50});
   }
-  
+
+  /**
+  * Draws a crossbow equipped to the player
+  * @param g the graphics context
+  */
   public void drawEquipped(Graphics g){
     transform = player.getTransform();
     transform.translate(-18, -110);
@@ -63,11 +75,17 @@ public class Rifle extends Equippable{
   }
 
   public void draw(Graphics g, long t){}
-  
-  
+
+  /**
+  * Shoots an arrow
+  * @param p the pointer position on the screen relative to the player
+  */
   public void attack(Point p){
-    //checks if rifle is reloaded
+    //checks if crossbow is reloaded
     if (sprite.isState(SHOOT_READY, false)){
+      //creates a new arrow
+      //new Arrow(player, p.getX(), p.getY());
+      //starts shoot animation
       sprite.startAnimation(1);
     }
   }
@@ -90,6 +108,4 @@ public class Rifle extends Equippable{
       sprite.startAnimation(0);
     }
   }
-  
-  
 }
