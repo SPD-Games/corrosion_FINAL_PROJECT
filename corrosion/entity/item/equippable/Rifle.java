@@ -1,4 +1,4 @@
-//Henry Lim
+//Henry Lim,Edward Pei
 //Dec. 13, 2018
 //Rifle class
 package corrosion.entity.item.equippable;
@@ -84,7 +84,7 @@ public class Rifle extends Equippable{
   * Reloads the weapon
   */
   public void reload(){
-    //checks if crossbow is ready to be reloaded
+    //checks if rifle is ready to be reloaded
     if (sprite.isState(RELOAD_READY, false)){
       //starts the reload
       sprite.startAnimation(0);
