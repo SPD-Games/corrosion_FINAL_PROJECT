@@ -22,6 +22,7 @@ import corrosion.entity.projectile.Arrow;
 
 
 public class Pistol extends Equippable{
+  // get the icons and animations for the pistol
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[2][];
   private final int[] SHOOT_READY = {0,3};
@@ -29,6 +30,9 @@ public class Pistol extends Equippable{
   public Sprite sprite;
 
 
+    /**
+    *Initialize the Pistol object
+    */
     public static void init(){
     try{
       //loads icon
@@ -51,13 +55,20 @@ public class Pistol extends Equippable{
     }
   }
 
-
+  /**
+  * constuctor for the pistol
+  * @param p player who has the pistol
+  */
   public Pistol(Player p){
     super(p);
     this.sprite = new Sprite(icon, new int[]{1,2}, sprites, new int[]{500,50});
   }
 
-    public void drawEquipped(Graphics g){
+  /**
+  * Draw the item
+  * @param g the graphics tool used to draw
+  */
+  public void drawEquipped(Graphics g){
     if (player == null){return;}
     transform = player.getTransform();
     transform.translate(-18, -110);
@@ -68,7 +79,11 @@ public class Pistol extends Equippable{
 
 
 
+  /**
+  * reloads the pistol
+  */
   public void reload(){
+    // only reload if it is ready to reload
     if (sprite.isState(RELOAD_READY, false)){
       sprite.startAnimation(0);
     }
