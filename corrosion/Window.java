@@ -7,6 +7,7 @@ package corrosion;
 import javax.swing.JFrame;
 
 import corrosion.Drawing;
+import corrosion.input.*;
 
 public class Window extends JFrame {
 
@@ -34,8 +35,10 @@ public class Window extends JFrame {
   */
   public void init() {
     add(new Drawing());//adds jFrame
-    //addKeyListener(new Keyboard());//adds Keyboard
-   //addMouseListener(new Mouse());//add Mouse
+    addKeyListener(new Keyboard());//adds Keyboard
+    Mouse m = new Mouse();
+    addMouseListener(m);//add Mouse
+    addMouseWheelListener(m);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setExtendedState(JFrame.MAXIMIZED_BOTH);
     setUndecorated(true);

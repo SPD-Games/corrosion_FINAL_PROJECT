@@ -75,6 +75,13 @@ abstract public class Entity{
     return yPos;
   }
 
+  /**
+   * Gets the current player transformation
+   * @return the current player transformation 
+  */
+  public AffineTransform getTransform(){
+    return transform;
+  }
 
   abstract public void draw(Graphics g, long t);
 }

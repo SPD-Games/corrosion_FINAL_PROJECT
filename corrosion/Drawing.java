@@ -20,6 +20,7 @@ public class Drawing extends JPanel{
   private int frameCount = 0;
   private int fps = 0;
 
+
   //fps counter
   private ActionListener frameCountListener = new ActionListener(){
     @Override
@@ -64,12 +65,20 @@ public class Drawing extends JPanel{
   }
 
   /**
+  * Gets the current Panel
+  * @return the current Panel
+  */
+  public static Drawing getPanel(){
+    return panel;
+  }
+
+  /**
   * Main Constructor
   */
   public Drawing(){
     panel = this;
-
     //start drawing and fps timers
+
     fpsTimer.start();
     frameTimer.start();
   }

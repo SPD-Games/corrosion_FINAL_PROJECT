@@ -20,9 +20,9 @@ import corrosion.entity.Entity;
 import corrosion.entity.player.Player;
 import corrosion.entity.projectile.Arrow;
 
-public class Rifle{
+public class Rifle extends Equippable{
   public Rifle(){
   }
-  
-  
+
+
 }

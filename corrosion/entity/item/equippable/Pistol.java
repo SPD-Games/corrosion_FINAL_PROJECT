@@ -21,14 +21,14 @@ import corrosion.entity.player.Player;
 import corrosion.entity.projectile.Arrow;
 
 
-public class Pistol extends equippable{
+public class Pistol extends Equippable{
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[2][];
   private final int[] SHOOT_READY = {0,3};
   private final int[] RELOAD_READY = {1,2};
   public Sprite sprite;
-  
-  
+
+
     public static void init(){
     try{
       //loads icon
@@ -50,22 +50,23 @@ public class Pistol extends equippable{
       System.exit(-1);
     }
   }
-  
-  
-  public Person(Player p){
+
+
+  public Pistol(Player p){
     super(p);
     this.sprite = new Sprite(icon, new int[]{1,2}, sprites, new int[]{500,50});
   }
-  
+
     public void drawEquipped(Graphics g){
+    if (player == null){return;}
     transform = player.getTransform();
     transform.translate(-18, -110);
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), player.getTransform(), null);
   }
-  
+
   public void draw(Graphics g, long t){}
-  
-  
+
+
 
   public void reload(){
     if (sprite.isState(RELOAD_READY, false)){
@@ -73,5 +74,5 @@ public class Pistol extends equippable{
     }
   }
 
-  
+
 }

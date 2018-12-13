@@ -11,7 +11,9 @@ import java.awt.image.BufferedImage;
 import javax.swing.*;
 
 import corrosion.Drawing;
+import corrosion.entity.item.equippable.*;
 import corrosion.entity.player.Player;
+import corrosion.input.*;
 
 public class MainPlayer extends Player{
     private static MainPlayer mainPlayer;
@@ -43,7 +45,7 @@ public class MainPlayer extends Player{
     */
     public MainPlayer(double xPos, double yPos){
       super(xPos, yPos);
-      //equipped = new CrossBow(this);
+      equipped = new CrossBow(this);
     }
 
     /**
@@ -122,20 +124,19 @@ public class MainPlayer extends Player{
     */
     public void draw(Graphics g, long t){
       //get the currsor location for aiming the equipped item
-      //Point mousePos = Mouse.getPosition();
-      Point mousePos = new Point();
-      transform.setToTranslation(Drawing.width()*0.5 - 50, Drawing.height()*0.5 - 50);
+      Point mousePos = Mouse.getPosition();
+      transform.setToTranslation(-xPos-50, -yPos-50);
       //TODO fix mouse rotation
-      //transform.rotate(mousePos.getY(),  mousePos.getX(), 50, 50);
+      transform.rotate(mousePos.getY(),  mousePos.getX(), 50, 50);
       ((Graphics2D)(g)).drawImage(img, transform, null);
 
       //draws the equipped item
       drawEquipped(g);
       //TODO make it so its not faster diagonal
       //moves the player
-      if (up){yPos -= t * 0.5;}
-      if (down){yPos += t * 0.5;}
-      if (left){xPos -= t * 0.5;}
-      if (right){xPos += t * 0.5;}
+      if (up){yPos += t * 0.5;}
+      if (down){yPos -= t * 0.5;}
+      if (left){xPos += t * 0.5;}
+      if (right){xPos -= t * 0.5;}
     }
 }

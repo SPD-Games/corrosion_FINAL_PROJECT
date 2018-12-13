@@ -3,7 +3,7 @@
   * gets the image for the crossbow, and draws it and allows it to shoot
   */
 
-package corrosion.entity.item.useable;
+package corrosion.entity.item.equippable;
 
 import javax.swing.Timer;
 import java.awt.Graphics;
@@ -20,9 +20,9 @@ import java.awt.event.ActionEvent;
 import corrosion.Sprite;
 import corrosion.entity.Entity;
 import corrosion.entity.player.Player;
-import corrosion.entity.projectile.Arrow;
+//import corrosion.entity.projectile.Arrow;
 
-public class CrossBow extends Useable{
+public class CrossBow extends Equippable{
   //TODO move all images and draw handling in Usable
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[2][];
@@ -85,7 +85,7 @@ public class CrossBow extends Useable{
     //checks if crossbow is reloaded
     if (sprite.isState(SHOOT_READY, false)){
       //creates a new arrow
-      new Arrow(player, p.getX(), p.getY());
+      //new Arrow(player, p.getX(), p.getY());
       //starts shoot animation
       sprite.startAnimation(1);
     }
