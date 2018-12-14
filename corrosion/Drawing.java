@@ -1,5 +1,5 @@
 /** Micheal Metzinger
-  * December 11 2018
+  * December 13 2018
   * a class which determines what is drawn and contains a fps counter
   */
 package corrosion;

@@ -1,5 +1,5 @@
 /** Micheal Metzinger, Edward Pei
-  * December 12 2018
+  * December 13 2018
   * gets the image for the crossbow, and draws it and allows it to shoot
   */
 
@@ -95,7 +95,6 @@ public class CrossBow extends Equippable{
   * @param p the pointer position on the screen relative to the player
   */
   public void attack(Point p){
-    System.out.println(p);
     //checks if crossbow is reloaded
     if (sprite.isState(SHOOT_READY, false)){
       //creates a new arrow

@@ -1,6 +1,8 @@
 /** Micheal Metzinger
-  * December 11 2018
+  * December 13 2018
   * Runs the game
+  * TODO:
+      hit reg and max distance of projectiles
   */
 
 package corrosion;
