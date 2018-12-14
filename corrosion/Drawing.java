@@ -14,7 +14,7 @@ import corrosion.drawingstate.*;
 
 public class Drawing extends JPanel{
   private static Drawing panel = null;
-  private static DrawingState state = new GameDrawing();//TODO: change to main menu or load screen?
+  private static DrawingState state;//TODO: change to main menu or load screen?
 
   private long lastFrame = 0;
   private int frameCount = 0;
@@ -39,6 +39,10 @@ public class Drawing extends JPanel{
     }
   };
   private Timer frameTimer = new Timer(0, newFrameListener);//no fps limit
+
+  public Timer getTimer() {
+    return frameTimer;
+  }
 
   /**
   * Gets the current fps
@@ -77,8 +81,9 @@ public class Drawing extends JPanel{
   */
   public Drawing(){
     panel = this;
-    //start drawing and fps timers
+    state = new GameDrawing();
 
+    //start drawing and fps timers
     fpsTimer.start();
     frameTimer.start();
   }

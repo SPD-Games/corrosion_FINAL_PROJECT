@@ -26,18 +26,22 @@ public class ConnectMenuDrawing extends DrawingState{
   * @param t frame count
   */
   public void draw(Graphics g, long t) {
+    // stop the draw timer stoping the draw and allow the buttons to be drawn properly
+    (Drawing.getPanel()).getTimer().stop();
+
+    System.out.print(1);
+
+    g.setColor(new Color(255,69,0));
+    g.fillRect(0, 0, Drawing.width(), Drawing.height());
   }
 
   public void init(){
-    drawSwing();
-    Drawing.getPanel().add(connectInput);
-  }
-
-  public void drawSwing() {
-    connectInput = new TextArea("ashdias");
-    connectInput.setPreferredSize(new Dimension(100,100));
+    connectInput = new TextArea("Enter IP here");
+    connectInput.setPreferredSize(new Dimension(800,75));
+    connectInput.setFont(new Font("Serif", Font.PLAIN, 40));
+    connectInput.setRows(1);
     connectInput.setBounds(Drawing.getPanel().getWidth()/2 - 100, Drawing.getPanel().getWidth()/2, 200, 75);
-
+    (Drawing.getPanel()).add(connectInput);
   }
 
 }
