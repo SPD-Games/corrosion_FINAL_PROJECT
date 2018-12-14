@@ -1,4 +1,4 @@
-/** Micheal Metzinger
+/**  Edward Pei, Micheal Metzinger
   * December 11 2018
   * Draws the main game
   */
@@ -65,7 +65,7 @@ public class MainMenuDrawing extends DrawingState{
     // draw the play button
     playBtn.setPreferredSize(new Dimension(100, 100));
     playBtn.setBounds(Drawing.getPanel().getWidth()/2 - 100, Drawing.getPanel().getWidth()/2, 200, 75);
-    playBtn.setFont(new Font("Arial", Font.BOLD, 40));
+    playBtn.setFont(new Font("Arial", Font.PLAIN, 40));
     playBtn.setForeground(Color.BLACK);
     playBtn.setBackground(new Color(255,140,0));
     Drawing.getPanel().add(playBtn);
@@ -120,11 +120,10 @@ public class MainMenuDrawing extends DrawingState{
 
   public void init(){
 
-
-      try{
+      try {
         //sets sprite image
         logoImg = ImageIO.read(new File("sprites/logoV1.png"));
-      }catch(Exception e){
+      } catch(Exception e) {
         //exits on error with message
         System.out.println("Logo load error: " + e);
         System.exit(-1);
