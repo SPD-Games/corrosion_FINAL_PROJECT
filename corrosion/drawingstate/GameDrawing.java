@@ -34,6 +34,7 @@ public class GameDrawing extends DrawingState{
   * Initiates the drawing state
   */
   public void init(){
+    Drawing.getPanel().getTimer().start();
     Player.init();
     CrossBow.init();
     Arrow.init();

@@ -81,11 +81,11 @@ public class Drawing extends JPanel{
   */
   public Drawing(){
     panel = this;
-    state = new GameDrawing();
+    state = new MainMenuDrawing();
 
     //start drawing and fps timers
     fpsTimer.start();
-    frameTimer.start();
+    //frameTimer.start();
   }
 
   /**
