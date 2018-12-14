@@ -1,3 +1,9 @@
+/**
+* Michael Metzinger
+* Dec 14 2018
+* Abstract Protocol that handles all sending and recieving of data
+*/
+
 package corrosion.network.protocol;
 
 import java.net.Socket;
@@ -9,30 +15,64 @@ import corrosion.network.*;
 
 abstract public class Protocol{
   private static Protocol[] protocols;
+
+  /**
+  * Loads the protocols
+  */
   public static void init(){
     protocols = new Protocol[2];
-    protocols[0] = new PingSend();
-    protocols[1] = new PingReceive();
+    protocols[0] = new Ping();
+    protocols[1] = new Ping2();
   }
 
+  /**
+  * Sends data to a connection
+  *@param protocol the protocol to use
+  *@param data the data to sends
+  *@param c the connection to send data to
+  */
   public static void send(int protocol, Object data, Connection c){
-    //not needed?
     synchronized(c.out){
       try{
+        //send the protocol number
         c.out.writeInt(protocol);
+        //sends the data
         protocols[protocol].send(data, c);
-      }catch(Exception e){}
+      }catch(Exception e){
+        System.out.println(e);
+      }
     }
   }
 
+  /**
+  * Reads data from a connection
+  * @param protocol the protocol to use
+  * @param in the input to read from
+  * @param c the connection that sent the data
+  */
   public static void get(int protocol, DataInputStream in, Connection c){
     protocols[protocol].get(in, c);
   }
 
+  /**
+  * Gets a protocol
+  * @param i the protocol index
+  */
   public static Protocol getProtocol(int i){
     return protocols[i];
   }
 
+  /**
+  * Sends data
+  * @param data data to send
+  * @param c the connection to send to
+  */
   abstract public void send(Object data, Connection c);
+
+  /**
+  * Gets data
+  * @param in the stream to listen on
+  * @param c the connection to send to
+  */
   abstract public void get(DataInputStream in, Connection c);
 }
