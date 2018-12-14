@@ -15,6 +15,7 @@ import corrosion.entity.player.*;
 import corrosion.entity.item.*;
 import corrosion.entity.item.equippable.*;
 import corrosion.input.*;
+import corrosion.input.bind.*;
 
 
 public class GameDrawing extends DrawingState{
@@ -38,8 +39,19 @@ public class GameDrawing extends DrawingState{
     Player.init();
     CrossBow.init();
     Arrow.init();
-    Mouse.init();
-    Keyboard.init();
+
+    MouseBindable mouseBinds[] = new MouseBindable[5];
+    mouseBinds[1] = new Attack();//left click
+    mouseBinds[3] = new Attack2();//right click
+    Mouse.setBinds(mouseBinds);
+
+    Bindable binds[] = new Bindable[526];
+    binds[87] = new Up();//w
+    binds[83] = new Down();//s
+    binds[65] = new Left();//a
+    binds[68] = new Right();//d
+    binds[82] = new Reload();//r
+    Keyboard.setBinds(binds);
 
     MainPlayer.spawn(0, 0);
   }
@@ -71,8 +83,7 @@ public class GameDrawing extends DrawingState{
     //draw static menus
     ((Graphics2D)g).setTransform(new AffineTransform());
     g.setColor(Color.black);
-    String fps = Drawing.getFps()+ "fps. (" + MainPlayer.getMainPlayer().getXPos() + ", " + MainPlayer.getMainPlayer().getYPos() + ")";
-    g.drawChars(fps.toCharArray(), 0, fps.length(), 50, 50);
+    g.drawString(Drawing.getFps()+ "fps. (" + MainPlayer.getMainPlayer().getXPos() + ", " + MainPlayer.getMainPlayer().getYPos() + ")", 50, 50);
   }
 
 
