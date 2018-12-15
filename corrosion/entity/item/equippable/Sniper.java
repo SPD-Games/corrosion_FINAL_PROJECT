@@ -22,4 +22,18 @@ import corrosion.entity.projectile.Arrow;
 
 public class Sniper extends Equippable{
   
+  private static BufferedImage icon;
+  private static BufferedImage[][] sprites = new BufferedImage[2][];
+  private final int[] SHOOT_READY = {0,3};
+  private final int[] RELOAD_READY = {1,2};
+  public Sprite sprite;
+  
+  
+  public Sniper(Player p){
+    super(p);
+    this.sprite = new Sprite(icon, new int[]{1,2}, sprites, new int[]{500,50});
+  }
+  
+  
+  
 }
