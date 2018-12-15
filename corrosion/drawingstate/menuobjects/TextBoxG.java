@@ -1,3 +1,7 @@
+/** Edward Pei
+  * December 14 2018
+  * draws text boxs
+  */
 package corrosion.drawingstate.menuobject;
 
 import javax.swing.*;
