@@ -19,6 +19,7 @@ import java.awt.Graphics;
 
 
 import corrosion.Drawing;
+import corrosion.drawingstate.*;
 
 public class MainMenuDrawing extends DrawingState{
   protected BufferedImage logoImg;

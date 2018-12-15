@@ -16,6 +16,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.Graphics;
 
 import corrosion.Drawing;
+import corrosion.drawingstate.menuobjects.ButtonG;
 
 public class ConnectMenuDrawing extends DrawingState{
 
@@ -25,7 +26,8 @@ public class ConnectMenuDrawing extends DrawingState{
   * @param t frame count
   */
   public void draw(Graphics g, long t) {
-
+    ButtonG b = new ButtonG();
+    b.draw(g);
   }
 
   public void init(){
