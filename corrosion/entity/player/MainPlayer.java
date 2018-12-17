@@ -44,7 +44,7 @@ public class MainPlayer extends Player{
      * @param yPos y position of the position
     */
     public MainPlayer(double xPos, double yPos){
-      super(xPos, yPos);
+      super(xPos, yPos, 0);
       equipped = new CrossBow(this);
     }
 
@@ -126,8 +126,8 @@ public class MainPlayer extends Player{
       //get the currsor location for aiming the equipped item
       Point mousePos = Mouse.getPosition();
       transform.setToTranslation(xPos-50, yPos-50);
-      //TODO fix mouse rotation
-      transform.rotate(mousePos.getY(),  mousePos.getX(), 50, 50);
+      rotation = Math.atan2(mousePos.getX(), mousePos.getY());
+      transform.rotate(rotation, 50, 50);
       ((Graphics2D)(g)).drawImage(img, transform, null);
 
       //draws the equipped item

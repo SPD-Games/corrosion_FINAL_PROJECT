@@ -16,7 +16,7 @@ import java.io.PrintStream;
 public class Client{
   private static Client client;
   private Connection connection;
-
+  private ArrayList<Player> players = new ArrayList<Player>();
   /**
   * Gets the client
   * @return the client
@@ -39,13 +39,5 @@ public class Client{
       System.out.println(e);
     }
     client = this;
-  }
-
-  public static void main(String[] args)throws Exception{
-    Client c = new Client("127.0.0.1", 1234);
-    while(true){
-      Thread.sleep(1000);
-      Protocol.send(0, null, c.connection);
-    }
   }
 }

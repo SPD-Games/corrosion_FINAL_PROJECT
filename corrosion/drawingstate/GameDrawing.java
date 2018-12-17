@@ -51,7 +51,7 @@ public class GameDrawing extends DrawingState{
   public void draw(Graphics g, long t){
     //clears the screen
     g.clearRect(0, 0, Drawing.width(), Drawing.height());
-    g.setColor(Color.green);
+    g.setColor(new Color(173, 216, 230));
     g.fillRect(0, 0, Drawing.width(), Drawing.height());
 
     ((Graphics2D)g).scale(zoom, zoom);

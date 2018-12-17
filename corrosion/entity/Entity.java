@@ -67,6 +67,14 @@ abstract public class Entity{
   }
 
   /**
+   * Gets the rotation
+   * @return the rotation
+  */
+  public double getRotaion(){
+    return rotation;
+  }
+
+  /**
    TODO: add a lock to position
    * Gets the y value of position
    * @return the y value of the Position
@@ -77,7 +85,7 @@ abstract public class Entity{
 
   /**
    * Gets the current player transformation
-   * @return the current player transformation 
+   * @return the current player transformation
   */
   public AffineTransform getTransform(){
     return transform;
