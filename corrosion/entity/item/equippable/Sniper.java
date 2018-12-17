@@ -1,5 +1,5 @@
 //Henry Lim
-//Dec 14, 2018
+//Dec 17, 2018
 //Sniper class
 package corrosion.entity.item.equippable;
 
