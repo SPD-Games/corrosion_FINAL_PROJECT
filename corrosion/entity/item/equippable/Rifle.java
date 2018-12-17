@@ -51,6 +51,10 @@ public class Rifle extends Equippable{
     }
   }
   
+  /**
+  * constuctor for the rifle
+  * @param p player who has the rifle
+  */
   public Rifle(Player p){
     super(p);
     this.sprite = new Sprite(icon, new int[]{1,2}, sprites, new int[]{500,50});
