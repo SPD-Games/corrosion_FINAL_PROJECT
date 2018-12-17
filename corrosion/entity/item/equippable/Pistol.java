@@ -1,8 +1,8 @@
 //Henry Lim, Edward Pei
-//Dec 12, 2018
+//Dec 17, 2018
 //Pistol class
 package corrosion.entity.item.equippable;
-
+//imports
 import javax.swing.Timer;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -19,7 +19,7 @@ import corrosion.Sprite;
 import corrosion.entity.Entity;
 import corrosion.entity.player.Player;
 import corrosion.entity.projectile.Arrow;
-
+//import corrosion.entity.projectile.Arrow
 
 public class Pistol extends Equippable{
   // get the icons and animations for the pistol
