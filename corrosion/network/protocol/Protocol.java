@@ -20,9 +20,11 @@ abstract public class Protocol{
   * Loads the protocols
   */
   public static void init(){
-    protocols = new Protocol[2];
+    protocols = new Protocol[4];
     protocols[0] = new Ping();
     protocols[1] = new Ping2();
+    protocols[2] = new Player2Server();
+    protocols[3] = new Player2Client();
   }
 
   /**

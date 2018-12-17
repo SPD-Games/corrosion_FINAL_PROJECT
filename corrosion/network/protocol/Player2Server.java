@@ -6,6 +6,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 
 import corrosion.network.protocol.*;
+import corrosion.network.*;
 
 public class Player2Server extends Protocol{
   /**

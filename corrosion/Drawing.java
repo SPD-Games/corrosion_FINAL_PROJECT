@@ -81,7 +81,8 @@ public class Drawing extends JPanel{
   */
   public Drawing(){
     panel = this;
-    state = new ConnectMenuDrawing();
+    //state = new ConnectMenuDrawing();
+    state = new GameDrawing();
 
     //start drawing and fps timers
     fpsTimer.start();

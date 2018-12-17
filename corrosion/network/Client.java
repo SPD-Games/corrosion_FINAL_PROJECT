@@ -6,6 +6,7 @@
 
 package corrosion.network;
 
+import corrosion.entity.player.*;
 import corrosion.network.protocol.*;
 import corrosion.network.Connection;
 
@@ -25,6 +26,17 @@ public class Client{
     return client;
   }
 
+  public static void setPlayers(ArrayList<Player> p){
+      client.players = p;
+  }
+
+  public static void getPlayers(){
+    return client.players;
+  }
+
+  public static send(int protocol, Object data){
+    Protocol.send(protocol, data, client.connection);
+  }
   /**
   * Main Constructor
   * @param ip the ip of the server to connect to
