@@ -11,17 +11,11 @@ import corrosion.input.bind.*;
 
 public class Keyboard implements KeyListener {
   private static Bindable binds[] = new Bindable[526];
-
   /**
-  * TODO: load from a data file, move to gamestate init
-  * inits the keyboard binds
+  * Sets up all the keyboard binds
   */
-  public static void init(){
-    binds[87] = new Up();//w
-    binds[83] = new Down();//s
-    binds[65] = new Left();//a
-    binds[68] = new Right();//d
-    binds[82] = new Reload();//r
+  public static void setBinds(Bindable b[]){
+    binds = b;
   }
 
   /**

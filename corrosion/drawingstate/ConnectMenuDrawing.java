@@ -16,9 +16,9 @@ import java.awt.geom.AffineTransform;
 import java.awt.Graphics;
 
 import corrosion.Drawing;
+import corrosion.drawingstate.menuobjects.*;
 
 public class ConnectMenuDrawing extends DrawingState{
-  TextArea connectInput;
 
   /**
   * draw the connection Screen
@@ -26,17 +26,11 @@ public class ConnectMenuDrawing extends DrawingState{
   * @param t frame count
   */
   public void draw(Graphics g, long t) {
+    ButtonG b = new ButtonG();
+    b.draw(g);
   }
 
   public void init(){
-    drawSwing();
-    Drawing.getPanel().add(connectInput);
-  }
-
-  public void drawSwing() {
-    connectInput = new TextArea("ashdias");
-    connectInput.setPreferredSize(new Dimension(100,100));
-    connectInput.setBounds(Drawing.getPanel().getWidth()/2 - 100, Drawing.getPanel().getWidth()/2, 200, 75);
 
   }
 

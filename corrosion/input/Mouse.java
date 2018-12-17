@@ -20,15 +20,13 @@ public class Mouse implements MouseListener, MouseWheelListener{
   //private static MouseWheelBindable mouseWheelUp = null;
   //private static MouseWheelBindable mouseWheelDown = null;
 
-
   /**
-  * TODO move to gamestate init
   * Sets up all the mouse binds
   */
-  public static void init(){
-    binds[1] = new Attack();//left click
-    binds[3] = new Attack2();//right click
+  public static void setBinds(MouseBindable b[]){
+    binds = b;
   }
+
 
   /**
   * Gets the location of the mouse relative to the JPanel
