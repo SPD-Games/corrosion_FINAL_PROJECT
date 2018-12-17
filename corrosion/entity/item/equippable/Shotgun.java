@@ -20,7 +20,7 @@ import corrosion.entity.Entity;
 import corrosion.entity.player.Player;
 //import corrosion.entity.projectile.Arrow;
 
-public class Rifle extends Equippable{
+public class Shotgun extends Equippable{
     //TODO move all images and draw handling in Usable
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[2][];
@@ -32,11 +32,11 @@ public class Rifle extends Equippable{
   public static void init(){
     try{
       //loads icon
-      icon = ImageIO.read(new File("sprites/rifle/icon.png"));
+      icon = ImageIO.read(new File("sprites/shotgun/icon.png"));
       //loads relaod animations
       sprites[0] = new BufferedImage[4];
       for (int i = 1; i <= 4; ++i){
-        sprites[0][i-1] = ImageIO.read(new File("sprites/rifle/animation/frame" + i + ".png"));
+        sprites[0][i-1] = ImageIO.read(new File("sprites/shotgun/animation/frame" + i + ".png"));
       }
 
       //loads shooting animations
@@ -46,16 +46,16 @@ public class Rifle extends Equippable{
       }
     }catch(Exception e){
       //exits on error with message
-      System.out.println("Reading Rifle Sprite: " + e);
+      System.out.println("Reading Shotgun Sprite: " + e);
       System.exit(-1);
     }
   }
   
   /**
-  * constuctor for the rifle
-  * @param p player who has the rifle
+  * constuctor for the Shotgun
+  * @param p player who has the Shotgun
   */
-  public Rifle(Player p){
+  public Shotgun(Player p){
     super(p);
     this.sprite = new Sprite(icon, new int[]{1,2}, sprites, new int[]{500,50});
   }
@@ -70,7 +70,7 @@ public class Rifle extends Equippable{
   
   
   public void attack(Point p){
-    //checks if rifle is reloaded
+    //checks if Shotgun is reloaded
     if (sprite.isState(SHOOT_READY, false)){
       sprite.startAnimation(1);
     }
