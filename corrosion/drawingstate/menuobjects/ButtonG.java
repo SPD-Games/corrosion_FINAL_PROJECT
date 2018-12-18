@@ -20,6 +20,10 @@ import corrosion.Drawing;
 public class ButtonG {
 
   int xPos,yPos, width, height;
+  int[] yBounds = new int[2];
+  int[] xBounds = new int[2];
+  Color c;
+  String text;
 
 /** stores the information of a button, button constructor
 * @param xPos the x Position of the button
@@ -27,19 +31,55 @@ public class ButtonG {
 * @param width the width of the Button
 * @param height the height of the Button
 */
-  public ButtonG(int xPos,int yPos, int width,int height) {
+  public ButtonG(int xPos,int yPos, int width,int height, Color c, String text) {
     this.xPos = xPos;
     this.yPos = yPos;
     this.width = width;
     this.height = height;
-    System.out.println(xPos);
-    System.out.println(yPos);
+    yBounds[0] = yPos - height/2;
+    yBounds[1] = yPos + height/2;
+    xBounds[0] = xPos - width/2;
+    xBounds[1] = xPos + width/2;
+    this.c = c;
+    this.text = text;
   }
 
+  /**
+  * returns the outer x vales of the button
+  * @return array of values
+  */
+  public int[] getXBounds() {
+    return xBounds;
+  }
+
+  /**
+  * returns the outer y vales of the button
+  * @return array of values
+  */
+  public int[] getYBounds() {
+    return yBounds;
+  }
+
+  /**
+  * Draws a button based on its characteristics, x/y pos represent the center of the button
+  *@param g the graphics tool
+  */
   public void draw(Graphics g) {
-    ((Graphics2D)g).fillRect(xPos,yPos,width ,height);
+    g.setColor(c);
+    ((Graphics2D)g).fillRect(xPos- width/2,yPos - height/2, width , height);
+    g.setColor(Color.black);
+    g.setFont(new Font("Calibri", Font.PLAIN, 24));
+    g.drawString(text, xPos- width/2, yPos);
   }
 
+  /**
+  * change the color of the button
+  * @param newColor the new color of the button
+  */
+  public void setColor(Color newColor) {
+    c = newColor;
+    System.out.println(c);
+  }
 
   public String toString() {
     return ("");
