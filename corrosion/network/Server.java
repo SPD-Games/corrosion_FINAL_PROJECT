@@ -44,11 +44,17 @@ public class Server{
     }
   };
   private Timer sendTimer = new Timer(1000/64, sendLoopListener);
+
+  public static void setPlayer(int id, Player player){
+    server.players.set(id, player);
+  }
+
   /**
   * Main Constructor
   * @param port the port which to run the server socket on
   */
   public Server(int port){
+    server = this;
     Protocol.init();
     try{
       //creates a new server socket
@@ -58,6 +64,7 @@ public class Server{
       System.exit(-1);
     }
     //listens for new clients
+    sendTimer.start();
     newClientListener();
   }
 
@@ -71,12 +78,12 @@ public class Server{
       try{
         //wait till a new client connects
         newClient = socket.accept();
-      } catch(IOException e){}
+      } catch(IOException e){System.out.println("Error adding new client" + e);}
       if (newClient != null){
         //Send log message
         System.out.println("New Client: " + newClient);
         //adds the client connection to clients
-        clients.add(new Connection(newClient));
+        clients.add(new Connection(newClient, clients.size()));
         players.add(new Player(0,0,0));
       }
     }
@@ -86,6 +93,6 @@ public class Server{
   * Starts a new server
   */
   public static void main(String[] args){
-    server = new Server(1234);
+    new Server(1234);
   }
 }

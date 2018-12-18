@@ -20,6 +20,15 @@ public class Player extends Entity{
   protected static BufferedImage hands;
 
   protected Equippable equipped = null;
+
+  public Equippable getEquipped(){
+    return equipped;
+  }
+
+  public void setEquipped(Equippable equipped){
+    this.equipped = equipped;
+  }
+
   /**
   * Initializes the player class
   */
@@ -56,8 +65,8 @@ public class Player extends Entity{
   * @param g the graphics context
   */
   public void draw(Graphics g, long t){
-    transform.setToTranslation(xPos, yPos);
-    transform.rotate(Math.toRadians(rotation), xPos - 50, yPos - 50);
+    transform.setToTranslation(xPos-50, yPos-50);
+    transform.rotate(rotation, 50, 50);
     ((Graphics2D)(g)).drawImage(img, transform, null);
 
     //draws the equipped item

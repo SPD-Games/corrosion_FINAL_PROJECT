@@ -47,6 +47,14 @@ public class Sprite{
   }
 
   /**
+  * Gets the current state of the sprites
+  * @return the current state of the sprites
+  */
+  public int[] getState(){
+    return state;
+  }
+
+  /**
   * Checks if a state matches the current state
   * @param animation the animation Number
   * @param frame the frame number

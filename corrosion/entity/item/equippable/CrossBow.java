@@ -30,7 +30,6 @@ public class CrossBow extends Equippable{
 
   private final int[] SHOOT_READY = {0,3};
   private final int[] RELOAD_READY = {1,2};
-  public Sprite sprite;
 
   /**
   * Initializes the player class
@@ -62,8 +61,15 @@ public class CrossBow extends Equippable{
    * @param p the player that has the crossbow equipped
   */
   public CrossBow(Player p){
-    super(p);
-    this.sprite = new Sprite(icon, new int[]{1,2}, sprites, new int[]{500,50});
+    this(p, new int[]{1,2});
+  }
+
+  /**
+   * Main Constructor
+   * @param p the player that has the crossbow equipped
+  */
+  public CrossBow(Player p, int[] state){
+    super(p, new Sprite(icon, state, sprites, new int[]{500,50}));
   }
 
   /**

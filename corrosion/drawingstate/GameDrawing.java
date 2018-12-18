@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
+import corrosion.network.*;
 import corrosion.Drawing;
 import corrosion.entity.*;
 import corrosion.entity.player.*;
@@ -54,6 +55,7 @@ public class GameDrawing extends DrawingState{
     Keyboard.setBinds(binds);
 
     MainPlayer.spawn(0, 0);
+    new Client("127.0.0.1", 1234);
   }
 
   /**
@@ -77,7 +79,12 @@ public class GameDrawing extends DrawingState{
     for (Entity e : entities){
       e.draw(g, t);
     }
-    //draw mainplayer
+
+    //draw players
+    ArrayList<Player> players = Client.getPlayers();
+    for (Player player: players){
+      player.draw(g,t);
+    }
     MainPlayer.getMainPlayer().draw(g, t);
 
     //draw static menus

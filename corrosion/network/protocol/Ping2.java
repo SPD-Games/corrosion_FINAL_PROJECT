@@ -24,7 +24,7 @@ public class Ping2 extends Protocol{
     try{
       c.out.writeLong((Long)data);
     } catch(Exception e){
-      System.out.println(e);
+      System.out.println("Error sending ping" + e);
     }
   }
 
@@ -38,7 +38,7 @@ public class Ping2 extends Protocol{
       //displays the ping
       System.out.println("Ping: " + (System.currentTimeMillis() - in.readLong()));
     }catch(Exception e){
-      System.out.println(e);
+      System.out.println("Error getting ping" + e);
     }
   }
 }

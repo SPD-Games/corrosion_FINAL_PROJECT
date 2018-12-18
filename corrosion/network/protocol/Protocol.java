@@ -41,7 +41,8 @@ abstract public class Protocol{
         //sends the data
         protocols[protocol].send(data, c);
       }catch(Exception e){
-        System.out.println(e);
+        //TODO check if pipe is broken then disconnect the client
+        System.out.println("Error sending data to " + c.socket + " " + e);
       }
     }
   }

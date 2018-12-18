@@ -14,12 +14,23 @@ import corrosion.network.protocol.*;
 public class Connection{
   public Socket socket;
   public DataOutputStream out;
+  public int id;
+
+  /**
+  * Secondary constructor
+  * @param socket the conneted socket to send and receive data
+  */
+  public Connection(Socket socket){
+    this(socket, -1);
+  }
 
   /**
   * Main constructor
   * @param socket the conneted socket to send and receive data
+  * @param id the id of the socket to use
   */
-  public Connection(Socket socket){
+  public Connection(Socket socket, int id){
+    this.id = id;
     this.socket = socket;
     try{
       //listens for new data
@@ -27,7 +38,7 @@ public class Connection{
       //creates a output stream
       out = new DataOutputStream(socket.getOutputStream());
     } catch(Exception e){
-      System.out.println(e);
+      System.out.println("Error creating new socket" + e);
     }
   }
 
@@ -67,7 +78,7 @@ public class Connection{
           Protocol.get(protolNumber, in, connection);
         }
       }catch(Exception e){
-        System.out.println(e);
+        System.out.println("Error listening for data" + e);
       }
     }
   }

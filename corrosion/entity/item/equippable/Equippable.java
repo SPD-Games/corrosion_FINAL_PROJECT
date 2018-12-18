@@ -10,16 +10,25 @@ import java.awt.Point;
 
 import corrosion.entity.player.Player;
 import corrosion.entity.item.Item;
+import corrosion.Sprite;
+
 
 abstract public class Equippable extends Item{
   protected Player player;
-
+  public Sprite sprite;
   /**
    * Main Constructor
    * @param p the player that has the crossbow equipped
   */
-  public Equippable(Player p){
+  public Equippable(Player p, Sprite s){
     this(0,0,0);
+    sprite = s;
+    player = p;
+  }
+
+  public Equippable(Player p, int[] state){
+    this(0,0,0);
+    sprite = new Sprite(null, state, null, null);
     player = p;
   }
 

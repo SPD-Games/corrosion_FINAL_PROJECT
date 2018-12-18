@@ -46,6 +46,8 @@ public class MainPlayer extends Player{
     public MainPlayer(double xPos, double yPos){
       super(xPos, yPos, 0);
       equipped = new CrossBow(this);
+      //equipped = null;
+
     }
 
     /**
