@@ -55,7 +55,11 @@ public class GameDrawing extends DrawingState{
     Keyboard.setBinds(binds);
 
     MainPlayer.spawn(0, 0);
-    new Client("127.0.0.1", 1234);
+  }
+
+  public GameDrawing(String ip, int port){
+    super();
+    new Client(ip, port);
   }
 
   /**

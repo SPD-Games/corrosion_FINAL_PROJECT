@@ -82,7 +82,7 @@ public class Drawing extends JPanel{
   public Drawing(){
     panel = this;
     //state = new ConnectMenuDrawing();
-    state = new GameDrawing();
+    state = new GameDrawing("127.0.0.1", 1234);
 
     //start drawing and fps timers
     fpsTimer.start();

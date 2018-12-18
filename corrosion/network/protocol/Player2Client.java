@@ -20,29 +20,31 @@ public class Player2Client extends Protocol{
   */
   public void send(Object data, Connection c){
     try{
-      ArrayList<Player> d = (ArrayList<Player>)data;
-      c.out.writeInt(d.size() - 1);
-      //check if its a player arraylist
-      int i = 0;
-      for (Player p : d){
-        if (i != c.id){
-          c.out.writeDouble(p.getXPos());
-          c.out.writeDouble(p.getYPos());
-          c.out.writeDouble(p.getRotaion());
+      ArrayList<Player> d = Server.getPlayers();
+      synchronized(d){
+        c.out.writeInt(d.size() - 1);
+        //check if its a player arraylist
+        int i = 0;
+        for (Player p : d){
+          if (i != c.id){
+            c.out.writeDouble(p.getXPos());
+            c.out.writeDouble(p.getYPos());
+            c.out.writeDouble(p.getRotaion());
 
-          Equippable equipped = p.getEquipped();
-          if (equipped == null){
-            c.out.writeInt(0);
-          } else {
-            int[] state = equipped.sprite.getState();
-            String className = equipped.getClass().toString().substring(39);
-            c.out.writeInt(className.length());
-            c.out.writeChars(className);
-            c.out.writeInt(state[0]);
-            c.out.writeInt(state[1]);
+            Equippable equipped = p.getEquipped();
+            if (equipped == null){
+              c.out.writeInt(0);
+            } else {
+              int[] state = equipped.sprite.getState();
+              String className = equipped.getClass().toString().substring(39);
+              c.out.writeInt(className.length());
+              c.out.writeChars(className);
+              c.out.writeInt(state[0]);
+              c.out.writeInt(state[1]);
+            }
           }
+          ++i;
         }
-        ++i;
       }
       //todo send equipped data
     } catch(Exception e){
