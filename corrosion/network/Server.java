@@ -39,14 +39,20 @@ public class Server{
         }
       }*/
       for (Connection client : clients){
-        Protocol.send(3, players, client);
+        Protocol.send(3, null, client);
       }
     }
   };
   private Timer sendTimer = new Timer(1000/64, sendLoopListener);
 
   public static void setPlayer(int id, Player player){
-    server.players.set(id, player);
+    synchronized(server.players){
+      server.players.set(id, player);
+    }
+  }
+
+  public static ArrayList<Player> getPlayers(){
+    return server.players;
   }
 
   /**
