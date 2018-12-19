@@ -20,8 +20,8 @@ abstract public class Projectile extends Entity{
   protected boolean watchHit = false;
   protected Player player;
 
-  public Projectile(double xPos, double yPos, double xVel, double yVel, double r){
-    super(xPos,yPos,r);
+  public Projectile(double xPos, double yPos, double xVel, double yVel, double r, long id){
+    super(xPos,yPos,r,id);
     this.xVel = xVel;
     this.yVel = yVel;
     lastXPos = xPos;

@@ -33,6 +33,10 @@ public class GameDrawing extends DrawingState{
     CrossBow.init();
     ArrowProjectile.init();
 
+    setBinds();
+  }
+
+  public void setBinds(){
     MouseBindable mouseBinds[] = new MouseBindable[5];
     mouseBinds[1] = new Attack();//left click
     mouseBinds[3] = new Attack2();//right click
@@ -45,8 +49,6 @@ public class GameDrawing extends DrawingState{
     binds[68] = new Right();//d
     binds[82] = new Reload();//r
     Keyboard.setBinds(binds);
-
-    MainPlayer.spawn(0, 0);
   }
 
   public GameDrawing(String ip, int port){
@@ -97,7 +99,7 @@ public class GameDrawing extends DrawingState{
     //draw static menus
     ((Graphics2D)g).setTransform(new AffineTransform());
     g.setColor(Color.black);
-    g.drawString(Drawing.getFps()+ "fps. (" + MainPlayer.getMainPlayer().getXPos() + ", " + MainPlayer.getMainPlayer().getYPos() + ")", 50, 50);
+    g.drawString(Drawing.getFps()+ "fps. " + Client.getPing() + "ms. Pos(" + MainPlayer.getMainPlayer().getXPos() + ", " + MainPlayer.getMainPlayer().getYPos() + ")", 50, 50);
   }
 
 

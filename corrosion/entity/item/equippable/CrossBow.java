@@ -76,8 +76,8 @@ public class CrossBow extends Equippable{
    * Main Constructor
    * @param p the player that has the crossbow equipped
   */
-  public CrossBow(double xPos, double yPos, double rotation){
-    super(xPos,yPos,rotation);
+  public CrossBow(double xPos, double yPos, double rotation, long id){
+    super(xPos,yPos,rotation, id);
     this.sprite = new Sprite(icon, new int[]{1,2}, sprites, new int[]{500,50});
   }
 

@@ -21,13 +21,13 @@ abstract public class Equippable extends Item{
    * @param p the player that has the crossbow equipped
   */
   public Equippable(Player p, Sprite s){
-    this(0,0,0);
+    this(0,0,0, -1);
     sprite = s;
     player = p;
   }
 
   public Equippable(Player p, int[] state){
-    this(0,0,0);
+    this(0,0,0, -1);
     sprite = new Sprite(null, state, null, null);
     player = p;
   }
@@ -38,8 +38,8 @@ abstract public class Equippable extends Item{
   * @param y the y position of the Equippable
   * @param r the rotation applied to the Equippable
   */
-  public Equippable(double x, double y, double r){
-    super(x,y,r);
+  public Equippable(double x, double y, double r, long id){
+    super(x,y,r,id);
   }
 
   /**

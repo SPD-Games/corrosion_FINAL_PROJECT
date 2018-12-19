@@ -13,8 +13,8 @@ abstract public class Item extends Entity{
   * @param y the y position of the Item
   * @param r the rotation applied to the Item
   */
-  public Item(double x, double y, double r){
-    super(x,y,r);
+  public Item(double x, double y, double r, long id){
+    super(x,y,r,id);
   }
 
   /**

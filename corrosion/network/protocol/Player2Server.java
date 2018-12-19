@@ -19,11 +19,13 @@ public class Player2Server extends Protocol{
   */
   public void send(Object data, Connection c){
     try{
-      c.out.writeDouble(((Entity)data).getXPos());
-      c.out.writeDouble(((Entity)data).getYPos());
-      c.out.writeDouble(((Entity)data).getRotaion());
+      Player p = (Player)data;
+      c.out.writeLong(p.getId());
+      c.out.writeDouble(p.getXPos());
+      c.out.writeDouble(p.getYPos());
+      c.out.writeDouble(p.getRotaion());
 
-      Equippable equipped = ((Player)data).getEquipped();
+      Equippable equipped = p.getEquipped();
       if (equipped == null){
         c.out.writeInt(0);
         return;
@@ -51,11 +53,12 @@ public class Player2Server extends Protocol{
   */
   public void get(DataInputStream in, Connection c){
     try{
+      long id = in.readLong();
       double xPos, yPos, rotation;
       xPos = in.readDouble();
       yPos = in.readDouble();
       rotation = in.readDouble();
-      Player p = new Player(xPos, yPos, rotation);
+      Player p = new Player(xPos, yPos, rotation, id);
 
       int classLength = in.readInt();
       if (classLength != 0){
@@ -68,7 +71,7 @@ public class Player2Server extends Protocol{
         Equippable q = (Equippable)Class.forName(className).getConstructor(cl).newInstance(p, state);
         p.setEquipped(q);
       }
-      Server.setPlayer(c.id, p);
+      Server.setPlayer(p);
       //add a new player to send to others
     }catch(Exception e){
       System.out.println("Server Receive Players" +e);

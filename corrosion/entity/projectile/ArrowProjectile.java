@@ -41,8 +41,8 @@ public class ArrowProjectile extends Projectile{
     }
   }
 
-  public ArrowProjectile(double xPos, double yPos, double xVel, double yVel, double r){
-    super(xPos,yPos,xVel,yVel,r);
+  public ArrowProjectile(double xPos, double yPos, double xVel, double yVel, double r, long id){
+    super(xPos,yPos,xVel,yVel,r,id);
   }
 
   /**

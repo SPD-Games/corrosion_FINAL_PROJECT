@@ -34,8 +34,8 @@ public class MainPlayer extends Player{
     * @param xPos the x position of the player
     * @param yPos the y position of the
     */
-    public static void spawn(double xPos, double yPos){
-      mainPlayer = new MainPlayer(xPos, yPos);
+    public static void spawn(double xPos, double yPos, long id){
+      mainPlayer = new MainPlayer(xPos, yPos, id);
     }
 
     /**
@@ -43,8 +43,8 @@ public class MainPlayer extends Player{
      * @param xPos x position of the position
      * @param yPos y position of the position
     */
-    public MainPlayer(double xPos, double yPos){
-      super(xPos, yPos, 0);
+    public MainPlayer(double xPos, double yPos, long id){
+      super(xPos, yPos, 0, id);
       equipped = new CrossBow(this);
       //equipped = null;
 

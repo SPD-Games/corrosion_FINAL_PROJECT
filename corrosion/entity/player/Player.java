@@ -56,8 +56,8 @@ public class Player extends Entity{
    * @param xPos x position of the position
    * @param yPos y position of the position
   */
-  public Player(double xPos, double yPos, double rotation){
-    super(xPos, yPos, rotation);
+  public Player(double xPos, double yPos, double rotation, long id){
+    super(xPos, yPos, rotation, id);
   }
 
   /**

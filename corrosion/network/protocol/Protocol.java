@@ -15,16 +15,17 @@ import corrosion.network.*;
 
 abstract public class Protocol{
   private static Protocol[] protocols;
-
   /**
   * Loads the protocols
   */
   public static void init(){
-    protocols = new Protocol[4];
+    protocols = new Protocol[6];
     protocols[0] = new Ping();
     protocols[1] = new Ping2();
     protocols[2] = new Player2Server();
     protocols[3] = new Player2Client();
+    protocols[4] = new InitId2Client();
+    protocols[5] = new RemovePlayer2Client();
   }
 
   /**

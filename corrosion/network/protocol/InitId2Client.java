@@ -1,7 +1,7 @@
 /**
 * Michael Metzinger
 * Dec 14 2018
-* Secondary ping message sending and receiving
+* Initial ping message sending and receiving
 */
 
 package corrosion.network.protocol;
@@ -13,10 +13,10 @@ import java.io.DataOutputStream;
 import corrosion.network.protocol.*;
 import corrosion.network.*;
 
-public class Ping2 extends Protocol{
+public class InitId2Client extends Protocol{
 
   /**
-  * Sends the reply ping message
+  * Sends an initial id
   * @param data data to send
   * @param c the connection to send to
   */
@@ -24,21 +24,22 @@ public class Ping2 extends Protocol{
     try{
       c.out.writeLong((Long)data);
     } catch(Exception e){
-      System.out.println("Error sending ping" + e);
+      System.out.println("Error sending init id" + e);
     }
   }
 
   /**
-  * Gets the reply ping message
+  * Gets an initial id
   * @param in the stream to listen on
   * @param c the connection to send to
   */
   public void get(DataInputStream in, Connection c){
     try{
-      //displays the ping
-      Client.setPing(System.currentTimeMillis() - in.readLong());
+      long n = in.readLong();
+      //replies to the ping
+      Client.setId(n);
     }catch(Exception e){
-      System.out.println("Error getting ping" + e);
+      System.out.println("Error getting init id" + e);
     }
   }
 }

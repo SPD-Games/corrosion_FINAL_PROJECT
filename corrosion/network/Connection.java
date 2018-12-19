@@ -14,7 +14,8 @@ import corrosion.network.protocol.*;
 public class Connection{
   public Socket socket;
   public DataOutputStream out;
-  public int id;
+  public long id;
+  private boolean isServer;
 
   /**
   * Secondary constructor
@@ -29,7 +30,8 @@ public class Connection{
   * @param socket the conneted socket to send and receive data
   * @param id the id of the socket to use
   */
-  public Connection(Socket socket, int id){
+  public Connection(Socket socket, long id){
+    isServer = true;
     this.id = id;
     this.socket = socket;
     try{
@@ -49,6 +51,7 @@ public class Connection{
   */
   public Connection(String ip, int port) throws Exception{
     this(new Socket(ip, port));
+    isServer = false;
   }
 
   class Listener implements Runnable{
@@ -69,16 +72,21 @@ public class Connection{
     * Listener loop
     */
     public void run(){
+      int protolNumber = -1;
       try{
         //continues listening for incoming Protocols
         while(true){
           //gets the protocol number
-          int protolNumber = in.readInt();
+          protolNumber = in.readInt();
           //runs the protocol data handler
           Protocol.get(protolNumber, in, connection);
         }
       }catch(Exception e){
-        System.out.println("Error listening for data" + e);
+        if (connection.isServer){
+          Server.closeConnection(connection);
+        } else {
+          System.out.println("Error listening for data" + e + protolNumber);
+        }
       }
     }
   }

@@ -22,12 +22,43 @@ import java.util.Scanner;
 import java.io.PrintStream;
 
 public class Client{
+  private static long ping = 0;
   private static Client client;
   private Connection connection;
   private ArrayList<Player> players = new ArrayList<Player>();
   private ArrayList<Entity> entities = new ArrayList<Entity>();
   private ArrayList<Entity> entitiesInView = new ArrayList<Entity>();
+  private long id = -1;
+  private final Object idLock = new Object();
 
+  public static void setPing(long p){
+    ping = p;
+  }
+
+  public static long getPing(){
+    return ping;
+  }
+
+  public static void setPlayer(Player p){
+    int n = client.players.indexOf(p);
+    if (n == -1){
+      client.players.add(p);
+    } else {
+      client.players.set(n, p);
+    }
+  }
+
+  public static void setId(long id){
+    synchronized(client.idLock){
+      client.id = id;
+    }
+  }
+
+  public static long getId(){
+    synchronized(client.idLock){
+      return client.id++;
+    }
+  }
   /**
   * Gets the client
   * @return the client
@@ -49,12 +80,17 @@ public class Client{
     @Override
     public void actionPerformed(ActionEvent arg0) {
       optimizeEntities();
+      Protocol.send(0, null, connection);
     }
   };
   private Timer optimizeTimer = new Timer(1000, optimizeListener);
 
   public static void setPlayers(ArrayList<Player> p){
       client.players = p;
+  }
+
+  public static void removePlayer(Player p){
+      client.players.remove(p);
   }
 
   public static ArrayList<Player> getPlayers(){
@@ -103,6 +139,7 @@ public class Client{
   * @param port the port of the server to connect to
   */
   public Client(String ip, int port){
+    client = this;
     Protocol.init();
     try{
       //creates a connection to the server
@@ -110,8 +147,10 @@ public class Client{
     } catch(Exception e){
       System.out.println("Error connecting to server" + e);
     }
-    client = this;
+    while(id == -1){}
+    MainPlayer.spawn(0,0,getId());
     optimizeTimer.start();
     sendTimer.start();
+    System.out.println("DONE");
   }
 }

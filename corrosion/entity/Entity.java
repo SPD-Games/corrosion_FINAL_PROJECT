@@ -12,7 +12,7 @@ import java.awt.geom.AffineTransform;
 
 abstract public class Entity{
   protected double xPos,yPos,rotation;
-  protected int id = -1;
+  protected long id = -1;
   protected AffineTransform transform = new AffineTransform();
   /**
   * Main Constructor
@@ -20,11 +20,12 @@ abstract public class Entity{
   * @param y the y position of the Entity
   * @param r the rotation applied to the Entity
   */
-  public Entity(double x, double y, double r){
+  public Entity(double x, double y, double r, long id){
     this();
     xPos = x;
     yPos = y;
     rotation = r;
+    this.id = id;
   }
 
   /**
@@ -94,6 +95,10 @@ abstract public class Entity{
 
   public void setId(int id){
     this.id = id;
+  }
+
+  public long getId(){
+    return id;
   }
 
   public boolean equals(Object o){
