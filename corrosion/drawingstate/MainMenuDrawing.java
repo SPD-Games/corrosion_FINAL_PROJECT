@@ -24,8 +24,8 @@ import corrosion.drawingstate.*;
 public class MainMenuDrawing extends DrawingState{
   protected BufferedImage logoImg;
   protected AffineTransform transform = new AffineTransform();
-  public JButton playBtn= new JButton("PLAY");
-  public JButton settingsBtn= new JButton("SETTINGS");
+  public JButton playBtn = new JButton("PLAY");
+  public JButton settingsBtn = new JButton("SETTINGS");
   public boolean addable = true;
 
   /**
@@ -60,7 +60,7 @@ public class MainMenuDrawing extends DrawingState{
 
       try {
         //sets sprite image
-        logoImg = ImageIO.read(new File("sprites/logoV1.png"));
+        logoImg = ImageIO.read(new File("sprites/menuicons/logoV1.png"));
       } catch(Exception e) {
         //exits on error with message
         System.out.println("Logo load error: " + e);

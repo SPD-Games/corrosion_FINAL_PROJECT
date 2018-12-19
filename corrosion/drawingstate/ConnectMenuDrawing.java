@@ -23,7 +23,8 @@ import corrosion.input.bind.*;
 
 public class ConnectMenuDrawing extends DrawingState{
   // create the new button
-  public static ButtonG b = new ButtonG((Drawing.width())/2 , 0 ,300 ,100, new Color(100,100,100), "Heck");
+  public static ButtonG b;
+  BufferedImage connectImage;
 
   /**
   * draw the connection Screen
@@ -48,6 +49,15 @@ public class ConnectMenuDrawing extends DrawingState{
     MouseBindable mouseBinds[] = new MouseBindable[5];
     mouseBinds[1] = new LeftClick();//left click
     Mouse.setBinds(mouseBinds);
+      try {
+            //sets sprite image
+            connectImage = ImageIO.read(new File("sprites/menuicons/ConnectBtn.png"));
+          } catch(Exception e) {
+            //exits on error with message
+            System.out.println("Logo load error: " + e);
+            System.exit(-1);
+      }
+       b = new ButtonG(0, 0 ,1,connectImage);
   }
 
 }

@@ -29,7 +29,6 @@ public class LeftClick extends MouseBindable{
     if (xClicked > (ConnectMenuDrawing.getB()).getXBounds()[0] && xClicked < (ConnectMenuDrawing.getB()).getXBounds()[1]) {
       if (yClicked > (ConnectMenuDrawing.getB()).getYBounds()[0] && yClicked < (ConnectMenuDrawing.getB()).getYBounds()[1]) {
         System.out.println("clicked!!!");
-        (ConnectMenuDrawing.getB()).setColor(new Color((int)(Math.random() * 255), (int)(Math.random() * 255), (int)(Math.random() * 255)));
       }
     }
 
