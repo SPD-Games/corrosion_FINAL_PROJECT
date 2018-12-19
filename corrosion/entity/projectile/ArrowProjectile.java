@@ -58,12 +58,21 @@ public class ArrowProjectile extends Projectile{
   }
 
   //TODO hit checking
-  public boolean hitCheck(){
-    return false;
+  public Entity hitCheck(){
+    return null;
   }
 
   public void hit(){
     Client.removeEntity(this);
+  }
+
+  public void update(long t){
+    xPos += t * xVel;
+    yPos += t * yVel;
+    range -= MAX_VEL*t;
+    if (range < 0){
+      hit();
+    }
   }
 
   /**
@@ -72,14 +81,7 @@ public class ArrowProjectile extends Projectile{
   * @param t the time passes since the last frame
   */
   public void draw(Graphics g, long t){
-
-    xPos += t * xVel;
-    yPos += t * yVel;
-    range -= MAX_VEL*t;
-    if (range < 0){
-      hit();
-    }
-
+    update(t);
     //draws the arrow
     transform.setToTranslation(xPos - 3, yPos);
     transform.rotate(rotation, 3, 0);

@@ -60,10 +60,11 @@ abstract public class Projectile extends Entity{
   * Determines if the object has hit anything
   * @return if the projectile hit an object
   */
-  abstract public boolean hitCheck();
+  abstract public Entity hitCheck();
 
   /**
   * When an object is hit
   */
   abstract public void hit();
+  abstract public void update(long t);
 }
