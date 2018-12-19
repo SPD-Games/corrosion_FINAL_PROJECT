@@ -4,7 +4,7 @@
 * An arrow that is shot
 */
 
-package corrosion.entity.item;
+package corrosion.entity.projectile;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -18,16 +18,15 @@ import corrosion.entity.player.Player;
 import corrosion.drawingstate.*;
 import corrosion.entity.item.*;
 import corrosion.entity.*;
-import corrosion.Projectile;
+import corrosion.network.Client;
 
-public class Arrow extends Item implements Projectile{
+
+public class ArrowProjectile extends Projectile{
   private static BufferedImage img;
-  private double xVel, yVel;
-  private double range;
+
   private static final double MAX_VEL = 2;
-  private static final double MAX_RANGE = 300;
-  private double lastXPos, lastYPos;
-  private Player player;
+  private static final double MAX_RANGE = 3000;
+
   /**
   * Initializes the player class
   */
@@ -42,8 +41,8 @@ public class Arrow extends Item implements Projectile{
     }
   }
 
-  public Arrow(double xPos, double yPos, double r){
-    super(xPos,yPos,r);
+  public ArrowProjectile(double xPos, double yPos, double xVel, double yVel, double r){
+    super(xPos,yPos,xVel,yVel,r);
   }
 
   /**
@@ -52,30 +51,19 @@ public class Arrow extends Item implements Projectile{
   * @param mouseX the x position of the mouse cursor relative to the player
   * @param mouseY the y position of the mouse cursor relative to the player
   */
-  public Arrow(Player player, double mouseX, double mouseY){
-    super();
-    this.player = player;
-    this.rotation = Math.atan2(mouseX, mouseY);
-    this.xPos = player.getXPos() + 189 * Math.sin(rotation);
-    this.yPos = player.getYPos() - 189 * Math.cos(rotation);
-    this.lastXPos = xPos;
-    this.lastYPos = yPos;
-    range = MAX_RANGE;
-    this.xVel = MAX_VEL*Math.sin(rotation);
-    this.yVel = MAX_VEL*-Math.cos(rotation);
-    this.transform = new AffineTransform();
-
+  public ArrowProjectile(Player player, double mouseX, double mouseY){
+    super(player, mouseX, mouseY, MAX_VEL, MAX_RANGE);
     //add to active entities
-    GameDrawing.addEntity(this);
+    Client.addEntity(this);
   }
 
   //TODO hit checking
   public boolean hitCheck(){
     return false;
   }
+
   public void hit(){
-    GameDrawing.addEntity(new Arrow(xPos, yPos, rotation));
-    GameDrawing.removeEntity(this);
+    Client.removeEntity(this);
   }
 
   /**
@@ -84,12 +72,12 @@ public class Arrow extends Item implements Projectile{
   * @param t the time passes since the last frame
   */
   public void draw(Graphics g, long t){
+
     xPos += t * xVel;
     yPos += t * yVel;
-    range -= MAX_VEL;
+    range -= MAX_VEL*t;
     if (range < 0){
-      xVel = 0;
-      yVel = 0;
+      hit();
     }
 
     //draws the arrow

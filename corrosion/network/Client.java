@@ -4,9 +4,12 @@
 * The client that connect to the server
 */
 
+//NOTE you have died will be on the map
+
 package corrosion.network;
 
 import corrosion.entity.player.*;
+import corrosion.entity.*;
 import corrosion.network.protocol.*;
 import corrosion.network.Connection;
 
@@ -22,6 +25,8 @@ public class Client{
   private static Client client;
   private Connection connection;
   private ArrayList<Player> players = new ArrayList<Player>();
+  private ArrayList<Entity> entities = new ArrayList<Entity>();
+  private ArrayList<Entity> entitiesInView = new ArrayList<Entity>();
 
   /**
   * Gets the client
@@ -40,12 +45,53 @@ public class Client{
   };
   private Timer sendTimer = new Timer(1000/64, sendLoopListener);
 
+  private ActionListener optimizeListener = new ActionListener(){
+    @Override
+    public void actionPerformed(ActionEvent arg0) {
+      optimizeEntities();
+    }
+  };
+  private Timer optimizeTimer = new Timer(1000, optimizeListener);
+
   public static void setPlayers(ArrayList<Player> p){
       client.players = p;
   }
 
   public static ArrayList<Player> getPlayers(){
     return client.players;
+  }
+
+  public static ArrayList<Entity> getEntities(){
+    return client.entitiesInView;
+  }
+
+  public static void addEntity(Entity entity){
+    client.entitiesInView.add(entity);
+    client.entities.add(entity);
+  }
+
+  public static void addEntity(Entity entity, int protocol){
+    addEntity(entity);
+    send(protocol, entity);
+  }
+
+  public static void removeEntity(Entity entity){
+    client.entitiesInView.remove(entity);
+    client.entities.remove(entity);
+  }
+
+  public static void optimizeEntities(){
+    ArrayList<Entity> visable = new ArrayList<Entity>();
+    double xPos = MainPlayer.getMainPlayer().getXPos();
+    double yPos = MainPlayer.getMainPlayer().getYPos();
+
+    for(Entity e: client.entities){
+      if ((e.getXPos() - xPos)*(e.getXPos() - xPos) + (e.getYPos() - yPos)*(e.getYPos() - yPos) < 100000000){
+        visable.add(e);
+      }
+    }
+
+    client.entitiesInView = visable;
   }
 
   public static void send(int protocol, Object data){
@@ -65,6 +111,7 @@ public class Client{
       System.out.println("Error connecting to server" + e);
     }
     client = this;
+    optimizeTimer.start();
     sendTimer.start();
   }
 }

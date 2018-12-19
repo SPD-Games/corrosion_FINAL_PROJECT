@@ -14,6 +14,7 @@ import corrosion.Drawing;
 import corrosion.entity.*;
 import corrosion.entity.player.*;
 import corrosion.entity.item.*;
+import corrosion.entity.projectile.*;
 import corrosion.entity.item.equippable.*;
 import corrosion.input.*;
 import corrosion.input.bind.*;
@@ -22,15 +23,6 @@ import corrosion.input.bind.*;
 public class GameDrawing extends DrawingState{
 
   public static double zoom = 1;
-  private static ArrayList<Entity> entities = new ArrayList<Entity>();
-
-  public static void addEntity(Entity e){
-      entities.add(e);
-  }
-
-  public static void removeEntity(Entity e){
-      entities.remove(e);
-  }
 
   /**
   * Initiates the drawing state
@@ -39,7 +31,7 @@ public class GameDrawing extends DrawingState{
     Drawing.getPanel().getTimer().start();
     Player.init();
     CrossBow.init();
-    Arrow.init();
+    ArrowProjectile.init();
 
     MouseBindable mouseBinds[] = new MouseBindable[5];
     mouseBinds[1] = new Attack();//left click
@@ -55,15 +47,11 @@ public class GameDrawing extends DrawingState{
     Keyboard.setBinds(binds);
 
     MainPlayer.spawn(0, 0);
-<<<<<<< HEAD
-    new Client("10.16.21.125", 1234);
-=======
   }
 
   public GameDrawing(String ip, int port){
     super();
     new Client(ip, port);
->>>>>>> eb902930a473982df8aa12a5302c56cdfc1db44c
   }
 
   /**
@@ -72,26 +60,37 @@ public class GameDrawing extends DrawingState{
   * @param t the time elapsed from the last frame
   */
   public void draw(Graphics g, long t){
+    Graphics2D g2d = (Graphics2D)g;
+
+    //setting to change render quality
+    //low settings
+    //g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
+
+    //high settings
+    g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+    g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+
     //clears the screen
     g.clearRect(0, 0, Drawing.width(), Drawing.height());
     g.setColor(new Color(173, 216, 230));
     g.fillRect(0, 0, Drawing.width(), Drawing.height());
 
-    ((Graphics2D)g).scale(zoom, zoom);
-    ((Graphics2D)g).translate(-MainPlayer.getMainPlayer().getXPos() + Drawing.width()/2/zoom, -MainPlayer.getMainPlayer().getYPos() + Drawing.height()/2/zoom);
+    g2d.scale(zoom, zoom);
+    g2d.translate(-MainPlayer.getMainPlayer().getXPos() + Drawing.width()/2/zoom, -MainPlayer.getMainPlayer().getYPos() + Drawing.height()/2/zoom);
     //draw map
     g.setColor(Color.black);
 
     g.fillOval(0, 0, 250, 250);//TMP TO TEST MOVEMENT
     //draw entities
-    for (Entity e : entities){
-      e.draw(g, t);
+    ArrayList<Entity> entities = Client.getEntities();
+    for (int i = 0; i < entities.size(); ++i){
+      entities.get(i).draw(g, t);
     }
 
     //draw players
     ArrayList<Player> players = Client.getPlayers();
-    for (Player player: players){
-      player.draw(g,t);
+    for (int i = 0; i < players.size(); ++i){
+      players.get(i).draw(g, t);
     }
     MainPlayer.getMainPlayer().draw(g, t);
 

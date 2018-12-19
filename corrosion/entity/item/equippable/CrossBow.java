@@ -17,7 +17,7 @@ import java.awt.Point;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 
-import corrosion.entity.item.*;
+import corrosion.entity.projectile.*;
 import corrosion.Sprite;
 import corrosion.entity.Entity;
 import corrosion.entity.player.Player;
@@ -104,7 +104,7 @@ public class CrossBow extends Equippable{
     //checks if crossbow is reloaded
     if (sprite.isState(SHOOT_READY, false)){
       //creates a new arrow
-      new Arrow(player, p.getX(), p.getY());
+      new ArrowProjectile(player, p.getX(), p.getY());
       //starts shoot animation
       sprite.startAnimation(1);
     }
