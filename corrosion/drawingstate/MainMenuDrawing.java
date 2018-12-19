@@ -1,5 +1,5 @@
 /**  Edward Pei, Micheal Metzinger
-  * December 11 2018
+  * December 18 2018
   * Draws the main game
   */
 
@@ -20,13 +20,17 @@ import java.awt.Graphics;
 
 import corrosion.Drawing;
 import corrosion.drawingstate.*;
+import corrosion.drawingstate.menuobjects.ButtonG;
+import corrosion.input.*;
+import corrosion.input.bind.*;
 
 public class MainMenuDrawing extends DrawingState{
   protected BufferedImage logoImg;
+  protected BufferedImage PlayBtnImage;
+  protected static ButtonG playBtn;
+  protected static ButtonG settingBtn;
   protected AffineTransform transform = new AffineTransform();
-  public JButton playBtn = new JButton("PLAY");
-  public JButton settingsBtn = new JButton("SETTINGS");
-  public boolean addable = true;
+
 
   /**
    * draw the images and buttons
@@ -42,29 +46,35 @@ public class MainMenuDrawing extends DrawingState{
 
     ((Graphics2D)(g)).drawImage(logoImg,transform,null);
 
-    // draw all swing objects
-    drawSwing(g);
-  }
+    // draw all buttons
+    ((Graphics2D)g).translate((Drawing.width())/2,(Drawing.height())/2 );
+    playBtn.draw(g);
+}
 
-  /**
-  * Draws all the swing objects on the main menu
-  * @param g the graphics tool to draw with
+  /** gets the button
+  * @return the Button
   */
-  public void drawSwing(Graphics g) {
-
-
+  public static ButtonG getPlayBtn() {
+    return playBtn;
   }
-
 
   public void init(){
 
+    // add all the mouse binds
+    MouseBindable mouseBinds[] = new MouseBindable[5];
+    mouseBinds[1] = new LeftClickMainMenu();//left click
+    Mouse.setBinds(mouseBinds);
+
       try {
         //sets sprite image
-        logoImg = ImageIO.read(new File("sprites/menuicons/logoV1.png"));
+        logoImg = ImageIO.read(new File("sprites/menuicons/LogoV1.png"));
+        PlayBtnImage = ImageIO.read(new File("sprites/menuicons/PlayBtn.png"));
+
       } catch(Exception e) {
         //exits on error with message
         System.out.println("Logo load error: " + e);
         System.exit(-1);
       }
+      playBtn = new ButtonG(0,400,1,PlayBtnImage);
     }
   }

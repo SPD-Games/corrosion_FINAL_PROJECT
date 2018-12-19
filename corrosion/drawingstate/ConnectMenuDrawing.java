@@ -1,5 +1,5 @@
 /** Edward Pei
-  * December 14 2018
+  * December 18 2018
   * Draws the connection menu screen
   */
 package corrosion.drawingstate;
@@ -47,7 +47,7 @@ public class ConnectMenuDrawing extends DrawingState{
   public void init(){
     // add all the mouse binds
     MouseBindable mouseBinds[] = new MouseBindable[5];
-    mouseBinds[1] = new LeftClick();//left click
+    mouseBinds[1] = new LeftClickConnectMenu();//left click
     Mouse.setBinds(mouseBinds);
       try {
             //sets sprite image
@@ -57,7 +57,7 @@ public class ConnectMenuDrawing extends DrawingState{
             System.out.println("Logo load error: " + e);
             System.exit(-1);
       }
-       b = new ButtonG(0, 0 ,1,connectImage);
+       b = new ButtonG(0, 400 ,1,connectImage);
   }
 
 }
