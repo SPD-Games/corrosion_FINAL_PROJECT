@@ -24,12 +24,13 @@ public class ButtonG {
   int[] xBounds = new int[2];
   AffineTransform transform = new AffineTransform();
   BufferedImage image;
-/** stores the information of a button, button constructor
-* @param xPos the x Position of the button
-* @param yPos the y Position of the button
-* @param width the width of the Button
-* @param height the height of the Button
-*/
+
+  /** stores the information of a button, button constructor
+  * @param xPos the x Position of the button
+  * @param yPos the y Position of the button
+  * @param scale how to scale the Button
+  * @param i the image
+  */
   public ButtonG(int xPos,int yPos, double scale,BufferedImage i) {
     this.xPos = xPos;
     this.yPos = yPos;
