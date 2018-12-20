@@ -2,7 +2,7 @@
   * December 14 2018
   * draws text boxs
   */
-package corrosion.drawingstate.menuobject;
+package corrosion.drawingstate.menuobjects;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,6 +22,8 @@ public class TextBoxG {
   int xPos,yPos, width, height;
   int[] yBounds = new int[2];
   int[] xBounds = new int[2];
+  String text;
+  Color c;
 
   /** stores the information of a button, button constructor
   * @param xPos the x Position of the button
@@ -38,6 +40,10 @@ public class TextBoxG {
     yBounds[1] = yPos + height/2;
     xBounds[0] = xPos - width/2;
     xBounds[1] = xPos + width/2;
+    this.width = width;
+    this.height = height;
+    this.text = text;
+    this.c = c;
   }
 
   public void draw(Graphics g) {
@@ -45,10 +51,11 @@ public class TextBoxG {
     ((Graphics2D) g).fillRect(xBounds[0], yBounds[0], width,height);
 
     g.setColor(Color.black);
-    g.drawString(xPos,yPos, text);
+    g.setFont(new Font("Ariel", Font.PLAIN, 50));
+    g.drawString(text,xPos-width/2,yPos + height/4);
 
   }
 
-  
+
 
 }

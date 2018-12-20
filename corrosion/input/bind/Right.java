@@ -6,19 +6,21 @@ package corrosion.input.bind;
 
 import corrosion.input.bind.Bindable;
 import corrosion.entity.player.MainPlayer;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class Right extends Bindable{
   /**
   * Moves the player right
   */
-  public void pressed(){
+  public void pressed(KeyEvent e){
     MainPlayer.getMainPlayer().setRight(true);
 
   }
   /**
   * Stops the player from moving the player right
   */
-  public void released(){
+  public void released(KeyEvent e){
     MainPlayer.getMainPlayer().setRight(false);
   }
 

@@ -4,8 +4,11 @@
   */
 package corrosion.input.bind;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 abstract public class Bindable{
-  abstract public void pressed();
-  abstract public void released();
+  abstract public void pressed(KeyEvent e);
+  abstract public void released(KeyEvent e);
   abstract public void typed();
 }

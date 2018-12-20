@@ -39,7 +39,7 @@ public class Keyboard implements KeyListener {
       //check if the key is bound
       if (binds[k] != null){
         //runs the bind
-        binds[k].pressed();
+        binds[k].pressed(e);
       }
     }
   }
@@ -57,7 +57,7 @@ public class Keyboard implements KeyListener {
       //check if the key is bound
       if (binds[k] != null){
         //runs the bind
-        binds[k].released();
+        binds[k].released(e);
       }
     }
   }
