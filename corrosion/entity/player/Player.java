@@ -18,7 +18,7 @@ import corrosion.entity.item.equippable.*;
 public class Player extends Entity{
   protected static BufferedImage img;
   protected static BufferedImage hands;
-
+  private double moveToX, moveToY, xVel, yVel;
   protected Equippable equipped = null;
 
   public Equippable getEquipped(){
@@ -58,8 +58,30 @@ public class Player extends Entity{
   */
   public Player(double xPos, double yPos, double rotation, long id){
     super(xPos, yPos, rotation, id);
+    moveToY = yPos;
+    moveToX = xPos;
+    xVel = 0;
+    yVel = 0;
   }
 
+  public void moveTo(double xPos, double yPos){
+
+    //check if it is moving
+    if (xPos != moveToX || yPos != moveToY){
+      double xMove = xPos - this.xPos;
+      double yMove = yPos - this.yPos;
+      double absMove = Math.sqrt(xMove*xMove + yMove*yMove);
+      xVel = 0.5 * xMove / absMove;
+      yVel = 0.5 * yMove / absMove;
+    } else {
+      xVel = 0;
+      yVel = 0;
+      this.xPos = xPos;
+      this.yPos = yPos;
+    }
+    moveToX = xPos;
+    moveToY = yPos;
+  }
   /**
   * Draws the player to the Window
   * @param g the graphics context
@@ -71,6 +93,9 @@ public class Player extends Entity{
 
     //draws the equipped item
     drawEquipped(g);
+
+    xPos += t * xVel;
+    yPos += t * yVel;
   }
 
   /**

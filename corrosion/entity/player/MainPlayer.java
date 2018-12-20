@@ -16,6 +16,7 @@ import corrosion.entity.player.Player;
 import corrosion.input.*;
 
 public class MainPlayer extends Player{
+  private final double SQRT_2 = Math.sqrt(2.0);
     private static MainPlayer mainPlayer;
 
     //direction the player is moving (keyboard input)
@@ -136,9 +137,18 @@ public class MainPlayer extends Player{
       drawEquipped(g);
       //TODO make it so its not faster diagonal
       //moves the player
-      if (up){yPos -= t * 0.5;}
-      if (down){yPos += t * 0.5;}
-      if (left){xPos -= t * 0.5;}
-      if (right){xPos += t * 0.5;}
+      double yVel = 0;
+      double xVel = 0;
+      if (up){yVel -= t * 0.5;}
+      if (down){yVel += t * 0.5;}
+      if (left){xVel -= t * 0.5;}
+      if (right){xVel += t * 0.5;}
+      if (xVel != 0 && yVel != 0){
+        yVel /= SQRT_2;
+        xVel /= SQRT_2;
+      }
+
+      xPos += xVel;
+      yPos += yVel;
     }
 }

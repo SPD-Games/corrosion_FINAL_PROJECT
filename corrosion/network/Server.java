@@ -68,7 +68,7 @@ public class Server{
       }
     }
   };
-  private Timer sendTimer = new Timer(1000/64, sendLoopListener);
+  private Timer sendTimer = new Timer(1000/32, sendLoopListener);
 
   public static void setPlayer(Player p){
     int n = server.players.indexOf(p);

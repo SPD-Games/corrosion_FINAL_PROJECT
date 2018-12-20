@@ -62,7 +62,8 @@ public class Client{
     if (n == -1){
       client.players.add(p);
     } else {
-      client.players.set(n, p);
+      client.players.get(n).moveTo(p.getXPos(), p.getYPos());
+      //client.players.get(n).setEquipped(p.getEquipped());
     }
   }
 
