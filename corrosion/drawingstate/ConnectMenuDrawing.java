@@ -46,13 +46,26 @@ public class ConnectMenuDrawing extends DrawingState{
   	return connectBtn;
   }
 
+  /** gets the text box
+   * @return the text box
+   */
+  public static TextBoxG getIPInput() {
+    return ipInput;
+  }
+
   public void init(){
     // add all the mouse binds
     MouseBindable mouseBinds[] = new MouseBindable[5];
     mouseBinds[1] = new LeftClickConnectMenu();//left click
     Mouse.setBinds(mouseBinds);
 
-    
+    Bindable binds[] = new Bindable[526];
+    Typing type = new Typing();
+    for(int i = 0; i < 526 ;i++) {
+      binds[i] = type;
+    }
+    Keyboard.setBinds(binds);
+
       try {
             //sets sprite image
             connectImage = ImageIO.read(new File("sprites/menuicons/ConnectBtn.png"));
@@ -62,7 +75,7 @@ public class ConnectMenuDrawing extends DrawingState{
             System.exit(-1);
       }
        connectBtn = new ButtonG(0, 400 ,1,connectImage);
-       ipInput = new TextBoxG(0,0,600,100,new Color(249,7,23),"ENTER IP HERE");
+       ipInput = new TextBoxG(0,0,900,100,new Color(249,7,23),"ENTER IP HERE");
   }
 
 }

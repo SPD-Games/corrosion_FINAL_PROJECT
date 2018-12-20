@@ -46,6 +46,20 @@ public class TextBoxG {
     this.c = c;
   }
 
+  public void addChar(char c) {
+    text += c;
+  }
+
+  public void backSpace() {
+    if(text.length() > 0) {
+      text = text.substring(0, text.length() - 1);
+    }
+  }
+
+  public String getText() {
+    return text;
+  }
+
   public void draw(Graphics g) {
     g.setColor(c);
     ((Graphics2D) g).fillRect(xBounds[0], yBounds[0], width,height);
