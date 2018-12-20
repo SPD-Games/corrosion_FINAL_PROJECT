@@ -147,7 +147,21 @@ public class Client{
     } catch(Exception e){
       System.out.println("Error connecting to server" + e);
     }
-    while(id == -1){}
+
+    long startTime = System.currentTimeMillis();
+    long timeElapsed = 0l;
+    while(id == -1){
+      timeElapsed = System.currentTimeMillis() - startTime;
+      if (timeElapsed > 2000){
+        //Error
+        System.out.println("Failed to connect to server.");
+        System.exit(-1);
+      }
+      try{
+        Thread.sleep(10);
+      } catch(Exception e){}
+    }
+
     MainPlayer.spawn(0,0,getId());
     optimizeTimer.start();
     sendTimer.start();
