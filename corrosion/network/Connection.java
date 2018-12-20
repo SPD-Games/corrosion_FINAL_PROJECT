@@ -85,6 +85,7 @@ public class Connection{
         if (connection.isServer){
           Server.closeConnection(connection);
         } else {
+          //main menu
           System.out.println("Error listening for data" + e + protolNumber);
         }
       }

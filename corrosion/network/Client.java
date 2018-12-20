@@ -10,6 +10,7 @@ package corrosion.network;
 
 import corrosion.entity.player.*;
 import corrosion.entity.*;
+import corrosion.entity.projectile.*;
 import corrosion.network.protocol.*;
 import corrosion.network.Connection;
 
@@ -26,10 +27,27 @@ public class Client{
   private static Client client;
   private Connection connection;
   private ArrayList<Player> players = new ArrayList<Player>();
+  private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
   private ArrayList<Entity> entities = new ArrayList<Entity>();
   private ArrayList<Entity> entitiesInView = new ArrayList<Entity>();
   private long id = -1;
   private final Object idLock = new Object();
+
+  public static Connection getConnection(){
+    return client.connection;
+  }
+
+  public static void addProjectile(Projectile p){
+    client.projectiles.add(p);
+  }
+
+  public static ArrayList<Projectile> getProjectiles(){
+    return client.projectiles;
+  }
+
+  public static void removeProjetile(Projectile p){
+    client.projectiles.remove(p);
+  }
 
   public static void setPing(long p){
     ping = p;

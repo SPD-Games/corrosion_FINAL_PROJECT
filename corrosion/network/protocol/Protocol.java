@@ -19,13 +19,14 @@ abstract public class Protocol{
   * Loads the protocols
   */
   public static void init(){
-    protocols = new Protocol[6];
+    protocols = new Protocol[7];
     protocols[0] = new Ping();
     protocols[1] = new Ping2();
     protocols[2] = new Player2Server();
     protocols[3] = new Player2Client();
     protocols[4] = new InitId2Client();
     protocols[5] = new RemovePlayer2Client();
+    protocols[6] = new Projectile2Server();
   }
 
   /**
@@ -35,6 +36,22 @@ abstract public class Protocol{
   *@param c the connection to send data to
   */
   public static void send(int protocol, Object data, Connection c){
+    //start new Thread
+    class Send implements Runnable{
+      public void run(){
+        _send(protocol, data, c);
+      }
+    }
+    new Thread(new Send()).start();
+  }
+
+  /**
+  * Sends data to a connection
+  *@param protocol the protocol to use
+  *@param data the data to sends
+  *@param c the connection to send data to
+  */
+  private static void _send(int protocol, Object data, Connection c){
     synchronized(c.out){
       try{
         //send the protocol number

@@ -89,6 +89,12 @@ public class GameDrawing extends DrawingState{
       entities.get(i).draw(g, t);
     }
 
+    //draw projectile
+    ArrayList<Projectile> projectiles = Client.getProjectiles();
+    for (int i = 0; i < projectiles.size(); ++i){
+      projectiles.get(i).draw(g, t);
+    }
+
     //draw players
     ArrayList<Player> players = Client.getPlayers();
     for (int i = 0; i < players.size(); ++i){
