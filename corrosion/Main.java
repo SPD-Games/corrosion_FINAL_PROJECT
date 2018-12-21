@@ -2,7 +2,8 @@
   * December 13 2018
   * Runs the game
   * TODO:
-      hit reg and max distance of projectiles
+      hit reg
+      dont send player update if no frame has passed
   */
 
 package corrosion;

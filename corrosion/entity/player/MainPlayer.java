@@ -46,7 +46,8 @@ public class MainPlayer extends Player{
     */
     public MainPlayer(double xPos, double yPos, long id){
       super(xPos, yPos, 0, id);
-      equipped = new Pistol();
+      //equipped = new Pistol();
+      equipped = new CrossBow();
       //equipped = null;
 
     }

@@ -6,12 +6,13 @@
 
 package corrosion.entity.projectile;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Line2D;
+import java.util.ArrayList;
 
 import corrosion.drawingstate.GameDrawing;
 import corrosion.entity.player.Player;
@@ -19,7 +20,8 @@ import corrosion.drawingstate.*;
 import corrosion.entity.item.*;
 import corrosion.entity.*;
 import corrosion.network.Client;
-import corrosion.network.protocol.*; 
+import corrosion.network.protocol.*;
+import corrosion.HitDetection;
 
 
 public class ArrowProjectile extends Projectile{
@@ -69,13 +71,19 @@ public class ArrowProjectile extends Projectile{
     Client.addProjectile(this);
   }
 
-
   //TODO hit checking
   public void hitCheck(){
-    return;
+    ArrayList<Player> players = Client.getPlayers();
+    for (int i = 0; i < players.size(); ++i){
+      if (HitDetection.hit(players.get(i).getHitBox(), getHitBox())){
+        System.out.println("HIT");
+        hit();
+      }
+    }
   }
 
   public void hit(){
+    isHit = true;
     Client.removeProjetile(this);
   }
 
@@ -105,5 +113,10 @@ public class ArrowProjectile extends Projectile{
     //((Graphics2D)(g)).drawLine((int)xPos, (int)yPos, (int)lastXPos, (int)lastYPos);
     lastXPos = xPos;
     lastYPos = yPos;
+  }
+
+  @Override
+  public Shape getHitBox(){
+    return new Line2D.Double(xPos,yPos,lastXPos,lastYPos);
   }
 }

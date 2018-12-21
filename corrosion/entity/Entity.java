@@ -8,7 +8,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.geom.AffineTransform;
-
+import java.awt.Shape;
 
 abstract public class Entity{
   protected double xPos,yPos,rotation;
@@ -45,6 +45,13 @@ abstract public class Entity{
   public void setPos(double x, double y){
     this.xPos = x;
     this.yPos = y;
+  }
+
+  /**
+  * Gets the hitBox for the entity
+  */
+  public Shape getHitBox(){
+    return null;
   }
 
   /**

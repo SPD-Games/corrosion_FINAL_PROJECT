@@ -19,6 +19,7 @@ abstract public class Projectile extends Entity{
   protected double range;
   protected boolean watchHit = false;
   protected Player player = null;
+  protected boolean isHit = false;
 
   public Projectile(double xPos, double yPos, double xVel, double yVel, double r, long id){
     super(xPos,yPos,r,id);

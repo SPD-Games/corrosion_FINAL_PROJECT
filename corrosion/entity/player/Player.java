@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.*;
 import java.io.File;
 import javax.imageio.*;
+import java.awt.geom.Ellipse2D;
 
 import corrosion.entity.*;
 import corrosion.entity.item.equippable.*;
@@ -89,6 +90,7 @@ public class Player extends Entity{
     transform.setToTranslation(xPos-50, yPos-50);
     transform.rotate(rotation, 50, 50);
     ((Graphics2D)(g)).drawImage(img, transform, null);
+    ((Graphics2D)(g)).fillOval((int)xPos-50, (int)yPos-50, 100, 100);
 
     //draws the equipped item
     drawEquipped(g);
@@ -115,5 +117,10 @@ public class Player extends Entity{
 
   public void die(){}
   public void hit(double damage){}
+
+  @Override
+  public Shape getHitBox(){
+    return new Ellipse2D.Double(xPos-50,yPos-50,100,100);
+  }
 
 }
