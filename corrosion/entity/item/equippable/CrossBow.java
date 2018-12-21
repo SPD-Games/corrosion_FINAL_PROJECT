@@ -26,7 +26,7 @@ import corrosion.entity.player.Player;
 public class CrossBow extends Equippable{
   //TODO move all images and draw handling in Usable
   private static BufferedImage icon;
-  private static BufferedImage[][] sprites = new BufferedImage[2][];
+  private static BufferedImage[][] sprites = new BufferedImage[2][];;
 
   private final int[] SHOOT_READY = {0,3};
   private final int[] RELOAD_READY = {1,2};
@@ -114,7 +114,7 @@ public class CrossBow extends Equippable{
   * Reloads the weapon
   * @param p the pointer position on the screen relative to the player
   */
-  public void attack2(Point p){
+  public void attack2(Point p, Player player){
     reload();
   }
 

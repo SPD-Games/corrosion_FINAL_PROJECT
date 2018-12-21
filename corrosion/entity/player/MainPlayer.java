@@ -46,7 +46,7 @@ public class MainPlayer extends Player{
     */
     public MainPlayer(double xPos, double yPos, long id){
       super(xPos, yPos, 0, id);
-      equipped = new CrossBow();
+      equipped = new Pistol();
       //equipped = null;
 
     }
@@ -105,7 +105,7 @@ public class MainPlayer extends Player{
       if(equipped == null){
 
       } else {
-        equipped.attack2(p);
+        equipped.attack2(p, this);
       }
     }
 
@@ -130,6 +130,7 @@ public class MainPlayer extends Player{
       Point mousePos = Mouse.getPosition();
       transform.setToTranslation(xPos-50, yPos-50);
       rotation = Math.atan2(mousePos.getX(), mousePos.getY());
+      //rotation = 0;
       transform.rotate(rotation, 50, 50);
       ((Graphics2D)(g)).drawImage(img, transform, null);
 

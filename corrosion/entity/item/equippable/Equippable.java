@@ -55,7 +55,7 @@ abstract public class Equippable extends Item{
   * Uses the second function useable
   * @param p the point relative to the player the user clicked
   */
-  abstract public void attack2(Point p);
+  abstract public void attack2(Point p, Player player);
 
   /**
   * Reloads the usable
