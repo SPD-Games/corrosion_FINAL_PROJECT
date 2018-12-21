@@ -18,7 +18,7 @@ abstract public class Projectile extends Entity{
   protected double lastXPos, lastYPos;
   protected double range;
   protected boolean watchHit = false;
-  protected Player player;
+  protected Player player = null;
 
   public Projectile(double xPos, double yPos, double xVel, double yVel, double r, long id){
     super(xPos,yPos,r,id);
@@ -27,25 +27,6 @@ abstract public class Projectile extends Entity{
     lastXPos = xPos;
     lastYPos = yPos;
     range = 1000;
-  }
-
-  /**
-  * Main Constructor
-  * @param player the player who created the Arrow
-  * @param mouseX the x position of the mouse cursor relative to the player
-  * @param mouseY the y position of the mouse cursor relative to the player
-  */
-  public Projectile(Player player, double mouseX, double mouseY, double MAX_VEL, double MAX_RANGE){
-    this();
-    this.player = player;
-    this.rotation = Math.atan2(mouseX, mouseY);
-    this.xPos = player.getXPos() + 189 * Math.sin(rotation);
-    this.yPos = player.getYPos() - 189 * Math.cos(rotation);
-    this.lastXPos = xPos;
-    this.lastYPos = yPos;
-    this.xVel = MAX_VEL*Math.sin(rotation);
-    this.yVel = MAX_VEL*-Math.cos(rotation);
-    range = MAX_RANGE;
   }
 
   public Projectile(){
@@ -58,9 +39,8 @@ abstract public class Projectile extends Entity{
   }
   /**
   * Determines if the object has hit anything
-  * @return if the projectile hit an object
   */
-  abstract public Entity hitCheck();
+  abstract public void hitCheck();
 
   /**
   * When an object is hit

@@ -18,76 +18,78 @@ import java.awt.event.ActionEvent;
 import corrosion.Sprite;
 import corrosion.entity.Entity;
 import corrosion.entity.player.Player;
-import corrosion.entity.projectile.Arrow;
-//import corrosion.entity.projectile.Arrow
 
 public class Pistol extends Equippable{
   // get the icons and animations for the pistol
   private static BufferedImage icon;
-  private static BufferedImage[][] sprites = new BufferedImage[2][];
-  private final int[] SHOOT_READY = {0,3};
-  private final int[] RELOAD_READY = {1,2};
-  public Sprite sprite;
-
+  private static BufferedImage[][] sprites = new BufferedImage[1][1];
+  //private final int[] SHOOT_READY = {0,3};
+  //private final int[] RELOAD_READY = {1,2};
 
     /**
     *Initialize the Pistol object
     */
     public static void init(){
-    try{
-      //loads icon
-      icon = ImageIO.read(new File("sprites/pistol/icon.png"));
-      //loads relaod animations
-      sprites[0] = new BufferedImage[4];
-      for (int i = 1; i <= 4; ++i){
-        sprites[0][i-1] = ImageIO.read(new File("sprites/pistol/animation/frame" + i + ".png"));
-      }
 
-      //loads shooting animations
-      sprites[1] = new BufferedImage[3];
-      for (int i = 0; i < 3; ++i){
-        sprites[1][i] = sprites[0][2-i];
+      try{
+        //loads icon
+        icon = ImageIO.read(new File("sprites/pistol/icon.png"));
+        sprites[0][0] = ImageIO.read(new File("sprites/pistol/animation/frame" + 1 + ".png"));
+        /*
+        //loads relaod animations
+        sprites[0] = new BufferedImage[4];
+        for (int i = 1; i <= 4; ++i){
+          sprites[0][i-1] = ImageIO.read(new File("sprites/pistol/animation/frame" + i + ".png"));
+        }
+
+        //loads shooting animations
+        sprites[1] = new BufferedImage[3];
+        for (int i = 0; i < 3; ++i){
+          sprites[1][i] = sprites[0][2-i];
+        }
+        */
+      }catch(Exception e){
+        //exits on error with message
+        System.out.println("Reading Pistol Sprite: " + e);
+        System.exit(-1);
       }
-    }catch(Exception e){
-      //exits on error with message
-      System.out.println("Reading Pistol Sprite: " + e);
-      System.exit(-1);
     }
+
+  /**
+  * constuctor for the pistol
+  */
+  public Pistol(){
+    super(new Sprite(icon, new int[]{0,0}, sprites, new int[]{0}));
   }
 
   /**
   * constuctor for the pistol
-  * @param p player who has the pistol
   */
-  public Pistol(Player p){
-    super(p);
-    this.sprite = new Sprite(icon, new int[]{1,2}, sprites, new int[]{500,50});
+  public Pistol(int[] state){
+    super(new Sprite(icon, state, sprites, new int[]{0}));
   }
 
   /**
   * Draw the item
   * @param g the graphics tool used to draw
   */
-  public void drawEquipped(Graphics g){
+  public void drawEquipped(Graphics g, Player player){
     if (player == null){return;}
     transform = player.getTransform();
-    transform.translate(-18, -110);
-    ((Graphics2D)(g)).drawImage(sprite.getFrame(), player.getTransform(), null);
+    transform.translate(-47, -110);
+    ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
   public void draw(Graphics g, long t){}
 
 
 
+
+  public void attack(Point p, Player player){}
+  public void attack2(Point p, Player player){}
+
   /**
   * reloads the pistol
   */
-  public void reload(){
-    // only reload if it is ready to reload
-    if (sprite.isState(RELOAD_READY, false)){
-      sprite.startAnimation(0);
-    }
-  }
-
-
+  public void reload(){}
 }

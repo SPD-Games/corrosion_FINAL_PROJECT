@@ -77,6 +77,14 @@ abstract public class Entity{
   }
 
   /**
+   * Sets the rotation
+   * @param r the rotation to set to
+  */
+  public void setRotation(double r){
+    rotation = r;
+  }
+
+  /**
    TODO: add a lock to position
    * Gets the y value of position
    * @return the y value of the Position

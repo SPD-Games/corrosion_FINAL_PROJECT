@@ -16,6 +16,7 @@ import corrosion.entity.player.Player;
 import corrosion.input.*;
 
 public class MainPlayer extends Player{
+  private final double SQRT_2 = Math.sqrt(2.0);
     private static MainPlayer mainPlayer;
 
     //direction the player is moving (keyboard input)
@@ -45,7 +46,7 @@ public class MainPlayer extends Player{
     */
     public MainPlayer(double xPos, double yPos, long id){
       super(xPos, yPos, 0, id);
-      equipped = new CrossBow(this);
+      equipped = new Pistol();
       //equipped = null;
 
     }
@@ -91,7 +92,7 @@ public class MainPlayer extends Player{
       if(equipped == null){
 
       } else {
-        equipped.attack(p);
+        equipped.attack(p, this);
       }
     }
 
@@ -104,7 +105,7 @@ public class MainPlayer extends Player{
       if(equipped == null){
 
       } else {
-        equipped.attack2(p);
+        equipped.attack2(p, this);
       }
     }
 
@@ -129,6 +130,7 @@ public class MainPlayer extends Player{
       Point mousePos = Mouse.getPosition();
       transform.setToTranslation(xPos-50, yPos-50);
       rotation = Math.atan2(mousePos.getX(), mousePos.getY());
+      //rotation = 0;
       transform.rotate(rotation, 50, 50);
       ((Graphics2D)(g)).drawImage(img, transform, null);
 
@@ -136,9 +138,18 @@ public class MainPlayer extends Player{
       drawEquipped(g);
       //TODO make it so its not faster diagonal
       //moves the player
-      if (up){yPos -= t * 0.5;}
-      if (down){yPos += t * 0.5;}
-      if (left){xPos -= t * 0.5;}
-      if (right){xPos += t * 0.5;}
+      double yVel = 0;
+      double xVel = 0;
+      if (up){yVel -= t * 0.5;}
+      if (down){yVel += t * 0.5;}
+      if (left){xVel -= t * 0.5;}
+      if (right){xVel += t * 0.5;}
+      if (xVel != 0 && yVel != 0){
+        yVel /= SQRT_2;
+        xVel /= SQRT_2;
+      }
+
+      xPos += xVel;
+      yPos += yVel;
     }
 }

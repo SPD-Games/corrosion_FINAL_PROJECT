@@ -36,7 +36,7 @@ public class InitId2Client extends Protocol{
   public void get(DataInputStream in, Connection c){
     try{
       long n = in.readLong();
-      //replies to the ping
+      //sets the client id
       Client.setId(n);
     }catch(Exception e){
       System.out.println("Error getting init id" + e);

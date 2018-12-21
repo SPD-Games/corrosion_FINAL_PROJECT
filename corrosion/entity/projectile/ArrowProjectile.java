@@ -19,6 +19,7 @@ import corrosion.drawingstate.*;
 import corrosion.entity.item.*;
 import corrosion.entity.*;
 import corrosion.network.Client;
+import corrosion.network.protocol.*; 
 
 
 public class ArrowProjectile extends Projectile{
@@ -45,25 +46,37 @@ public class ArrowProjectile extends Projectile{
     super(xPos,yPos,xVel,yVel,r,id);
   }
 
+
   /**
   * Main Constructor
-  * @param player the player who created the Arrow
   * @param mouseX the x position of the mouse cursor relative to the player
   * @param mouseY the y position of the mouse cursor relative to the player
   */
   public ArrowProjectile(Player player, double mouseX, double mouseY){
-    super(player, mouseX, mouseY, MAX_VEL, MAX_RANGE);
-    //add to active entities
-    Client.addEntity(this);
+    super();
+    this.player = player;
+    id = Client.getId();
+    this.rotation = Math.atan2(mouseX, mouseY);
+    this.xPos = player.getXPos() + 189 * Math.sin(rotation);
+    this.yPos = player.getYPos() - 189 * Math.cos(rotation);
+    this.lastXPos = xPos;
+    this.lastYPos = yPos;
+    this.xVel = MAX_VEL*Math.sin(rotation);
+    this.yVel = MAX_VEL*-Math.cos(rotation);
+    range = MAX_RANGE;
+
+    Protocol.send(6, this, Client.getConnection());
+    Client.addProjectile(this);
   }
 
+
   //TODO hit checking
-  public Entity hitCheck(){
-    return null;
+  public void hitCheck(){
+    return;
   }
 
   public void hit(){
-    Client.removeEntity(this);
+    Client.removeProjetile(this);
   }
 
   public void update(long t){
@@ -72,6 +85,9 @@ public class ArrowProjectile extends Projectile{
     range -= MAX_VEL*t;
     if (range < 0){
       hit();
+    }
+    if (player != null){
+      hitCheck();
     }
   }
 

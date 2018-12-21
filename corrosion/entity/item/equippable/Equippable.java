@@ -14,22 +14,19 @@ import corrosion.Sprite;
 
 
 abstract public class Equippable extends Item{
-  protected Player player;
   public Sprite sprite;
   /**
    * Main Constructor
    * @param p the player that has the crossbow equipped
   */
-  public Equippable(Player p, Sprite s){
+  public Equippable(Sprite s){
     this(0,0,0, -1);
     sprite = s;
-    player = p;
   }
 
-  public Equippable(Player p, int[] state){
+  public Equippable(int[] state){
     this(0,0,0, -1);
     sprite = new Sprite(null, state, null, null);
-    player = p;
   }
 
   /**
@@ -46,19 +43,19 @@ abstract public class Equippable extends Item{
   * Draws the useable equipped to the player
   * @param g the graphics context
   */
-  abstract public void drawEquipped(Graphics g);
+  abstract public void drawEquipped(Graphics g, Player player);
 
   /**
   * Uses the useable
   * @param p the point relative to the player the user clicked
   */
-  abstract public void attack(Point p);
+  abstract public void attack(Point p, Player player);
 
   /**
   * Uses the second function useable
   * @param p the point relative to the player the user clicked
   */
-  abstract public void attack2(Point p);
+  abstract public void attack2(Point p, Player player);
 
   /**
   * Reloads the usable
