@@ -28,7 +28,7 @@ public class Projectile2Client extends Protocol{
   }
 
   /**
-  * Gets an projectile message
+  * Gets an projectile from the server
   * @param in the stream to listen on
   * @param c the connection to send to
   */

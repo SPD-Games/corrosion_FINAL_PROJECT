@@ -46,7 +46,7 @@ public class MainPlayer extends Player{
     */
     public MainPlayer(double xPos, double yPos, long id){
       super(xPos, yPos, 0, id);
-      equipped = new CrossBow(this);
+      equipped = new CrossBow();
       //equipped = null;
 
     }
@@ -92,7 +92,7 @@ public class MainPlayer extends Player{
       if(equipped == null){
 
       } else {
-        equipped.attack(p);
+        equipped.attack(p, this);
       }
     }
 

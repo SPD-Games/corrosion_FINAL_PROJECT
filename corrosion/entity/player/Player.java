@@ -65,7 +65,6 @@ public class Player extends Entity{
   }
 
   public void moveTo(double xPos, double yPos){
-
     //check if it is moving
     if (xPos != moveToX || yPos != moveToY){
       double xMove = xPos - this.xPos;
@@ -110,7 +109,7 @@ public class Player extends Entity{
       ((Graphics2D)(g)).drawImage(hands, transform, null);
     } else {
       //draw equipped item
-      equipped.drawEquipped(g);
+      equipped.drawEquipped(g, this);
     }
   }
 

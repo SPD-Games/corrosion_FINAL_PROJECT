@@ -16,7 +16,7 @@ import corrosion.network.*;
 public class Projectile2Server extends Protocol{
 
   /**
-  * Sends an projectile to the client
+  * Sends an projectile to the server
   * @param data data to send
   * @param c the connection to send to
   */
@@ -29,7 +29,7 @@ public class Projectile2Server extends Protocol{
   }
 
   /**
-  * Gets an projectile message
+  * Gets an projectile message from the client
   * @param in the stream to listen on
   * @param c the connection to send to
   */

@@ -1,6 +1,6 @@
 /**
 * Michael Metzinger
-* Dec 14 2018
+* Dec 20 2018
 * Abstract Protocol that handles all sending and recieving of data
 */
 
