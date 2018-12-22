@@ -58,7 +58,6 @@ public class CrossBow extends Equippable{
 
   /**
    * Main Constructor
-   * @param p the player that has the crossbow equipped
   */
   public CrossBow(){
     this(new int[]{1,2});
@@ -92,7 +91,7 @@ public class CrossBow extends Equippable{
   }
 
   public void draw(Graphics g, long t){
-    transform.setToTranslation(xPos -18, yPos -110);
+    transform.setToTranslation(xPos -50, yPos -50);
     ((Graphics2D)(g)).drawImage(sprite.getIcon(), transform, null);
   }
 

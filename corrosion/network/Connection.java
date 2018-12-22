@@ -87,6 +87,7 @@ public class Connection{
         } else {
           //main menu
           System.out.println("Error listening for data" + e + protolNumber);
+          System.exit(-1);
         }
       }
     }

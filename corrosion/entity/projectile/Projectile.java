@@ -1,11 +1,5 @@
-/*
-* Michael Metzinger
-* Dec 13 2018
-* Projectile interface
-*/
-
 /** Micheal Metzinger, Edward Pei
-  * December 4 2018
+  * December 20 2018
   * Class which defines all projectiles in the game such as arrows and bullets on screen
   */
 package corrosion.entity.projectile;
@@ -17,8 +11,7 @@ abstract public class Projectile extends Entity{
   protected double xVel, yVel;
   protected double lastXPos, lastYPos;
   protected double range;
-  protected boolean watchHit = false;
-  protected Player player = null;
+  protected transient Player player = null;
   protected boolean isHit = false;
 
   public Projectile(double xPos, double yPos, double xVel, double yVel, double r, long id){
@@ -38,6 +31,15 @@ abstract public class Projectile extends Entity{
     lastYPos = 0;
     range = 1000;
   }
+
+  public double getXVel(){
+    return xVel;
+  }
+
+  public double getYVel(){
+    return yVel;
+  }
+
   /**
   * Determines if the object has hit anything
   */

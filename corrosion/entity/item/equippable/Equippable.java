@@ -7,14 +7,15 @@ package corrosion.entity.item.equippable;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.io.Serializable;
 
 import corrosion.entity.player.Player;
 import corrosion.entity.item.Item;
 import corrosion.Sprite;
 
 
-abstract public class Equippable extends Item{
-  public Sprite sprite;
+abstract public class Equippable extends Item implements Serializable{
+  public transient Sprite sprite;
   /**
    * Main Constructor
    * @param p the player that has the crossbow equipped

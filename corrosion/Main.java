@@ -3,7 +3,7 @@
   * Runs the game
   * TODO:
       hit reg
-      dont send player update if no frame has passed
+      finish projectile server
   */
 
 package corrosion;

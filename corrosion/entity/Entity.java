@@ -9,8 +9,10 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.geom.AffineTransform;
 import java.awt.Shape;
+import java.io.Serializable;
 
-abstract public class Entity{
+
+abstract public class Entity implements Serializable{
   protected double xPos,yPos,rotation;
   protected long id = -1;
   protected AffineTransform transform = new AffineTransform();

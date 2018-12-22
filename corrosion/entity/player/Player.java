@@ -90,7 +90,6 @@ public class Player extends Entity{
     transform.setToTranslation(xPos-50, yPos-50);
     transform.rotate(rotation, 50, 50);
     ((Graphics2D)(g)).drawImage(img, transform, null);
-    ((Graphics2D)(g)).fillOval((int)xPos-50, (int)yPos-50, 100, 100);
 
     //draws the equipped item
     drawEquipped(g);

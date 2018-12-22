@@ -14,16 +14,22 @@ import java.awt.geom.AffineTransform;
 import java.awt.Point;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
+import java.io.Serializable;
 
 import corrosion.Sprite;
 import corrosion.entity.Entity;
 import corrosion.entity.player.Player;
+import corrosion.entity.projectile.*;
 
-public class Pistol extends Equippable{
+import corrosion.network.*;
+import corrosion.network.protocol.*;
+
+
+public class Pistol extends Equippable implements Serializable{
   // get the icons and animations for the pistol
   private static BufferedImage icon;
-  private static BufferedImage[][] sprites = new BufferedImage[1][1];
-  //private final int[] SHOOT_READY = {0,3};
+  private static BufferedImage[][] sprites = new BufferedImage[1][3];
+  private final int[] SHOOT_READY = {0,2};
   //private final int[] RELOAD_READY = {1,2};
 
     /**
@@ -34,7 +40,9 @@ public class Pistol extends Equippable{
       try{
         //loads icon
         icon = ImageIO.read(new File("sprites/pistol/icon.png"));
-        sprites[0][0] = ImageIO.read(new File("sprites/pistol/animation/frame" + 1 + ".png"));
+        sprites[0][1] = ImageIO.read(new File("sprites/pistol/animation/frame" + 2 + ".png"));
+        sprites[0][2] = ImageIO.read(new File("sprites/pistol/animation/frame" + 1 + ".png"));
+        sprites[0][0] = sprites[0][2];
         /*
         //loads relaod animations
         sprites[0] = new BufferedImage[4];
@@ -59,14 +67,14 @@ public class Pistol extends Equippable{
   * constuctor for the pistol
   */
   public Pistol(){
-    super(new Sprite(icon, new int[]{0,0}, sprites, new int[]{0}));
+    super(new Sprite(icon, new int[]{0,2}, sprites, new int[]{50}));
   }
 
   /**
   * constuctor for the pistol
   */
   public Pistol(int[] state){
-    super(new Sprite(icon, state, sprites, new int[]{0}));
+    super(new Sprite(icon, state, sprites, new int[]{50}));
   }
 
   /**
@@ -85,7 +93,14 @@ public class Pistol extends Equippable{
 
 
 
-  public void attack(Point p, Player player){}
+  public void attack(Point p, Player player){
+    if (sprite.isState(SHOOT_READY, false)){
+      //creates a new arrow
+      ArrowProjectile a = new ArrowProjectile(player, p.getX(), p.getY());
+      //starts shoot animation
+      sprite.startAnimation(0);
+    }
+  }
   public void attack2(Point p, Player player){}
 
   /**

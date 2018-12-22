@@ -45,6 +45,7 @@ public class Client{
   */
   public static void addProjectile(Projectile p){
     client.projectiles.add(p);
+    client.entitiesInView.add(p);
   }
 
   /**
@@ -61,6 +62,7 @@ public class Client{
   */
   public static void removeProjetile(Projectile p){
     client.projectiles.remove(p);
+    client.entitiesInView.remove(p);
   }
 
   /**
@@ -121,6 +123,9 @@ public class Client{
     return client;
   }
 
+  //possible add a lock object
+  private boolean waitForUpdate = false;
+  public static void updateReady(){client.waitForUpdate = false;}
   //send data loop
   private ActionListener sendLoopListener = new ActionListener(){
     @Override
@@ -128,7 +133,11 @@ public class Client{
     * Sends player location
     */
     public void actionPerformed(ActionEvent arg0) {
+      if (waitForUpdate){
+        return;
+      }
       Protocol.send(2, MainPlayer.getMainPlayer(), connection);
+      waitForUpdate = true;
     }
   };
   //timer that sends player location 64 times a second
@@ -208,6 +217,15 @@ public class Client{
     //iterates through all entities
     for(int i = 0; i < client.entities.size(); ++i){
       Entity e = client.entities.get(i);
+      //checks if that entity is in possible rendering distance
+      if ((e.getXPos() - xPos)*(e.getXPos() - xPos) + (e.getYPos() - yPos)*(e.getYPos() - yPos) < 100000000){
+        //if so add to list
+        visable.add(e);
+      }
+    }
+
+    for(int i = 0; i < client.projectiles.size(); ++i){
+      Entity e = client.projectiles.get(i);
       //checks if that entity is in possible rendering distance
       if ((e.getXPos() - xPos)*(e.getXPos() - xPos) + (e.getYPos() - yPos)*(e.getYPos() - yPos) < 100000000){
         //if so add to list

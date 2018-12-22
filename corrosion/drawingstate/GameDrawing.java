@@ -90,12 +90,6 @@ public class GameDrawing extends DrawingState{
       entities.get(i).draw(g, t);
     }
 
-    //draw projectile
-    ArrayList<Projectile> projectiles = Client.getProjectiles();
-    for (int i = 0; i < projectiles.size(); ++i){
-      projectiles.get(i).draw(g, t);
-    }
-
     //draw players
     ArrayList<Player> players = Client.getPlayers();
     for (int i = 0; i < players.size(); ++i){
@@ -110,6 +104,7 @@ public class GameDrawing extends DrawingState{
     g.drawLine(Drawing.width()/2, 0, Drawing.width()/2,Drawing.height());
     g.drawString(Drawing.getFps()+ "fps. " + Client.getPing() + "ms. Pos(" + MainPlayer.getMainPlayer().getXPos() + ", " + MainPlayer.getMainPlayer().getYPos() + ")", 50, 50);
 
+    Client.updateReady();
   }
 
 

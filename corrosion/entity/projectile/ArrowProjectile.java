@@ -15,7 +15,7 @@ import java.awt.geom.Line2D;
 import java.util.ArrayList;
 
 import corrosion.drawingstate.GameDrawing;
-import corrosion.entity.player.Player;
+import corrosion.entity.player.*;
 import corrosion.drawingstate.*;
 import corrosion.entity.item.*;
 import corrosion.entity.*;
@@ -46,6 +46,7 @@ public class ArrowProjectile extends Projectile{
 
   public ArrowProjectile(double xPos, double yPos, double xVel, double yVel, double r, long id){
     super(xPos,yPos,xVel,yVel,r,id);
+    range = MAX_RANGE;
   }
 
 
@@ -76,9 +77,15 @@ public class ArrowProjectile extends Projectile{
     ArrayList<Player> players = Client.getPlayers();
     for (int i = 0; i < players.size(); ++i){
       if (HitDetection.hit(players.get(i).getHitBox(), getHitBox())){
-        System.out.println("HIT");
+        if (!isHit && player != null){
+          //deal damage to entity
+        }
         hit();
+        return;
       }
+    }
+    if (HitDetection.hit(MainPlayer.getMainPlayer().getHitBox(), getHitBox())){
+      hit();
     }
   }
 
@@ -94,9 +101,7 @@ public class ArrowProjectile extends Projectile{
     if (range < 0){
       hit();
     }
-    if (player != null){
-      hitCheck();
-    }
+    hitCheck();
   }
 
   /**
@@ -110,8 +115,7 @@ public class ArrowProjectile extends Projectile{
     transform.setToTranslation(xPos - 3, yPos);
     transform.rotate(rotation, 3, 0);
     ((Graphics2D)(g)).drawImage(img, transform, null);
-    //((Graphics2D)(g)).drawLine((int)xPos, (int)yPos, (int)lastXPos, (int)lastYPos);
-    lastXPos = xPos;
+    lastXPos = xPos-3;
     lastYPos = yPos;
   }
 

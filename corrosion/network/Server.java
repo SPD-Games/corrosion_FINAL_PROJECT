@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.Timer;
 
 import corrosion.entity.Entity;
+import corrosion.entity.projectile.*;
 import corrosion.entity.player.*;
 import corrosion.network.protocol.*;
 import corrosion.network.Connection;
@@ -85,6 +86,15 @@ public class Server{
   };
   //sends new data to clients 64 times a second
   private Timer sendTimer = new Timer(1000/64, sendLoopListener);
+
+  public static void forwardProjectiles(Projectile p, Connection from){
+    for (int i = 0; i < server.clients.size(); ++i){
+      Connection c = server.clients.get(i);
+      if (c.id != from.id){
+        Protocol.send(7,p,c);
+      }
+    }
+  }
 
   /**
   * Adds a new player to be queued to sent

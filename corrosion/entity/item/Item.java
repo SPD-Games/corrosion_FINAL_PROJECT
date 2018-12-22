@@ -5,8 +5,9 @@
 package corrosion.entity.item;
 
 import corrosion.entity.Entity;
+import java.io.Serializable;
 
-abstract public class Item extends Entity{
+abstract public class Item extends Entity implements Serializable{
   /**
   * Main Constructor
   * @param x the x position of the Item

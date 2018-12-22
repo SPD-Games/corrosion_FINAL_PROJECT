@@ -15,7 +15,12 @@ public class HitDetection{
     return false;
   }
 
+  /**
+  * Checks if a circle intersects/contains a line segment
+  * @param s1 a circle
+  * @param s2 a line segment
+  */
   private static boolean circleLine(Ellipse2D s1, Line2D s2){
-    return s1.contains(s2.getP1());
+    return s2.ptSegDistSq(s1.getCenterX(),s1.getCenterY()) <= s1.getWidth()*s1.getWidth()/4;
   }
 }

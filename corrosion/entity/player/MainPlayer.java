@@ -14,6 +14,9 @@ import corrosion.Drawing;
 import corrosion.entity.item.equippable.*;
 import corrosion.entity.player.Player;
 import corrosion.input.*;
+import java.awt.geom.Ellipse2D;
+
+import corrosion.network.*;
 
 public class MainPlayer extends Player{
   private final double SQRT_2 = Math.sqrt(2.0);
@@ -46,8 +49,8 @@ public class MainPlayer extends Player{
     */
     public MainPlayer(double xPos, double yPos, long id){
       super(xPos, yPos, 0, id);
-      //equipped = new Pistol();
-      equipped = new CrossBow();
+      equipped = new Pistol();
+      //equipped = new CrossBow();
       //equipped = null;
 
     }
