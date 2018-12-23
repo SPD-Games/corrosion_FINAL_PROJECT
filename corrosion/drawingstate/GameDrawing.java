@@ -57,6 +57,23 @@ public class GameDrawing extends DrawingState{
     new Client(ip, port);
   }
 
+  private void drawStatus(Graphics g, long t){
+    int hp = MainPlayer.getMainPlayer().getHp();
+    ((Graphics2D)g).setTransform(new AffineTransform());
+    g.setColor(Color.black);
+    g.drawLine(0, Drawing.height()/2,Drawing.width(),Drawing.height()/2);
+    g.drawLine(Drawing.width()/2, 0, Drawing.width()/2,Drawing.height());
+    g.drawString(Drawing.getFps()+ "fps. " + Client.getPing() + "ms. Pos(" + MainPlayer.getMainPlayer().getXPos() + ", " + MainPlayer.getMainPlayer().getYPos() + ")", 50, 50);
+
+    g.translate(Drawing.width()-300, Drawing.height()-100);
+    g.setColor(Color.RED);
+    g.fillRect(0,0,200,40);
+    g.setColor(Color.GREEN);
+    g.fillRect(0,0,hp*2,40);
+    g.setColor(Color.BLACK);
+    g.drawString(hp + "", 10, 25);
+  }
+
   /**
   * Draws a new frame of game
   * @param g the graphics context
@@ -98,12 +115,7 @@ public class GameDrawing extends DrawingState{
     MainPlayer.getMainPlayer().draw(g, t);
 
     //draw static menus
-    ((Graphics2D)g).setTransform(new AffineTransform());
-    g.setColor(Color.black);
-    g.drawLine(0, Drawing.height()/2,Drawing.width(),Drawing.height()/2);
-    g.drawLine(Drawing.width()/2, 0, Drawing.width()/2,Drawing.height());
-    g.drawString(Drawing.getFps()+ "fps. " + Client.getPing() + "ms. Pos(" + MainPlayer.getMainPlayer().getXPos() + ", " + MainPlayer.getMainPlayer().getYPos() + ")", 50, 50);
-
+    drawStatus(g,t);
     Client.updateReady();
   }
 

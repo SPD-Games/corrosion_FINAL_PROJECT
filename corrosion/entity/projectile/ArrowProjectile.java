@@ -78,7 +78,10 @@ public class ArrowProjectile extends Projectile{
     for (int i = 0; i < players.size(); ++i){
       if (HitDetection.hit(players.get(i).getHitBox(), getHitBox())){
         if (!isHit && player != null){
-          //deal damage to entity
+          ArrayList out = new ArrayList();
+          out.add(players.get(i).getId());
+          out.add(1);
+          Protocol.send(10, out, Client.getConnection());
         }
         hit();
         return;

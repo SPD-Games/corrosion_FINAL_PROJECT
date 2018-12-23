@@ -21,6 +21,7 @@ import corrosion.network.*;
 public class MainPlayer extends Player{
   private final double SQRT_2 = Math.sqrt(2.0);
     private static MainPlayer mainPlayer;
+    private int hp = 100;
 
     //direction the player is moving (keyboard input)
     private boolean up, down, left, right;
@@ -87,6 +88,10 @@ public class MainPlayer extends Player{
     	this.right = right;
     }
 
+    public int getHp(){
+      return hp;
+    }
+
     /**
     * TODO synchronized it
     * Uses the equipped item
@@ -101,7 +106,6 @@ public class MainPlayer extends Player{
     }
 
     /**
-    * TODO synchronized it
     * Uses the secondary function of the equipped item
     * @param p the point relative to the location of the player that was attacked (mouse input)
     */
@@ -114,7 +118,6 @@ public class MainPlayer extends Player{
     }
 
     /**
-    * TODO synchronized it
     * reloads the equipped item
     */
     public void reload(){
@@ -122,6 +125,13 @@ public class MainPlayer extends Player{
 
       } else {
         equipped.reload();
+      }
+    }
+
+    public void hit(int damage){
+      hp -= damage;
+      if (hp <= 0){
+        //die
       }
     }
 
@@ -134,13 +144,11 @@ public class MainPlayer extends Player{
       Point mousePos = Mouse.getPosition();
       transform.setToTranslation(xPos-50, yPos-50);
       rotation = Math.atan2(mousePos.getX(), mousePos.getY());
-      //rotation = 0;
       transform.rotate(rotation, 50, 50);
       ((Graphics2D)(g)).drawImage(img, transform, null);
 
       //draws the equipped item
       drawEquipped(g);
-      //TODO make it so its not faster diagonal
       //moves the player
       double yVel = 0;
       double xVel = 0;

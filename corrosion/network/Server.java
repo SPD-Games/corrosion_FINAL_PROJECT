@@ -55,6 +55,18 @@ public class Server{
     }
   }
 
+  public static void hitPlayer(long id, int damage){
+    ArrayList out = new ArrayList();
+    for (int iClient = 0; iClient < server.clients.size(); ++iClient){
+      Connection c = server.clients.get(iClient);
+      if (c.id == id){
+        Protocol.send(11, damage, c);
+        return;
+      }
+    }
+
+  }
+
   //send data loop
   private ActionListener sendLoopListener = new ActionListener(){
     @Override
