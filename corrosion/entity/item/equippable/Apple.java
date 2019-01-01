@@ -3,6 +3,8 @@
 //Apple class
 package corrosion.entity.item.equippable;
 
+//TODO: get apples to add health and stuff idk how to do this micheal dad help
+
 import javax.swing.Timer;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -48,7 +50,7 @@ public class Apple extends Equippable{
     }
   }
 
-  public Sniper(Player p){
+  public Apple(Player p){
 
   }
 
