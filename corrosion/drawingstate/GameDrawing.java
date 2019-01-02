@@ -40,8 +40,9 @@ public class GameDrawing extends DrawingState{
     ArrowProjectile.init();
     BuildingPlan.init();
     Square.init();
+    Triangle.init();
     Apple.init();
-    
+
     setBinds();
   }
 

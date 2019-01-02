@@ -29,7 +29,7 @@ public class BuildingPlan extends Equippable{
   private static final int SQUARE = 0;
   private static final int WALL = 1;
   private static final int DOOR_FRAME = 2;
-  private static final int TRIANGLE = 0;
+  private static final int TRIANGLE = 3;
   private int placeState = 0;
   private Building preview = new Square();
 
@@ -79,10 +79,12 @@ public class BuildingPlan extends Equippable{
       preview = new Square();
     } else if (placeState == WALL){
       //preview = new Wall();
+      preview = null;
     } else if (placeState == DOOR_FRAME){
       //preview = new DoorFrame();
+      preview = null;
     } else if (placeState == TRIANGLE){
-      //preview = new Triangle();
+      preview = new Triangle();
     }
   }
 
@@ -95,6 +97,7 @@ public class BuildingPlan extends Equippable{
     transform.translate(-14, -60);
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
     if (player == MainPlayer.getMainPlayer()){
+      if (preview == null){return;}
       preview.drawPreview(g, player);
     }
   }
