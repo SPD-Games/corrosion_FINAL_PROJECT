@@ -4,6 +4,8 @@
   */
 package corrosion.drawingstate.menuobjects;
 
+//TODO: when text is added, remove default text, when removed display defualy text, just add new attrubites to object "default text" and "added text" thanks eddie.
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
