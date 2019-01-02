@@ -43,19 +43,6 @@ public class Pistol extends Equippable implements Serializable{
         sprites[0][1] = ImageIO.read(new File("sprites/pistol/animation/frame" + 2 + ".png"));
         sprites[0][2] = ImageIO.read(new File("sprites/pistol/animation/frame" + 1 + ".png"));
         sprites[0][0] = sprites[0][2];
-        /*
-        //loads relaod animations
-        sprites[0] = new BufferedImage[4];
-        for (int i = 1; i <= 4; ++i){
-          sprites[0][i-1] = ImageIO.read(new File("sprites/pistol/animation/frame" + i + ".png"));
-        }
-
-        //loads shooting animations
-        sprites[1] = new BufferedImage[3];
-        for (int i = 0; i < 3; ++i){
-          sprites[1][i] = sprites[0][2-i];
-        }
-        */
       }catch(Exception e){
         //exits on error with message
         System.out.println("Reading Pistol Sprite: " + e);

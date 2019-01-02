@@ -18,11 +18,16 @@ import corrosion.entity.projectile.*;
 import corrosion.entity.item.equippable.*;
 import corrosion.input.*;
 import corrosion.input.bind.*;
+import corrosion.entity.building.*;
 
 
 public class GameDrawing extends DrawingState{
 
   public static double zoom = 1;
+
+  public static double getZoom(){
+    return zoom;
+  }
 
   /**
   * Initiates the drawing state
@@ -33,6 +38,8 @@ public class GameDrawing extends DrawingState{
     CrossBow.init();
     Pistol.init();
     ArrowProjectile.init();
+    BuildingPlan.init();
+    Square.init();
 
     setBinds();
   }

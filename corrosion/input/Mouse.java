@@ -13,6 +13,7 @@ import javax.swing.SwingUtilities;
 import corrosion.Drawing;
 import corrosion.input.bind.*;
 import corrosion.drawingstate.GameDrawing;
+import corrosion.entity.player.*;
 
 public class Mouse implements MouseListener, MouseWheelListener{
   private static MouseBindable binds[] = new MouseBindable[5];
@@ -43,6 +44,18 @@ public class Mouse implements MouseListener, MouseWheelListener{
   */
   public static Point relativeToPlayer(Point p){
     p.setLocation(p.getX() - Drawing.getPanel().getWidth()/2, Drawing.getPanel().getHeight()/2 - p.getY());
+    return p;
+  }
+
+  /**
+  * Converts a point on the screen to a point on the map
+  */
+  public static Point getPointOnMap(){
+    Point p = getPosition();
+    p.x /= GameDrawing.getZoom();
+    p.y /= -GameDrawing.getZoom();
+    p.x += (int)MainPlayer.getMainPlayer().getXPos();
+    p.y += (int)MainPlayer.getMainPlayer().getYPos();
     return p;
   }
 

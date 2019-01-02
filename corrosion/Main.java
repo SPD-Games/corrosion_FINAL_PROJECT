@@ -3,7 +3,7 @@
   * Runs the game
   * TODO:
       hit reg
-      finish projectile server
+      entity networking
   */
 
 package corrosion;
