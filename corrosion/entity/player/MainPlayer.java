@@ -50,10 +50,11 @@ public class MainPlayer extends Player{
     */
     public MainPlayer(double xPos, double yPos, long id){
       super(xPos, yPos, 0, id);
-      //equipped = new Pistol();
-      equipped = new BuildingPlan();
+      //equipped = new CrossBow();
+      //equipped = new BuildingPlan();
+      equipped = new Apple();
       //equipped = null;
-
+      hp = 1;
     }
 
     /**
@@ -129,9 +130,14 @@ public class MainPlayer extends Player{
     }
 
     public void hit(int damage){
-      hp -= damage;
-      if (hp <= 0){
+      int tmpHp = hp - damage;
+      if (tmpHp <= 0){
         //die
+        hp = 0;
+      } else if (tmpHp > 100){
+        hp = 100;
+      } else {
+        hp = tmpHp;
       }
     }
 

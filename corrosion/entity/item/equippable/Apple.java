@@ -19,15 +19,13 @@ import java.awt.event.ActionEvent;
 
 import corrosion.Sprite;
 import corrosion.entity.Entity;
-import corrosion.entity.player.Player;
-import corrosion.entity.projectile.Arrow;
+import corrosion.entity.player.*;
 
 public class Apple extends Equippable{
 
   private static BufferedImage icon;
-  private static BufferedImage[][] sprites = new BufferedImage[2][];
-  public Sprite sprite;
-
+  private static BufferedImage[][] sprites = new BufferedImage[1][];
+  private final static int[] LAST_FRAME = {0,3};
   public static void init(){
     try{
       //loads icon
@@ -37,12 +35,6 @@ public class Apple extends Equippable{
       for (int i = 1; i <= 4; ++i){
         sprites[0][i-1] = ImageIO.read(new File("sprites/apple/animation/frame" + i + ".png"));
       }
-
-      //loads shooting animations
-      sprites[1] = new BufferedImage[3];
-      for (int i = 0; i < 3; ++i){
-        sprites[1][i] = sprites[0][2-i];
-      }
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading apple Sprite: " + e);
@@ -50,29 +42,44 @@ public class Apple extends Equippable{
     }
   }
 
-  public Apple(Player p){
-
+  public Apple(){
+    this(new int[]{0,0});
   }
 
-  public void drawEquipped(Graphics g){
+  public Apple(int[] state){
+    super(new Sprite(icon, state, sprites, new int[]{0}));
+  }
+
+  public Apple(double x, double y, double r, long id){
+    super(x,y,r,id);
+  }
+
+  public void drawEquipped(Graphics g, Player player){
     transform = player.getTransform();
-    transform.translate(-18, -110);
-    ((Graphics2D)(g)).drawImage(sprite.getFrame(), player.getTransform(), null);
+    transform.scale(.3,.3);
+    transform.translate(-18, -65);
+    ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
   public void draw(Graphics g, long t){}
 
   ///////
 
-  public void attack(Point p){
-
+  public void attack(Point p, Player player){
+    int[] frame = sprite.getState();
+    if (frame[0] == LAST_FRAME[0] && frame[1] == LAST_FRAME[1]){
+      player.setEquipped(null);
+    } else {
+      sprite.nextFrame();
+    }
+    ((MainPlayer)player).hit(-10);
   }
 
   /**
   * Reloads the weapon
   * @param p the pointer position on the screen relative to the player
   */
-  public void attack2(Point p){
+  public void attack2(Point p, Player player){
 
   }
 
