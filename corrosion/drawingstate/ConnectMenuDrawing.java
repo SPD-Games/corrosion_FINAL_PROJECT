@@ -25,6 +25,7 @@ public class ConnectMenuDrawing extends DrawingState{
   // create the new button
   public static ButtonG connectBtn;
   public static TextBoxG ipInput;
+  protected BufferedImage backImg;
   BufferedImage connectImage;
 
   /**
@@ -33,7 +34,9 @@ public class ConnectMenuDrawing extends DrawingState{
   * @param t frame count
   */
   public void draw(Graphics g, long t) {
+    ((Graphics2D)(g)).drawImage(backImg,null,null);
     ((Graphics2D)g).translate((Drawing.width())/2,(Drawing.height())/2 );
+
     connectBtn.draw(g);
     ipInput.draw(g);
     //System.out.println((b.getXBounds())[0] + " " + (b.getXBounds())[1] + ", " + (b.getYBounds())[0] + " " +  (b.getYBounds())[1]);
@@ -69,13 +72,14 @@ public class ConnectMenuDrawing extends DrawingState{
       try {
             //sets sprite image
             connectImage = ImageIO.read(new File("sprites/menuicons/ConnectBtn.png"));
+            backImg = ImageIO.read(new File("sprites/menuicons/MenuBackgrounds.jpg"));
           } catch(Exception e) {
             //exits on error with message
             System.out.println("Logo load error: " + e);
             System.exit(-1);
       }
-       connectBtn = new ButtonG(0, 400 ,1,connectImage);
-       ipInput = new TextBoxG(0,0,900,100,new Color(249,7,23),"ENTER IP HERE");
+       connectBtn = new ButtonG(0, 300 ,1,connectImage);
+       ipInput = new TextBoxG(0,0,900,100,new Color(255, 98, 0),"ENTER IP HERE");
   }
 
 }

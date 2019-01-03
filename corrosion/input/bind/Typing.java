@@ -25,9 +25,6 @@ public class Typing extends Bindable{
 
     String allowedChar = "1234567890:.";
 
-    System.out.println((char)keyCode + ": " +  e.getKeyCode());
-
-
     if (keyCode == 8) {
       ConnectMenuDrawing.getIPInput().backSpace();
     } else if ((allowedChar.indexOf(c) != -1)&& ConnectMenuDrawing.getIPInput().getText().length() < 23) {

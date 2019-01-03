@@ -27,6 +27,7 @@ import corrosion.input.bind.*;
 public class MainMenuDrawing extends DrawingState{
   protected BufferedImage logoImg;
   protected BufferedImage PlayBtnImage;
+  protected BufferedImage backImg;
   protected static ButtonG playBtn;
   protected static ButtonG settingBtn;
   protected AffineTransform transform = new AffineTransform();
@@ -38,11 +39,11 @@ public class MainMenuDrawing extends DrawingState{
    * @@param t frame count
    */
   public void draw(Graphics g, long t) {
-
     // format all the image options to fit the screen properly
     //  transform.setToScale(0.4,0.4);
     transform.setToTranslation(Drawing.getPanel().getWidth()/2 - (logoImg.getWidth()/2), Drawing.getPanel().getHeight()/2 - (logoImg.getHeight()/2));
     ((Graphics2D)(g)).clearRect(0,0 , Drawing.getPanel().getWidth(), Drawing.getPanel().getHeight());
+    ((Graphics2D)(g)).drawImage(backImg,transform,null);
 
     ((Graphics2D)(g)).drawImage(logoImg,transform,null);
 
@@ -69,12 +70,13 @@ public class MainMenuDrawing extends DrawingState{
         //sets sprite image
         logoImg = ImageIO.read(new File("sprites/menuicons/LogoV1.png"));
         PlayBtnImage = ImageIO.read(new File("sprites/menuicons/PlayBtn.png"));
+        backImg = ImageIO.read(new File("sprites/menuicons/MenuBackgrounds.jpg"));
 
       } catch(Exception e) {
         //exits on error with message
-        System.out.println("Logo load error: " + e);
+        System.out.println("Image load error: " + e);
         System.exit(-1);
       }
-      playBtn = new ButtonG(0,400,1,PlayBtnImage);
+      playBtn = new ButtonG(0,400,0.5,PlayBtnImage);
     }
   }
