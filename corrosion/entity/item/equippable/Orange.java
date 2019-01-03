@@ -25,7 +25,7 @@ public class Orange extends Equippable{
 
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[1][];
-  private final static int[] LAST_FRAME = {0,3};
+  private final static int[] LAST_FRAME = {0,2};
   public static void init(){
     try{
       //loads icon

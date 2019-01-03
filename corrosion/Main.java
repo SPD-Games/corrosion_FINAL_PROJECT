@@ -4,6 +4,7 @@
   * TODO:
       hit reg
       entity networking
+      all the classes for items
   */
 
 package corrosion;
