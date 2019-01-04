@@ -1,6 +1,6 @@
 /** Edward Pei
   * December 18 2018
-  * draws buttons
+  * A button class
   */
 package corrosion.drawingstate.menuobjects;
 
@@ -34,15 +34,18 @@ public class ButtonG {
   public ButtonG(int xPos,int yPos, double scale,BufferedImage i) {
     this.xPos = xPos;
     this.yPos = yPos;
+    // get the width and height of the scaled button
     width = (int)(i.getWidth()*scale);
     height = (int)(i.getHeight()*scale);
-
     image = i;
+
+    // get the edges of the button
     yBounds[0] = yPos - height/2;
     yBounds[1] = yPos + height/2;
     xBounds[0] = xPos - width/2;
     xBounds[1] = xPos + width/2;
 
+    // transform and scale
     transform.translate(xPos -width/2,yPos - height/2);
     transform.scale(scale,scale);
   }

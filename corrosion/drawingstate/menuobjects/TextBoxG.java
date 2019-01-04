@@ -52,20 +52,29 @@ public class TextBoxG {
     text += c;
   }
 
+  /** removes a Character from the text box
+   */
   public void backSpace() {
+    // only remove a character if there is one that can be removed
     if(text.length() > 0) {
       text = text.substring(0, text.length() - 1);
     }
   }
 
+  /* *
+  * Method used to get the text from the text box
+  *
+  */
   public String getText() {
     return text;
   }
 
   public void draw(Graphics g) {
+    // draw the rectangle
     g.setColor(c);
     ((Graphics2D) g).fillRect(xBounds[0], yBounds[0], width,height);
 
+    // set font and color then draw the characters
     g.setColor(Color.black);
     g.setFont(new Font("Ariel", Font.PLAIN, 50));
     g.drawString(text,xPos-width/2,yPos + height/4);

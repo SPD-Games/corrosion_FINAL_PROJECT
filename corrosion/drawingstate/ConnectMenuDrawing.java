@@ -39,7 +39,6 @@ public class ConnectMenuDrawing extends DrawingState{
 
     connectBtn.draw(g);
     ipInput.draw(g);
-    //System.out.println((b.getXBounds())[0] + " " + (b.getXBounds())[1] + ", " + (b.getYBounds())[0] + " " +  (b.getYBounds())[1]);
   }
 
   /** gets the button
@@ -62,6 +61,7 @@ public class ConnectMenuDrawing extends DrawingState{
     mouseBinds[1] = new LeftClickConnectMenu();//left click
     Mouse.setBinds(mouseBinds);
 
+    // create the keyboard binds
     Bindable binds[] = new Bindable[526];
     Typing type = new Typing();
     for(int i = 0; i < 526 ;i++) {
@@ -78,6 +78,7 @@ public class ConnectMenuDrawing extends DrawingState{
             System.out.println("Logo load error: " + e);
             System.exit(-1);
       }
+      // create the a new textbox and button
        connectBtn = new ButtonG(0, 300 ,1,connectImage);
        ipInput = new TextBoxG(0,0,900,100,new Color(255, 98, 0),"ENTER IP HERE");
   }

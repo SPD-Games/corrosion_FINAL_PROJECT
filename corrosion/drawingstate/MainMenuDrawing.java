@@ -1,10 +1,9 @@
 /**  Edward Pei, Micheal Metzinger
-  * December 18 2018
+  * January 3 2019
   * Draws the main game
   */
 
 package corrosion.drawingstate;
-
 
 import javax.swing.*;
 import java.awt.*;
@@ -77,6 +76,7 @@ public class MainMenuDrawing extends DrawingState{
         System.out.println("Image load error: " + e);
         System.exit(-1);
       }
+      // create a new button
       playBtn = new ButtonG(0,400,0.5,PlayBtnImage);
     }
   }
