@@ -29,7 +29,7 @@ public abstract class Building extends Entity {
   public abstract void drawPreview(Graphics g, Player p);
   public abstract Shape getHitBox();
   public abstract void upgrade(int level);
-  public abstract void place();
+  public abstract boolean place();
 
   public void repair(double hp){
     hp += this.hp;

@@ -12,11 +12,16 @@ import javax.imageio.ImageIO;
 import java.awt.geom.AffineTransform;
 import java.awt.*;
 import java.awt.geom.*;
-
+import java.util.ArrayList;
+import corrosion.network.Client;
+import corrosion.entity.Entity;
+import corrosion.HitDetection;
 
 public class Triangle extends Building {
   private static BufferedImage[][] sprites = new BufferedImage[1][4];
   public transient Sprite sprite;
+  private Path2D[] placingHitBoxs = new Path2D[3];
+  private Path2D hitBox;
 
   public static void init(){
     try{
@@ -39,64 +44,157 @@ public class Triangle extends Building {
 
   public void draw(Graphics g, long t){
     ((Graphics2D)g).drawImage(sprite.getFrame(), transform, null);
-    //hit box points
-    Point2D a = new Point2D.Double(0,217);
-    a = transform.transform(a,null);
-    Point2D b = new Point2D.Double(250,217);
-    b = transform.transform(b,null);
-    Point2D c = new Point2D.Double(125,0);
-    c = transform.transform(c,null);
-    Point2D d = new Point2D.Double(125,144.831216351);
-    d = transform.transform(d,null);
-
-
-    //draws all hitboxes for placing
-    g.setColor(Color.GREEN);
-    g.fillOval((int)a.getX()-5, (int)a.getY()-5, 10, 10);
-    g.fillOval((int)b.getX()-5, (int)b.getY()-5, 10, 10);
-    g.fillOval((int)c.getX()-5, (int)c.getY()-5, 10, 10);
-    g.fillOval((int)d.getX()-5, (int)d.getY()-5, 10, 10);
-
-    Path2D t1 = new Path2D.Double();
-    t1.moveTo(a.getX(), a.getY());
-    t1.lineTo(b.getX(), b.getY());
-    t1.lineTo(d.getX(), d.getY());
-    ((Graphics2D)g).fill(t1);
-
-    g.setColor(Color.BLUE);
-    Path2D t2 = new Path2D.Double();
-    t2.moveTo(c.getX(), c.getY());
-    t2.lineTo(b.getX(), b.getY());
-    t2.lineTo(d.getX(), d.getY());
-
-    ((Graphics2D)g).fill(t2);
-
-    g.setColor(Color.RED);
-    Path2D t3 = new Path2D.Double();
-    t3.moveTo(c.getX(), c.getY());
-    t3.lineTo(a.getX(), a.getY());
-    t3.lineTo(d.getX(), d.getY());
-
-    ((Graphics2D)g).fill(t3);
   }
 
   public void drawPreview(Graphics g, Player p){
-    Point pointOnMap = Mouse.getPointOnMap();
+    Point2D pointOnMap = Mouse.getPointOnMap();
     Point mousePos = Mouse.getPosition();
-    pointOnMap.x -= 125;
-    pointOnMap.y -= 144.831216351;
-    transform.setToTranslation(pointOnMap.x, pointOnMap.y);
+    transform.setToTranslation(pointOnMap.getX()-125, pointOnMap.getY()-144.831216351);
     rotation = Math.atan2(mousePos.getX(), mousePos.getY());
     transform.rotate(rotation, 125, 144.831216351);
+
+    ArrayList<Entity> entities = Client.getEntities();
+
+    for (int i = 0; i < entities.size(); ++i){
+      if (entities.get(i) instanceof Square){
+        AffineTransform newTransform = ((Square)entities.get(i)).checkPlacingHitBoxesTriangle(pointOnMap);
+        if (newTransform != null){
+          transform = newTransform;
+          break;
+        }
+      } else if (entities.get(i) instanceof Triangle){
+        AffineTransform newTransform = ((Triangle)entities.get(i)).checkPlacingHitBoxesTriangle(pointOnMap);
+        if (newTransform != null){
+          transform = newTransform;
+          break;
+        }
+      }
+    }
+
+    Point2D a = new Point2D.Double(2,215);
+    a = transform.transform(a,null);
+    Point2D b = new Point2D.Double(248,215);
+    b = transform.transform(b,null);
+    Point2D c = new Point2D.Double(125,1);
+    c = transform.transform(c,null);
+    Point2D d = new Point2D.Double(125,144.831216351);
+    d = transform.transform(d,null);
+    hitBox = new Path2D.Double();
+    hitBox.moveTo(a.getX(), a.getY());
+    hitBox.lineTo(b.getX(), b.getY());
+    hitBox.lineTo(c.getX(), c.getY());
+    hitBox = null;
+    for (int i = 0; i < entities.size(); ++i){
+      if (entities.get(i) instanceof Square){
+        Shape otherHitBox = ((Square)entities.get(i)).getBuildingHitBox();
+        if (HitDetection.hit(otherHitBox,hitBox)){
+          //TODO DRAW CANNOT PLACE
+          return;
+        }
+      } else if (entities.get(i) instanceof Triangle){
+        Shape otherHitBox = ((Triangle)entities.get(i)).getBuildingHitBox();
+        if (HitDetection.hit(otherHitBox,hitBox)){
+          //TODO DRAW CANNOT PLACE
+          return;
+        }
+      }
+    }
+
     ((Graphics2D)g).drawImage(sprite.getFrame(), transform, null);
   }
 
+  public Shape getBuildingHitBox(){
+    return hitBox;
+  }
   public Shape getHitBox(){return null;}
   public void upgrade(int level){}
 
-  public void place(){
-      Client.addEntity(this);
-      id = Client.getId();
-      Protocol.send(8, this, Client.getConnection());
+  public boolean place(){
+    Point2D a = new Point2D.Double(1,216.5);
+    a = transform.transform(a,null);
+    Point2D b = new Point2D.Double(249,216.5);
+    b = transform.transform(b,null);
+    Point2D c = new Point2D.Double(125,1);
+    c = transform.transform(c,null);
+    Point2D d = new Point2D.Double(125,144.831216351);
+    d = transform.transform(d,null);
+    xPos = d.getX();
+    yPos = d.getY();
+    hitBox = new Path2D.Double();
+    hitBox.moveTo(a.getX(), a.getY());
+    hitBox.lineTo(b.getX(), b.getY());
+    hitBox.lineTo(c.getX(), c.getY());
+    ArrayList<Entity> entities = Client.getEntities();
+    for (int i = 0; i < entities.size(); ++i){
+      if (entities.get(i) instanceof Square){
+        Shape otherHitBox = ((Square)entities.get(i)).getBuildingHitBox();
+        if (HitDetection.hit(otherHitBox,hitBox)){
+          return false;
+        }
+      } else if (entities.get(i) instanceof Triangle){
+        Shape otherHitBox = ((Triangle)entities.get(i)).getBuildingHitBox();
+        if (HitDetection.hit(otherHitBox,hitBox)){
+          return false;
+        }
+      }
+    }
+
+    placingHitBoxs[0] = new Path2D.Double();
+    placingHitBoxs[0].moveTo(a.getX(), a.getY());
+    placingHitBoxs[0].lineTo(b.getX(), b.getY());
+    placingHitBoxs[0].lineTo(d.getX(), d.getY());
+    placingHitBoxs[1] = new Path2D.Double();
+    placingHitBoxs[1].moveTo(c.getX(), c.getY());
+    placingHitBoxs[1].lineTo(b.getX(), b.getY());
+    placingHitBoxs[1].lineTo(d.getX(), d.getY());
+    placingHitBoxs[2] = new Path2D.Double();
+    placingHitBoxs[2].moveTo(c.getX(), c.getY());
+    placingHitBoxs[2].lineTo(a.getX(), a.getY());
+    placingHitBoxs[2].lineTo(d.getX(), d.getY());
+
+    Client.addEntity(this);
+    id = Client.getId();
+    Protocol.send(8, this, Client.getConnection());
+    return true;
+  }
+  double j = 0;
+  public AffineTransform checkPlacingHitBoxesSquare(Point2D p){
+    for (int i = 0; i < 3; ++i){
+      if(placingHitBoxs[i].contains(p)){
+        AffineTransform out = new AffineTransform(transform);
+        if (i == 0){
+          out.translate(0,217);
+        } else if (i == 1){
+          out.rotate(Math.PI/3,125,125);
+          out.translate(17,-187);
+        } else {
+          out.rotate(Math.PI/6,125,125);
+          out.translate(-187,17);
+        }
+        return out;
+      }
+    }
+    return null;
+  }
+  public AffineTransform checkPlacingHitBoxesTriangle(Point2D p){
+    for (int i = 0; i < 3; ++i){
+      if(placingHitBoxs[i].contains(p)){
+        AffineTransform out = new AffineTransform(transform);
+        AffineTransform out2 = new AffineTransform();
+        if (i == 0){
+          out2.translate(0,144);
+          out2.rotate(Math.PI,125,144.831216351);
+        } else if (i == 1){
+          out2.rotate(Math.PI/3,125,144.831216351);
+          out2.translate(0,-144);
+        } else {
+          out2.rotate(5*Math.PI/3,125,144.831216351);
+          out2.translate(0,-144);
+        }
+        out.concatenate(out2);
+        return out;
+      }
+    }
+    return null;
   }
 }

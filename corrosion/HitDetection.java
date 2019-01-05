@@ -10,9 +10,10 @@ public class HitDetection{
     if (s1 instanceof Ellipse2D && s2 instanceof Line2D){
       return circleLine((Ellipse2D)s1, (Line2D) s2);
     }
-
-    System.out.println("COLLISION NOT FOUND");
-    return false;
+    Area a1 = new Area(s1);
+    Area a2 = new Area(s2);
+    a1.intersect(a2);
+    return !a1.isEmpty();
   }
 
   /**
