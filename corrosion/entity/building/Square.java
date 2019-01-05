@@ -31,6 +31,10 @@ public class Square extends Building {
     }
   }
 
+  public void fromServer(){
+    sprite = new Sprite(null, new int[]{0,0}, sprites, new int[]{0});
+  }
+  
   public Square(){
     this(0, 0, 0);
   }

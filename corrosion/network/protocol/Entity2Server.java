@@ -7,7 +7,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
-
 import corrosion.network.protocol.*;
 import corrosion.network.*;
 import corrosion.entity.*;
@@ -36,7 +35,7 @@ class Entity2Server extends Protocol {
     try{
       ObjectInputStream oin = new ObjectInputStream(in);
       Entity o = (Entity) oin.readObject();
-      System.out.println(o);
+      Server.addEntity(o);
     }catch(Exception e){
       System.out.println(e);
     }

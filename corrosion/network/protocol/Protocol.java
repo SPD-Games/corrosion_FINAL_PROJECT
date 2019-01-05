@@ -29,7 +29,7 @@ abstract public class Protocol{
     protocols[6] = new Projectile2Server();
     protocols[7] = new Projectile2Client();
     protocols[8] = new Entity2Server();
-//    protocols[9] = new Entity2Client();
+    protocols[9] = new Entity2Client();
     protocols[10] = new HitPlayer2Server();
     protocols[11] = new HitPlayer2Client();
   }

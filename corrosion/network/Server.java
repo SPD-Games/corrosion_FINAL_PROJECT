@@ -33,6 +33,18 @@ public class Server{
   private long nextPlayerId = 1000000000000l;
   private final Object nextPlayerIdLock = new Object();
 
+  public static void addEntity(Entity e){
+    server.newEntities.add(e);
+    synchronized (server.activeEntities){
+      int i = server.activeEntities.indexOf(e);
+      if (i == -1){
+        server.activeEntities.add(e);
+      } else {
+        server.activeEntities.set(i, e);
+      }
+    }
+  }
+
   /**
   * Gets the next id for server generated entities
   * @return the next usable id for server generated entities
@@ -74,12 +86,18 @@ public class Server{
     * Send all new data to the server
     */
     public void actionPerformed(ActionEvent arg0) {
-      /*
+
       while (newEntities.size() != 0){
-        for (Connection c : clients){
-          Protocol.send();
+          for (int iClient = 0; iClient < clients.size(); ++ iClient){
+            Connection c = clients.get(iClient);
+            Entity e = newEntities.get(0);
+            if (c.id != e.getId() - (e.getId()%1000000000000l)){
+              Protocol.send(9, e, c);
+            }
         }
-      }*/
+        newEntities.remove(0);
+      }
+
       //get new player list and clears it
       ArrayList<Player> players = getPlayers();
       server.players = new ArrayList<Player>();
@@ -90,6 +108,7 @@ public class Server{
           Player p = players.get(iPlayer);
           //check if sending a player is not own by the client
           if (c.id != p.getId()){
+            //sends the player to the client
             Protocol.send(3, p, c);
           }
         }

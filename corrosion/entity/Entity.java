@@ -126,5 +126,7 @@ abstract public class Entity implements Serializable{
     return ((Entity)o).id == id;
   }
 
+  public void fromServer(){}
+
   abstract public void draw(Graphics g, long t);
 }

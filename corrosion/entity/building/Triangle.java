@@ -33,6 +33,10 @@ public class Triangle extends Building {
     }
   }
 
+  public void fromServer(){
+    sprite = new Sprite(null, new int[]{0,0}, sprites, new int[]{0});
+  }
+
   public Triangle(){
     this(0, 0, 0);
   }
