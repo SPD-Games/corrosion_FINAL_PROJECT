@@ -1,7 +1,7 @@
 //Henry Lim
 //Jan. 8th, 2019
 //Inventory Box
-package inventorybox;
+package corrosion;
 
 import java.awt.Color;
 import javax.swing.JFrame;
