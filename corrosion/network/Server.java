@@ -206,7 +206,7 @@ public class Server{
   */
   public void newClient(Connection c){
     Protocol.send(4, c.id, c);
-
+    //TODO sync???
     for (int iEntity = 0; i < activeEntities.size(); ++iEntity){
       Protocol.send(9,activeEntities.get(iEntity),c);
     }
