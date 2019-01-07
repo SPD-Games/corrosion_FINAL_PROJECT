@@ -60,6 +60,7 @@ public class GameDrawing extends DrawingState{
     binds[65] = new Left();//a
     binds[68] = new Right();//d
     binds[82] = new Reload();//r
+    binds[69] = new Use();//e
     Keyboard.setBinds(binds);
   }
 
