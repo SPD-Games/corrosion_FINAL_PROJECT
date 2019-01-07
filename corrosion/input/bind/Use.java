@@ -24,6 +24,7 @@ import corrosion.entity.building.wall.*;
 public class Use extends Bindable{
   public void pressed(KeyEvent event){
     Shape playerHitBox = new Rectangle2D.Double(MainPlayer.getMainPlayer().getXPos()-10,MainPlayer.getMainPlayer().getYPos(),20,150);
+
     ArrayList<Entity> entities = Client.getEntities();
     for (int iEntities = 0; iEntities < entities.size(); ++iEntities){
       Entity e = entities.get(iEntities);
@@ -31,7 +32,7 @@ public class Use extends Bindable{
         Shape s = ((DoorFrame)e).getBuildingHitBox();
         if (HitDetection.hit(s, playerHitBox)){
           ((DoorFrame)e).open();
-          //Protocol.send();
+          Protocol.send(8,e,Client.getConnection());
           return;
         }
       }
