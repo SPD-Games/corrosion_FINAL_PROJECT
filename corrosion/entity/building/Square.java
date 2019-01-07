@@ -34,7 +34,7 @@ public class Square extends Building {
   public void fromServer(){
     sprite = new Sprite(null, new int[]{0,0}, sprites, new int[]{0});
   }
-  
+
   public Square(){
     this(0, 0, 0);
   }
@@ -145,6 +145,27 @@ public class Square extends Building {
           out.rotate(-Math.PI/6, 125, 144.831216351);
         } else {
           out.translate(0,-217);
+        }
+        return out;
+      }
+    }
+    return null;
+  }
+
+  public AffineTransform checkPlacingHitBoxesWall(Point2D p){
+    for (int i = 0; i < 4; ++i){
+      if(placingHitBoxs[i].contains(p)){
+        AffineTransform out = new AffineTransform(transform);
+        if (i == 0){
+          out.rotate(Math.PI/2,xPos-125,yPos-125);
+          out.translate(0,-255);
+        } else if (i == 1){
+          out.translate(0,245);
+        } else if(i == 2){
+          out.rotate(Math.PI/2,xPos-125,yPos-125);
+          out.translate(0,-505);
+        } else {
+          out.translate(0,-5);
         }
         return out;
       }

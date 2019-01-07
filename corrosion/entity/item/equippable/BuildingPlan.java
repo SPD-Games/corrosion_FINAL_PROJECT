@@ -16,6 +16,7 @@ import java.awt.Point;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 
+import corrosion.entity.building.wall.*;
 import corrosion.entity.projectile.*;
 import corrosion.Sprite;
 import corrosion.entity.Entity;
@@ -78,8 +79,7 @@ public class BuildingPlan extends Equippable{
     if (placeState == SQUARE){
       preview = new Square();
     } else if (placeState == WALL){
-      //preview = new Wall();
-      preview = null;
+      preview = new Wall();
     } else if (placeState == DOOR_FRAME){
       //preview = new DoorFrame();
       preview = null;

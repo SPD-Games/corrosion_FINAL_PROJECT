@@ -201,4 +201,8 @@ public class Triangle extends Building {
     }
     return null;
   }
+
+  public AffineTransform checkPlacingHitBoxesWall(Point2D p){
+    return null;
+  }
 }

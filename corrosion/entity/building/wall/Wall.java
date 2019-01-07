@@ -1,6 +1,6 @@
-package corrosion.entity.building;
+package corrosion.entity.building.wall;
 
-import corrosion.entity.building.Building;
+import corrosion.entity.building.*;
 import corrosion.entity.player.*;
 import corrosion.input.Mouse;
 import corrosion.Sprite;
@@ -46,6 +46,7 @@ public class Wall extends Building {
 
   public void draw(Graphics g, long t){
     ((Graphics2D)g).drawImage(sprite.getFrame(), transform, null);
+    ((Graphics2D)g).fill(hitBox);
   }
 
   public void drawPreview(Graphics g, Player p){
@@ -53,9 +54,9 @@ public class Wall extends Building {
     Point mousePos = Mouse.getPosition();
     ArrayList<Entity> entities = Client.getEntities();
 
-    transform.setToTranslation(pointOnMap.getX()-125, pointOnMap.getY()-125);
+    transform.setToTranslation(pointOnMap.getX()-125, pointOnMap.getY()-2.5);
     rotation = Math.atan2(mousePos.getX(), mousePos.getY());
-    transform.rotate(rotation, 125, 125);
+    transform.rotate(rotation, 125, 2.5);
 
     boolean onFoundation = false;
     for (int i = 0; i < entities.size(); ++i){
@@ -67,7 +68,7 @@ public class Wall extends Building {
           break;
         }
       }else if (entities.get(i) instanceof Triangle){
-        AffineTransform newTransform = ((Triangle)entities.get(i)).checkPlacingHitBoxesSquareWall(pointOnMap);
+        AffineTransform newTransform = ((Triangle)entities.get(i)).checkPlacingHitBoxesWall(pointOnMap);
         if (newTransform != null){
           transform = newTransform;
           onFoundation = true;
@@ -103,11 +104,39 @@ public class Wall extends Building {
 
   public boolean place(){
     ArrayList<Entity> entities = Client.getEntities();
+    hitBox = new Path2D.Double();
+    hitBox.moveTo(6, 0);
+    hitBox.lineTo(244, 0);
+    hitBox.lineTo(244, 10);
+    hitBox.lineTo(6, 10);
+    hitBox.transform(transform);
+
+    boolean onFoundation = false;
     for (int i = 0; i < entities.size(); ++i){
       if (entities.get(i) instanceof Square){
+        Shape otherHitBox  = ((Square)entities.get(i)).getBuildingHitBox();
+        if (HitDetection.hit(otherHitBox,hitBox)){
+          onFoundation = true;
+          break;
+        }
+      }else if (entities.get(i) instanceof Triangle){
+        Shape otherHitBox = ((Triangle)entities.get(i)).getBuildingHitBox();
+        if (HitDetection.hit(otherHitBox,hitBox)){
+          onFoundation = true;
+          break;
+        }
+      }
+    }
 
-      } else if (entities.get(i) instanceof Triangle){
+    if(!onFoundation){return false;}
 
+    for (int i = 0; i < entities.size(); ++i){
+      if (entities.get(i) instanceof Wall){
+        Shape otherHitBox = ((Wall)entities.get(i)).getHitBox();
+        if (HitDetection.hit(otherHitBox,hitBox)){
+          //TODO DRAW CANNOT PLACE
+          return false;
+        }
       }
     }
 

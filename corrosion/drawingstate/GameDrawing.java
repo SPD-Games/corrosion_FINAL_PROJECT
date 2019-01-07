@@ -19,6 +19,7 @@ import corrosion.entity.item.equippable.*;
 import corrosion.input.*;
 import corrosion.input.bind.*;
 import corrosion.entity.building.*;
+import corrosion.entity.building.wall.*;
 
 
 public class GameDrawing extends DrawingState{
@@ -41,6 +42,7 @@ public class GameDrawing extends DrawingState{
     BuildingPlan.init();
     Square.init();
     Triangle.init();
+    Wall.init();
     Apple.init();
 
     setBinds();

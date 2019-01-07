@@ -9,13 +9,15 @@ package corrosion.entity.player;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
-
+import java.util.ArrayList;
 import corrosion.Drawing;
 import corrosion.entity.item.equippable.*;
 import corrosion.entity.player.Player;
 import corrosion.input.*;
 import java.awt.geom.Ellipse2D;
-
+import corrosion.HitDetection;
+import corrosion.entity.projectile.*;
+import corrosion.entity.*;
 import corrosion.network.*;
 
 public class MainPlayer extends Player{
@@ -155,6 +157,7 @@ public class MainPlayer extends Player{
 
       //draws the equipped item
       drawEquipped(g);
+
       //moves the player
       double yVel = 0;
       double xVel = 0;
@@ -169,5 +172,18 @@ public class MainPlayer extends Player{
 
       xPos += xVel;
       yPos += yVel;
+
+      ArrayList<Entity> entities = Client.getEntities();
+      for (int iEntities = 0; iEntities < entities.size(); ++iEntities){
+        Entity e = entities.get(iEntities);
+        if (!(e instanceof Projectile)){
+          Shape s = e.getHitBox();
+          if (HitDetection.hit(s, getHitBox())){
+            xPos -= xVel;
+            yPos -= yVel;
+            return;
+          }
+        }
+      }
     }
 }
