@@ -1,7 +1,7 @@
 //Henry Lim
 //Dec. 19th, 2018
 //Inventory Box Drawing Surface
-package inventorybox;
+package corrosion;
 
 import java.awt.Color;
 import java.awt.Graphics;
