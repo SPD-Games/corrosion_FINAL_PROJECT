@@ -10,10 +10,14 @@ public class HitDetection{
     if (s1 instanceof Ellipse2D && s2 instanceof Line2D){
       return circleLine((Ellipse2D)s1, (Line2D) s2);
     }
-    Area a1 = new Area(s1);
-    Area a2 = new Area(s2);
-    a1.intersect(a2);
-    return !a1.isEmpty();
+
+    if(s1.getBounds2D().intersects(s2.getBounds2D())){
+      Area a1 = new Area(s1);
+      Area a2 = new Area(s2);
+      a1.intersect(a2);
+      return !a1.isEmpty();
+    }
+    return false;
   }
 
   /**
