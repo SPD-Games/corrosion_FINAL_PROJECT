@@ -5,6 +5,9 @@
       hit reg
       entity networking
       all the classes for items
+
+      no place on players
+      fix placing
   */
 
 package corrosion;

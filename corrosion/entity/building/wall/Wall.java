@@ -20,6 +20,7 @@ public class Wall extends Building {
   private transient Sprite sprite;
   private Path2D[] placingHitBoxs = new Path2D[4];
   private Path2D hitBox;
+  private boolean placeable = false;
 
   public static void init(){
     try{
@@ -46,10 +47,10 @@ public class Wall extends Building {
 
   public void draw(Graphics g, long t){
     ((Graphics2D)g).drawImage(sprite.getFrame(), transform, null);
-    ((Graphics2D)g).fill(hitBox);
   }
 
   public void drawPreview(Graphics g, Player p){
+    placeable = false;
     Point2D pointOnMap = Mouse.getPointOnMap();
     Point mousePos = Mouse.getPosition();
     ArrayList<Entity> entities = Client.getEntities();
@@ -89,6 +90,7 @@ public class Wall extends Building {
       }
     }
     ((Graphics2D)g).drawImage(sprite.getFrame(), transform, null);
+    placeable = true;
   }
 
   public Shape getBuildingHitBox(){
@@ -103,12 +105,13 @@ public class Wall extends Building {
 
 
   public boolean place(){
+    if(!placeable){return false;}
     ArrayList<Entity> entities = Client.getEntities();
     hitBox = new Path2D.Double();
-    hitBox.moveTo(6, 0);
-    hitBox.lineTo(244, 0);
-    hitBox.lineTo(244, 10);
-    hitBox.lineTo(6, 10);
+    hitBox.moveTo(15, 0);
+    hitBox.lineTo(235, 0);
+    hitBox.lineTo(235, 10);
+    hitBox.lineTo(15, 10);
     hitBox.transform(transform);
 
     boolean onFoundation = false;

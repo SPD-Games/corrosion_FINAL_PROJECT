@@ -203,6 +203,24 @@ public class Triangle extends Building {
   }
 
   public AffineTransform checkPlacingHitBoxesWall(Point2D p){
+    for (int i = 0; i < 3; ++i){
+      if(placingHitBoxs[i].contains(p)){
+        AffineTransform out = new AffineTransform(transform);
+        AffineTransform out2 = new AffineTransform();
+        if (i == 0){
+          out2.translate(0,210);
+          out2.rotate(Math.PI,125,5);
+        } else if (i == 1){
+          out2.rotate(Math.PI/3,125,5);
+          out2.translate(120,0);
+        } else {
+          out2.rotate(5*Math.PI/3,125,5);
+          out2.translate(-120,0);
+        }
+        out.concatenate(out2);
+        return out;
+      }
+    }
     return null;
   }
 }
