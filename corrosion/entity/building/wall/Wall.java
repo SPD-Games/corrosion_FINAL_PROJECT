@@ -16,11 +16,11 @@ import java.awt.geom.*;
 import java.util.ArrayList;
 
 public class Wall extends Building {
-  private static BufferedImage[][] sprites = new BufferedImage[1][4];
-  private transient Sprite sprite;
-  private Path2D[] placingHitBoxs = new Path2D[4];
-  private Path2D hitBox;
-  private boolean placeable = false;
+  protected static BufferedImage[][] sprites = new BufferedImage[1][4];
+  protected transient Sprite sprite;
+  protected Path2D[] placingHitBoxs = new Path2D[4];
+  protected Path2D hitBox;
+  protected boolean placeable = false;
 
   public static void init(){
     try{

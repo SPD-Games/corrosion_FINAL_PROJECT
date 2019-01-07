@@ -81,8 +81,7 @@ public class BuildingPlan extends Equippable{
     } else if (placeState == WALL){
       preview = new Wall();
     } else if (placeState == DOOR_FRAME){
-      //preview = new DoorFrame();
-      preview = null;
+      preview = new DoorFrame();
     } else if (placeState == TRIANGLE){
       preview = new Triangle();
     }
