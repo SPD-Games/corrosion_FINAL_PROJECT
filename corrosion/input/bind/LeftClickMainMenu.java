@@ -1,5 +1,5 @@
 /** Edward Pei
-  * December 4 2018
+  * January 7, 2019
   * a class which allows the player to click on the main menu
   */
 package corrosion.input.bind;
@@ -28,7 +28,8 @@ public class LeftClickMainMenu extends MouseBindable{
     // check if play button in main menu is pressed
     if (xClicked > (MainMenuDrawing.getPlayBtn()).getXBounds()[0] && xClicked < (MainMenuDrawing.getPlayBtn()).getXBounds()[1]) {
       if (yClicked > (MainMenuDrawing.getPlayBtn()).getYBounds()[0] && yClicked < (MainMenuDrawing.getPlayBtn()).getYBounds()[1]) {
-        System.out.println("clicked!!!");
+        // show the user the connection menu
+        Drawing.setStateConnect();
       }
     }
 

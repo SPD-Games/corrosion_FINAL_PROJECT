@@ -26,6 +26,7 @@ public class ConnectMenuDrawing extends DrawingState{
   public static ButtonG connectBtn;
   public static TextBoxG ipInput;
   protected BufferedImage backImg;
+  protected BufferedImage logoImg;
   BufferedImage connectImage;
 
   /**
@@ -36,9 +37,16 @@ public class ConnectMenuDrawing extends DrawingState{
   public void draw(Graphics g, long t) {
     ((Graphics2D)(g)).drawImage(backImg,null,null);
     ((Graphics2D)g).translate((Drawing.width())/2,(Drawing.height())/2 );
+    g.setFont(new Font("Ariel", Font.PLAIN, 50));
+    g.setColor(Color.black);
+    ((Graphics2D)g).drawString("*Port not needed",-220,110);
 
     connectBtn.draw(g);
     ipInput.draw(g);
+
+    ((Graphics2D)(g)).scale(0.5,0.5);
+    g.translate(-logoImg.getWidth()/2, -logoImg.getHeight()/2 -530);
+    ((Graphics2D)(g)).drawImage(logoImg,null,null);
   }
 
   /** gets the button
@@ -53,6 +61,10 @@ public class ConnectMenuDrawing extends DrawingState{
    */
   public static TextBoxG getIPInput() {
     return ipInput;
+  }
+
+  public static String getIP() {
+    return ipInput.getText();
   }
 
   public void init(){
@@ -73,6 +85,8 @@ public class ConnectMenuDrawing extends DrawingState{
             //sets sprite image
             connectImage = ImageIO.read(new File("sprites/menuicons/ConnectBtn.png"));
             backImg = ImageIO.read(new File("sprites/menuicons/MenuBackgrounds.jpg"));
+            logoImg = ImageIO.read(new File("sprites/menuicons/LogoV1.png"));
+
           } catch(Exception e) {
             //exits on error with message
             System.out.println("Logo load error: " + e);

@@ -1,5 +1,5 @@
 /** Edward Pei
-  * December 4 2018
+  * January 7, 2019
   * a class which allows the player to click on the connect menu
   */
 package corrosion.input.bind;
@@ -29,7 +29,8 @@ public class LeftClickConnectMenu extends MouseBindable{
     // check if button in connect menu is pressed
     if (xClicked > (ConnectMenuDrawing.getB()).getXBounds()[0] && xClicked < (ConnectMenuDrawing.getB()).getXBounds()[1]) {
       if (yClicked > (ConnectMenuDrawing.getB()).getYBounds()[0] && yClicked < (ConnectMenuDrawing.getB()).getYBounds()[1]) {
-        System.out.println("clicked!!!");
+        // show the user the game
+        Drawing.setStateGame(ConnectMenuDrawing.getIP(), 1234);
       }
     }
 

@@ -23,7 +23,7 @@ public class Typing extends Bindable{
     int keyCode = e.getKeyCode();
     char c = e.getKeyChar();
 
-    String allowedChar = "1234567890:.";
+    String allowedChar = "1234567890.";
 
     if (keyCode == 8) {
       ConnectMenuDrawing.getIPInput().backSpace();

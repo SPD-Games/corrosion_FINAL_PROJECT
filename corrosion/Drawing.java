@@ -53,6 +53,23 @@ public class Drawing extends JPanel{
   }
 
   /**
+  * make the state of the drawing the game
+  * @param ip the ip
+  * @param port the port
+  */
+  public static void setStateGame(String ip, int port) {
+      // 127.0.0.1
+      state = new GameDrawing(ip, 1234);
+  }
+
+  /**
+  * make the state of the drawing the connection menu
+  */
+  public static void setStateConnect() {
+    state = new ConnectMenuDrawing();
+  }
+
+  /**
   * Gets the current width of the window
   * @return the currnet width of the window
   */
@@ -81,8 +98,7 @@ public class Drawing extends JPanel{
   */
   public Drawing(){
     panel = this;
-    //state = new ConnectMenuDrawing();
-    state = new GameDrawing("127.0.0.1", 1234);
+    state = new MainMenuDrawing();
 
     //start drawing and fps timers
     fpsTimer.start();
