@@ -16,6 +16,8 @@ abstract public class Entity implements Serializable{
   protected double xPos,yPos,rotation;
   protected long id = -1;
   protected AffineTransform transform = new AffineTransform();
+  private int zIndex = 0;
+
   /**
   * Main Constructor
   * @param x the x position of the Entity
@@ -37,6 +39,27 @@ abstract public class Entity implements Serializable{
     xPos = 0;
     yPos = 0;
     rotation = 0;
+  }
+
+  /**
+  * Sets the value of the setZIndex
+  * @param i the zIndex value in range of 0 to 9 inclusive
+  */
+  public void setZIndex(int i){
+    if (i <= 0){
+      zIndex = 0;
+    } else if(i >= 9){
+      zIndex = 9;
+    } else {
+      zIndex = i;
+    }
+  }
+
+  /**
+  * Gets the zIndex value
+  */
+  public int getZIndex(){
+    return zIndex;
   }
 
   /**

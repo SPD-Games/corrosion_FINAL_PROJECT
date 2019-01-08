@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
+import corrosion.Map;
 import corrosion.network.*;
 import corrosion.Drawing;
 import corrosion.entity.*;
@@ -25,7 +26,7 @@ import corrosion.entity.building.wall.*;
 public class GameDrawing extends DrawingState{
 
   public static double zoom = 1;
-
+  public static Map map = new Map();
   public static double getZoom(){
     return zoom;
   }
@@ -95,7 +96,6 @@ public class GameDrawing extends DrawingState{
   */
   public void draw(Graphics g, long t){
     Graphics2D g2d = (Graphics2D)g;
-
     //setting to change render quality
     //low settings
     //g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
@@ -108,13 +108,12 @@ public class GameDrawing extends DrawingState{
     g.clearRect(0, 0, Drawing.width(), Drawing.height());
     g.setColor(new Color(173, 216, 230));
     g.fillRect(0, 0, Drawing.width(), Drawing.height());
-
     g2d.scale(zoom, zoom);
     g2d.translate(-MainPlayer.getMainPlayer().getXPos() + Drawing.width()/2/zoom, -MainPlayer.getMainPlayer().getYPos() + Drawing.height()/2/zoom);
+    map.draw(g,zoom);
     //draw map
     g.setColor(Color.black);
 
-    g.fillOval(0, 0, 250, 250);//TMP TO TEST MOVEMENT
     //draw entities
     ArrayList<Entity> entities = Client.getEntities();
     for (int i = 0; i < entities.size(); ++i){
