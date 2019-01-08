@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 public class DrawingSurface extends JPanel{
 
-    Items[][] items = new Items[6][6];
+    //private Item[][] items = new Item[6][6];
 
     private void doDrawing(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
