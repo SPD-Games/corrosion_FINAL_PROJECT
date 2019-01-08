@@ -48,6 +48,21 @@ public class GameDrawing extends DrawingState{
     DoorFrame.init();
     Apple.init();
 
+
+    Axe.init();
+    Bandage.init();
+    Bow.init();
+    Equippable.init();
+    Medkit.init();
+    Orange.init();
+    Pickaxe.init();
+    Rifle.init();
+    Shotgun.init();
+    Smg.init();
+    Sniper.init();
+
+
+
     setBinds();
   }
 
