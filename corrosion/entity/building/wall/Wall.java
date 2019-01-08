@@ -46,6 +46,7 @@ public class Wall extends Building {
 
   public Wall(double xPos, double yPos, double rotation){
     super(xPos, yPos, rotation);
+    setZIndex(2);
     state = new int[]{0,0};
     sprite = new Sprite(null, state, sprites, new int[]{0});
   }

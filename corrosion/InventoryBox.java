@@ -12,17 +12,17 @@ public class InventoryBox extends JFrame{
     public InventoryBox(){
         initUI();
     }
-    
-    private void initUI() {        
+
+    private void initUI() {
         setTitle("Inventory");
         add(new DrawingSurface());
         setSize(340, 360);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
-        
+
     }
-    
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
 
@@ -33,6 +33,6 @@ public class InventoryBox extends JFrame{
             }
         });
     }
+
     
 }
-

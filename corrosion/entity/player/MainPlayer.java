@@ -55,7 +55,7 @@ public class MainPlayer extends Player{
       super(xPos, yPos, 0, id);
       //equipped = new CrossBow();
       equipped = new BuildingPlan();
-      equipped = new UpgradePlan();
+      //equipped = new UpgradePlan();
 
       //equipped = new Apple();
       //equipped = null;
