@@ -24,7 +24,7 @@ public class Player2Client extends Protocol{
       c.out.writeLong(p.getId());
       c.out.writeDouble(p.getXPos());
       c.out.writeDouble(p.getYPos());
-      c.out.writeDouble(p.getRotaion());
+      c.out.writeDouble(p.getRotation());
 
       //sends current equipped info
       Equippable equipped = p.getEquipped();

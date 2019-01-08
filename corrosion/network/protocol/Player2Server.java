@@ -23,7 +23,7 @@ public class Player2Server extends Protocol{
       c.out.writeLong(p.getId());
       c.out.writeDouble(p.getXPos());
       c.out.writeDouble(p.getYPos());
-      c.out.writeDouble(p.getRotaion());
+      c.out.writeDouble(p.getRotation());
 
       //sends eqquipped info
       Equippable equipped = p.getEquipped();

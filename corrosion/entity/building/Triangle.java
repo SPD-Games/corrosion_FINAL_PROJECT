@@ -22,10 +22,14 @@ public class Triangle extends Building {
   public transient Sprite sprite;
   private Path2D[] placingHitBoxs = new Path2D[3];
   private Path2D hitBox;
+  private int[] state;
 
   public static void init(){
     try{
       sprites[0][0] = ImageIO.read(new File("sprites/triangle/twigTriangle.png"));
+      sprites[0][1] = ImageIO.read(new File("sprites/triangle/woodTriangle.png"));
+      sprites[0][2] = ImageIO.read(new File("sprites/triangle/stoneTriangle.png"));
+      sprites[0][3] = ImageIO.read(new File("sprites/triangle/metalTriangle.png"));
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading triangle Sprite: " + e);
@@ -34,7 +38,7 @@ public class Triangle extends Building {
   }
 
   public void fromServer(){
-    sprite = new Sprite(null, new int[]{0,0}, sprites, new int[]{0});
+    sprite = new Sprite(null, state, sprites, new int[]{0});
   }
 
   public Triangle(){
@@ -43,7 +47,8 @@ public class Triangle extends Building {
 
   public Triangle(double xPos, double yPos, double rotation){
     super(xPos, yPos, rotation);
-    sprite = new Sprite(null, new int[]{0,0}, sprites, new int[]{0});
+    state = new int[]{0,0};
+    sprite = new Sprite(null, state, sprites, new int[]{0});
   }
 
   public void draw(Graphics g, long t){
@@ -111,8 +116,11 @@ public class Triangle extends Building {
     return hitBox;
   }
   public Shape getHitBox(){return null;}
-  public void upgrade(int level){}
-
+  public void upgrade(int level){
+    state = new int[]{0,level};
+    sprite.setState(0, level);
+    Protocol.send(8, this, Client.getConnection());
+  }
   public boolean place(){
     Point2D a = new Point2D.Double(1,216.5);
     a = transform.transform(a,null);
@@ -156,8 +164,8 @@ public class Triangle extends Building {
     placingHitBoxs[2].lineTo(a.getX(), a.getY());
     placingHitBoxs[2].lineTo(d.getX(), d.getY());
 
-    Client.addEntity(this);
     id = Client.getId();
+    Client.addEntity(this);
     Protocol.send(8, this, Client.getConnection());
     return true;
   }

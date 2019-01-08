@@ -91,9 +91,7 @@ public class Server{
           for (int iClient = 0; iClient < clients.size(); ++ iClient){
             Connection c = clients.get(iClient);
             Entity e = newEntities.get(0);
-            if (c.id != e.getId() - (e.getId()%1000000000000l)){
-              Protocol.send(9, e, c);
-            }
+            Protocol.send(9, e, c);
         }
         newEntities.remove(0);
       }

@@ -60,6 +60,17 @@ public class Mouse implements MouseListener, MouseWheelListener{
   }
 
   /**
+  * Converts a point on the screen to a point on the map
+  */
+  public static Point getPointOnMap(Point p){
+    p.x /= GameDrawing.getZoom();
+    p.y /= -GameDrawing.getZoom();
+    p.x += (int)MainPlayer.getMainPlayer().getXPos();
+    p.y += (int)MainPlayer.getMainPlayer().getYPos();
+    return p;
+  }
+
+  /**
   *
   * @param e
   */

@@ -5,8 +5,7 @@
       hit reg
       entity networking
       all the classes for items
-
-      frame sprites
+      upgrading
   */
 
 package corrosion;

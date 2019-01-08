@@ -7,6 +7,7 @@
 package corrosion.entity.player;
 
 import java.awt.*;
+import java.awt.geom.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 import java.util.ArrayList;
@@ -54,6 +55,8 @@ public class MainPlayer extends Player{
       super(xPos, yPos, 0, id);
       //equipped = new CrossBow();
       equipped = new BuildingPlan();
+      equipped = new UpgradePlan();
+
       //equipped = new Apple();
       //equipped = null;
       hp = 1;

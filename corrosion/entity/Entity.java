@@ -81,7 +81,7 @@ abstract public class Entity implements Serializable{
    * Gets the rotation
    * @return the rotation
   */
-  public double getRotaion(){
+  public double getRotation(){
     return rotation;
   }
 

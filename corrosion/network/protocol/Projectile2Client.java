@@ -31,7 +31,7 @@ public class Projectile2Client extends Protocol{
       c.out.writeDouble(p.getYPos());
       c.out.writeDouble(p.getXVel());
       c.out.writeDouble(p.getYVel());
-      c.out.writeDouble(p.getRotaion());
+      c.out.writeDouble(p.getRotation());
       c.out.writeLong(p.getId());
     } catch(Exception e){
       System.out.println("Error sending projectile" + e);

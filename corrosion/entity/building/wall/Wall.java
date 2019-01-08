@@ -16,24 +16,28 @@ import java.awt.geom.*;
 import java.util.ArrayList;
 
 public class Wall extends Building {
-  protected static BufferedImage[][] sprites = new BufferedImage[1][4];
+  private static BufferedImage[][] sprites = new BufferedImage[1][4];
   protected transient Sprite sprite;
   protected Path2D[] placingHitBoxs = new Path2D[4];
   protected Path2D hitBox;
+  protected Path2D buildingHitBox;
   protected boolean placeable = false;
-
+  protected int[] state;
   public static void init(){
     try{
       sprites[0][0] = ImageIO.read(new File("sprites/wall/twigWall.png"));
+      sprites[0][1] = ImageIO.read(new File("sprites/wall/woodWall.png"));
+      sprites[0][2] = ImageIO.read(new File("sprites/wall/stoneWall.png"));
+      sprites[0][3] = ImageIO.read(new File("sprites/wall/metalWall.png"));
     }catch(Exception e){
       //exits on error with message
-      System.out.println("Reading square Sprite: " + e);
+      System.out.println("Reading wall Sprite: " + e);
       System.exit(-1);
     }
   }
 
   public void fromServer(){
-    sprite = new Sprite(null, new int[]{0,0}, sprites, new int[]{0});
+    sprite = new Sprite(null, state, sprites, new int[]{0});
   }
 
   public Wall(){
@@ -42,7 +46,8 @@ public class Wall extends Building {
 
   public Wall(double xPos, double yPos, double rotation){
     super(xPos, yPos, rotation);
-    sprite = new Sprite(null, new int[]{0,0}, sprites, new int[]{0});
+    state = new int[]{0,0};
+    sprite = new Sprite(null, state, sprites, new int[]{0});
   }
 
   public void draw(Graphics g, long t){
@@ -79,12 +84,16 @@ public class Wall extends Building {
     }
 
     if(!onFoundation){return;}
-
+    buildingHitBox = new Path2D.Double();
+    buildingHitBox.moveTo(15, 0);
+    buildingHitBox.lineTo(235, 0);
+    buildingHitBox.lineTo(235, 10);
+    buildingHitBox.lineTo(15, 10);
+    buildingHitBox.transform(transform);
     for (int i = 0; i < entities.size(); ++i){
       if (entities.get(i) instanceof Wall){
-        Shape otherHitBox = ((Wall)entities.get(i)).getHitBox();
-        if (HitDetection.hit(otherHitBox,hitBox)){
-          //TODO DRAW CANNOT PLACE
+        Shape otherHitBox = ((Wall)entities.get(i)).getBuildingHitBox();
+        if (HitDetection.hit(otherHitBox,buildingHitBox)){
           return;
         }
       }
@@ -94,37 +103,47 @@ public class Wall extends Building {
   }
 
   public Shape getBuildingHitBox(){
-    return hitBox;
+    return buildingHitBox;
   }
 
   public Shape getHitBox(){
     return hitBox;
   }
 
-  public void upgrade(int level){}
-
+  public void upgrade(int level){
+    state = new int[]{0,level};
+    sprite.setState(0, level);
+    Protocol.send(8, this, Client.getConnection());
+  }
 
   public boolean place(){
     if(!placeable){return false;}
     ArrayList<Entity> entities = Client.getEntities();
+    buildingHitBox = new Path2D.Double();
+    buildingHitBox.moveTo(15, 0);
+    buildingHitBox.lineTo(235, 0);
+    buildingHitBox.lineTo(235, 10);
+    buildingHitBox.lineTo(15, 10);
+    buildingHitBox.transform(transform);
+
     hitBox = new Path2D.Double();
-    hitBox.moveTo(15, 0);
-    hitBox.lineTo(235, 0);
-    hitBox.lineTo(235, 10);
-    hitBox.lineTo(15, 10);
+    hitBox.moveTo(0, 0);
+    hitBox.lineTo(250, 0);
+    hitBox.lineTo(250, 10);
+    hitBox.lineTo(0, 10);
     hitBox.transform(transform);
 
     boolean onFoundation = false;
     for (int i = 0; i < entities.size(); ++i){
       if (entities.get(i) instanceof Square){
         Shape otherHitBox  = ((Square)entities.get(i)).getBuildingHitBox();
-        if (HitDetection.hit(otherHitBox,hitBox)){
+        if (HitDetection.hit(otherHitBox,buildingHitBox)){
           onFoundation = true;
           break;
         }
       }else if (entities.get(i) instanceof Triangle){
         Shape otherHitBox = ((Triangle)entities.get(i)).getBuildingHitBox();
-        if (HitDetection.hit(otherHitBox,hitBox)){
+        if (HitDetection.hit(otherHitBox,buildingHitBox)){
           onFoundation = true;
           break;
         }
@@ -135,16 +154,14 @@ public class Wall extends Building {
 
     for (int i = 0; i < entities.size(); ++i){
       if (entities.get(i) instanceof Wall){
-        Shape otherHitBox = ((Wall)entities.get(i)).getHitBox();
-        if (HitDetection.hit(otherHitBox,hitBox)){
-          //TODO DRAW CANNOT PLACE
+        Shape otherHitBox = ((Wall)entities.get(i)).getBuildingHitBox();
+        if (HitDetection.hit(otherHitBox,buildingHitBox)){
           return false;
         }
       }
     }
-
-    Client.addEntity(this);
     id = Client.getId();
+    Client.addEntity(this);
     Protocol.send(8, this, Client.getConnection());
     return true;
   }

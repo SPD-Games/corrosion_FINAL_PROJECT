@@ -91,7 +91,7 @@ public class Client{
       client.players.add(p);
     } else {
       client.players.get(n).moveTo(p.getXPos(), p.getYPos());
-      client.players.get(n).setRotation(p.getRotaion());
+      client.players.get(n).setRotation(p.getRotation());
       client.players.get(n).setEquipped(p.getEquipped());
     }
   }
@@ -195,7 +195,14 @@ public class Client{
   */
   public static void addEntity(Entity entity){
     client.entitiesInView.add(entity);
-    client.entities.add(entity);
+    synchronized(client.entities){
+      int i = client.entities.indexOf(entity);
+      if (i == -1){
+        client.entities.add(entity);
+      } else {
+        client.entities.set(i, entity);
+      }
+    }
   }
 
   /**
@@ -204,7 +211,9 @@ public class Client{
   */
   public static void removeEntity(Entity entity){
     client.entitiesInView.remove(entity);
-    client.entities.remove(entity);
+    synchronized(client.entities){
+      client.entities.remove(entity);
+    }
   }
 
   /**

@@ -28,9 +28,10 @@ public abstract class Building extends Entity {
   public abstract void draw(Graphics g, long t);
   public abstract void drawPreview(Graphics g, Player p);
   public abstract Shape getHitBox();
+  public abstract Shape getBuildingHitBox();
   public abstract void upgrade(int level);
   public abstract boolean place();
-
+  
   public void repair(double hp){
     hp += this.hp;
     this.hp = Math.min(maxHp, hp);
