@@ -54,10 +54,11 @@ public class MainPlayer extends Player{
     public MainPlayer(double xPos, double yPos, long id){
       super(xPos, yPos, 0, id);
       //equipped = new CrossBow();
-      equipped = new BuildingPlan();
-      equipped = new UpgradePlan();
+      //equipped = new BuildingPlan();
+      //equipped = new UpgradePlan();
 
       //equipped = new Apple();
+      equipped = new Pistol();
       //equipped = null;
       hp = 1;
     }

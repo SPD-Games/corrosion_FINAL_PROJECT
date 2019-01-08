@@ -38,6 +38,7 @@ public class GameDrawing extends DrawingState{
     Player.init();
     CrossBow.init();
     Pistol.init();
+    BulletProjectile.init();
     ArrowProjectile.init();
     BuildingPlan.init();
     UpgradePlan.init();
