@@ -26,7 +26,7 @@ import corrosion.entity.building.wall.*;
 public class GameDrawing extends DrawingState{
 
   public static double zoom = 1;
-  public static Map map = new Map();
+  public static Map map;
   public static double getZoom(){
     return zoom;
   }
@@ -35,6 +35,7 @@ public class GameDrawing extends DrawingState{
   * Initiates the drawing state
   */
   public void init(){
+    map = new Map();
     Drawing.getPanel().getTimer().start();
     Player.init();
     CrossBow.init();
@@ -49,17 +50,16 @@ public class GameDrawing extends DrawingState{
     Apple.init();
 
 
-    Axe.init();
+    //Axe.init();
     Bandage.init();
     Bow.init();
-    Equippable.init();
-    Medkit.init();
+    //Medkit.init();
     Orange.init();
-    Pickaxe.init();
-    Rifle.init();
-    Shotgun.init();
-    Smg.init();
-    Sniper.init();
+    //Pickaxe.init();
+    //Rifle.init();
+    //Shotgun.init();
+    //Smg.init();
+    //Sniper.init();
 
 
 

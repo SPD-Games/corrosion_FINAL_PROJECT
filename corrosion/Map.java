@@ -24,15 +24,15 @@ import java.awt.*;
 import java.awt.geom.*;
 import java.util.ArrayList;
 public class Map{
-  public BufferedImage map;
   public BufferedImage[][] segments = new BufferedImage[100][100];
   public void init(){
+    BufferedImage map = null;
     try{
       //loads Barrel icon
       map = ImageIO.read(new File("sprites/map.png"));
     }catch(Exception e){
       //exits on error with message
-      System.out.println("Reading Barrel Sprite: " + e);
+      System.out.println("Reading Map Sprite: " + e);
       System.exit(-1);
     }
     for (int x = 0; x < 10000; x += 100){
