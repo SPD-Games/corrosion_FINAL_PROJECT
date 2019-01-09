@@ -118,9 +118,9 @@ public class BulletProjectile extends Projectile{
   public void draw(Graphics g, long t){
     update(t);
     //draws the bullet
-    transform.setToTranslation(xPos -10, yPos+5);
+    transform.setToTranslation(xPos -12, yPos+7);
     transform.rotate(rotation, 3, 0);
-    transform.scale(0.1,0.1);
+    transform.scale(0.15,0.15);
     ((Graphics2D)(g)).drawImage(img, transform, null);
     lastXPos = xPos-3;
     lastYPos = yPos;

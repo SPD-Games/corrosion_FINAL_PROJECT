@@ -52,12 +52,12 @@ public class GameDrawing extends DrawingState{
 
 
     //Axe.init();
-    Bandage.init();
-    Bow.init();
+    //Bandage.init();
+    //Bow.init();
     //Medkit.init();
-    Orange.init();
+    //Orange.init();
     //Pickaxe.init();
-    //Rifle.init();
+    Rifle.init();
     //Shotgun.init();
     //Smg.init();
     //Sniper.init();
