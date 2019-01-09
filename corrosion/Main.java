@@ -6,6 +6,7 @@
       entity networking
       all the classes for items
       upgrading
+      fix buggy shotgun when player shots in middle
   */
 
 package corrosion;

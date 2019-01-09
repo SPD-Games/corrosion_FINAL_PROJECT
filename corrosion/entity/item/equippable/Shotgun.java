@@ -1,6 +1,6 @@
-//Henry Lim
-//Dec. 17, 2018
-//Shotgun class
+//Edward Pei
+//January 9, 2019
+//Pistol class
 package corrosion.entity.item.equippable;
 //imports
 import javax.swing.Timer;
@@ -14,85 +14,89 @@ import java.awt.geom.AffineTransform;
 import java.awt.Point;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
+import java.io.Serializable;
 
 import corrosion.Sprite;
 import corrosion.entity.Entity;
 import corrosion.entity.player.Player;
-//import corrosion.entity.projectile.Arrow;
+import corrosion.entity.projectile.*;
 
-public class Shotgun extends Equippable{
-    //TODO move all images and draw handling in Usable
+import corrosion.network.*;
+import corrosion.network.protocol.*;
+
+
+public class Shotgun extends Equippable implements Serializable{
+  // get the icons and animations for the pistol
   private static BufferedImage icon;
-  private static BufferedImage[][] sprites = new BufferedImage[2][];
+  private static BufferedImage[][] sprites = new BufferedImage[1][3];
+  private final int[] SHOOT_READY = {0,2};
+  //private final int[] RELOAD_READY = {1,2};
 
-  private final int[] SHOOT_READY = {0,3};
-  private final int[] RELOAD_READY = {1,2};
-  public Sprite sprite;
+    /**
+    *Initialize the Pistol object
+    */
+    public static void init(){
 
-  public static void init(){
-    try{
-      //loads icon
-      icon = ImageIO.read(new File("sprites/shotgun/icon.png"));
-      //loads relaod animations
-      sprites[0] = new BufferedImage[4];
-      for (int i = 1; i <= 4; ++i){
-        sprites[0][i-1] = ImageIO.read(new File("sprites/shotgun/animation/frame" + i + ".png"));
+      try{
+        //loads icon
+        icon = ImageIO.read(new File("sprites/shotgun/icon.png"));
+        sprites[0][1] = ImageIO.read(new File("sprites/shotgun/animation/frame" + 2 + ".png"));
+        sprites[0][2] = ImageIO.read(new File("sprites/shotgun/animation/frame" + 1 + ".png"));
+        sprites[0][0] = sprites[0][2];
+      }catch(Exception e){
+        //exits on error with message
+        System.out.println("Reading Pistol Sprite: " + e);
+        System.exit(-1);
       }
-
-      //loads shooting animations
-      sprites[1] = new BufferedImage[3];
-      for (int i = 0; i < 3; ++i){
-        sprites[1][i] = sprites[0][2-i];
-      }
-    }catch(Exception e){
-      //exits on error with message
-      System.out.println("Reading Shotgun Sprite: " + e);
-      System.exit(-1);
     }
+
+  /**
+  * constuctor for the pistol
+  */
+  public Shotgun(){
+    super(new Sprite(icon, new int[]{0,2}, sprites, new int[]{50}));
   }
 
   /**
-  * constuctor for the Shotgun
-  * @param p player who has the Shotgun
+  * constuctor for the pistol
   */
-  public Shotgun(Player p){
-    super(new Sprite(icon, new int[]{1,2}, sprites, new int[]{500,50}));
+  public Shotgun(int[] state){
+    super(new Sprite(icon, state, sprites, new int[]{50}));
   }
 
+  /**
+  * Draw the item
+  * @param g the graphics tool used to draw
+  */
   public void drawEquipped(Graphics g, Player player){
+    if (player == null){return;}
     transform = player.getTransform();
-    transform.translate(-18, -110);
-    ((Graphics2D)(g)).drawImage(sprite.getFrame(), player.getTransform(), null);
+    transform.translate(-90, -190);
+    transform.scale(1.4,1.4);
+    ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
   public void draw(Graphics g, long t){}
 
+    //+ (int)(Math.random() * 100 - 50)
+
 
   public void attack(Point p, Player player){
-    //checks if Shotgun is reloaded
     if (sprite.isState(SHOOT_READY, false)){
-      sprite.startAnimation(1);
-    }
-  }
-
-  /**
-  * Reloads the weapon
-  * @param p the pointer position on the screen relative to the player
-  */
-  public void attack2(Point p, Player player){
-    reload();
-  }
-
-  /**
-  * Reloads the weapon
-  */
-  public void reload(){
-    //checks if rifle is ready to be reloaded
-    if (sprite.isState(RELOAD_READY, false)){
-      //starts the reload
+      //creates the bullet spread of the shotgun
+      BulletProjectile a1 = new BulletProjectile(player, p.getX()+ (int)(Math.random() * 60 -30), p.getY()+ (int)(Math.random() * 60 -30), 2,1000,16,12,150);
+      BulletProjectile a2 = new BulletProjectile(player, p.getX() + (int)(Math.random() * 50 - 25), p.getY() +  (int)(Math.random() * 50 - 25), 2,1000,16,12,150);
+      BulletProjectile a3 = new BulletProjectile(player, p.getX() + (int)(Math.random() * 50 - 25), p.getY()  + (int)(Math.random() * 50 - 25), 2,1000,16,12,150);
+      BulletProjectile a4 = new BulletProjectile(player, p.getX()+ (int)(Math.random() * 100 - 50), p.getY() + (int)(Math.random() * 100 - 50) , 2,1000,16,12,150);
+      BulletProjectile a5 = new BulletProjectile(player, p.getX() + (int)(Math.random() * 100 - 50), p.getY() + (int)(Math.random() * 100 - 50), 2,1000,16,12,150);
+      //starts shoot animation
       sprite.startAnimation(0);
     }
   }
+  public void attack2(Point p, Player player){}
 
-
+  /**
+  * reloads the pistol
+  */
+  public void reload(){}
 }

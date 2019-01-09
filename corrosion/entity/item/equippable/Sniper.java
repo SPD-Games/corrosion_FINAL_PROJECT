@@ -81,7 +81,7 @@ public class Sniper extends Equippable implements Serializable{
   public void attack(Point p, Player player){
     if (sprite.isState(SHOOT_READY, false)){
       //creates a new bullet
-      BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),8,10000,80,10,220);
+      BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),10,5000,80,10,220);
       //starts shoot animation
       sprite.startAnimation(0);
     }
