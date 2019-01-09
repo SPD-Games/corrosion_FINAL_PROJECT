@@ -84,7 +84,7 @@ public class Smg extends Equippable implements Serializable{
     if (sprite.isState(SHOOT_READY, false)){
       //creates a new bullet
       //BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),5,2000,10);
-      BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),2,3000,10,12,140);
+      BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),2,2000,10,12,140);
       //starts shoot animation
       sprite.startAnimation(0);
     }
