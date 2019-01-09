@@ -41,7 +41,9 @@ public class Medkit extends Equippable{
       System.exit(-1);
     }
   }
-
+  public BufferedImage getIcon(){
+    return icon;
+  }
   public Medkit(){
     this(new int[]{0,0});
   }

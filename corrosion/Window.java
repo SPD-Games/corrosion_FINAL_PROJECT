@@ -43,6 +43,7 @@ public class Window extends JFrame {
     setExtendedState(JFrame.MAXIMIZED_BOTH);
     setUndecorated(true);
     setTitle("Corrosion");
+    setFocusTraversalKeysEnabled(false);
     setVisible(true);
   }
 }

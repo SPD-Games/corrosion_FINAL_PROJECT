@@ -23,7 +23,6 @@ import corrosion.entity.player.*;
 
 public class Orange extends Equippable{
 
-  @Override
   public BufferedImage getIcon(){
     return icon;
   }
@@ -34,7 +33,9 @@ public class Orange extends Equippable{
   public static void init(){
     try{
       //loads icon
+
       icon = ImageIO.read(new File("sprites/orange/icon.png"));
+
       //loads eating animations
       sprites[0] = new BufferedImage[2];
       for (int i = 1; i <= 2; ++i){

@@ -42,6 +42,10 @@ public class Apple extends Equippable{
     }
   }
 
+  public BufferedImage getIcon(){
+    return icon;
+  }
+
   public Apple(){
     this(new int[]{0,0});
   }

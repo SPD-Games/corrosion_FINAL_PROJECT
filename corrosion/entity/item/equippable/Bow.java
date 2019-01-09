@@ -54,7 +54,9 @@ public class Bow extends Equippable{
       System.exit(-1);
     }
   }
-
+  public BufferedImage getIcon(){
+    return icon;
+  }
   /**
    * Main Constructor
    * @param p the player that has the crossbow equipped

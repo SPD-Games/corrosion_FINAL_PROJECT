@@ -78,6 +78,14 @@ public class Drawing extends JPanel{
   }
 
   /**
+  * Gets the current state of the window
+  * @return the currnet state of the window
+  */
+  public static DrawingState getState(){
+    return state;
+  }
+
+  /**
   * Gets the current height of the window
   * @return the currnet height of the window
   */

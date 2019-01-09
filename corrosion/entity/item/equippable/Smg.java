@@ -49,19 +49,22 @@ public class Smg extends Equippable implements Serializable{
         System.exit(-1);
       }
     }
-
+    public BufferedImage getIcon(){
+      return icon;
+    }
   /**
   * constuctor for the smg
   */
   public Smg(){
-    super(new Sprite(icon, new int[]{0,2}, sprites, new int[]{50}));
+    this(new int[]{0,2});
   }
 
   /**
   * constuctor for the smg
   */
-  public Pistol(int[] state){
+  public Smg(int[] state){
     super(new Sprite(icon, state, sprites, new int[]{50}));
+    isStackable = false;
   }
 
   /**

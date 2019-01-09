@@ -24,7 +24,7 @@ import corrosion.entity.building.wall.*;
 
 
 public class GameDrawing extends DrawingState{
-
+  public static boolean isShownInvetory = false;
   public static double zoom = 1;
   public static Map map;
   public static double getZoom(){
@@ -54,7 +54,7 @@ public class GameDrawing extends DrawingState{
     //Bandage.init();
     //Bow.init();
     //Medkit.init();
-    //Orange.init();
+    Orange.init();
     //Pickaxe.init();
     Pistol.init();
     Rifle.init();
@@ -75,6 +75,7 @@ public class GameDrawing extends DrawingState{
     Mouse.setBinds(mouseBinds);
 
     Bindable binds[] = new Bindable[526];
+    binds[9] = new ToggleInvetory();//tab
     binds[87] = new Up();//w
     binds[83] = new Down();//s
     binds[65] = new Left();//a
@@ -114,6 +115,27 @@ public class GameDrawing extends DrawingState{
     g.fillRect(0,0,hp*2,40);
     g.setColor(Color.BLACK);
     g.drawString(hp + "", 10, 25);
+  }
+
+  public void drawInvetory(Graphics g,long t){
+    if (isShownInvetory){
+      MainPlayer.getMainPlayer().getInvetory().draw(g,t);
+    }
+  }
+
+  public void showInvetory(){
+    isShownInvetory = !isShownInvetory;
+    if (isShownInvetory){
+      MouseBindable mouseBinds[] = new MouseBindable[5];
+      Mouse.setBinds(mouseBinds);
+
+      Bindable binds[] = new Bindable[526];
+      binds[9] = new ToggleInvetory();//tab
+
+      Keyboard.setBinds(binds);
+    } else {
+      setBinds();
+    }
   }
 
   /**
@@ -156,6 +178,7 @@ public class GameDrawing extends DrawingState{
 
     //draw static menus
     drawStatus(g,t);
+    drawInvetory(g,t);
     Client.updateReady();
   }
 

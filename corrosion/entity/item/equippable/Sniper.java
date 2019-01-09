@@ -28,10 +28,17 @@ import corrosion.network.protocol.*;
 public class Sniper extends Equippable implements Serializable{
   // get the icons and animations for the rifle
   private static BufferedImage icon;
-  private static BufferedImage[][] sprites = new BufferedImage[1][3];
-  private final int[] SHOOT_READY = {0,2};
-  //private final int[] RELOAD_READY = {1,2};
+  private static BufferedImage[][] sprites = new BufferedImage[2][3];
+  private final int[] SHOOT_READY = {1,2};
+  private final int[] RELOAD_READY = {0,2};
 
+  @Override
+  public String getInfo(){
+    if(sprite.isState(SHOOT_READY, false)){
+      return "1";
+    }
+    return "0";
+  }
     /**
     *Initialize the rifle object
     */
@@ -43,6 +50,10 @@ public class Sniper extends Equippable implements Serializable{
         sprites[0][1] = ImageIO.read(new File("sprites/sniper/animation/frame" + 2 + ".png"));
         sprites[0][2] = ImageIO.read(new File("sprites/sniper/animation/frame" + 1 + ".png"));
         sprites[0][0] = sprites[0][2];
+
+        sprites[1][0] = sprites[0][2];
+        sprites[1][1] = sprites[0][2];
+        sprites[1][2] = sprites[0][2];
       }catch(Exception e){
         //exits on error with message
         System.out.println("Reading sniper Sprite: " + e);
@@ -54,14 +65,17 @@ public class Sniper extends Equippable implements Serializable{
   * constuctor for the rifle
   */
   public Sniper(){
-    super(new Sprite(icon, new int[]{0,2}, sprites, new int[]{50}));
+    this(new int[]{0,2});
   }
-
+  public BufferedImage getIcon(){
+    return icon;
+  }
   /**
   * constuctor for the rifle
   */
   public Sniper(int[] state){
-    super(new Sprite(icon, state, sprites, new int[]{50}));
+    super(new Sprite(icon, state, sprites, new int[]{50, 1000}));
+    stackable = false;
   }
 
   /**
@@ -86,10 +100,16 @@ public class Sniper extends Equippable implements Serializable{
       sprite.startAnimation(0);
     }
   }
-  public void attack2(Point p, Player player){}
+  public void attack2(Point p, Player player){
+    reload();
+  }
 
   /**
   * reloads the rifle
   */
-  public void reload(){}
+  public void reload(){
+    if (sprite.isState(RELOAD_READY, false)){
+      sprite.startAnimation(1);
+    }
+  }
 }

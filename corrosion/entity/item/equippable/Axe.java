@@ -49,12 +49,14 @@ public class Axe extends Equippable implements Serializable{
         System.exit(-1);
       }
     }
-
+    public BufferedImage getIcon(){
+      return icon;
+    }
   /**
   * constuctor for the axe
   */
   public Axe(){
-    super(new Sprite(icon, new int[]{0,2}, sprites, new int[]{50}));
+    this(new int[]{0,2});
   }
 
   /**
@@ -62,6 +64,7 @@ public class Axe extends Equippable implements Serializable{
   */
   public Axe(int[] state){
     super(new Sprite(icon, state, sprites, new int[]{50}));
+    isStackable = false;
   }
 
   /**

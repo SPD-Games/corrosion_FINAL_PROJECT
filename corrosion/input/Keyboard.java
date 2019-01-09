@@ -34,6 +34,7 @@ public class Keyboard implements KeyListener {
   public void keyPressed(KeyEvent e) {
     //gets the key code
     int k = e.getKeyCode();
+    //System.out.println(k);
     //check if it is in the set range
     if (k < 526){
       //check if the key is bound

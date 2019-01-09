@@ -51,7 +51,9 @@ public class UpgradePlan extends Equippable{
       System.exit(-1);
     }
   }
-
+  public BufferedImage getIcon(){
+    return icon;
+  }
   /**
    * Main Constructor
   */
@@ -65,7 +67,7 @@ public class UpgradePlan extends Equippable{
   */
   public UpgradePlan(int[] state){
     super(new Sprite(icon, state, sprites, new int[]{0,0}));
-
+    stackable = false;
   }
 
   /**

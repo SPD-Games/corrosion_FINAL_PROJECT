@@ -31,6 +31,10 @@ public class CrossBow extends Equippable{
   private final int[] SHOOT_READY = {0,3};
   private final int[] RELOAD_READY = {1,2};
 
+  public BufferedImage getIcon(){
+    return icon;
+  }
+
   /**
   * Initializes the player class
   */
@@ -69,6 +73,7 @@ public class CrossBow extends Equippable{
   */
   public CrossBow(int[] state){
     super(new Sprite(icon, state, sprites, new int[]{500,50}));
+    stackable = false;
   }
 
   /**

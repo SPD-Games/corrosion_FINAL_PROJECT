@@ -41,7 +41,9 @@ public class Bandage extends Equippable{
       System.exit(-1);
     }
   }
-
+  public BufferedImage getIcon(){
+    return icon;
+  }
   public Bandage(){
     this(new int[]{0,0});
   }

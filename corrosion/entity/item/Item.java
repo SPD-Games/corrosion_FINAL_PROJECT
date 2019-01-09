@@ -9,6 +9,8 @@ import corrosion.entity.Entity;
 import java.io.Serializable;
 
 abstract public class Item extends Entity implements Serializable{
+  protected boolean stackable = true;
+  protected int stackSize = 1;
   /**
   * Main Constructor
   * @param x the x position of the Item
@@ -29,8 +31,31 @@ abstract public class Item extends Entity implements Serializable{
     super();
   }
 
-  public BufferedImage getIcon(){
-    return null;
+  abstract public BufferedImage getIcon();
+
+  public boolean isStackable(){
+    return stackable;
   }
 
+  public void addStack(Item i){
+    stackSize += i.getStackSize();
+  }
+
+  public int getStackSize(){
+    return stackSize;
+  }
+
+  public String getInfo(){
+      return getStackSize() + "";
+  }
+
+  public void removeStack(Item i){
+    int otherStackSize = i.getStackSize();
+    if (otherStackSize <= stackSize){
+      stackSize -= otherStackSize;
+      return;
+    } else {
+      i.removeStack(this);
+    }
+  }
 }

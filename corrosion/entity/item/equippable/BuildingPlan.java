@@ -49,7 +49,9 @@ public class BuildingPlan extends Equippable{
       System.exit(-1);
     }
   }
-
+  public BufferedImage getIcon(){
+    return icon;
+  }
   /**
    * Main Constructor
   */
@@ -63,7 +65,7 @@ public class BuildingPlan extends Equippable{
   */
   public BuildingPlan(int[] state){
     super(new Sprite(icon, state, sprites, new int[]{0,0}));
-
+    stackable = false;
   }
 
   /**

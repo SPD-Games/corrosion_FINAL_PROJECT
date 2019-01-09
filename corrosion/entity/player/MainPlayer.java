@@ -20,14 +20,19 @@ import corrosion.HitDetection;
 import corrosion.entity.projectile.*;
 import corrosion.entity.*;
 import corrosion.network.*;
+import corrosion.Inventory;
 
 public class MainPlayer extends Player{
   private final double SQRT_2 = Math.sqrt(2.0);
     private static MainPlayer mainPlayer;
     private int hp = 100;
-
+    private Inventory inventory = new Inventory();
     //direction the player is moving (keyboard input)
     private boolean up, down, left, right;
+
+    public Inventory getInvetory(){
+      return inventory;
+    }
 
     /**
     * Gets the main player Object
