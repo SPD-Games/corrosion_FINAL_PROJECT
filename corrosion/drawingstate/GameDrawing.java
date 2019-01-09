@@ -39,7 +39,6 @@ public class GameDrawing extends DrawingState{
     Drawing.getPanel().getTimer().start();
     Player.init();
     CrossBow.init();
-    Pistol.init();
     BulletProjectile.init();
     ArrowProjectile.init();
     BuildingPlan.init();
@@ -57,10 +56,11 @@ public class GameDrawing extends DrawingState{
     //Medkit.init();
     //Orange.init();
     //Pickaxe.init();
+    Pistol.init();
     Rifle.init();
     //Shotgun.init();
     //Smg.init();
-    //Sniper.init();
+    Sniper.init();
 
 
 

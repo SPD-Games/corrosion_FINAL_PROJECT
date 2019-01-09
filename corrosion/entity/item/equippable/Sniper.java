@@ -1,8 +1,8 @@
-//Henry Lim
-//Dec 17, 2018
+//Edward Pei
+//January 8 2019
 //Sniper class
 package corrosion.entity.item.equippable;
-
+//imports
 import javax.swing.Timer;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -14,80 +14,82 @@ import java.awt.geom.AffineTransform;
 import java.awt.Point;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
+import java.io.Serializable;
 
 import corrosion.Sprite;
 import corrosion.entity.Entity;
 import corrosion.entity.player.Player;
+import corrosion.entity.projectile.*;
 
-public class Sniper extends Equippable{
+import corrosion.network.*;
+import corrosion.network.protocol.*;
 
+
+public class Sniper extends Equippable implements Serializable{
+  // get the icons and animations for the rifle
   private static BufferedImage icon;
-  private static BufferedImage[][] sprites = new BufferedImage[2][];
-  private final int[] SHOOT_READY = {0,3};
-  private final int[] RELOAD_READY = {1,2};
-  public Sprite sprite;
+  private static BufferedImage[][] sprites = new BufferedImage[1][3];
+  private final int[] SHOOT_READY = {0,2};
+  //private final int[] RELOAD_READY = {1,2};
 
-  public static void init(){
-    try{
-      //loads icon
-      icon = ImageIO.read(new File("sprites/rifle/icon.png"));
-      //loads relaod animations
-      sprites[0] = new BufferedImage[4];
-      for (int i = 1; i <= 4; ++i){
-        sprites[0][i-1] = ImageIO.read(new File("sprites/rifle/animation/frame" + i + ".png"));
-      }
+    /**
+    *Initialize the rifle object
+    */
+    public static void init(){
 
-      //loads shooting animations
-      sprites[1] = new BufferedImage[3];
-      for (int i = 0; i < 3; ++i){
-        sprites[1][i] = sprites[0][2-i];
+      try{
+        //loads icon
+        icon = ImageIO.read(new File("sprites/sniper/icon.png"));
+        sprites[0][1] = ImageIO.read(new File("sprites/sniper/animation/frame" + 2 + ".png"));
+        sprites[0][2] = ImageIO.read(new File("sprites/sniper/animation/frame" + 1 + ".png"));
+        sprites[0][0] = sprites[0][2];
+      }catch(Exception e){
+        //exits on error with message
+        System.out.println("Reading sniper Sprite: " + e);
+        System.exit(-1);
       }
-    }catch(Exception e){
-      //exits on error with message
-      System.out.println("Reading Rifle Sprite: " + e);
-      System.exit(-1);
     }
-  }
 
+  /**
+  * constuctor for the rifle
+  */
   public Sniper(){
-    super(new Sprite(icon, new int[]{1,2}, sprites, new int[]{500,50}));
+    super(new Sprite(icon, new int[]{0,2}, sprites, new int[]{50}));
   }
 
+  /**
+  * constuctor for the rifle
+  */
+  public Sniper(int[] state){
+    super(new Sprite(icon, state, sprites, new int[]{50}));
+  }
+
+  /**
+  * Draw the item
+  * @param g the graphics tool used to draw
+  */
   public void drawEquipped(Graphics g, Player player){
+    if (player == null){return;}
     transform = player.getTransform();
-    transform.translate(-18, -110);
-    ((Graphics2D)(g)).drawImage(sprite.getFrame(), player.getTransform(), null);
+    transform.translate(0, -170);
+    ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
   public void draw(Graphics g, long t){}
 
-  ///////
 
   public void attack(Point p, Player player){
-    //checks if rifle is reloaded
     if (sprite.isState(SHOOT_READY, false)){
-      sprite.startAnimation(1);
-    }
-  }
-
-  /**
-  * Reloads the weapon
-  * @param p the pointer position on the screen relative to the player
-  */
-  public void attack2(Point p, Player player){
-    reload();
-  }
-
-  /**
-  * Reloads the weapon
-  */
-  public void reload(){
-    //checks if rifle is ready to be reloaded
-    if (sprite.isState(RELOAD_READY, false)){
-      //starts the reload
+      //creates a new bullet
+      BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),8,10000,80,10,220);
+      //starts shoot animation
       sprite.startAnimation(0);
     }
   }
+  public void attack2(Point p, Player player){}
 
-
+  /**
+  * reloads the rifle
+  */
+  public void reload(){}
 }
