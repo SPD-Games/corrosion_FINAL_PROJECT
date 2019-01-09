@@ -13,7 +13,7 @@ public abstract class Building extends Entity {
   protected static final int WOOD = 1;
   protected static final int STONE = 2;
   protected static final int METAL = 3;
-  protected double hp;
+  protected double hp = 26;
   protected double maxHp;
   protected boolean placed;
   protected int state = 0;
@@ -34,10 +34,6 @@ public abstract class Building extends Entity {
   public abstract void upgrade(int level);
   public abstract boolean place();
 
-  public void repair(double hp){
-    hp += this.hp;
-    this.hp = Math.min(maxHp, hp);
-  }
   @Override
   public void hit(int damage){
     hp -= damage;

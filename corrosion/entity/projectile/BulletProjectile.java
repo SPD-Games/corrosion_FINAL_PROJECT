@@ -85,8 +85,22 @@ public class BulletProjectile extends Projectile{
         if (!isHit && player != null){
           ArrayList out = new ArrayList();
           out.add(players.get(i).getId());
-          out.add(damage);
+          out.add(1);
           Protocol.send(10, out, Client.getConnection());
+        }
+        hit();
+        return;
+      }
+    }
+
+    ArrayList<Entity> entities = Client.getEntities();
+    for (int i = 0; i < entities.size(); ++i){
+
+      Entity e = entities.get(i);
+      if (e == this){continue;}
+      if (HitDetection.hit(e.getHitBox(), getHitBox())){
+        if (!isHit && player != null){
+          e.hit(damage);
         }
         hit();
         return;
@@ -130,6 +144,10 @@ public class BulletProjectile extends Projectile{
 
   @Override
   public Shape getHitBox(){
-    return new Line2D.Double(xPos,yPos,lastXPos,lastYPos);
+    Path2D  p = new Path2D.Double();
+    p.moveTo(xPos, yPos);
+    p.lineTo(lastXPos, lastYPos);
+    p.lineTo((xPos + lastXPos)/2+0.1, (yPos + lastYPos)/2+0.1);
+    return p;
   }
 }

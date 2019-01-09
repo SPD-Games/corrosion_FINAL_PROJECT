@@ -22,6 +22,9 @@ public class DoorFrame extends Wall {
   private Path2D closedHitBox;
   private static BufferedImage[][] sprites = new BufferedImage[2][4];
 
+  /**
+  * Loads all the sprites
+  */
   public static void init(){
     try{
       sprites[0][0] = ImageIO.read(new File("sprites/doorframe/twigFrame.png"));
@@ -40,14 +43,25 @@ public class DoorFrame extends Wall {
     }
   }
 
+  /**
+  * Sets the state when getting from server
+  */
   public void fromServer(){
     sprite = new Sprite(null, state, sprites, new int[]{0});
   }
 
+  /**
+  * Blank constructor
+  */
   public DoorFrame(){
     this(0, 0, 0);
   }
 
+  /**
+  * Draws the DoorFrame
+  * @param g the graphics context to Use
+  * @param t the time since last frame
+  */
   public void draw(Graphics g, long t){
     ((Graphics2D)g).drawImage(sprite.getFrame(), transform, null);
   }
@@ -74,6 +88,13 @@ public class DoorFrame extends Wall {
   public void upgrade(int level){
     state[1] = level;
     sprite.setState(state[0], state[1]);
+    if (level == WOOD){
+      hp = 10*25;
+    } else if (level == STONE){
+      hp = 60*25;
+    } else if (level == METAL){
+      hp = 120*25;
+    }
     Protocol.send(8, this, Client.getConnection());
   }
 

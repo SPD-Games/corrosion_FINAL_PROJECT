@@ -62,11 +62,12 @@ public class GameDrawing extends DrawingState{
     //Smg.init();
     Sniper.init();
 
-
-
     setBinds();
   }
 
+  /**
+  * Sets all the binds for the state
+  */
   public void setBinds(){
     MouseBindable mouseBinds[] = new MouseBindable[5];
     mouseBinds[1] = new Attack();//left click
@@ -83,11 +84,21 @@ public class GameDrawing extends DrawingState{
     Keyboard.setBinds(binds);
   }
 
+  /**
+  * Main Constructor
+  * @param ip the ip of the server to connect to
+  * @param port the port of the server to connect to
+  */
   public GameDrawing(String ip, int port){
     super();
     new Client(ip, port);
   }
 
+  /**
+  * Draws fps, ping and Position
+  * @param g the graphics contect
+  * @param t the time since last frame
+  */
   private void drawStatus(Graphics g, long t){
     int hp = MainPlayer.getMainPlayer().getHp();
     ((Graphics2D)g).setTransform(new AffineTransform());

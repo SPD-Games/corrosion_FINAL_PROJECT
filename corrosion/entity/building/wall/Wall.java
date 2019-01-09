@@ -115,6 +115,13 @@ public class Wall extends Building {
   public void upgrade(int level){
     state = new int[]{0,level};
     sprite.setState(0, level);
+    if (level == WOOD){
+      hp = 30*25;
+    } else if (level == STONE){
+      hp = 120*25;
+    } else if (level == METAL){
+      hp = 240*25;
+    }
     Protocol.send(8, this, Client.getConnection());
   }
 
