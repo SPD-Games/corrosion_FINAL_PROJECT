@@ -150,6 +150,6 @@ abstract public class Entity implements Serializable{
   }
 
   public void fromServer(){}
-
+  public void hit(int damage){}
   abstract public void draw(Graphics g, long t);
 }

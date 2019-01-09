@@ -107,6 +107,7 @@ public class Wall extends Building {
     return buildingHitBox;
   }
 
+  @Override
   public Shape getHitBox(){
     return hitBox;
   }

@@ -117,6 +117,7 @@ public class Triangle extends Building {
   public Shape getBuildingHitBox(){
     return hitBox;
   }
+  @Override
   public Shape getHitBox(){return null;}
   public void upgrade(int level){
     state = new int[]{0,level};

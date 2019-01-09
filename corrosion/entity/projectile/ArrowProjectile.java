@@ -13,6 +13,7 @@ import java.io.File;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
+import java.awt.geom.*;
 
 import corrosion.drawingstate.GameDrawing;
 import corrosion.entity.player.*;
@@ -29,7 +30,7 @@ public class ArrowProjectile extends Projectile{
 
   private static final double MAX_VEL = 2;
   private static final double MAX_RANGE = 3000;
-
+  private int damage = 1;
   /**
   * Initializes the player class
   */
@@ -87,6 +88,20 @@ public class ArrowProjectile extends Projectile{
         return;
       }
     }
+
+    ArrayList<Entity> entities = Client.getEntities();
+    for (int i = 0; i < entities.size(); ++i){
+
+      Entity e = entities.get(i);
+      if (e == this){continue;}
+      if (HitDetection.hit(e.getHitBox(), getHitBox())){
+        if (!isHit && player != null){
+          e.hit(damage);
+        }
+        hit();
+        return;
+      }
+    }
     if (HitDetection.hit(MainPlayer.getMainPlayer().getHitBox(), getHitBox())){
       hit();
     }
@@ -124,6 +139,10 @@ public class ArrowProjectile extends Projectile{
 
   @Override
   public Shape getHitBox(){
-    return new Line2D.Double(xPos,yPos,lastXPos,lastYPos);
+    Path2D  p = new Path2D.Double();
+    p.moveTo(xPos, yPos);
+    p.lineTo(lastXPos, lastYPos);
+    p.lineTo((xPos + lastXPos)/2+0.1, (yPos + lastYPos)/2+0.1);
+    return p;
   }
 }

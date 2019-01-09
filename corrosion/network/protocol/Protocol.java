@@ -19,7 +19,7 @@ abstract public class Protocol{
   * Loads the protocols
   */
   public static void init(){
-    protocols = new Protocol[12];
+    protocols = new Protocol[14];
     protocols[0] = new Ping();
     protocols[1] = new Ping2();
     protocols[2] = new Player2Server();
@@ -32,6 +32,8 @@ abstract public class Protocol{
     protocols[9] = new Entity2Client();
     protocols[10] = new HitPlayer2Server();
     protocols[11] = new HitPlayer2Client();
+    protocols[12] = new RemoveEntity2Server();
+    protocols[13] = new RemoveEntity2Client();
   }
 
   /**

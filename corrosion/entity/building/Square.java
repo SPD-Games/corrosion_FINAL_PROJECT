@@ -113,7 +113,8 @@ public class Square extends Building {
   public Shape getBuildingHitBox(){
     return hitBox;
   }
-
+  
+  @Override
   public Shape getHitBox(){return null;}
 
   public void upgrade(int level){

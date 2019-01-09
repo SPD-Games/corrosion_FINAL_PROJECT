@@ -53,13 +53,13 @@ public class MainPlayer extends Player{
     */
     public MainPlayer(double xPos, double yPos, long id){
       super(xPos, yPos, 0, id);
-      //equipped = new CrossBow();
+      equipped = new CrossBow();
       //equipped = new BuildingPlan();
       //equipped = new UpgradePlan();
 
       //equipped = new Apple();
       //equipped = new Pistol();
-      equipped = new Rifle();
+      //equipped = new Rifle();
       //equipped = null;
       hp = 1;
     }
@@ -153,6 +153,7 @@ public class MainPlayer extends Player{
     * @param g the graphics context
     */
     public void draw(Graphics g, long t){
+
       //get the currsor location for aiming the equipped item
       Point mousePos = Mouse.getPosition();
       transform.setToTranslation(xPos-50, yPos-50);
@@ -186,9 +187,13 @@ public class MainPlayer extends Player{
           if (HitDetection.hit(s, getHitBox())){
             xPos -= xVel;
             yPos -= yVel;
-            return;
+            break;
           }
         }
       }
+      if (xPos < 0){xPos = 0;}
+      else if(xPos > 20000){xPos = 20000;}
+      if (yPos < 0){yPos = 0;}
+      else if(yPos > 20000){yPos = 20000;}
     }
 }
