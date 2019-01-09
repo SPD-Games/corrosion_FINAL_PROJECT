@@ -4,6 +4,7 @@
   */
 package corrosion.entity.item;
 
+import java.awt.image.BufferedImage;
 import corrosion.entity.Entity;
 import java.io.Serializable;
 
@@ -27,4 +28,9 @@ abstract public class Item extends Entity implements Serializable{
   public Item(){
     super();
   }
+
+  public BufferedImage getIcon(){
+    return null;
+  }
+
 }

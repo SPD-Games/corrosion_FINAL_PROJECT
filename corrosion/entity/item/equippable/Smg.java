@@ -1,94 +1,98 @@
-//Edward Pei
-//Dec. 13, 2018
+//Henry Lim, Edward Pei
+//Jan. 09, 2018
 //SMG class
-
 package corrosion.entity.item.equippable;
 //imports
 import javax.swing.Timer;
-import javax.swing.AbstractAction;
-import javax.imageio.ImageIO;
-import java.awt.geom.AffineTransform;
-import java.awt.Point;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.awt.event.ActionEvent;
+import javax.imageio.ImageIO;
 import java.io.File;
+import java.awt.geom.AffineTransform;
+import java.awt.Point;
+import javax.swing.AbstractAction;
+import java.awt.event.ActionEvent;
+import java.io.Serializable;
 
 import corrosion.Sprite;
 import corrosion.entity.Entity;
 import corrosion.entity.player.Player;
+import corrosion.entity.projectile.*;
 
-public class Smg extends Equippable{
-  //TODO move all images and draw handling in Usable
+import corrosion.network.*;
+import corrosion.network.protocol.*;
+
+
+public class Smg extends Equippable implements Serializable{
+  // get the icons and animations for the smg
   private static BufferedImage icon;
-  private static BufferedImage[][] sprites = new BufferedImage[2][];
+  private static BufferedImage[][] sprites = new BufferedImage[1][3];
+  private final int[] SHOOT_READY = {0,2};
+  //private final int[] RELOAD_READY = {1,2};
 
-  private final int[] SHOOT_READY = {0,3};
-  private final int[] RELOAD_READY = {1,2};
-  public Sprite sprite;
+    /**
+    *Initialize the Smg object
+    */
+    public static void init(){
 
-  public static void init(){
-    try{
-      //loads icon
-      icon = ImageIO.read(new File("sprites/smg/icon.png"));
-      //loads relaod animations
-      sprites[0] = new BufferedImage[4];
-      for (int i = 1; i <= 4; ++i){
-        sprites[0][i-1] = ImageIO.read(new File("sprites/smg/animation/frame" + i + ".png"));
+      try{
+        //loads icon
+        icon = ImageIO.read(new File("sprites/smg/icon.png"));
+        sprites[0][1] = ImageIO.read(new File("sprites/smg/animation/frame" + 2 + ".png"));
+        sprites[0][2] = ImageIO.read(new File("sprites/smg/animation/frame" + 1 + ".png"));
+        sprites[0][0] = sprites[0][2];
+      }catch(Exception e){
+        //exits on error with message
+        System.out.println("Reading Smg Sprite: " + e);
+        System.exit(-1);
       }
-
-      //loads shooting animations
-      sprites[1] = new BufferedImage[3];
-      for (int i = 0; i < 3; ++i){
-        sprites[1][i] = sprites[0][2-i];
-      }
-    }catch(Exception e){
-      //exits on error with message
-      System.out.println("Reading smg Sprite: " + e);
-      System.exit(-1);
     }
-  }
 
+  /**
+  * constuctor for the smg
+  */
   public Smg(){
-    super(new Sprite(icon, new int[]{1,2}, sprites, new int[]{500,50}));
+    super(new Sprite(icon, new int[]{0,2}, sprites, new int[]{50}));
   }
 
+  /**
+  * constuctor for the smg
+  */
+  public Pistol(int[] state){
+    super(new Sprite(icon, state, sprites, new int[]{50}));
+  }
+
+  /**
+  * Draw the item
+  * @param g the graphics tool used to draw
+  */
   public void drawEquipped(Graphics g, Player player){
+    if (player == null){return;}
     transform = player.getTransform();
-    transform.translate(-18, -110);
-    ((Graphics2D)(g)).drawImage(sprite.getFrame(), player.getTransform(), null);
+    transform.translate(-47, -110);
+    ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
   public void draw(Graphics g, long t){}
 
 
+
+
   public void attack(Point p, Player player){
-    //checks if smg is reloaded
     if (sprite.isState(SHOOT_READY, false)){
-      sprite.startAnimation(1);
-    }
-  }
-
-  /**
-  * Reloads the smg
-  * @param p the pointer position on the screen relative to the player
-  */
-  public void attack2(Point p, Player player){
-    reload();
-  }
-
-  /**
-  * Reloads the smg
-  */
-  public void reload(){
-    //checks if smg is ready to be reloaded
-    if (sprite.isState(RELOAD_READY, false)){
-      //starts the reload animation
+      //creates a new bullet
+      //BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),5,2000,10);
+      BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),2,2000,10,12,140);
+      //starts shoot animation
       sprite.startAnimation(0);
     }
   }
+  public void attack2(Point p, Player player){}
 
-
+  /**
+  * reloads the smg
+  */
+  public void reload(){}
 }

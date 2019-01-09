@@ -23,6 +23,11 @@ import corrosion.entity.player.*;
 
 public class Orange extends Equippable{
 
+  @Override
+  public BufferedImage getIcon(){
+    return icon;
+  }
+
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[1][];
   private final static int[] LAST_FRAME = {0,2};
