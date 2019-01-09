@@ -30,6 +30,7 @@ public class BulletProjectile extends Projectile{
   private double MAX_VEL = 2;
   private double MAX_RANGE = 3000;
   private int damage;
+  private int shift;
 
   /**
   * Initializes the player class
@@ -56,7 +57,7 @@ public class BulletProjectile extends Projectile{
   * @param mouseX the x position of the mouse cursor relative to the player
   * @param mouseY the y position of the mouse cursor relative to the player
   */
-  public BulletProjectile(Player player, double mouseX, double mouseY,double vel, double r, int damage){
+  public BulletProjectile(Player player, double mouseX, double mouseY,double vel, double r, int damage,int shift, int gunRad){
     super();
     this.player = player;
     id = Client.getId();
@@ -64,10 +65,11 @@ public class BulletProjectile extends Projectile{
     this.MAX_RANGE = r;
     this.damage = damage;
     this.rotation = Math.atan2(mouseX, mouseY);
-    this.xPos = player.getXPos() + 189 * Math.sin(rotation);
-    this.yPos = player.getYPos() - 189 * Math.cos(rotation);
+    this.xPos = player.getXPos() + gunRad * Math.sin(rotation);
+    this.yPos = player.getYPos() - gunRad * Math.cos(rotation);
     this.lastXPos = xPos;
     this.lastYPos = yPos;
+    this.shift = shift;
     this.xVel = MAX_VEL*Math.sin(rotation);
     this.yVel = MAX_VEL*-Math.cos(rotation);
     range = MAX_RANGE;
@@ -118,8 +120,8 @@ public class BulletProjectile extends Projectile{
   public void draw(Graphics g, long t){
     update(t);
     //draws the bullet
-    transform.setToTranslation(xPos -12, yPos+7);
-    transform.rotate(rotation, 3, 0);
+    transform.setToTranslation(xPos - shift, yPos);
+    transform.rotate(rotation, shift, 0);
     transform.scale(0.15,0.15);
     ((Graphics2D)(g)).drawImage(img, transform, null);
     lastXPos = xPos-3;

@@ -1,6 +1,6 @@
 //Edward Pei
 //January 8 2019
-//Pistol class
+//Rifle class
 package corrosion.entity.item.equippable;
 //imports
 import javax.swing.Timer;
@@ -81,8 +81,7 @@ public class Rifle extends Equippable implements Serializable{
   public void attack(Point p, Player player){
     if (sprite.isState(SHOOT_READY, false)){
       //creates a new bullet
-      //BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),5,2000,10);
-      BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),6,4000,20);
+      BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),6,5000,20,14,165);
       //starts shoot animation
       sprite.startAnimation(0);
     }
