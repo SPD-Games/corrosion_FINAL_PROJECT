@@ -58,7 +58,8 @@ public class MainPlayer extends Player{
       //equipped = new UpgradePlan();
 
       //equipped = new Apple();
-      equipped = new Pistol();
+      //equipped = new Pistol();
+      equipped = new Rifle();
       //equipped = null;
       hp = 1;
     }

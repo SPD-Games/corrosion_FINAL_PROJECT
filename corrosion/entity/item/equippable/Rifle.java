@@ -1,5 +1,5 @@
 //Henry Lim,Edward Pei
-//Dec. 13, 2018
+//January 8, 2018
 //Rifle class
 package corrosion.entity.item.equippable;
 //imports
@@ -18,7 +18,7 @@ import java.awt.event.ActionEvent;
 import corrosion.Sprite;
 import corrosion.entity.Entity;
 import corrosion.entity.player.Player;
-//import corrosion.entity.projectile.Arrow;
+import corrosion.entity.projectile.BulletProjectile;;
 
 public class Rifle extends Equippable{
     //TODO move all images and draw handling in Usable
@@ -26,74 +26,65 @@ public class Rifle extends Equippable{
   private static BufferedImage[][] sprites = new BufferedImage[2][];
 
   private final int[] SHOOT_READY = {0,3};
-  private final int[] RELOAD_READY = {1,2};
+  //private final int[] RELOAD_READY = {1,2};
   public Sprite sprite;
-  
+
   public static void init(){
+
     try{
       //loads icon
       icon = ImageIO.read(new File("sprites/rifle/icon.png"));
-      //loads relaod animations
-      sprites[0] = new BufferedImage[4];
-      for (int i = 1; i <= 4; ++i){
-        sprites[0][i-1] = ImageIO.read(new File("sprites/rifle/animation/frame" + i + ".png"));
-      }
-
-      //loads shooting animations
-      sprites[1] = new BufferedImage[3];
-      for (int i = 0; i < 3; ++i){
-        sprites[1][i] = sprites[0][2-i];
-      }
+      sprites[0][1] = ImageIO.read(new File("sprites/rifle/animation/frame" + 2 + ".png"));
+      sprites[0][2] = ImageIO.read(new File("sprites/rifle/animation/frame" + 1 + ".png"));
+      sprites[0][0] = sprites[0][2];
     }catch(Exception e){
       //exits on error with message
-      System.out.println("Reading Rifle Sprite: " + e);
+      System.out.println("Reading rifle Sprite: " + e);
       System.exit(-1);
     }
   }
-  
   /**
-  * constuctor for the rifle
-  * @param p player who has the rifle
+  * constuctor for the pistol
   */
-  public Rifle(Player p){
-    super(p);
-    this.sprite = new Sprite(icon, new int[]{1,2}, sprites, new int[]{500,50});
+  public Rifle(){
+    super(new Sprite(icon, new int[]{0,2}, sprites, new int[]{50}));
   }
-  
-  public void drawEquipped(Graphics g){
+
+  /**
+  * constuctor for the pistol
+  */
+  public Rifle(int[] state){
+    super(new Sprite(icon, state, sprites, new int[]{50}));
+  }
+
+  /**
+  * Draw the item
+  * @param g the graphics tool used to draw
+  */
+  public void drawEquipped(Graphics g, Player player){
+    if (player == null){return;}
     transform = player.getTransform();
-    transform.translate(-18, -110);
-    ((Graphics2D)(g)).drawImage(sprite.getFrame(), player.getTransform(), null);
+    transform.translate(-47, -110);
+    ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
   public void draw(Graphics g, long t){}
-  
-  
-  public void attack(Point p){
-    //checks if rifle is reloaded
+
+
+  public void attack(Point p, Player player){
     if (sprite.isState(SHOOT_READY, false)){
-      sprite.startAnimation(1);
-    }
-  }
-
-  /**
-  * Reloads the weapon
-  * @param p the pointer position on the screen relative to the player
-  */
-  public void attack2(Point p){
-    reload();
-  }
-
-  /**
-  * Reloads the weapon
-  */
-  public void reload(){
-    //checks if rifle is ready to be reloaded
-    if (sprite.isState(RELOAD_READY, false)){
-      //starts the reload
+      //creates a new bullet
+      //BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),5,2000,10);
+      BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),0,3000,10);
+      //starts shoot animation
       sprite.startAnimation(0);
     }
   }
-  
-  
+  public void attack2(Point p, Player player){}
+
+  /**
+  * reloads the Rifle
+  */
+  public void reload(){}
+
 }
