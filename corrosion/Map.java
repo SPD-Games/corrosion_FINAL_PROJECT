@@ -6,6 +6,7 @@ package corrosion;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
+import java.awt.image.AffineTransformOp;
 import corrosion.network.*;
 import corrosion.Drawing;
 import corrosion.entity.*;
@@ -47,17 +48,19 @@ public class Map{
   }
 
   public void draw(Graphics g, double scale){
-    int xPos = (int)MainPlayer.getMainPlayer().getXPos()/100;
-    int yPos = (int)MainPlayer.getMainPlayer().getYPos()/100;
-    int w = (int)(Drawing.width() / 100 * scale);
-    int h = (int)(Drawing.height() / 100 * scale);
-    for (int x = -w; x < w; x++){
+    int xPos = (int)MainPlayer.getMainPlayer().getXPos()/200;
+    int yPos = (int)MainPlayer.getMainPlayer().getYPos()/200;
+    int w = (int)(Drawing.width() / 400.0 / scale) + 1;
+    int h = (int)(Drawing.height() / 400.0 / scale) + 1;
+    for (int x = -w; x <= w; x++){
       if (xPos+x < 0){continue;}
       if (xPos+x >= 100){break;}
-      for (int y = -h; y < h; y++){
+      for (int y = -h; y <= h; y++){
         if (yPos+y < 0){continue;}
         if (yPos+y >= 100){break;}
+        ((Graphics2D)g).scale(2,2);
         ((Graphics2D)g).drawImage(segments[xPos+x][yPos+y],null,(xPos + x)*100,(yPos + y)*100);
+        ((Graphics2D)g).scale(0.5,0.5);
       }
     }
   }

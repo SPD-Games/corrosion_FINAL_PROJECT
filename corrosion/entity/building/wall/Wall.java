@@ -133,7 +133,8 @@ public class Wall extends Building {
     hitBox.lineTo(250, 10);
     hitBox.lineTo(0, 10);
     hitBox.transform(transform);
-
+    xPos = buildingHitBox.getCurrentPoint().getX();
+    yPos = buildingHitBox.getCurrentPoint().getY();
     boolean onFoundation = false;
     for (int i = 0; i < entities.size(); ++i){
       if (entities.get(i) instanceof Square){
