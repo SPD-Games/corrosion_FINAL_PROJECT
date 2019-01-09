@@ -93,6 +93,8 @@ public class Triangle extends Building {
     hitBox.lineTo(b.getX(), b.getY());
     hitBox.lineTo(c.getX(), c.getY());
     hitBox = null;
+    xPos = d.getX();
+    yPos = d.getY();
     for (int i = 0; i < entities.size(); ++i){
       if (entities.get(i) instanceof Square){
         Shape otherHitBox = ((Square)entities.get(i)).getBuildingHitBox();

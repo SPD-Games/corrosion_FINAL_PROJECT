@@ -46,6 +46,7 @@ public class Wall extends Building {
 
   public Wall(double xPos, double yPos, double rotation){
     super(xPos, yPos, rotation);
+    setZIndex(2);
     state = new int[]{0,0};
     sprite = new Sprite(null, state, sprites, new int[]{0});
   }
@@ -132,7 +133,8 @@ public class Wall extends Building {
     hitBox.lineTo(250, 10);
     hitBox.lineTo(0, 10);
     hitBox.transform(transform);
-
+    xPos = buildingHitBox.getCurrentPoint().getX();
+    yPos = buildingHitBox.getCurrentPoint().getY();
     boolean onFoundation = false;
     for (int i = 0; i < entities.size(); ++i){
       if (entities.get(i) instanceof Square){

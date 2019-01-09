@@ -21,7 +21,7 @@ import corrosion.entity.Entity;
 import corrosion.entity.player.Player;
 //import corrosion.entity.projectile.Arrow;
 
-public class CrossBow extends Equippable{
+public class Bow extends Equippable{
   //TODO move all images and draw handling in Usable
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[2][];
@@ -59,16 +59,15 @@ public class CrossBow extends Equippable{
    * Main Constructor
    * @param p the player that has the crossbow equipped
   */
-  public CrossBow(Player p){
-    super(p);
-    this.sprite = new Sprite(icon, new int[]{1,2}, sprites, new int[]{500,50});
+  public Bow(){
+    super(new Sprite(icon, new int[]{1,2}, sprites, new int[]{500,50}));
   }
 
   /**
   * Draws a crossbow equipped to the player
   * @param g the graphics context
   */
-  public void drawEquipped(Graphics g){
+  public void drawEquipped(Graphics g, Player player){
     transform = player.getTransform();
     transform.translate(-18, -110);
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), player.getTransform(), null);
@@ -80,7 +79,7 @@ public class CrossBow extends Equippable{
   * Shoots an arrow
   * @param p the pointer position on the screen relative to the player
   */
-  public void attack(Point p){
+  public void attack(Point p, Player player){
     //checks if crossbow is reloaded
     if (sprite.isState(SHOOT_READY, false)){
       //creates a new arrow
@@ -94,7 +93,7 @@ public class CrossBow extends Equippable{
   * Reloads the weapon
   * @param p the pointer position on the screen relative to the player
   */
-  public void attack2(Point p){
+  public void attack2(Point p, Player player){
     reload();
   }
 

@@ -166,12 +166,12 @@ public class Square extends Building {
       if(placingHitBoxs[i].contains(p)){
         AffineTransform out = new AffineTransform(transform);
         if (i == 0){
-          out.rotate(Math.PI/2,xPos-125,yPos-125);
+          out.rotate(Math.PI/2,-125,-125);
           out.translate(0,-255);
         } else if (i == 1){
           out.translate(0,245);
         } else if(i == 2){
-          out.rotate(Math.PI/2,xPos-125,yPos-125);
+          out.rotate(Math.PI/2,-125,-125);
           out.translate(0,-505);
         } else {
           out.translate(0,-5);
@@ -194,6 +194,9 @@ public class Square extends Building {
     d = transform.transform(d,null);
     Point2D e = new Point2D.Double(125,125);
     e = transform.transform(e,null);
+
+    xPos = e.getX();
+    yPos = e.getY();
 
     hitBox = new Path2D.Double();
     hitBox.moveTo(a.getX(), a.getY());

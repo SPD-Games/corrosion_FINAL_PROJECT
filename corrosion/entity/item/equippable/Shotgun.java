@@ -28,7 +28,7 @@ public class Shotgun extends Equippable{
   private final int[] SHOOT_READY = {0,3};
   private final int[] RELOAD_READY = {1,2};
   public Sprite sprite;
-  
+
   public static void init(){
     try{
       //loads icon
@@ -50,26 +50,25 @@ public class Shotgun extends Equippable{
       System.exit(-1);
     }
   }
-  
+
   /**
   * constuctor for the Shotgun
   * @param p player who has the Shotgun
   */
   public Shotgun(Player p){
-    super(p);
-    this.sprite = new Sprite(icon, new int[]{1,2}, sprites, new int[]{500,50});
+    super(new Sprite(icon, new int[]{1,2}, sprites, new int[]{500,50}));
   }
-  
-  public void drawEquipped(Graphics g){
+
+  public void drawEquipped(Graphics g, Player player){
     transform = player.getTransform();
     transform.translate(-18, -110);
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), player.getTransform(), null);
   }
 
   public void draw(Graphics g, long t){}
-  
-  
-  public void attack(Point p){
+
+
+  public void attack(Point p, Player player){
     //checks if Shotgun is reloaded
     if (sprite.isState(SHOOT_READY, false)){
       sprite.startAnimation(1);
@@ -80,7 +79,7 @@ public class Shotgun extends Equippable{
   * Reloads the weapon
   * @param p the pointer position on the screen relative to the player
   */
-  public void attack2(Point p){
+  public void attack2(Point p, Player player){
     reload();
   }
 
@@ -94,6 +93,6 @@ public class Shotgun extends Equippable{
       sprite.startAnimation(0);
     }
   }
-  
-  
+
+
 }

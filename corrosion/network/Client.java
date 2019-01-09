@@ -11,7 +11,7 @@ import corrosion.entity.*;
 import corrosion.entity.projectile.*;
 import corrosion.network.protocol.*;
 import corrosion.network.Connection;
-
+import corrosion.SortingInsertion;;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.Timer;
@@ -194,11 +194,11 @@ public class Client{
   * @param entity the entity to add
   */
   public static void addEntity(Entity entity){
-    client.entitiesInView.add(entity);
+    SortingInsertion.insertByZIndex(client.entitiesInView,entity);
     synchronized(client.entities){
       int i = client.entities.indexOf(entity);
       if (i == -1){
-        client.entities.add(entity);
+        SortingInsertion.insertByZIndex(client.entities, entity);
       } else {
         client.entities.set(i, entity);
       }
@@ -241,7 +241,7 @@ public class Client{
         visable.add(e);
       }
     }
-
+    visable = SortingInsertion.bucketSort(visable);
     //sets the list
     client.entitiesInView = visable;
   }
