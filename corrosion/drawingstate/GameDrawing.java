@@ -8,6 +8,10 @@ package corrosion.drawingstate;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.*;
+import java.io.IOException;
 
 import corrosion.Map;
 import corrosion.network.*;
@@ -21,12 +25,18 @@ import corrosion.input.*;
 import corrosion.input.bind.*;
 import corrosion.entity.building.*;
 import corrosion.entity.building.wall.*;
+import corrosion.drawingstate.*;
 
 
 public class GameDrawing extends DrawingState{
   public static boolean isShownInvetory = false;
   public static double zoom = 1;
   public static Map map;
+  public static BufferedImage img;
+
+
+  public static int dead = 0;
+
   public static double getZoom(){
     return zoom;
   }
@@ -63,6 +73,15 @@ public class GameDrawing extends DrawingState{
     Sniper.init();
 
     setBinds();
+
+    try{
+      //sets sprite image
+      img = ImageIO.read(new File("sprites/deathScreen.png"));
+    }catch(Exception e){
+      //exits on error with message
+      System.out.println("Reading error: " + e);
+      System.exit(-1);
+    }
   }
 
   /**
@@ -187,7 +206,22 @@ public class GameDrawing extends DrawingState{
     drawStatus(g,t);
     drawInvetory(g,t);
     Client.updateReady();
+
+    // if the player has been killed, draw the death screen for a bit
+    if(dead > 0) {
+      g.drawImage(img,-1000,-1000,null);
+      g.setFont(new Font("Ariel", Font.PLAIN, 48));
+      g.setColor(Color.RED);
+      g.drawString("YOU DIED",40,-100);
+      dead -= 2.2;
+    }
+
   }
+
+  public void deadScreen() {
+    dead = 1000;
+  }
+
 
 
 }

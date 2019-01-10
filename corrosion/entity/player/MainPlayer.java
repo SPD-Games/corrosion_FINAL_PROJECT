@@ -22,6 +22,7 @@ import corrosion.entity.projectile.*;
 import corrosion.entity.*;
 import corrosion.network.*;
 import corrosion.Inventory;
+import corrosion.drawingstate.*;
 
 public class MainPlayer extends Player{
   private final double SQRT_2 = Math.sqrt(2.0);
@@ -165,6 +166,7 @@ public class MainPlayer extends Player{
       int tmpHp = hp - damage;
       if (tmpHp <= 0){
         //die
+        ((GameDrawing)Drawing.getState()).deadScreen();
         spawn();
         hp = 50;
       } else if (tmpHp > 100){
