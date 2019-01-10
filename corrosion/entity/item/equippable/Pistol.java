@@ -30,12 +30,13 @@ public class Pistol extends Equippable implements Serializable{
 
   // get the icons and animations for the pistol
   private static BufferedImage icon;
-  private static BufferedImage[][] sprites = new BufferedImage[1][3];
+  private static BufferedImage[][] sprites = new BufferedImage[2][3];
   private final int[] SHOOT_READY = {0,2};
-  //private final int[] RELOAD_READY = {1,2};
+  private int ammo = 0;
+  private static final int MAX_AMMO = 8;
+  private final int[] RELOAD_DONE = {1,2};
   public String getInfo(){
-    //TODO
-    return "TODO";
+    return ammo + "";
   }
     /**
     *Initialize the Pistol object
@@ -48,6 +49,10 @@ public class Pistol extends Equippable implements Serializable{
         sprites[0][1] = ImageIO.read(new File("sprites/pistol/animation/frame" + 2 + ".png"));
         sprites[0][2] = ImageIO.read(new File("sprites/pistol/animation/frame" + 1 + ".png"));
         sprites[0][0] = sprites[0][2];
+
+        sprites[1][0] = sprites[0][2];
+        sprites[1][1] = sprites[0][2];
+        sprites[1][2] = sprites[0][2];
       }catch(Exception e){
         //exits on error with message
         System.out.println("Reading Pistol Sprite: " + e);
@@ -68,7 +73,7 @@ public class Pistol extends Equippable implements Serializable{
   * constuctor for the pistol
   */
   public Pistol(int[] state){
-    super(new Sprite(icon, state, sprites, new int[]{50}));
+    super(new Sprite(icon, state, sprites, new int[]{50, 1000}));
     stackable = false;
   }
 
@@ -78,6 +83,10 @@ public class Pistol extends Equippable implements Serializable{
   */
   public void drawEquipped(Graphics g, Player player){
     if (player == null){return;}
+    if (sprite.isState(RELOAD_DONE, false)){
+      ammo = MAX_AMMO;
+      sprite.setState(SHOOT_READY[0], SHOOT_READY[1]);
+    }
     transform = player.getTransform();
     transform.translate(-47, -110);
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
@@ -89,10 +98,11 @@ public class Pistol extends Equippable implements Serializable{
 
 
   public void attack(Point p, Player player){
-    if (sprite.isState(SHOOT_READY, false)){
+    if (sprite.isState(SHOOT_READY, false) && ammo > 0){
       //creates a new bullet
       //BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),5,2000,10);
       BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),2,3000,10,12,140);
+      ammo--;
       //starts shoot animation
       sprite.startAnimation(0);
     }
@@ -102,5 +112,9 @@ public class Pistol extends Equippable implements Serializable{
   /**
   * reloads the pistol
   */
-  public void reload(){}
+  public void reload(){
+    if (ammo != MAX_AMMO){
+      sprite.startAnimation(1);
+    }
+  }
 }

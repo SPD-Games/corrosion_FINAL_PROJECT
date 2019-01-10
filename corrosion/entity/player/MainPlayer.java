@@ -6,6 +6,7 @@
 
 package corrosion.entity.player;
 
+import java.util.concurrent.ThreadLocalRandom;
 import java.awt.*;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
@@ -24,14 +25,15 @@ import corrosion.Inventory;
 
 public class MainPlayer extends Player{
   private final double SQRT_2 = Math.sqrt(2.0);
-    private static MainPlayer mainPlayer;
-    private int hp = 100;
-    private Inventory inventory = new Inventory();
-    //direction the player is moving (keyboard input)
-    private boolean up, down, left, right;
-
+  private static MainPlayer mainPlayer;
+  private int hp = 100;
+  private Inventory inventory = new Inventory();
+  //direction the player is moving (keyboard input)
+  private boolean up, down, left, right;
    public void attackOff(){
-     equipped.attackOff(this);
+     if (equipped != null){
+       equipped.attackOff(this);
+     }
    }
 
     public Inventory getInvetory(){
@@ -57,6 +59,24 @@ public class MainPlayer extends Player{
     */
     public static void spawn(double xPos, double yPos, long id){
       mainPlayer = new MainPlayer(xPos, yPos, id);
+      mainPlayer.spawn();
+    }
+
+    public void spawn(){
+      int i = ThreadLocalRandom.current().nextInt(0, 4);
+      if (i == 0){
+        yPos = 750;
+        xPos = ThreadLocalRandom.current().nextInt(1500, 18200);
+      } else if (i == 1){
+        yPos = 19300;
+        xPos = ThreadLocalRandom.current().nextInt(1000, 19100);
+      } else if (i == 2){
+        xPos = 750;
+        yPos = ThreadLocalRandom.current().nextInt(1800, 19300);
+      } else if (i == 3){
+        xPos = 19300;
+        yPos = ThreadLocalRandom.current().nextInt(2200, 18600);
+      }
     }
 
     /**
@@ -66,16 +86,6 @@ public class MainPlayer extends Player{
     */
     public MainPlayer(double xPos, double yPos, long id){
       super(xPos, yPos, 0, id);
-      //equipped = new CrossBow();
-      //equipped = new BuildingPlan();
-      //equipped = new UpgradePlan();
-
-      //equipped = new Apple();
-      //equipped = new Pistol();
-      //equipped = new Rifle();
-      //equipped = new Sniper();
-      //equipped = new Shotgun();
-      //equipped = null;
       hp = 1;
     }
 

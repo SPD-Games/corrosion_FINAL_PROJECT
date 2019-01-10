@@ -107,6 +107,16 @@ public class Mouse implements MouseListener, MouseWheelListener{
   */
   @Override
   public void mouseReleased(MouseEvent e) {
+    //gets the mouse button pressed
+    int k = e.getButton();
+    //checks if it is in range of the buttons
+    if (k < 5){
+      //checks if the button is bound
+      if (binds[k] != null){
+        //runs the bind
+        binds[k].released(e.getPoint());
+      }
+    }
   }
 
   /**

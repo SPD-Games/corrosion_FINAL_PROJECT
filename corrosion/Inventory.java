@@ -96,6 +96,20 @@ public class Inventory{
     return need <= 0;
   }
 
+  public int haveItem(Item i){
+    int have = 0;
+    for(int x = 0; x < 6; x ++){
+      for(int y = 0; y < 6; y ++){
+        if (items[x][y] != null){
+          if (items[x][y].getClass() == i.getClass()){
+            have += items[x][y].getStackSize();
+          }
+        }
+      }
+    }
+    return have;
+  }
+
   public boolean removeItem(Item i){
     if (checkItem(i)){
       for(int x = 0; x < 6; x ++){
