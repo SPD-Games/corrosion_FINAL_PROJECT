@@ -28,11 +28,8 @@ public class Inventory{
     hotBar[2] = new Orange();
     hotBar[3] = new Rifle();
     hotBar[4] = new Sniper();
-    for(int x = 0; x < 6; ++x){
-      for(int y = 0; y < 6; ++y){
-        items[x][y] = new Apple();
-      }
-    }
+    items[0][0] = new BuildingPlan();
+    items[0][1] = new UpgradePlan();
   }
 
   public Equippable getHotBar(int i){

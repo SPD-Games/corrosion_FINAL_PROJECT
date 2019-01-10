@@ -30,7 +30,7 @@ public class BulletProjectile extends Projectile{
 
   private double MAX_VEL = 2;
   private double MAX_RANGE = 3000;
-  private int damage;
+  private int damage = 50;
   private int shift;
 
   /**
@@ -86,7 +86,7 @@ public class BulletProjectile extends Projectile{
         if (!isHit && player != null){
           ArrayList out = new ArrayList();
           out.add(players.get(i).getId());
-          out.add(1);
+          out.add(damage);
           Protocol.send(10, out, Client.getConnection());
         }
         hit();
