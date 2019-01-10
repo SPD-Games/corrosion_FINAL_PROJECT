@@ -35,6 +35,13 @@ public class CrossBow extends Equippable{
     return icon;
   }
 
+  public String getInfo(){
+    if (sprite.isState(SHOOT_READY, false)){
+      return "1";
+    }
+    return "0";
+  }
+
   /**
   * Initializes the player class
   */

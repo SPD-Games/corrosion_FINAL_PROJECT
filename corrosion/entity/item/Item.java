@@ -45,9 +45,7 @@ abstract public class Item extends Entity implements Serializable{
     return stackSize;
   }
 
-  public String getInfo(){
-      return getStackSize() + "";
-  }
+  abstract public String getInfo();
 
   public void removeStack(Item i){
     int otherStackSize = i.getStackSize();

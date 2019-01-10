@@ -64,7 +64,7 @@ public class Shotgun extends Equippable implements Serializable{
   */
   public Shotgun(int[] state){
     super(new Sprite(icon, state, sprites, new int[]{50}));
-    isStackable = false;
+    stackable = false;
   }
 
   /**

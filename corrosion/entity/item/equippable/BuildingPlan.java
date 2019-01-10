@@ -52,6 +52,11 @@ public class BuildingPlan extends Equippable{
   public BufferedImage getIcon(){
     return icon;
   }
+
+  public String getInfo(){
+    return "";
+  }
+  
   /**
    * Main Constructor
   */

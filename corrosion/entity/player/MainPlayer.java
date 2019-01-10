@@ -42,6 +42,10 @@ public class MainPlayer extends Player{
       return mainPlayer;
     }
 
+    public void setEquipped(int i){
+      equipped = inventory.getHotBar(i);
+    }
+
     /**
     * Creates the new MainPlayer
     * @param xPos the x position of the player
@@ -65,7 +69,7 @@ public class MainPlayer extends Player{
       //equipped = new Apple();
       //equipped = new Pistol();
       //equipped = new Rifle();
-      equipped = new Sniper();
+      //equipped = new Sniper();
       //equipped = new Shotgun();
       //equipped = null;
       hp = 1;

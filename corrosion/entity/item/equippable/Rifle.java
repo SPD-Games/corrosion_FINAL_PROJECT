@@ -31,7 +31,10 @@ public class Rifle extends Equippable implements Serializable{
   private static BufferedImage[][] sprites = new BufferedImage[1][3];
   private final int[] SHOOT_READY = {0,2};
   //private final int[] RELOAD_READY = {1,2};
-
+  public String getInfo(){
+    //TODO
+    return "TODO";
+  }
     /**
     *Initialize the rifle object
     */

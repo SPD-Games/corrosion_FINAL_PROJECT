@@ -41,7 +41,9 @@ public class Apple extends Equippable{
       System.exit(-1);
     }
   }
-
+  public String getInfo(){
+    return stackSize + "";
+  }
   public BufferedImage getIcon(){
     return icon;
   }

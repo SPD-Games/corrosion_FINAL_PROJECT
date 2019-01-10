@@ -17,16 +17,22 @@ import java.awt.geom.AffineTransform;
 public class Inventory{
 
   private Item[][] items = new Item[6][6];
+  private Equippable[] hotBar = new Equippable[6];
 
   /**
   *Constructor
   */
   public Inventory(){
-    for(int x = 0; x < 6; x ++){
-      for(int y = 0; y < 6; y ++){
-        items[x][y] = new Orange();
-      }
-    }
+    hotBar[0] = new CrossBow();
+    hotBar[1] = new Pistol();
+    hotBar[2] = new Orange();
+    hotBar[3] = new Rifle();
+    hotBar[4] = new Sniper();
+
+  }
+
+  public Equippable getHotBar(int i){
+    return hotBar[i];
   }
 
   public boolean addItem(Item i){
@@ -87,8 +93,28 @@ public class Inventory{
     }
   }
 
+  public void drawHotBar(Graphics g, long time){
+    Graphics2D g2d = (Graphics2D) g;
+    g2d.setTransform(new AffineTransform());
+    g2d.translate(Drawing.width()/2-258, Drawing.height() - 90);
+    g2d.scale(1.75,1.75);
+
+    for (int x = 0; x < 6; x ++) {
+      g2d.setColor(new Color(20,20,20,50));
+      g2d.fillRect(x*50, 0, 45, 45);
+      if (hotBar[x] != null){
+        AffineTransform t = new AffineTransform();
+        BufferedImage i = hotBar[x].getIcon();
+        t.translate(x*50, 0);
+        t.scale(45.0/i.getWidth(), 45.0/i.getHeight());
+        g2d.drawImage(i,t,null);
+        g2d.setColor(Color.BLACK);
+        g2d.drawString((hotBar[x].getInfo()) + "", x*50+1, 10);
+      }
+    }
+  }
+
   public void draw(Graphics g, long time){
-    items[0][0] = MainPlayer.getMainPlayer().getEquipped();
       Graphics2D g2d = (Graphics2D) g;
       g2d.setTransform(new AffineTransform());
       g2d.scale(1.75,1.75);

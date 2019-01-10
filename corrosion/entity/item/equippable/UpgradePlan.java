@@ -54,7 +54,9 @@ public class UpgradePlan extends Equippable{
   public BufferedImage getIcon(){
     return icon;
   }
-  /**
+  public String getInfo(){
+    return "";
+  }  /**
    * Main Constructor
   */
   public UpgradePlan(){

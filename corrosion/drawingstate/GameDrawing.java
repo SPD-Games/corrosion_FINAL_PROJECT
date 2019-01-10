@@ -82,6 +82,9 @@ public class GameDrawing extends DrawingState{
     binds[68] = new Right();//d
     binds[82] = new Reload();//r
     binds[69] = new Use();//e
+    for(int i = 49; i <= 54; ++i){//1 to 6
+      binds[i] = new SetHotBar();
+    }
     Keyboard.setBinds(binds);
   }
 
@@ -121,6 +124,7 @@ public class GameDrawing extends DrawingState{
     if (isShownInvetory){
       MainPlayer.getMainPlayer().getInvetory().draw(g,t);
     }
+    MainPlayer.getMainPlayer().getInvetory().drawHotBar(g,t);
   }
 
   public void showInvetory(){

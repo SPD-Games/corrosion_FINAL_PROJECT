@@ -126,7 +126,9 @@ public class Mouse implements MouseListener, MouseWheelListener{
   * @param e
   */
   public void mouseWheelMoved(MouseWheelEvent e) {
-    //TODO proper zoom change (limit the amount of zoom that is possible)
-    GameDrawing.zoom -= 0.1 * e.getWheelRotation();
+    double zoom = GameDrawing.zoom -= 0.1 * e.getWheelRotation();
+    zoom = Math.max(0.3, zoom);
+    zoom = Math.min(1, zoom);
+    GameDrawing.zoom = zoom;
   }
 }
