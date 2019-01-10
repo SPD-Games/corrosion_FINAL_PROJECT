@@ -45,6 +45,7 @@ public class BuildingPlan extends Equippable{
       sprites[0][1] = ImageIO.read(new File("sprites/buildingplan/BuildingPlan" + 2 + ".png"));
       sprites[0][2] = ImageIO.read(new File("sprites/buildingplan/BuildingPlan" + 3 + ".png"));
       sprites[0][3] = ImageIO.read(new File("sprites/buildingplan/BuildingPlan" + 4 + ".png"));
+      icon = sprites[0][0];
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading BuildingPlan Sprite: " + e);
