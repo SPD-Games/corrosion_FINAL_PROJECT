@@ -166,6 +166,8 @@ public class MainPlayer extends Player{
       if (tmpHp <= 0){
         //die
         hp = 0;
+        spawn();
+        hp = 50;
       } else if (tmpHp > 100){
         hp = 100;
       } else {

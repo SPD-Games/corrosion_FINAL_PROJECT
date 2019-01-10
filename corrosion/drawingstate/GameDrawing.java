@@ -162,7 +162,7 @@ public class GameDrawing extends DrawingState{
 
     //clears the screen
     g.clearRect(0, 0, Drawing.width(), Drawing.height());
-    g.setColor(new Color(173, 216, 230));
+    g.setColor(new Color(15,143,167));
     g.fillRect(0, 0, Drawing.width(), Drawing.height());
     g2d.scale(zoom, zoom);
     g2d.translate(-MainPlayer.getMainPlayer().getXPos() + Drawing.width()/2/zoom, -MainPlayer.getMainPlayer().getYPos() + Drawing.height()/2/zoom);
