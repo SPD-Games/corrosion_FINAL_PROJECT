@@ -10,7 +10,7 @@
   */
 
 package corrosion;
-    
+
 import corrosion.Window;
 
 public class Main {

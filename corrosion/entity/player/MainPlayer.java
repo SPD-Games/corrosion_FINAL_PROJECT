@@ -30,6 +30,10 @@ public class MainPlayer extends Player{
     //direction the player is moving (keyboard input)
     private boolean up, down, left, right;
 
+   public void attackOff(){
+     equipped.attackOff(this);
+   }
+
     public Inventory getInvetory(){
       return inventory;
     }

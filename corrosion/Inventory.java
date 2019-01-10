@@ -9,10 +9,10 @@ import javax.swing.SwingUtilities;
 import corrosion.entity.item.*;
 import corrosion.entity.item.equippable.*;
 import corrosion.entity.player.*;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.geom.AffineTransform;
+import java.awt.geom.*;
+import corrosion.input.Mouse;
 
 public class Inventory{
 
@@ -28,11 +28,33 @@ public class Inventory{
     hotBar[2] = new Orange();
     hotBar[3] = new Rifle();
     hotBar[4] = new Sniper();
-
+    for(int x = 0; x < 6; ++x){
+      for(int y = 0; y < 6; ++y){
+        items[x][y] = new Apple();
+      }
+    }
   }
 
   public Equippable getHotBar(int i){
     return hotBar[i];
+  }
+
+  public int[] getMousePos(){
+    Point p = Mouse.getOnScreen();
+    int[] out = {(int)((p.x-35)/87.5),(int)((p.y-35)/87.5)};
+    if((p.x-35)%87.5 >= 78.75 || p.x-35 <= 0){return null;}
+    if((p.y-35)%87.5 >= 78.75 || p.y-35 <= 0){return null;}
+    if(out[0] > 6 || out[1] > 6){return null;}
+    return out;
+  }
+
+  public void swapToHotBar(int swap){
+    int[] on = getMousePos();
+    if (on == null){return;}
+    if(!(items[on[0]][on[1]] instanceof Equippable)){return;}
+    Equippable tmp = (Equippable)items[on[0]][on[1]];
+    items[on[0]][on[1]] = hotBar[swap];
+    hotBar[swap] = tmp;
   }
 
   public boolean addItem(Item i){

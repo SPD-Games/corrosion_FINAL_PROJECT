@@ -39,6 +39,11 @@ public class Mouse implements MouseListener, MouseWheelListener{
     return relativeToPlayer(p);
   }
 
+  public static Point getOnScreen(){
+    Point p = MouseInfo.getPointerInfo().getLocation();
+    SwingUtilities.convertPointFromScreen(p, Drawing.getPanel());
+    return p;
+  }
   /**
   * Converts a point on the screen to a point on the screen relative to the player
   */

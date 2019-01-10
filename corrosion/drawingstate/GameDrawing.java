@@ -135,6 +135,9 @@ public class GameDrawing extends DrawingState{
 
       Bindable binds[] = new Bindable[526];
       binds[9] = new ToggleInvetory();//tab
+      for(int i = 49; i <= 54; ++i){//1 to 6
+        binds[i] = new SwapToHotBar();
+      }
 
       Keyboard.setBinds(binds);
     } else {

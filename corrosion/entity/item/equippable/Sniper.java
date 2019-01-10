@@ -26,6 +26,8 @@ import corrosion.network.protocol.*;
 
 
 public class Sniper extends Equippable implements Serializable{
+  public void attackOff(Player player){}
+
   // get the icons and animations for the rifle
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[2][3];

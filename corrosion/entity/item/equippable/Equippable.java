@@ -53,6 +53,12 @@ abstract public class Equippable extends Item implements Serializable{
   abstract public void attack(Point p, Player player);
 
   /**
+  * Uses the useable
+  * @param player the player that stopped attacking
+  */
+  abstract public void attackOff(Player player);
+
+  /**
   * Uses the second function useable
   * @param p the point relative to the player the user clicked
   */

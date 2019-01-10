@@ -29,6 +29,8 @@ import corrosion.HitDetection;
 
 
 public class UpgradePlan extends Equippable{
+  public void attackOff(Player player){}
+
   //TODO move all images and draw handling in Usable
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[1][3];

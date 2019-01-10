@@ -22,6 +22,7 @@ import corrosion.entity.Entity;
 import corrosion.entity.player.*;
 
 public class Orange extends Equippable{
+  public void attackOff(Player player){}
 
   public BufferedImage getIcon(){
     return icon;

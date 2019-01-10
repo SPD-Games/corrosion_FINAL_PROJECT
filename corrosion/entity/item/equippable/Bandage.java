@@ -22,6 +22,7 @@ import corrosion.entity.Entity;
 import corrosion.entity.player.*;
 
 public class Bandage extends Equippable{
+  public void attackOff(Player player){}
 
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[1][];

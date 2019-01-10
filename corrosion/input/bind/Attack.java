@@ -20,7 +20,9 @@ public class Attack extends MouseBindable{
     MainPlayer.getMainPlayer().attack(Mouse.relativeToPlayer(p));
   }
 
-  public void released(Point p){}
+  public void released(Point p){
+    MainPlayer.getMainPlayer().attackOff();
+  }
 
   public void clicked(Point p){}
 }
