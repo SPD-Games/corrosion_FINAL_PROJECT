@@ -47,6 +47,7 @@ public class UpgradePlan extends Equippable{
       sprites[0][0] = ImageIO.read(new File("sprites/upgradeplan/upgradePlan" + 1 + ".png"));
       sprites[0][1] = ImageIO.read(new File("sprites/upgradeplan/upgradePlan" + 2 + ".png"));
       sprites[0][2] = ImageIO.read(new File("sprites/upgradeplan/upgradePlan" + 3 + ".png"));
+      icon = sprites[0][0];
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading UpgradePlan Sprite: " + e);
