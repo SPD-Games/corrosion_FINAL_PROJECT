@@ -87,6 +87,7 @@ public class BulletProjectile extends Projectile{
           ArrayList out = new ArrayList();
           out.add(players.get(i).getId());
           out.add(damage);
+          Protocol.send(8 ,new HitMarker(players.get(i).getXPos(),players.get(i).getYPos(), "-"+damage), Client.getConnection());
           Protocol.send(10, out, Client.getConnection());
         }
         hit();
@@ -102,6 +103,7 @@ public class BulletProjectile extends Projectile{
       if (HitDetection.hit(e.getHitBox(), getHitBox())){
         if (!isHit && player != null){
           e.hit(damage);
+          Protocol.send(8 ,new HitMarker(getXPos(),getYPos(), "-"+damage), Client.getConnection());
         }
         hit();
         return;
