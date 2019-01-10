@@ -30,7 +30,7 @@ public class ArrowProjectile extends Projectile{
 
   private static final double MAX_VEL = 2;
   private static final double MAX_RANGE = 3000;
-  private int damage = 1;
+  private int damage = 50;
   /**
   * Initializes the player class
   */
@@ -81,7 +81,8 @@ public class ArrowProjectile extends Projectile{
         if (!isHit && player != null){
           ArrayList out = new ArrayList();
           out.add(players.get(i).getId());
-          out.add(1);
+          out.add(damage);
+          Protocol.send(8 ,new HitMarker(players.get(i).getXPos(),players.get(i).getYPos(), "-"+damage), Client.getConnection());
           Protocol.send(10, out, Client.getConnection());
         }
         hit();
@@ -97,6 +98,7 @@ public class ArrowProjectile extends Projectile{
       if (HitDetection.hit(e.getHitBox(), getHitBox())){
         if (!isHit && player != null){
           e.hit(damage);
+          Protocol.send(8 ,new HitMarker(getXPos(),getYPos(), "-"+damage), Client.getConnection());
         }
         hit();
         return;
