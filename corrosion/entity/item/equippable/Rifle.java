@@ -110,7 +110,7 @@ public class Rifle extends Equippable implements Serializable{
     Point p = Mouse.getPosition();
     Player player = MainPlayer.getMainPlayer();
     //creates a new bullet
-    BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),6,5000,20,14,165);
+    BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),5,5000,15,14,165);
     //starts shoot animation
     ammo--;
     sprite.startAnimation(0);
