@@ -39,13 +39,12 @@ public class ConnectMenuDrawing extends DrawingState{
     ((Graphics2D)g).translate((Drawing.width())/2,(Drawing.height())/2 );
     g.setFont(new Font("Ariel", Font.PLAIN, 50));
     g.setColor(Color.black);
-    ((Graphics2D)g).drawString("*Port not needed",-220,110);
 
     connectBtn.draw(g);
     ipInput.draw(g);
 
-    ((Graphics2D)(g)).scale(0.5,0.5);
-    g.translate(-logoImg.getWidth()/2, -logoImg.getHeight()/2 -530);
+    ((Graphics2D)(g)).scale(0.8,0.8);
+    g.translate(-logoImg.getWidth()/2, -logoImg.getHeight()/2 - Drawing.getPanel().getWidth()/6);
     ((Graphics2D)(g)).drawImage(logoImg,null,null);
   }
 
@@ -85,7 +84,7 @@ public class ConnectMenuDrawing extends DrawingState{
             //sets sprite image
             connectImage = ImageIO.read(new File("sprites/menuicons/ConnectBtn.png"));
             backImg = ImageIO.read(new File("sprites/menuicons/MenuBackgrounds.jpg"));
-            logoImg = ImageIO.read(new File("sprites/menuicons/LogoV1.png"));
+            logoImg = ImageIO.read(new File("sprites/menuicons/logoV1.png"));
 
           } catch(Exception e) {
             //exits on error with message
@@ -93,8 +92,8 @@ public class ConnectMenuDrawing extends DrawingState{
             System.exit(-1);
       }
       // create the a new textbox and button
-       connectBtn = new ButtonG(0, 300 ,1,connectImage);
-       ipInput = new TextBoxG(0,0,900,100,new Color(255, 98, 0),"ENTER IP HERE");
+       connectBtn = new ButtonG(0, 200 ,0.7,connectImage);
+       ipInput = new TextBoxG(0,0,800,100,new Color(255, 98, 0),"ENTER IP HERE");
   }
 
 }

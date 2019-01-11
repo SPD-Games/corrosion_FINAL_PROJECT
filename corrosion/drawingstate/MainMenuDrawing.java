@@ -39,15 +39,14 @@ public class MainMenuDrawing extends DrawingState{
    */
   public void draw(Graphics g, long t) {
     // format all the image options to fit the screen properly
-    //  transform.setToScale(0.4,0.4);
-    transform.setToTranslation(Drawing.getPanel().getWidth()/2 - (logoImg.getWidth()/2), Drawing.getPanel().getHeight()/2 - (logoImg.getHeight()/2));
+    transform.setToScale(1, 1);
     ((Graphics2D)(g)).clearRect(0,0 , Drawing.getPanel().getWidth(), Drawing.getPanel().getHeight());
     ((Graphics2D)(g)).drawImage(backImg,transform,null);
-
+    transform.translate(Drawing.getPanel().getWidth()/2 - (logoImg.getWidth()/2), Drawing.getPanel().getHeight()/2 - (logoImg.getHeight()/1.5));
     ((Graphics2D)(g)).drawImage(logoImg,transform,null);
 
     // draw all buttons
-    ((Graphics2D)g).translate((Drawing.width())/2,(Drawing.height())/2 );
+    ((Graphics2D)g).translate((Drawing.width())/2,(Drawing.height())/2);
     playBtn.draw(g);
 }
 
@@ -67,7 +66,7 @@ public class MainMenuDrawing extends DrawingState{
 
       try {
         //sets sprite image
-        logoImg = ImageIO.read(new File("sprites/menuicons/LogoV1.png"));
+        logoImg = ImageIO.read(new File("sprites/menuicons/logoV1.png"));
         PlayBtnImage = ImageIO.read(new File("sprites/menuicons/PlayBtn.png"));
         backImg = ImageIO.read(new File("sprites/menuicons/MenuBackgrounds.jpg"));
 
@@ -77,6 +76,6 @@ public class MainMenuDrawing extends DrawingState{
         System.exit(-1);
       }
       // create a new button
-      playBtn = new ButtonG(0,400,0.5,PlayBtnImage);
+      playBtn = new ButtonG(0,270,0.5,PlayBtnImage);
     }
   }
