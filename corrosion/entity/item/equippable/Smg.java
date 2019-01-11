@@ -80,7 +80,7 @@ public class Smg extends Equippable implements Serializable{
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
-  public void draw(Graphics g, long t){}
+
 
 
 

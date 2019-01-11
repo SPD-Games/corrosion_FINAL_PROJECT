@@ -77,7 +77,7 @@ public class Bow extends Equippable{
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), player.getTransform(), null);
   }
 
-  public void draw(Graphics g, long t){}
+
 
   /**
   * Shoots an arrow

@@ -81,7 +81,7 @@ public class Pickaxe extends Equippable implements Serializable{
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
-  public void draw(Graphics g, long t){}
+
 
   public void attack(Point p, Player player){
     if (sprite.isState(SWING_READY, false)){

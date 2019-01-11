@@ -7,10 +7,24 @@ package corrosion.entity.item;
 import java.awt.image.BufferedImage;
 import corrosion.entity.Entity;
 import java.io.Serializable;
+import corrosion.Sprite;
+import corrosion.network.Client;
+import corrosion.network.protocol.Protocol;
+import java.awt.*;
+import java.awt.geom.*;
 
 abstract public class Item extends Entity implements Serializable{
+  public transient Sprite sprite;
   protected boolean stackable = true;
   protected int stackSize = 1;
+  protected int[] delay;
+  protected int[] state;
+  abstract public void fromServer();
+  public void sendItem(){
+    state = sprite.getState();
+    delay = sprite.getDelay();
+    Protocol.send(8,this,Client.getConnection());
+  }
   /**
   * Main Constructor
   * @param x the x position of the Item
@@ -47,6 +61,13 @@ abstract public class Item extends Entity implements Serializable{
 
   abstract public String getInfo();
 
+  public void draw(Graphics g, long t){
+    BufferedImage i = sprite.getIcon();
+    transform.setToTranslation(xPos -50, yPos -50);
+    transform.scale(100.0/i.getWidth(),100.0/i.getHeight());
+    ((Graphics2D)(g)).drawImage(i, transform, null);
+  }
+
   public void removeStack(Item i){
     int otherStackSize = i.getStackSize();
     if (otherStackSize <= stackSize){
@@ -55,5 +76,10 @@ abstract public class Item extends Entity implements Serializable{
     } else {
       i.removeStack(this);
     }
+  }
+
+  @Override
+  public Shape getPickUpHitBox(){
+    return new Rectangle2D.Double(xPos - 50, yPos - 50, 100, 100);
   }
 }

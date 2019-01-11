@@ -15,7 +15,6 @@ import corrosion.Sprite;
 
 
 abstract public class Equippable extends Item implements Serializable{
-  public transient Sprite sprite;
   /**
    * Main Constructor
    * @param p the player that has the crossbow equipped

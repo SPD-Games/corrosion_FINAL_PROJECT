@@ -3,6 +3,7 @@
   */
 package corrosion.input.bind;
 
+import corrosion.entity.item.Item;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.*;
@@ -42,6 +43,11 @@ public class Use extends Bindable{
           ((DoorFrame)e).open();
           Protocol.send(8, e, Client.getConnection());
           return;
+        }
+      } else if (e instanceof Item){
+        Shape s = ((Item) e).getPickUpHitBox();
+        if(HitDetection.hit(s, playerHitBox)){
+          MainPlayer.getMainPlayer().getInvetory().addItem(((Item) e));
         }
       }
     }

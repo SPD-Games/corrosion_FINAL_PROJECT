@@ -38,6 +38,10 @@ public class Sprite{
     this.delay = delay;
   }
 
+  public int[] getDelay(){
+    return delay;
+  }
+
   /**
   * Gets the current frame of the sprites
   * @return the current frame of the sprites

@@ -14,6 +14,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.geom.*;
 import corrosion.input.Mouse;
+import corrosion.network.Client;
+import corrosion.network.protocol.Protocol;
+
 
 //Inventory class
 public class Inventory{
@@ -21,7 +24,7 @@ public class Inventory{
   private Item[][] items = new Item[6][6];
   //Array for items in hotbar
   private Equippable[] hotBar = new Equippable[6];
-
+  private int equipped = 0;
   /**
   *Constructor
   */
@@ -34,7 +37,9 @@ public class Inventory{
     items[0][0] = new BuildingPlan();
     items[0][1] = new UpgradePlan();
   }
-
+  public void setEquipped(int i){
+    equipped = i;
+  }
   /**
    * Method to return item in hotbar
    * @param i index of desired item to be returned
@@ -57,13 +62,25 @@ public class Inventory{
     return out;
   }
 
+  public void drop(){
+    int[] on = getMousePos();
+    if (on == null){return;}
+    if(items[on[0]][on[1]] == null){return;}
+    items[on[0]][on[1]].setPos(MainPlayer.getMainPlayer().getXPos(),MainPlayer.getMainPlayer().getYPos(),0);
+    items[on[0]][on[1]].sendItem();
+    items[on[0]][on[1]] = null;
+  }
+
   public void swapToHotBar(int swap){
     int[] on = getMousePos();
     if (on == null){return;}
-    if(!(items[on[0]][on[1]] instanceof Equippable)){return;}
+    if(!(items[on[0]][on[1]] instanceof Equippable) && items[on[0]][on[1]] != null){return;}
     Equippable tmp = (Equippable)items[on[0]][on[1]];
     items[on[0]][on[1]] = hotBar[swap];
     hotBar[swap] = tmp;
+    if(equipped == swap){
+      MainPlayer.getMainPlayer().setEquipped(swap);
+    }
   }
 
   public boolean addItem(Item i){

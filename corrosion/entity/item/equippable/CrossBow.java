@@ -25,11 +25,12 @@ import corrosion.entity.player.Player;
 
 public class CrossBow extends Equippable{
   public void attackOff(Player player){}
-
+  public void fromServer(){
+    sprite = new Sprite(icon, state, sprites, delay);
+  }
   //TODO move all images and draw handling in Usable
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[2][];;
-
   private final int[] SHOOT_READY = {0,3};
   private final int[] RELOAD_READY = {1,2};
 
@@ -102,11 +103,6 @@ public class CrossBow extends Equippable{
     transform = player.getTransform();
     transform.translate(-18, -110);
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
-  }
-
-  public void draw(Graphics g, long t){
-    transform.setToTranslation(xPos -50, yPos -50);
-    ((Graphics2D)(g)).drawImage(sprite.getIcon(), transform, null);
   }
 
   /**

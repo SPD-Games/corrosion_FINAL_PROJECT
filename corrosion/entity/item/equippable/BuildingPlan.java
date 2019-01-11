@@ -25,7 +25,9 @@ import corrosion.entity.building.*;
 
 public class BuildingPlan extends Equippable{
   public void attackOff(Player player){}
-
+  public void fromServer(){
+    sprite = new Sprite(icon, state, sprites, delay);
+  }
   //TODO move all images and draw handling in Usable
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[1][4];;

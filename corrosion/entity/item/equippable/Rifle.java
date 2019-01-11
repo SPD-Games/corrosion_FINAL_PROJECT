@@ -29,6 +29,9 @@ import corrosion.network.protocol.*;
 
 public class Rifle extends Equippable implements Serializable{
   public boolean shooting = false;
+  public void fromServer(){
+    sprite = new Sprite(icon, state, sprites, delay);
+  }
   public void attackOff(Player player){
     shooting = false;
   }
@@ -104,7 +107,7 @@ public class Rifle extends Equippable implements Serializable{
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
-  public void draw(Graphics g, long t){}
+
 
   public void shoot(){
     Point p = Mouse.getPosition();

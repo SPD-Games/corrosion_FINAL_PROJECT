@@ -154,6 +154,8 @@ public class GameDrawing extends DrawingState{
 
       Bindable binds[] = new Bindable[526];
       binds[9] = new ToggleInvetory();//tab
+      binds[71] = new Drop();//g
+
       for(int i = 49; i <= 54; ++i){//1 to 6
         binds[i] = new SwapToHotBar();
       }

@@ -30,7 +30,9 @@ import corrosion.HitDetection;
 
 public class UpgradePlan extends Equippable{
   public void attackOff(Player player){}
-
+  public void fromServer(){
+    sprite = new Sprite(icon, state, sprites, new int[]{0});
+  }
   //TODO move all images and draw handling in Usable
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[1][3];
@@ -93,11 +95,6 @@ public class UpgradePlan extends Equippable{
     transform = player.getTransform();
     transform.translate(-14, -60);
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
-  }
-
-  public void draw(Graphics g, long t){
-    transform.setToTranslation(xPos -50, yPos -50);
-    ((Graphics2D)(g)).drawImage(sprite.getIcon(), transform, null);
   }
 
   /**

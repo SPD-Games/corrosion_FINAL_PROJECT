@@ -34,7 +34,6 @@ public class Tree extends Entity{
 
   public draw() {
 
-
   }
 
   /**

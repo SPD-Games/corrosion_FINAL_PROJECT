@@ -81,7 +81,7 @@ public class Shotgun extends Equippable implements Serializable{
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
-  public void draw(Graphics g, long t){}
+
 
     //+ (int)(Math.random() * 100 - 50)
 

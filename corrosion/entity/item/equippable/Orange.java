@@ -23,7 +23,9 @@ import corrosion.entity.player.*;
 
 public class Orange extends Equippable{
   public void attackOff(Player player){}
-
+    public void fromServer(){
+      sprite = new Sprite(icon, state, sprites, delay);
+    }
   public BufferedImage getIcon(){
     return icon;
   }
@@ -70,7 +72,7 @@ public class Orange extends Equippable{
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
-  public void draw(Graphics g, long t){}
+
 
   ///////
 

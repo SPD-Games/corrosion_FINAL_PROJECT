@@ -23,7 +23,9 @@ import corrosion.entity.player.*;
 
 public class Apple extends Equippable{
   public void attackOff(Player player){}
-
+  public void fromServer(){
+      sprite = new Sprite(icon, state, sprites, delay);
+  }
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[1][];
   private final static int[] LAST_FRAME = {0,3};
@@ -67,10 +69,6 @@ public class Apple extends Equippable{
     transform.translate(-18, -65);
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
-
-  public void draw(Graphics g, long t){}
-
-  ///////
 
   public void attack(Point p, Player player){
     int[] frame = sprite.getState();

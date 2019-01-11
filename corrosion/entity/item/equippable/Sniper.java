@@ -27,7 +27,9 @@ import corrosion.network.protocol.*;
 
 public class Sniper extends Equippable implements Serializable{
   public void attackOff(Player player){}
-
+    public void fromServer(){
+      sprite = new Sprite(icon, state, sprites, delay);
+    }
   // get the icons and animations for the rifle
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[2][3];
@@ -91,7 +93,7 @@ public class Sniper extends Equippable implements Serializable{
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
-  public void draw(Graphics g, long t){}
+
 
 
   public void attack(Point p, Player player){
