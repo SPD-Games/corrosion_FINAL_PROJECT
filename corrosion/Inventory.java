@@ -1,8 +1,9 @@
 //Henry Lim
-//Jan. 8th, 2019
+//Jan. 10th, 2019
 //Inventory Box
 package corrosion;
 
+//Imports
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -14,9 +15,11 @@ import java.awt.image.BufferedImage;
 import java.awt.geom.*;
 import corrosion.input.Mouse;
 
+//Inventory class
 public class Inventory{
-
+  //2d Array for items in inventory
   private Item[][] items = new Item[6][6];
+  //Array for items in hotbar
   private Equippable[] hotBar = new Equippable[6];
 
   /**
@@ -32,10 +35,19 @@ public class Inventory{
     items[0][1] = new UpgradePlan();
   }
 
+  /**
+   * Method to return item in hotbar
+   * @param i index of desired item to be returned
+   * @return item
+   */
   public Equippable getHotBar(int i){
     return hotBar[i];
   }
 
+  /**
+   *
+   * @return
+   */
   public int[] getMousePos(){
     Point p = Mouse.getOnScreen();
     int[] out = {(int)((p.x-35)/87.5),(int)((p.y-35)/87.5)};
