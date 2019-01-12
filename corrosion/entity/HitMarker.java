@@ -1,6 +1,7 @@
 package corrosion.entity;
 import corrosion.entity.Entity;
 import corrosion.network.Client;
+import corrosion.network.protocol.Protocol;
 import java.awt.*;
 
 public class HitMarker extends Entity{
@@ -16,6 +17,8 @@ public class HitMarker extends Entity{
     time -= (int)t;
     if (time <= 0){
       //remove
+      Client.removeEntity(this);
+      Protocol.send(12, this, Client.getConnection());
       return;
     }else if(time <= 255){
       g.setColor(new Color(255,255,255,time));

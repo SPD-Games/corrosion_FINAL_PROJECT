@@ -47,7 +47,11 @@ public class Use extends Bindable{
       } else if (e instanceof Item){
         Shape s = ((Item) e).getPickUpHitBox();
         if(HitDetection.hit(s, playerHitBox)){
-          MainPlayer.getMainPlayer().getInvetory().addItem(((Item) e));
+          if(MainPlayer.getMainPlayer().getInvetory().addItem(((Item) e))){
+            Client.removeEntity(e);
+            Protocol.send(12, e, Client.getConnection());
+            return;
+          }
         }
       }
     }

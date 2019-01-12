@@ -36,6 +36,7 @@ public class Inventory{
     hotBar[4] = new Sniper();
     items[0][0] = new BuildingPlan();
     items[0][1] = new UpgradePlan();
+    items[0][3] = new Orange();
   }
   public void setEquipped(int i){
     equipped = i;
@@ -49,6 +50,27 @@ public class Inventory{
     return hotBar[i];
   }
 
+  public int getAmount(Item i){
+    int have = 0;
+    for(int x = 0; x < 6; x ++){
+      for(int y = 0; y < 6; y ++){
+        if (items[x][y] != null){
+          if (items[x][y].getClass() == i.getClass()){
+            have += items[x][y].getStackSize();
+          }
+        }
+      }
+    }
+    return have;
+  }
+
+  public void dropEquipped(){
+    hotBar[equipped].setPos(MainPlayer.getMainPlayer().getXPos(),MainPlayer.getMainPlayer().getYPos(),0);
+    hotBar[equipped].sendItem();
+    hotBar[equipped] = null;
+    MainPlayer.getMainPlayer().setEquipped(equipped);
+  }
+
   /**
    *
    * @return
@@ -60,6 +82,24 @@ public class Inventory{
     if((p.y-35)%87.5 >= 78.75 || p.y-35 <= 0){return null;}
     if(out[0] > 6 || out[1] > 6){return null;}
     return out;
+  }
+
+  public void dropAll(){
+    for (int x = 0; x < 6; ++x){
+      for (int y = 0; y < 6; ++y){
+        if(items[x][y] == null){continue;}
+        items[x][y].setPos(MainPlayer.getMainPlayer().getXPos(),MainPlayer.getMainPlayer().getYPos(),0);
+        items[x][y].sendItem();
+        items[x][y] = null;
+      }
+    }
+
+    for (int x = 0; x < 6; ++x){
+      if(hotBar[x] == null){continue;}
+      hotBar[x].setPos(MainPlayer.getMainPlayer().getXPos(),MainPlayer.getMainPlayer().getYPos(),0);
+      hotBar[x].sendItem();
+      hotBar[x] = null;
+    }
   }
 
   public void drop(){
@@ -85,6 +125,15 @@ public class Inventory{
 
   public boolean addItem(Item i){
     if (i.isStackable()){
+      for (int x = 0; x < 6; x++){
+        if (hotBar[x] != null){
+          if (hotBar[x].getClass() == i.getClass()){
+            hotBar[x].addStack(i);
+            return true;
+          }
+        }
+      }
+
       for(int x = 0; x < 6; x ++){
         for(int y = 0; y < 6; y ++){
           if (items[x][y] != null){
@@ -99,7 +148,7 @@ public class Inventory{
 
     for(int x = 0; x < 6; x ++){
       for(int y = 0; y < 6; y ++){
-        if (items[x][y] != null){
+        if (items[x][y] == null){
           items[x][y] = i;
           return true;
         }

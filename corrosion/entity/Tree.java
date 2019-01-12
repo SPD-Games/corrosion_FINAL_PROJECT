@@ -1,14 +1,21 @@
 /** Edward Pei
   * January 7 2019
-  * class for tree that drop wood
+  * class for rocks that drop sulfer, metal, and stone
   */
 package corrosion.entity;
-
+import corrosion.entity.item.*;
+import corrosion.Sprite;
+import corrosion.entity.player.MainPlayer;
+import java.awt.*;
+import java.awt.geom.*;
+import corrosion.entity.*;
+import corrosion.network.*;
+import corrosion.network.protocol.*;
 
 public class Tree extends Entity{
 
   // radius of Tree in pixels
-  int rad = 325;
+  private int rad = 75;
 
   /**
   * Main Constructor of the Crate
@@ -19,7 +26,9 @@ public class Tree extends Entity{
   public Tree (double x, double y, double r, long id) {
     super(x,y,r,id);
   }
-
+  public Tree () {
+    super();
+  }
   /**
   * Main Constructor of the Crate
   * @param x the x position of the Entity
@@ -32,20 +41,29 @@ public class Tree extends Entity{
     this.rad = rad;
   }
 
-  public draw() {
-
+  public void draw(Graphics g, long t) {
+    g.setColor(Color.GREEN);
+    g.fillOval((int)xPos-rad, (int)yPos-rad, 2*rad, 2*rad);
   }
 
+  public Shape getHitBox(){
+    return new Ellipse2D.Double(xPos- rad, yPos-rad,2*rad,2*rad);
+  }
   /**
   * if the Tree is hit, decrease its size until it is small then return resources
   */
-  public hit() {
-
-    if(rad > 120) {
+  public void hit(int damage) {
+    if(rad > 20) {
       // reduce the size of the Tree
-      scaleSize -= 30;
+      rad -= 1;
+      Item i = new Wood(1);
+      MainPlayer.getMainPlayer().getInvetory().addItem(i);
+      Protocol.send(8, this, Client.getConnection());
     } else {
-      //TODO: ADD SOME SORT OF LOOT DROP WHEN CRATE IS HIT A BUNCH
+      Item i = new Wood(100);
+      MainPlayer.getMainPlayer().getInvetory().addItem(i);
+      Client.removeEntity(this);
+      Protocol.send(12, this, Client.getConnection());
     }
   }
 

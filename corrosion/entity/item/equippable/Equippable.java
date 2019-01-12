@@ -37,6 +37,7 @@ abstract public class Equippable extends Item implements Serializable{
   */
   public Equippable(double x, double y, double r, long id){
     super(x,y,r,id);
+    stackable = false;
   }
 
   /**

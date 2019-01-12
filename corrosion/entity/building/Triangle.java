@@ -121,14 +121,22 @@ public class Triangle extends Building {
   public Shape getHitBox(){return null;}
   public void upgrade(int level){
     state = new int[]{0,level};
-    sprite.setState(0, level);
+    Inventory i = MainPlayer.getMainPlayer().getInvetory();
+    Item uses;
     if (level == WOOD){
+      uses = new Wood(70);
+      if (!i.removeItem(uses)){return;}
       hp = 30*25;
     } else if (level == STONE){
+      uses = new Stone(70);
+      if (!i.removeItem(uses)){return;}
       hp = 120*25;
     } else if (level == METAL){
+      uses = new Metal(70);
+      if (!i.removeItem(uses)){return;}
       hp = 240*25;
     }
+    sprite.setState(0, level);
     Protocol.send(8, this, Client.getConnection());
   }
   public boolean place(){
@@ -173,6 +181,7 @@ public class Triangle extends Building {
     placingHitBoxs[2].moveTo(c.getX(), c.getY());
     placingHitBoxs[2].lineTo(a.getX(), a.getY());
     placingHitBoxs[2].lineTo(d.getX(), d.getY());
+    if(!MainPlayer.getMainPlayer().getInvetory().removeItem(new Wood(25))){return false;}
 
     id = Client.getId();
     Client.addEntity(this);

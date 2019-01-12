@@ -30,7 +30,7 @@ public class Axe extends Equippable implements Serializable{
 
   // get the icons and animations for the axe
   private static BufferedImage icon;
-  private static BufferedImage[][] sprites = new BufferedImage[1][3]; // what does this one even do?????
+  private static BufferedImage[][] sprites = new BufferedImage[1][3];
   private final int[] SWING_READY = {0,2};
   //private final int[] RELOAD_READY = {1,2};
 
@@ -80,11 +80,6 @@ public class Axe extends Equippable implements Serializable{
     transform.translate(-47, -110);
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
-
-
-
-
-
 
   public void attack(Point p, Player player){
     if (sprite.isState(SWING_READY, false)){

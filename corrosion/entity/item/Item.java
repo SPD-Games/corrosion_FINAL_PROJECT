@@ -78,7 +78,6 @@ abstract public class Item extends Entity implements Serializable{
     }
   }
 
-  @Override
   public Shape getPickUpHitBox(){
     return new Rectangle2D.Double(xPos - 50, yPos - 50, 100, 100);
   }

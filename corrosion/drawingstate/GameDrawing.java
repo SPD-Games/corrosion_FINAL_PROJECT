@@ -58,8 +58,10 @@ public class GameDrawing extends DrawingState{
     Wall.init();
     DoorFrame.init();
     Apple.init();
-
-
+    Stone.init();
+    Wood.init();
+    Metal.init();
+    
     //Axe.init();
     //Bandage.init();
     //Bow.init();
@@ -101,6 +103,7 @@ public class GameDrawing extends DrawingState{
     binds[68] = new Right();//d
     binds[82] = new Reload();//r
     binds[69] = new Use();//e
+    binds[71] = new DropEquipped();//g
     for(int i = 49; i <= 54; ++i){//1 to 6
       binds[i] = new SetHotBar();
     }

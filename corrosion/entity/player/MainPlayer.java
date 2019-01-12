@@ -65,6 +65,7 @@ public class MainPlayer extends Player{
     }
 
     public void spawn(){
+      hp = 50;
       int i = ThreadLocalRandom.current().nextInt(0, 4);
       if (i == 0){
         yPos = 750;
@@ -168,8 +169,8 @@ public class MainPlayer extends Player{
       if (tmpHp <= 0){
         //die
         ((GameDrawing)Drawing.getState()).deadScreen();
+        inventory.dropAll();
         spawn();
-        hp = 50;
       } else if (tmpHp > 100){
         hp = 100;
       } else {

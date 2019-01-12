@@ -6,6 +6,7 @@
 
 package corrosion.network;
 
+import corrosion.Drawing;
 import corrosion.entity.player.*;
 import corrosion.entity.*;
 import corrosion.entity.projectile.*;
@@ -259,6 +260,8 @@ public class Client{
       connection = new Connection(ip, port);
     } catch(Exception e){
       System.out.println("Error connecting to server" + e);
+      Drawing.setStateConnect();
+      return;
     }
     //checks for server responce for 2000ms
     long startTime = System.currentTimeMillis();
@@ -269,7 +272,8 @@ public class Client{
       if (timeElapsed > 2000){
         //server timeout error
         System.out.println("Failed to connect to server.");
-        System.exit(-1);
+        Drawing.setStateConnect();
+        return;
       }
       try{
         Thread.sleep(10);

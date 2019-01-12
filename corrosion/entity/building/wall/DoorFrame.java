@@ -86,15 +86,23 @@ public class DoorFrame extends Wall {
 
   @Override
   public void upgrade(int level){
-    state[1] = level;
-    sprite.setState(state[0], state[1]);
+    state = new int[]{0,level};
+    Inventory i = MainPlayer.getMainPlayer().getInvetory();
+    Item uses;
     if (level == WOOD){
-      hp = 10*25;
+      uses = new Wood(100);
+      if (!i.removeItem(uses)){return;}
+      hp = 30*25;
     } else if (level == STONE){
-      hp = 60*25;
-    } else if (level == METAL){
+      uses = new Stone(100);
+      if (!i.removeItem(uses)){return;}
       hp = 120*25;
+    } else if (level == METAL){
+      uses = new Metal(100);
+      if (!i.removeItem(uses)){return;}
+      hp = 240*25;
     }
+    sprite.setState(0, level);
     Protocol.send(8, this, Client.getConnection());
   }
 

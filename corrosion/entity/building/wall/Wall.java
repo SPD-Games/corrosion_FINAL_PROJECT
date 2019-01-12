@@ -114,14 +114,23 @@ public class Wall extends Building {
 
   public void upgrade(int level){
     state = new int[]{0,level};
-    sprite.setState(0, level);
+    Inventory i = MainPlayer.getMainPlayer().getInvetory();
+    Item uses;
     if (level == WOOD){
+      uses = new Wood(100);
+      if (!i.removeItem(uses)){return;}
       hp = 30*25;
     } else if (level == STONE){
+      uses = new Stone(100);
+      if (!i.removeItem(uses)){return;}
       hp = 120*25;
     } else if (level == METAL){
+      uses = new Metal(100);
+      if (!i.removeItem(uses)){return;}
       hp = 240*25;
     }
+
+    sprite.setState(0, level);
     Protocol.send(8, this, Client.getConnection());
   }
 
@@ -170,6 +179,8 @@ public class Wall extends Building {
         }
       }
     }
+    if(!MainPlayer.getMainPlayer().getInvetory().removeItem(new Wood(25))){return false;}
+
     id = Client.getId();
     Client.addEntity(this);
     Protocol.send(8, this, Client.getConnection());

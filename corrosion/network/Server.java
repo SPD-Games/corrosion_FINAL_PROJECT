@@ -98,15 +98,6 @@ public class Server{
     * Send all new data to the server
     */
     public void actionPerformed(ActionEvent arg0) {
-      while (disposeEntities.size() != 0){
-        for (int iClient = 0; iClient < clients.size(); ++ iClient){
-          Connection c = clients.get(iClient);
-          Entity e = disposeEntities.get(0);
-          Protocol.send(13, e, c);
-        }
-        disposeEntities.remove(0);
-      }
-
       while (newEntities.size() != 0){
           for (int iClient = 0; iClient < clients.size(); ++ iClient){
             Connection c = clients.get(iClient);
@@ -115,6 +106,14 @@ public class Server{
         }
         newEntities.remove(0);
       }
+      while (disposeEntities.size() != 0){
+          for (int iClient = 0; iClient < clients.size(); ++ iClient){
+            Connection c = clients.get(iClient);
+            Entity e = disposeEntities.get(0);
+            Protocol.send(13, e, c);
+          }
+          disposeEntities.remove(0);
+        }
 
       //get new player list and clears it
       ArrayList<Player> players = getPlayers();

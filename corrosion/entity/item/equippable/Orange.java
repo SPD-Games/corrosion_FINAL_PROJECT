@@ -59,10 +59,12 @@ public class Orange extends Equippable{
 
   public Orange(int[] state){
     super(new Sprite(icon, state, sprites, new int[]{0}));
+    stackable = true;
   }
 
   public Orange(double x, double y, double r, long id){
     super(x,y,r,id);
+    stackable = true;
   }
 
   public void drawEquipped(Graphics g, Player player){
@@ -72,9 +74,6 @@ public class Orange extends Equippable{
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
-
-
-  ///////
 
   public void attack(Point p, Player player){
     int[] frame = sprite.getState();
