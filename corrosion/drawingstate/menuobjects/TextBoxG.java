@@ -21,11 +21,11 @@ import corrosion.Drawing;
 
 public class TextBoxG {
 
-  int xPos,yPos, width, height;
-  int[] yBounds = new int[2];
-  int[] xBounds = new int[2];
-  String text;
-  Color c;
+  private int xPos,yPos, width, height;
+  private int[] yBounds = new int[2];
+  private int[] xBounds = new int[2];
+  private String text;
+  private Color c;
 
   /** stores the information of a button, button constructor
   * @param xPos the x Position of the button

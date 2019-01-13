@@ -1,3 +1,9 @@
+/**
+* Michael Metzinger
+* Jan 13 2019
+* A square foundation that can have walls/doors/other foundations connected to it
+*/
+
 package corrosion.entity.building;
 
 import corrosion.entity.building.Building;
@@ -24,6 +30,9 @@ public class Square extends Building {
   private Path2D hitBox;
   private int[] state;
 
+  /**
+  * Sets up all the sprites
+  */
   public static void init(){
     try{
       sprites[0][0] = ImageIO.read(new File("sprites/square/twigSquare.png"));
@@ -37,23 +46,41 @@ public class Square extends Building {
     }
   }
 
+  /**
+  * Sets the state when getting from server
+  */
   public void fromServer(){
     sprite = new Sprite(null, state, sprites, new int[]{0});
   }
 
+  /**
+  * Blank Constructor
+  */
   public Square(){
     this(0, 0, 0);
   }
 
+  /**
+  * Main Constructor
+  * @param xPos the x position of the Square
+  * @param yPos the y position of the Square
+  * @param rotation the rotation of the Square
+  */
   public Square(double xPos, double yPos, double rotation){
     super(xPos, yPos, rotation);
     state = new int[]{0,0};
     sprite = new Sprite(null, state, sprites, new int[]{0});
   }
 
+  /**
+  * Draws the Square
+  * @param g the graphics context to Use
+  * @param t the time since last frame
+  */
   public void draw(Graphics g, long t){
     ((Graphics2D)g).drawImage(sprite.getFrame(), transform, null);
   }
+
 
   public void drawPreview(Graphics g, Player p){
     Point2D pointOnMap = Mouse.getPointOnMap();
@@ -98,13 +125,11 @@ public class Square extends Building {
       if (entities.get(i) instanceof Square){
         Shape otherHitBox = ((Square)entities.get(i)).getBuildingHitBox();
         if (HitDetection.hit(otherHitBox,hitBox)){
-          //TODO DRAW CANNOT PLACE
           return;
         }
       } else if (entities.get(i) instanceof Triangle){
         Shape otherHitBox = ((Triangle)entities.get(i)).getBuildingHitBox();
         if (HitDetection.hit(otherHitBox,hitBox)){
-          //TODO DRAW CANNOT PLACE
           return;
         }
       }

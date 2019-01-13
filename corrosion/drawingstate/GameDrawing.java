@@ -37,6 +37,10 @@ public class GameDrawing extends DrawingState{
 
   public static int dead = 0;
 
+  /**
+  * Gets the current zoom of the GameDrawing
+  * @return the current zoom of the GameDrawing
+  */
   public static double getZoom(){
     return zoom;
   }
@@ -45,8 +49,13 @@ public class GameDrawing extends DrawingState{
   * Initiates the drawing state
   */
   public void init(){
+    //loads map
     map = new Map();
+
+    //start the drawing loop
     Drawing.getPanel().getTimer().start();
+
+    //loads all other classes
     Player.init();
     CrossBow.init();
     BulletProjectile.init();
@@ -76,7 +85,10 @@ public class GameDrawing extends DrawingState{
     //Smg.init();
     Sniper.init();
 
+    //setUpBinds
     setBinds();
+
+    //load deathScreen image
     try{
       //sets sprite image
       img = ImageIO.read(new File("sprites/deathScreen.png"));
@@ -91,11 +103,13 @@ public class GameDrawing extends DrawingState{
   * Sets all the binds for the state
   */
   public void setBinds(){
+    //Sets all mouse binds
     MouseBindable mouseBinds[] = new MouseBindable[5];
     mouseBinds[1] = new Attack();//left click
     mouseBinds[3] = new Attack2();//right click
     Mouse.setBinds(mouseBinds);
 
+    //sets all keyboard binds
     Bindable binds[] = new Bindable[526];
     binds[9] = new ToggleInvetory();//tab
     binds[87] = new Up();//w
@@ -128,12 +142,14 @@ public class GameDrawing extends DrawingState{
   */
   private void drawStatus(Graphics g, long t){
     int hp = MainPlayer.getMainPlayer().getHp();
+    //draws status text
     ((Graphics2D)g).setTransform(new AffineTransform());
     g.setColor(Color.black);
     g.drawLine(0, Drawing.height()/2,Drawing.width(),Drawing.height()/2);
     g.drawLine(Drawing.width()/2, 0, Drawing.width()/2,Drawing.height());
     g.drawString(Drawing.getFps()+ "fps. " + Client.getPing() + "ms. Pos(" + MainPlayer.getMainPlayer().getXPos() + ", " + MainPlayer.getMainPlayer().getYPos() + ")", 50, 50);
 
+    //draws health bar
     g.translate(Drawing.width()-300, Drawing.height()-100);
     g.setColor(Color.RED);
     g.fillRect(0,0,200,40);
@@ -143,19 +159,34 @@ public class GameDrawing extends DrawingState{
     g.drawString(hp + "", 10, 25);
   }
 
+  /**
+  * Draws the MainPlayers Invetory
+  * @param g the graphics contect
+  * @param t the time since last frame
+  */
   public void drawInvetory(Graphics g,long t){
+    //checks if the invetory should be drawn
     if (isShownInvetory){
+      //draws the invetory
       MainPlayer.getMainPlayer().getInvetory().draw(g,t);
     }
+    //draws the hotbar
     MainPlayer.getMainPlayer().getInvetory().drawHotBar(g,t);
   }
 
+  /**
+  * Toggles the invetory in and out of view
+  */
   public void showInvetory(){
+    //toggles if invetory is drawn
     isShownInvetory = !isShownInvetory;
+    //checks if the invetory should be drawn
     if (isShownInvetory){
+      //sets mouse binds for the invetory
       MouseBindable mouseBinds[] = new MouseBindable[5];
       Mouse.setBinds(mouseBinds);
 
+      //sets keyboard binds for the invetory
       Bindable binds[] = new Bindable[526];
       binds[9] = new ToggleInvetory();//tab
       binds[71] = new Drop();//g
@@ -166,6 +197,7 @@ public class GameDrawing extends DrawingState{
 
       Keyboard.setBinds(binds);
     } else {
+      //sets binds for when the invetory is closed
       setBinds();
     }
   }
@@ -224,10 +256,10 @@ public class GameDrawing extends DrawingState{
 
   }
 
+  /**
+  * Inits the drawing of the death screen
+  */
   public void deadScreen() {
     dead = 1000;
   }
-
-
-
 }

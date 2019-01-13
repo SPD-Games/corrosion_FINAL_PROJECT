@@ -27,7 +27,7 @@ public class ConnectMenuDrawing extends DrawingState{
   public static TextBoxG ipInput;
   protected BufferedImage backImg;
   protected BufferedImage logoImg;
-  BufferedImage connectImage;
+  protected BufferedImage connectImage;
 
   /**
   * draw the connection Screen
@@ -35,14 +35,17 @@ public class ConnectMenuDrawing extends DrawingState{
   * @param t frame count
   */
   public void draw(Graphics g, long t) {
+    //draws background
     ((Graphics2D)(g)).drawImage(backImg,null,null);
     ((Graphics2D)g).translate((Drawing.width())/2,(Drawing.height())/2 );
     g.setFont(new Font("Ariel", Font.PLAIN, 50));
     g.setColor(Color.black);
 
+    //draws button and inputTextBox
     connectBtn.draw(g);
     ipInput.draw(g);
 
+    //draws logo
     ((Graphics2D)(g)).scale(0.8,0.8);
     g.translate(-logoImg.getWidth()/2, -logoImg.getHeight()/2 - Drawing.getPanel().getWidth()/6);
     ((Graphics2D)(g)).drawImage(logoImg,null,null);

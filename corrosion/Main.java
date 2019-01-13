@@ -2,11 +2,14 @@
   * December 13 2018
   * Runs the game
   * TODO:
-      hit reg
-      entity networking
-      all the classes for items
-      upgrading
+      REMARKS after corrosion.entity.building.Building
+      add bullets
+      add spawning of rocks trees etc
+      add tool
+
       fix buggy shotgun when player shots in middle
+      corrosion.drawingstate.TextBoxG says in the top
+      corrosion.drawingstate.GameDrawing init() load all sprites
   */
 
 package corrosion;

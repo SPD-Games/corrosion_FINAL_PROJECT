@@ -19,11 +19,11 @@ import corrosion.Drawing;
 
 public class ButtonG {
 
-  int xPos,yPos, width, height;
-  int[] yBounds = new int[2];
-  int[] xBounds = new int[2];
-  AffineTransform transform = new AffineTransform();
-  BufferedImage image;
+  private int xPos,yPos, width, height;
+  private int[] yBounds = new int[2];
+  private int[] xBounds = new int[2];
+  private AffineTransform transform = new AffineTransform();
+  private BufferedImage image;
 
   /** stores the information of a button, button constructor
   * @param xPos the x Position of the button

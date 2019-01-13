@@ -1,6 +1,6 @@
 /**  Edward Pei, Micheal Metzinger
   * January 3 2019
-  * Draws the main game
+  * Draws the main menu
   */
 
 package corrosion.drawingstate;
@@ -57,8 +57,10 @@ public class MainMenuDrawing extends DrawingState{
     return playBtn;
   }
 
+  /**
+  * Initiates the MainMenuDrawing
+  */
   public void init(){
-
     // add all the mouse binds
     MouseBindable mouseBinds[] = new MouseBindable[5];
     mouseBinds[1] = new LeftClickMainMenu();//left click
