@@ -3,11 +3,23 @@
   * class for barrels that drop loot
   */
 package corrosion.entity;
+import corrosion.entity.item.*;
+import corrosion.Sprite;
+import corrosion.entity.player.MainPlayer;
+import java.awt.*;
+import java.awt.geom.*;
+import corrosion.entity.*;
+import corrosion.network.*;
+import corrosion.network.protocol.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.*;
 
 public class Barrel extends Entity{
 
-  double scaleSize = 0.5;
-
+  private double scaleSize = 0.5;
+  private static BufferedImage icon;
+  private int hp = 150;
   public static void init(){
     try{
       //loads Barrel icon
@@ -18,44 +30,48 @@ public class Barrel extends Entity{
       System.exit(-1);
     }
   }
-
   /**
-  * Main Constructor of the Barrel
+  * Main Constructor of the Crate
   * @param x the x position of the Entity
   * @param y the y position of the Entity
   * @param r the rotation applied to the Entity
   */
   public Barrel (double x, double y, double r, long id) {
     super(x,y,r,id);
+    transform.setToTranslation(x-50,y-50);
+    transform.scale(scaleSize,scaleSize);
+  }
+  public Barrel () {
+    super();
   }
 
-  /**
-  * Main Constructor of the Barrel
-  * @param x the x position of the Entity
-  * @param y the y position of the Entity
-  * @param r the rotation applied to the Entity
-  * @param scaleSize the size to which the object is scaled to
-  */
-  public Barrel (double x, double y, double r, long id, double scaleSize) {
-    super(x,y,r,id);
-    this.scaleSize = scaleSize;
+  public void draw(Graphics g, long t) {
+    ((Graphics2D)g).drawImage(icon,transform,null);
   }
 
-  public draw() {
+  public void drop(){
 
+  }
 
+  public Shape getHitBox(){
+    return new Ellipse2D.Double(xPos-50, yPos-50,100,100);
   }
 
   /**
   * if the Barrel is hit, decrease its size until it is small then return resources
   */
-  public hit() {
-
-    if(scaleSize > 0.2) {
-      // reduce the size of the barrel
-      scaleSize -= 0.05;
+  public void hit(int damage) {
+    if(hp > 0) {
+      // reduce the size of the Barrel
+      hp -= damage;
+      Item i = new Metal(1);
+      MainPlayer.getMainPlayer().getInvetory().addItem(i);
+      Protocol.send(8, this, Client.getConnection());
     } else {
-      //TODO: ADD SOME SORT OF LOOT DROP WHEN BARREL IS HIT A BUNCH
+      drop();
+
+      Client.removeEntity(this);
+      Protocol.send(12, this, Client.getConnection());
     }
   }
 

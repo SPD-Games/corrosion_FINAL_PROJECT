@@ -61,7 +61,9 @@ public class GameDrawing extends DrawingState{
     Stone.init();
     Wood.init();
     Metal.init();
-    
+    Barrel.init();
+    Crate.init();
+
     //Axe.init();
     //Bandage.init();
     //Bow.init();
@@ -70,12 +72,11 @@ public class GameDrawing extends DrawingState{
     //Pickaxe.init();
     Pistol.init();
     Rifle.init();
-    //Shotgun.init();
+    Shotgun.init();
     //Smg.init();
     Sniper.init();
 
     setBinds();
-
     try{
       //sets sprite image
       img = ImageIO.read(new File("sprites/deathScreen.png"));
@@ -115,7 +116,7 @@ public class GameDrawing extends DrawingState{
   * @param ip the ip of the server to connect to
   * @param port the port of the server to connect to
   */
-  public GameDrawing(String ip, int port){
+  public GameDrawing(String ip, int port) throws Exception{
     super();
     new Client(ip, port);
   }

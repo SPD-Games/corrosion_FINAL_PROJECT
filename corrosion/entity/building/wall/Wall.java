@@ -14,6 +14,8 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.*;
 import java.util.ArrayList;
+import corrosion.Inventory;
+import corrosion.entity.item.*;
 
 public class Wall extends Building {
   private static BufferedImage[][] sprites = new BufferedImage[1][4];
@@ -145,10 +147,10 @@ public class Wall extends Building {
     buildingHitBox.transform(transform);
 
     hitBox = new Path2D.Double();
-    hitBox.moveTo(0, 0);
-    hitBox.lineTo(250, 0);
-    hitBox.lineTo(250, 10);
-    hitBox.lineTo(0, 10);
+    hitBox.moveTo(-5, 0);
+    hitBox.lineTo(255, 0);
+    hitBox.lineTo(255, 10);
+    hitBox.lineTo(-5, 10);
     hitBox.transform(transform);
     xPos = buildingHitBox.getCurrentPoint().getX();
     yPos = buildingHitBox.getCurrentPoint().getY();

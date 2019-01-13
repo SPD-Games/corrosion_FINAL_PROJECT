@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import corrosion.network.Client;
 import corrosion.entity.Entity;
 import corrosion.HitDetection;
+import corrosion.Inventory;
+import corrosion.entity.item.*;
 
 public class Triangle extends Building {
   private static BufferedImage[][] sprites = new BufferedImage[1][4];

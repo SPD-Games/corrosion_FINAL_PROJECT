@@ -80,6 +80,9 @@ public class MainPlayer extends Player{
         xPos = 19300;
         yPos = ThreadLocalRandom.current().nextInt(2200, 18600);
       }
+      xPos = 500;
+      yPos = 500;
+      Client.addEntity(new Crate(0,0,0,Client.getId()));
     }
 
     /**
@@ -170,6 +173,7 @@ public class MainPlayer extends Player{
         //die
         ((GameDrawing)Drawing.getState()).deadScreen();
         inventory.dropAll();
+        equipped = null;
         spawn();
       } else if (tmpHp > 100){
         hp = 100;

@@ -15,6 +15,8 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.*;
 import java.util.ArrayList;
+import corrosion.Inventory;
+import corrosion.entity.item.*;
 
 public class DoorFrame extends Wall {
   private boolean open = false;
@@ -64,6 +66,7 @@ public class DoorFrame extends Wall {
   */
   public void draw(Graphics g, long t){
     ((Graphics2D)g).drawImage(sprite.getFrame(), transform, null);
+    ((Graphics2D)g).fill(hitBox);
   }
 
   public DoorFrame(double xPos, double yPos, double rotation){
@@ -109,7 +112,7 @@ public class DoorFrame extends Wall {
   @Override
   public boolean place(){
     if (super.place()){
-      closedHitBox = buildingHitBox;
+      closedHitBox = hitBox;
       openHitBox = null;
     }
     return false;

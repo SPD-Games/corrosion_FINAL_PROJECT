@@ -59,7 +59,11 @@ public class Drawing extends JPanel{
   */
   public static void setStateGame(String ip, int port) {
       // 127.0.0.1
+      try {
       state = new GameDrawing(ip, 1234);
+    } catch (Exception e){
+      state = new MainMenuDrawing();
+    }
   }
 
   /**

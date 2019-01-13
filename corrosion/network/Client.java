@@ -252,7 +252,7 @@ public class Client{
   * @param ip the ip of the server to connect to
   * @param port the port of the server to connect to
   */
-  public Client(String ip, int port){
+  public Client(String ip, int port) throws Exception{
     client = this;
     Protocol.init();
     try{
@@ -260,8 +260,7 @@ public class Client{
       connection = new Connection(ip, port);
     } catch(Exception e){
       System.out.println("Error connecting to server" + e);
-      Drawing.setStateConnect();
-      return;
+      throw new Exception();
     }
     //checks for server responce for 2000ms
     long startTime = System.currentTimeMillis();
@@ -272,8 +271,7 @@ public class Client{
       if (timeElapsed > 2000){
         //server timeout error
         System.out.println("Failed to connect to server.");
-        Drawing.setStateConnect();
-        return;
+        throw new Exception();
       }
       try{
         Thread.sleep(10);

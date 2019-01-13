@@ -37,6 +37,9 @@ public class Inventory{
     items[0][0] = new BuildingPlan();
     items[0][1] = new UpgradePlan();
     items[0][3] = new Orange();
+    items[0][4] = new Wood(10000);
+    items[0][5] = new Stone(10000);
+    items[1][0] = new Metal(10000);
   }
   public void setEquipped(int i){
     equipped = i;
@@ -145,7 +148,14 @@ public class Inventory{
         }
       }
     }
-
+    if (i instanceof Equippable){
+      for (int x = 0; x < 6; x++){
+        if (hotBar[x] == null){
+          hotBar[x] = (Equippable)i;
+          return true;
+        }
+      }
+    }
     for(int x = 0; x < 6; x ++){
       for(int y = 0; y < 6; y ++){
         if (items[x][y] == null){

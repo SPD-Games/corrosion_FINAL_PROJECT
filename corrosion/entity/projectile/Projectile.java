@@ -11,7 +11,7 @@ abstract public class Projectile extends Entity{
   protected double xVel, yVel;
   protected double lastXPos, lastYPos;
   protected double range;
-  protected transient Player player = null;
+  protected Player player = null;
   protected boolean isHit = false;
 
   public Projectile(double xPos, double yPos, double xVel, double yVel, double r, long id){

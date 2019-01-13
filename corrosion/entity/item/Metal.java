@@ -51,8 +51,11 @@ public class Metal extends Item{
   public String getInfo(){
     return stackSize + "";
   }
+
+  public void fromServer(){
+    sprite = sprites;
+  }
   public BufferedImage getIcon(){
     return sprite.getIcon();
   }
-  public void fromServer(){}
 }

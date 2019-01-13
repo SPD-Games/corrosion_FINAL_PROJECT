@@ -25,7 +25,7 @@ import corrosion.network.*;
 import corrosion.network.protocol.*;
 
 
-public class Shotgun extends Equippable implements Serializable{
+public class Shotgun extends Equippable {
   public void attackOff(Player player){}
 
   // get the icons and animations for the pistol
@@ -51,6 +51,12 @@ public class Shotgun extends Equippable implements Serializable{
         System.exit(-1);
       }
     }
+  public String getInfo(){
+    return "TODO";
+  }
+  public void fromServer(){
+    sprite = new Sprite(icon, state, sprites, new int[]{50});
+  }
     public BufferedImage getIcon(){
       return icon;
     }

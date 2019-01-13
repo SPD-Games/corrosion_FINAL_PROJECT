@@ -54,5 +54,7 @@ public class Stone extends Item{
   public BufferedImage getIcon(){
     return sprite.getIcon();
   }
-  public void fromServer(){}
+  public void fromServer(){
+    sprite = sprites;
+  }
 }

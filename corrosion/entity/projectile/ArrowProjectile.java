@@ -63,8 +63,8 @@ public class ArrowProjectile extends Projectile{
     this.rotation = Math.atan2(mouseX, mouseY);
     this.xPos = player.getXPos() + 189 * Math.sin(rotation);
     this.yPos = player.getYPos() - 189 * Math.cos(rotation);
-    this.lastXPos = xPos;
-    this.lastYPos = yPos;
+    this.lastXPos = player.getXPos();
+    this.lastYPos = player.getYPos();
     this.xVel = MAX_VEL*Math.sin(rotation);
     this.yVel = MAX_VEL*-Math.cos(rotation);
     range = MAX_RANGE;
@@ -75,21 +75,6 @@ public class ArrowProjectile extends Projectile{
 
   //TODO hit checking
   public void hitCheck(){
-    ArrayList<Player> players = Client.getPlayers();
-    for (int i = 0; i < players.size(); ++i){
-      if (HitDetection.hit(players.get(i).getHitBox(), getHitBox())){
-        if (!isHit && player != null){
-          ArrayList out = new ArrayList();
-          out.add(players.get(i).getId());
-          out.add(damage);
-          Protocol.send(8 ,new HitMarker(players.get(i).getXPos(),players.get(i).getYPos(), "-"+damage), Client.getConnection());
-          Protocol.send(10, out, Client.getConnection());
-        }
-        hit();
-        return;
-      }
-    }
-
     ArrayList<Entity> entities = Client.getEntities();
     for (int i = 0; i < entities.size(); ++i){
 
@@ -104,6 +89,24 @@ public class ArrowProjectile extends Projectile{
         return;
       }
     }
+
+    ArrayList<Player> players = Client.getPlayers();
+    for (int i = 0; i < players.size(); ++i){
+      if (players.get(i).equals(player)){continue;}
+      if (HitDetection.hit(players.get(i).getHitBox(), getHitBox())){
+        if (!isHit && player != null){
+          ArrayList out = new ArrayList();
+          out.add(players.get(i).getId());
+          out.add(damage);
+          Protocol.send(8 ,new HitMarker(players.get(i).getXPos()+50,players.get(i).getYPos()+50, "-"+damage), Client.getConnection());
+          Protocol.send(10, out, Client.getConnection());
+        }
+        hit();
+        return;
+      }
+    }
+
+    if (MainPlayer.getMainPlayer().equals(player)){return;}
     if (HitDetection.hit(MainPlayer.getMainPlayer().getHitBox(), getHitBox())){
       hit();
     }
