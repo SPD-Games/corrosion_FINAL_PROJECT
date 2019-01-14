@@ -72,6 +72,7 @@ public class GameDrawing extends DrawingState{
     Metal.init();
     Barrel.init();
     Crate.init();
+    Bullet.init();
 
     //Axe.init();
     //Bandage.init();
@@ -84,7 +85,7 @@ public class GameDrawing extends DrawingState{
     Shotgun.init();
     //Smg.init();
     Sniper.init();
-
+    Tool.init();
     //setUpBinds
     setBinds();
 

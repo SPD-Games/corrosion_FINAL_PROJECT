@@ -21,7 +21,7 @@ import corrosion.Sprite;
 import corrosion.entity.Entity;
 import corrosion.entity.player.*;
 
-public class Bullet extends Item{
+public class Arrow extends Item{
   public void attackOff(Player player){}
 
   private static BufferedImage icon;
@@ -30,27 +30,27 @@ public class Bullet extends Item{
   public static void init(){
     try{
       //loads icon
-      icon = ImageIO.read(new File("sprites/bulletIcon.png"));
+      icon = ImageIO.read(new File("sprites/arrowIcon.png"));
 
     }catch(Exception e){
       //exits on error with message
-      System.out.println("Reading Bullet Sprite: " + e);
+      System.out.println("Reading Arrow Sprite: " + e);
       System.exit(-1);
     }
   }
   public BufferedImage getIcon(){
     return icon;
   }
-  public Bullet(){
+  public Arrow(){
     super();
     sprite = new Sprite(icon, null, null, null);
   }
-  public Bullet(int stackSize){
+  public Arrow(int stackSize){
     this();
     this.stackSize = stackSize;
   }
 
-  public Bullet(double x, double y, double r, long id){
+  public Arrow(double x, double y, double r, long id){
     super(x,y,r,id);
     sprite = new Sprite(icon, null, null, null);
   }

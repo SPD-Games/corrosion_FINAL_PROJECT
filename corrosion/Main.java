@@ -3,9 +3,10 @@
   * Runs the game
   * TODO:
       REMARKS after corrosion.entity.building.Building
-      add bullets
       add spawning of rocks trees etc
       add tool
+      reloading
+      player random spawn
 
       fix buggy shotgun when player shots in middle
       corrosion.drawingstate.TextBoxG says in the top

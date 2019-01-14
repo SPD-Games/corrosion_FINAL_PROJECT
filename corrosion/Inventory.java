@@ -40,6 +40,10 @@ public class Inventory{
     items[0][4] = new Wood(10000);
     items[0][5] = new Stone(10000);
     items[1][0] = new Metal(10000);
+    items[1][1] = new Bullet(10000);
+    items[1][2] = new Arrow(10000);
+    items[1][3] = new Tool();
+
   }
   public void setEquipped(int i){
     equipped = i;
@@ -205,6 +209,15 @@ public class Inventory{
               if (items[x][y].getStackSize() == 0){items[x][y] = null;}
               if (i.getStackSize() == 0){return true;}
             }
+          }
+        }
+      }
+      for (int x = 0; x < 6; x++){
+        if (hotBar[x] != null){
+          if (hotBar[x].getClass() == i.getClass()){
+            hotBar[x].removeStack(i);
+            if (hotBar[x].getStackSize() == 0){hotBar[x] = null;}
+            if (i.getStackSize() == 0){return true;}
           }
         }
       }

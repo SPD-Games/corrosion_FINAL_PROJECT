@@ -113,11 +113,6 @@ public class BuildingPlan extends Equippable{
     }
   }
 
-  public void draw(Graphics g, long t){
-    transform.setToTranslation(xPos -50, yPos -50);
-    ((Graphics2D)(g)).drawImage(sprite.getIcon(), transform, null);
-  }
-
   /**
   *
   * @param p the pointer position on the screen relative to the player
