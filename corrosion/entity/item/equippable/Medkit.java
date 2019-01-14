@@ -1,6 +1,6 @@
 //Edward Pei
 //Dec 29, 2018
-//medkit class
+//Apple class
 package corrosion.entity.item.equippable;
 
 //TODO: get apples to add health and stuff idk how to do this micheal dad help
@@ -23,54 +23,62 @@ import corrosion.entity.player.*;
 
 public class Medkit extends Equippable{
   public void attackOff(Player player){}
-
-  private static BufferedImage icon;
-  private static BufferedImage[][] sprites = new BufferedImage[1][];
-  private final static int[] LAST_FRAME = {0,1};
-  public static void init(){
-    try{
-      //loads icon
-      icon = ImageIO.read(new File("sprites/medkit/icon.png"));
-      //loads eating animations
-      sprites[0] = new BufferedImage[2];
-      for (int i = 1; i <= 1; ++i){
-        sprites[0][i-1] = ImageIO.read(new File("sprites/bandage/medkit/frame" + i + ".png"));
-      }
-    }catch(Exception e){
-      //exits on error with message
-      System.out.println("Reading Medkit Sprite: " + e);
-      System.exit(-1);
+    public void fromServer(){
+      sprite = new Sprite(icon, state, sprites, delay);
     }
-  }
   public BufferedImage getIcon(){
     return icon;
   }
+  public String getInfo(){
+    return stackSize + "";
+  }
+  private static BufferedImage icon;
+  private static BufferedImage[][] sprites = new BufferedImage[1][];
+  private final static int[] LAST_FRAME = {0,0};
+  public static void init(){
+    try{
+      //loads icon
+
+      icon = ImageIO.read(new File("sprites/medkit/icon.png"));
+
+      //loads eating animations
+      sprites[0] = new BufferedImage[2];
+      for (int i = 1; i <= 1; ++i){
+        sprites[0][i-1] = ImageIO.read(new File("sprites/medkit/animation/frame" + i + ".png"));
+      }
+    }catch(Exception e){
+      //exits on error with message
+      System.out.println("Reading medkit Sprite: " + e);
+      System.exit(-1);
+    }
+  }
+
   public Medkit(){
     this(new int[]{0,0});
   }
 
   public Medkit(int[] state){
     super(new Sprite(icon, state, sprites, new int[]{0}));
+    stackable = true;
   }
 
   public Medkit(double x, double y, double r, long id){
     super(x,y,r,id);
+    stackable = true;
   }
 
   public void drawEquipped(Graphics g, Player player){
     transform = player.getTransform();
-    transform.scale(.3,.3);
-    transform.translate(-18, -65);
+    transform.scale(.8,.8);
+    transform.translate(-37, -167);
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
 
-
-  ///////
-
   public void attack(Point p, Player player){
     int[] frame = sprite.getState();
     if (frame[0] == LAST_FRAME[0] && frame[1] == LAST_FRAME[1]){
+      ((MainPlayer)player).getInvetory().removeItem(new Medkit());
       player.setEquipped(null);
     } else {
       sprite.nextFrame();

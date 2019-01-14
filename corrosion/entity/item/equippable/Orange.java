@@ -34,7 +34,7 @@ public class Orange extends Equippable{
   }
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[1][];
-  private final static int[] LAST_FRAME = {0,2};
+  private final static int[] LAST_FRAME = {0,1};
   public static void init(){
     try{
       //loads icon
@@ -69,8 +69,8 @@ public class Orange extends Equippable{
 
   public void drawEquipped(Graphics g, Player player){
     transform = player.getTransform();
-    transform.scale(.3,.3);
-    transform.translate(-18, -65);
+    transform.scale(1.2,1.2);
+    transform.translate(-18, -70);
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
@@ -78,6 +78,7 @@ public class Orange extends Equippable{
   public void attack(Point p, Player player){
     int[] frame = sprite.getState();
     if (frame[0] == LAST_FRAME[0] && frame[1] == LAST_FRAME[1]){
+      ((MainPlayer)player).getInvetory().removeItem(new Orange());
       player.setEquipped(null);
     } else {
       sprite.nextFrame();

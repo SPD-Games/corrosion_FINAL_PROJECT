@@ -57,10 +57,14 @@ public class Apple extends Equippable{
 
   public Apple(int[] state){
     super(new Sprite(icon, state, sprites, new int[]{0}));
+    stackable = true;
+
   }
 
   public Apple(double x, double y, double r, long id){
     super(x,y,r,id);
+    stackable = true;
+
   }
 
   public void drawEquipped(Graphics g, Player player){
@@ -73,11 +77,13 @@ public class Apple extends Equippable{
   public void attack(Point p, Player player){
     int[] frame = sprite.getState();
     if (frame[0] == LAST_FRAME[0] && frame[1] == LAST_FRAME[1]){
+      //((MainPlayer)player).getInvetory().removeItem(new Apple());
       player.setEquipped(null);
+      System.out.println(((MainPlayer)player).getInvetory().removeItem(new Apple()));
     } else {
       sprite.nextFrame();
     }
-    ((MainPlayer)player).hit(-10);
+    ((MainPlayer)player).hit(-5);
   }
 
   /**
