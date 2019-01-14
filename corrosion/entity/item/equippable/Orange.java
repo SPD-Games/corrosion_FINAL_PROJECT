@@ -79,6 +79,7 @@ public class Orange extends Equippable{
     int[] frame = sprite.getState();
     if (frame[0] == LAST_FRAME[0] && frame[1] == LAST_FRAME[1]){
       ((MainPlayer)player).getInvetory().removeItem(new Orange());
+      sprite.setState(0,0);
       player.setEquipped(null);
     } else {
       sprite.nextFrame();

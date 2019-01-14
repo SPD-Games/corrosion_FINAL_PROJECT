@@ -71,7 +71,9 @@ abstract public class Item extends Entity implements Serializable{
   public void removeStack(Item i){
     int otherStackSize = i.getStackSize();
     if (otherStackSize <= stackSize){
+      int tmp = stackSize;
       stackSize -= otherStackSize;
+      i.stackSize -= tmp;
       return;
     } else {
       i.removeStack(this);
