@@ -25,16 +25,17 @@ import java.awt.event.ActionEvent;
 public class Tool extends Equippable{
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[1][];;
-  private final int[] SHOOT_READY = {0,3};
+  private final int[] USE_READY = {0,5};
   public static void init(){
     try{
       //loads icon
       icon = ImageIO.read(new File("sprites/club/icon.png"));
       //loads relaod animations
-      sprites[0] = new BufferedImage[5];
+      sprites[0] = new BufferedImage[6];
       for (int i = 1; i <= 5; ++i){
         sprites[0][i-1] = ImageIO.read(new File("sprites/club/animation/frame" + i + ".png"));
       }
+      sprites[0][5] = sprites[0][0];
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading Tool Sprite: " + e);
@@ -45,7 +46,7 @@ public class Tool extends Equippable{
    * Main Constructor
   */
   public Tool(){
-    this(new int[]{0,0});
+    this(new int[]{0,5});
   }
 
   /**
@@ -53,7 +54,7 @@ public class Tool extends Equippable{
    * @param p the player that has the crossbow equipped
   */
   public Tool(int[] state){
-    super(new Sprite(icon, state, sprites, new int[]{500,50}));
+    super(new Sprite(icon, state, sprites, new int[]{100}));
     stackable = false;
   }
 
@@ -63,7 +64,7 @@ public class Tool extends Equippable{
   */
   public Tool(double xPos, double yPos, double rotation, long id){
     super(xPos,yPos,rotation, id);
-    this.sprite = new Sprite(icon, new int[]{1,2}, sprites, new int[]{500,50});
+    this.sprite = new Sprite(icon, new int[]{0,5}, sprites, new int[]{100});
   }
 
   public void reload(){
@@ -83,21 +84,21 @@ public class Tool extends Equippable{
   }
 
   public void drawEquipped(Graphics g, Player player){
-
+    transform = player.getTransform();
+    transform.translate(0, -120);
+    transform.scale(0.25,0.25);
+    ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
   public String getInfo(){
     return "";
   }
 
-  @Override
   public BufferedImage getIcon(){
-    System.out.println(icon);
-    System.exit(-1);
     return icon;
   }
 
   public void fromServer(){
-    this.sprite = new Sprite(icon, new int[]{0,2}, sprites, new int[]{50});
+    this.sprite = new Sprite(icon, new int[]{0,5}, sprites, new int[]{100});
   }
 }

@@ -182,6 +182,13 @@ public class Inventory{
         }
       }
     }
+    for(int x = 0; x < 6; x ++){
+      if (hotBar[x] != null){
+        if (hotBar[x].getClass() == i.getClass()){
+          need -= hotBar[x].getStackSize();
+        }
+      }
+    }
     return need <= 0;
   }
 
@@ -270,6 +277,7 @@ public class Inventory{
             continue;
           }
           BufferedImage i = items[x][y].getIcon();
+          if (i==null){return;}
           AffineTransform t = new AffineTransform();
           t.translate(x*50 + 19, y*50 + 20);
           t.scale(45.0/i.getWidth(), 45.0/i.getHeight());
