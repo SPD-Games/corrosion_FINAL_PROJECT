@@ -20,8 +20,8 @@ import java.awt.event.ActionEvent;
 import corrosion.entity.projectile.*;
 import corrosion.Sprite;
 import corrosion.entity.Entity;
-import corrosion.entity.player.Player;
-//import corrosion.entity.projectile.Arrow;
+import corrosion.entity.player.*;
+import corrosion.entity.item.Arrow;
 
 public class CrossBow extends Equippable{
   public void attackOff(Player player){}
@@ -133,6 +133,7 @@ public class CrossBow extends Equippable{
   public void reload(){
     //checks if crossbow is ready to be reloaded
     if (sprite.isState(RELOAD_READY, false)){
+      if (!MainPlayer.getMainPlayer().getInvetory().removeItem(new Arrow(1))){return;}
       //starts the reload
       sprite.startAnimation(0);
     }

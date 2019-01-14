@@ -3,15 +3,20 @@
   * Runs the game
   * TODO:
       REMARKS after corrosion.entity.building.Building
+
       add spawning of rocks trees etc
-      add tool
+
       reloading
+        shotgun
+        smg
+
       player random spawn
+        remove crate that spawns at 0,0
 
       fix buggy shotgun when player shots in middle
+      
       corrosion.drawingstate.TextBoxG says in the top
       corrosion.drawingstate.GameDrawing init() load all sprites
-
 
       Data File loading rocks and all that stuff
       recursion ???

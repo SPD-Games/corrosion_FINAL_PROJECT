@@ -68,6 +68,13 @@ public class Inventory{
         }
       }
     }
+    for(int x = 0; x < 6; x ++){
+      if (hotBar[x] != null){
+        if (hotBar[x].getClass() == i.getClass()){
+          have += hotBar[x].getStackSize();
+        }
+      }
+    }
     return have;
   }
 

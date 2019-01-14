@@ -21,11 +21,17 @@ import java.awt.geom.AffineTransform;
 import java.awt.Point;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import corrosion.HitDetection;
+import corrosion.entity.HitMarker;
 
 public class Tool extends Equippable{
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[1][];;
   private final int[] USE_READY = {0,5};
+  private static Path2D[] hitBoxs = new Path2D[6];
+  private boolean hitAnything = false;
+  private int damage = 70;
   public static void init(){
     try{
       //loads icon
@@ -36,6 +42,28 @@ public class Tool extends Equippable{
         sprites[0][i-1] = ImageIO.read(new File("sprites/club/animation/frame" + i + ".png"));
       }
       sprites[0][5] = sprites[0][0];
+
+      hitBoxs[0] = new Path2D.Double();
+      hitBoxs[0].moveTo(450,192);
+      hitBoxs[0].lineTo(95,527);
+      hitBoxs[0].lineTo(545,340);
+      hitBoxs[1] = new Path2D.Double();
+      hitBoxs[1].moveTo(385,145);
+      hitBoxs[1].lineTo(516,265);
+      hitBoxs[1].lineTo(116,547);
+      hitBoxs[2] = new Path2D.Double();
+      hitBoxs[2].moveTo(315,109);
+      hitBoxs[2].lineTo(465,205);
+      hitBoxs[2].lineTo(138,560);
+      hitBoxs[3] = new Path2D.Double();
+      hitBoxs[3].moveTo(245,90);
+      hitBoxs[3].lineTo(405,155);
+      hitBoxs[3].lineTo(160,575);
+      hitBoxs[4] = new Path2D.Double();
+      hitBoxs[4].moveTo(163,92);
+      hitBoxs[4].lineTo(330,116);
+      hitBoxs[4].lineTo(185,578);
+      hitBoxs[5] = hitBoxs[0];
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading Tool Sprite: " + e);
@@ -54,7 +82,7 @@ public class Tool extends Equippable{
    * @param p the player that has the crossbow equipped
   */
   public Tool(int[] state){
-    super(new Sprite(icon, state, sprites, new int[]{100}));
+    super(new Sprite(icon, state, sprites, new int[]{40}));
     stackable = false;
   }
 
@@ -64,7 +92,7 @@ public class Tool extends Equippable{
   */
   public Tool(double xPos, double yPos, double rotation, long id){
     super(xPos,yPos,rotation, id);
-    this.sprite = new Sprite(icon, new int[]{0,5}, sprites, new int[]{100});
+    this.sprite = new Sprite(icon, new int[]{0,5}, sprites, new int[]{40});
   }
 
   public void reload(){
@@ -76,7 +104,12 @@ public class Tool extends Equippable{
   }
 
   public void attack(Point p, Player player){
-
+    //checks if tool is ready for use
+    if (sprite.isState(USE_READY, false)){
+      hitAnything = false;
+      //starts attack animation
+      sprite.startAnimation(0);
+    }
   }
 
   public void attackOff(Player player){
@@ -85,11 +118,52 @@ public class Tool extends Equippable{
 
   public void drawEquipped(Graphics g, Player player){
     transform = player.getTransform();
-    transform.translate(0, -120);
+    transform.translate(0, -130);
     transform.scale(0.25,0.25);
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
+    if (getHitBox() != null){
+      ((Graphics2D)(g)).fill(getHitBox());
+    }
+    update(player);
   }
 
+  public void update(Player player){
+    if (player != MainPlayer.getMainPlayer() || sprite.isState(USE_READY, false)){return;}
+    ArrayList<Entity> entities = Client.getEntities();
+    for (int i = 0; i < entities.size(); ++i){
+
+      Entity e = entities.get(i);
+      if (e == this){continue;}
+      if (HitDetection.hit(e.getHitBox(), getHitBox())){
+        e.hit(damage);
+        Protocol.send(8 ,new HitMarker(getXPos(),getYPos(), "-"+damage), Client.getConnection());
+        hit();
+        return;
+      }
+    }
+
+    ArrayList<Player> players = Client.getPlayers();
+    for (int i = 0; i < players.size(); ++i){
+      if (players.get(i).equals(player)){continue;}
+      if (HitDetection.hit(players.get(i).getHitBox(), getHitBox())){
+        ArrayList out = new ArrayList();
+        out.add(players.get(i).getId());
+        out.add(damage);
+        Protocol.send(8 ,new HitMarker(players.get(i).getXPos()+50,players.get(i).getYPos()+50, "-"+damage), Client.getConnection());
+        hit();
+        return;
+      }
+    }
+  }
+
+  public double getXPos(){
+    Point2D p = transform.transform(new Point2D.Double(),null);
+    return p.getX();
+  }
+  public double getYPos(){
+    Point2D p = transform.transform(new Point2D.Double(),null);
+    return p.getY();
+  }
   public String getInfo(){
     return "";
   }
@@ -99,6 +173,17 @@ public class Tool extends Equippable{
   }
 
   public void fromServer(){
-    this.sprite = new Sprite(icon, new int[]{0,5}, sprites, new int[]{100});
+    this.sprite = new Sprite(icon, new int[]{0,5}, sprites, new int[]{40});
+  }
+
+  public Shape getHitBox(){
+    if (hitAnything){return null;}
+    Path2D out = (Path2D)hitBoxs[sprite.getState()[1]].clone();
+    out.transform(transform);
+    return out;
+  }
+
+  private void hit(){
+    hitAnything = true;
   }
 }

@@ -1,4 +1,4 @@
-//Henry Lim, Edward Peiphics g, long t){}
+//Henry Lim, Edward Pei
 //Dec 17, 2018
 //Pistol class
 package corrosion.entity.item.equippable;
@@ -20,7 +20,8 @@ import corrosion.Sprite;
 import corrosion.entity.Entity;
 import corrosion.entity.player.Player;
 import corrosion.entity.projectile.*;
-
+import corrosion.entity.player.MainPlayer;
+import corrosion.entity.item.Bullet;
 import corrosion.network.*;
 import corrosion.network.protocol.*;
 
@@ -35,6 +36,7 @@ public class Pistol extends Equippable implements Serializable{
   private static BufferedImage[][] sprites = new BufferedImage[2][3];
   private final int[] SHOOT_READY = {0,2};
   private int ammo = 0;
+  private int reloadTo = 8;
   private static final int MAX_AMMO = 8;
   private final int[] RELOAD_DONE = {1,2};
   public String getInfo(){
@@ -86,18 +88,13 @@ public class Pistol extends Equippable implements Serializable{
   public void drawEquipped(Graphics g, Player player){
     if (player == null){return;}
     if (sprite.isState(RELOAD_DONE, false)){
-      ammo = MAX_AMMO;
+      ammo = reloadTo;
       sprite.setState(SHOOT_READY[0], SHOOT_READY[1]);
     }
     transform = player.getTransform();
     transform.translate(-47, -110);
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
-
-
-
-
-
 
   public void attack(Point p, Player player){
     if (sprite.isState(SHOOT_READY, false) && ammo > 0){
@@ -116,6 +113,8 @@ public class Pistol extends Equippable implements Serializable{
   */
   public void reload(){
     if (ammo != MAX_AMMO){
+      reloadTo = Math.min(MainPlayer.getMainPlayer().getInvetory().getAmount(new Bullet()) + ammo, MAX_AMMO);
+      MainPlayer.getMainPlayer().getInvetory().removeItem(new Bullet(reloadTo-ammo));
       sprite.startAnimation(1);
     }
   }

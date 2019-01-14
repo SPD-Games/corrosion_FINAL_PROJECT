@@ -15,7 +15,8 @@ import java.awt.Point;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
-
+import corrosion.entity.player.MainPlayer;
+import corrosion.entity.item.Bullet;
 import corrosion.Sprite;
 import corrosion.entity.Entity;
 import corrosion.entity.player.Player;
@@ -113,6 +114,7 @@ public class Sniper extends Equippable implements Serializable{
   */
   public void reload(){
     if (sprite.isState(RELOAD_READY, false)){
+      if (!MainPlayer.getMainPlayer().getInvetory().removeItem(new Bullet(1))){return;}
       sprite.startAnimation(1);
     }
   }

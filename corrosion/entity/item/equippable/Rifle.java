@@ -22,12 +22,13 @@ import corrosion.Sprite;
 import corrosion.entity.Entity;
 import corrosion.entity.player.Player;
 import corrosion.entity.projectile.*;
-
+import corrosion.entity.player.MainPlayer;
+import corrosion.entity.item.Bullet;
 import corrosion.network.*;
 import corrosion.network.protocol.*;
 
 
-public class Rifle extends Equippable implements Serializable{
+public class Rifle extends Equippable {
   public boolean shooting = false;
   public void fromServer(){
     sprite = new Sprite(icon, state, sprites, delay);
@@ -43,6 +44,8 @@ public class Rifle extends Equippable implements Serializable{
   private int ammo = 0;
   private int MAX_AMMO = 30;
   private static final int[] RELOAD_DONE = {1,2};
+  private int reloadTo = 30;
+
   public String getInfo(){
     return ammo + "";
   }
@@ -99,7 +102,7 @@ public class Rifle extends Equippable implements Serializable{
         shoot();
       }
     } else if (sprite.isState(RELOAD_DONE, false)){
-      ammo = MAX_AMMO;
+      ammo = reloadTo;
       sprite.setState(SHOOT_READY[0], SHOOT_READY[1]);
     }
     transform = player.getTransform();
@@ -129,6 +132,8 @@ public class Rifle extends Equippable implements Serializable{
   */
   public void reload(){
     if(ammo != MAX_AMMO){
+      reloadTo = Math.min(MainPlayer.getMainPlayer().getInvetory().getAmount(new Bullet()) + ammo, MAX_AMMO);
+      MainPlayer.getMainPlayer().getInvetory().removeItem(new Bullet(reloadTo-ammo));
       sprite.startAnimation(1);
     }
   }
