@@ -10,6 +10,11 @@
       fix buggy shotgun when player shots in middle
       corrosion.drawingstate.TextBoxG says in the top
       corrosion.drawingstate.GameDrawing init() load all sprites
+
+
+      Data File loading rocks and all that stuff
+      recursion ???
+      create a jar file
   */
 
 package corrosion;
