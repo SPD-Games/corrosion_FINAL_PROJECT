@@ -73,17 +73,14 @@ public class GameDrawing extends DrawingState{
     Barrel.init();
     Crate.init();
     Bullet.init();
-    Arrow.init();
-    //Axe.init();
-    //Bandage.init();
-    //Bow.init();
-    //Medkit.init();
+
+    Bandage.init();
+    Medkit.init();
     Orange.init();
-    //Pickaxe.init();
     Pistol.init();
     Rifle.init();
     Shotgun.init();
-    //Smg.init();
+    Smg.init();
     Sniper.init();
     Tool.init();
     //setUpBinds

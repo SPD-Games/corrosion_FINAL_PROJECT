@@ -46,7 +46,7 @@ public class ConnectMenuDrawing extends DrawingState{
     ipInput.draw(g);
 
     //draws logo
-    ((Graphics2D)(g)).scale(0.8,0.8);
+    ((Graphics2D)(g)).scale(0.6,0.6);
     g.translate(-logoImg.getWidth()/2, -logoImg.getHeight()/2 - Drawing.getPanel().getWidth()/6);
     ((Graphics2D)(g)).drawImage(logoImg,null,null);
   }

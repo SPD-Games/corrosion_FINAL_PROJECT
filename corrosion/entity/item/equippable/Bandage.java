@@ -1,6 +1,6 @@
 //Edward Pei
 //Dec 29, 2018
-//Bandage class
+//Apple class
 package corrosion.entity.item.equippable;
 
 //TODO: get apples to add health and stuff idk how to do this micheal dad help
@@ -23,14 +23,24 @@ import corrosion.entity.player.*;
 
 public class Bandage extends Equippable{
   public void attackOff(Player player){}
-
+    public void fromServer(){
+      sprite = new Sprite(icon, state, sprites, delay);
+    }
+  public BufferedImage getIcon(){
+    return icon;
+  }
+  public String getInfo(){
+    return stackSize + "";
+  }
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[1][];
-  private final static int[] LAST_FRAME = {0,1};
+  private final static int[] LAST_FRAME = {0,0};
   public static void init(){
     try{
       //loads icon
+
       icon = ImageIO.read(new File("sprites/bandage/icon.png"));
+
       //loads eating animations
       sprites[0] = new BufferedImage[2];
       for (int i = 1; i <= 1; ++i){
@@ -38,39 +48,37 @@ public class Bandage extends Equippable{
       }
     }catch(Exception e){
       //exits on error with message
-      System.out.println("Reading Bandage Sprite: " + e);
+      System.out.println("Reading bandage Sprite: " + e);
       System.exit(-1);
     }
   }
-  public BufferedImage getIcon(){
-    return icon;
-  }
+
   public Bandage(){
     this(new int[]{0,0});
   }
 
   public Bandage(int[] state){
     super(new Sprite(icon, state, sprites, new int[]{0}));
+    stackable = true;
   }
 
   public Bandage(double x, double y, double r, long id){
     super(x,y,r,id);
+    stackable = true;
   }
 
   public void drawEquipped(Graphics g, Player player){
     transform = player.getTransform();
-    transform.scale(.3,.3);
-    transform.translate(-18, -65);
+    transform.scale(1.1,1.1);
+    transform.translate(-45, -150);
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
 
-
-  ///////
-
   public void attack(Point p, Player player){
     int[] frame = sprite.getState();
     if (frame[0] == LAST_FRAME[0] && frame[1] == LAST_FRAME[1]){
+      ((MainPlayer)player).getInvetory().removeItem(new Bandage());
       player.setEquipped(null);
     } else {
       sprite.nextFrame();

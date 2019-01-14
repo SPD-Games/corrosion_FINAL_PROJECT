@@ -84,7 +84,7 @@ public class Rifle extends Equippable implements Serializable{
   * constuctor for the rifle
   */
   public Rifle(int[] state){
-    super(new Sprite(icon, state, sprites, new int[]{50,1000}));
+    super(new Sprite(icon, state, sprites, new int[]{60,1250}));
     stackable = false;
   }
 
