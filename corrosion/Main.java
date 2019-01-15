@@ -2,7 +2,7 @@
   * December 13 2018
   * Runs the game
   * TODO:
-      REMARKS after corrosion.entity.building.Building
+      REMARKS after corrosion.entity.item
 
       crate and barrel drops
 
