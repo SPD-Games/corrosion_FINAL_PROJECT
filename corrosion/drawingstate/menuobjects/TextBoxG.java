@@ -88,6 +88,22 @@ public class TextBoxG {
   }
 
   /**
+  * returns the outer x vales of the button
+  * @return array of values
+  */
+  public int[] getXBounds() {
+    return xBounds;
+  }
+
+  /**
+  * returns the outer y vales of the button
+  * @return array of values
+  */
+  public int[] getYBounds() {
+    return yBounds;
+  }
+
+  /**
   * returns the information about the textbox
   * @return the information
   */
@@ -101,7 +117,7 @@ public class TextBoxG {
   * @return if they are equal
   */
   public boolean equals(TextBoxG t){
-    if ((xBounds == b.getXBounds() && yBounds == b.getYBounds()) && text == t.getText()) return true;
+    if ((xBounds == t.getXBounds() && yBounds == t.getYBounds()) && text == t.getText()) return true;
     return false;
   }
 
