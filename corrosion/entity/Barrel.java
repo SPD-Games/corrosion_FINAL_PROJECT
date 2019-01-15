@@ -62,7 +62,7 @@ public class Barrel extends Entity{
     //Possilbity of pistol : 10%,
     //2 Bandages : 30%
 
-    if (Math.random() < 0.3) {
+    if (Math.random() < 0.15) {
       CrossBow i = new CrossBow(getXPos(), getYPos(), 0, Client.getId());
       i.sendItem();
     }
