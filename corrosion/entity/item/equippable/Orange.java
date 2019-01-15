@@ -88,7 +88,7 @@ public class Orange extends Equippable{
     } else {
       sprite.nextFrame();
     }
-    ((MainPlayer)player).hit(-10);
+    ((MainPlayer)player).hit(-3);
   }
 
   /**

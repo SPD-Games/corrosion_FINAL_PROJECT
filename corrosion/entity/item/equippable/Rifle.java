@@ -42,7 +42,7 @@ public class Rifle extends Equippable {
   private static BufferedImage[][] sprites = new BufferedImage[2][];
   private static final int[] SHOOT_READY = {0,4};
   private int ammo = 0;
-  private int MAX_AMMO = 30;
+  private int MAX_AMMO = 25;
   private static final int[] RELOAD_DONE = {1,2};
   private int reloadTo = 30;
 

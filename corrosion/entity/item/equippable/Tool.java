@@ -121,9 +121,6 @@ public class Tool extends Equippable{
     transform.translate(0, -130);
     transform.scale(0.25,0.25);
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
-    if (getHitBox() != null){
-      ((Graphics2D)(g)).fill(getHitBox());
-    }
     update(player);
   }
 

@@ -81,7 +81,7 @@ public class Shotgun extends Equippable {
   * constuctor for the shotgun
   */
   public Shotgun(int[] state){
-    super(new Sprite(icon, state, sprites, new int[]{50,50,1000}));
+    super(new Sprite(icon, state, sprites, new int[]{50,50,1500}));
     stackable = false;
   }
 
@@ -91,7 +91,7 @@ public class Shotgun extends Equippable {
   */
   public Shotgun(double xPos, double yPos, double rotation, long id){
     super(xPos,yPos,rotation, id);
-    this.sprite = new Sprite(icon, new int[]{0,2}, sprites, new int[]{50,50,1000});
+    this.sprite = new Sprite(icon, new int[]{0,2}, sprites, new int[]{50,50,1500});
   }
 
   /**

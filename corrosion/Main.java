@@ -4,7 +4,7 @@
   * TODO:
       REMARKS after corrosion.entity.item
 
-      crate and barrel drops
+      fix medkits and bandages drops
 
       corrosion.drawingstate.TextBoxG says in the top
 

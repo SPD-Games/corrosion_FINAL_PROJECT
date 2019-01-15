@@ -77,7 +77,7 @@ public class Pistol extends Equippable implements Serializable{
   * constuctor for the pistol
   */
   public Pistol(int[] state){
-    super(new Sprite(icon, state, sprites, new int[]{50, 1000}));
+    super(new Sprite(icon, state, sprites, new int[]{50, 500}));
     stackable = false;
   }
 
@@ -87,7 +87,7 @@ public class Pistol extends Equippable implements Serializable{
   */
   public Pistol(double xPos, double yPos, double rotation, long id){
     super(xPos,yPos,rotation, id);
-    this.sprite = new Sprite(icon, new int[]{0,2}, sprites, new int[]{50,1000});
+    this.sprite = new Sprite(icon, new int[]{0,2}, sprites, new int[]{50,500});
   }
 
   /**
@@ -109,7 +109,7 @@ public class Pistol extends Equippable implements Serializable{
     if (sprite.isState(SHOOT_READY, false) && ammo > 0){
       //creates a new bullet
       //BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),5,2000,10);
-      BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),2,3000,10,12,140);
+      BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),2,3000,14,12,140);
       ammo--;
       //starts shoot animation
       sprite.startAnimation(0);

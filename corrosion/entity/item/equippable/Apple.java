@@ -86,7 +86,7 @@ public class Apple extends Equippable{
     } else {
       sprite.nextFrame();
     }
-    ((MainPlayer)player).hit(-5);
+    ((MainPlayer)player).hit(-2);
   }
 
   /**

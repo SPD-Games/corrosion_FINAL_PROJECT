@@ -42,7 +42,7 @@ public class Smg extends Equippable implements Serializable{
   private static BufferedImage[][] sprites = new BufferedImage[2][];
   private static final int[] SHOOT_READY = {0,4};
   private int ammo = 0;
-  private int MAX_AMMO = 30;
+  private int MAX_AMMO = 45;
   private static final int[] RELOAD_DONE = {1,2};
   public int reloadTo = 30;
 
@@ -124,7 +124,7 @@ public class Smg extends Equippable implements Serializable{
     Point p = Mouse.getPosition();
     Player player = MainPlayer.getMainPlayer();
     //creates a new bullet
-    BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),3,3000,15,14,160);
+    BulletProjectile a = new BulletProjectile(player, p.getX(), p.getY(),2,3000,5,14,160);
     //starts shoot animation
     ammo--;
     sprite.startAnimation(0);

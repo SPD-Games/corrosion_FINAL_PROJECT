@@ -62,7 +62,7 @@ public class Barrel extends Entity{
     //Possilbity of pistol : 10%,
     //2 Bandages : 30%
 
-    if (Math.random() < 0.15) {
+    if (Math.random() < 0.05) {
       CrossBow i = new CrossBow(getXPos(), getYPos(), 0, Client.getId());
       i.sendItem();
     }
@@ -70,7 +70,7 @@ public class Barrel extends Entity{
       Shotgun i = new Shotgun(getXPos(), getYPos(), 0, Client.getId());
       i.sendItem();
     }
-    if (Math.random() < 0.1) {
+    if (Math.random() < 0.05) {
       Pistol i = new Pistol(getXPos(), getYPos(), 0, Client.getId());
       i.sendItem();
     }
@@ -80,11 +80,11 @@ public class Barrel extends Entity{
     }
 
       Bullet i = new Bullet(getXPos(), getYPos(), 0, Client.getId());
-      i.addStack(new Bullet(30));
+      i.addStack(new Bullet(10));
       i.sendItem();
 
       Arrow j = new Arrow(getXPos(), getYPos(), 0, Client.getId());
-      j.addStack(new Arrow(10));
+      j.addStack(new Arrow(3));
       j.sendItem();
   }
 
