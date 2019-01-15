@@ -42,7 +42,7 @@ public class Tree extends Entity{
   }
 
   public void draw(Graphics g, long t) {
-    g.setColor(Color.GREEN);
+    g.setColor(new Color(45,87,44));
     g.fillOval((int)xPos-rad, (int)yPos-rad, 2*rad, 2*rad);
   }
 
