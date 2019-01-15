@@ -80,6 +80,7 @@ public class MainPlayer extends Player{
         xPos = 19300;
         yPos = ThreadLocalRandom.current().nextInt(2200, 18600);
       }
+      inventory = new Inventory();
     }
 
     /**
