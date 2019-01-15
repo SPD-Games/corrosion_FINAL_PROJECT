@@ -58,6 +58,34 @@ public class Server{
     synchronized(server.disposeEntities){
       server.disposeEntities.add(e);
     }
+    class Wait extends Thread{
+      Entity entity;
+      public Wait(Entity entity){
+        this.entity = entity;
+      }
+      public void run(){
+        try{
+          //wait 10 minutes before respawning 
+          Thread.sleep(10*60*1000);
+        } catch (Exception e){
+
+        }
+        addEntity(entity);
+      }
+    }
+
+    if (e instanceof Barrel){
+      e = new Barrel(e.getXPos(),e.getYPos(),e.getRotation(),e.getId());
+    } else if (e instanceof Crate){
+      e = new Crate(e.getXPos(),e.getYPos(),e.getRotation(),e.getId());
+    } else if (e instanceof Tree){
+      e = new Tree(e.getXPos(),e.getYPos(),e.getRotation(),e.getId());
+    } else if (e instanceof Rock){
+      e = new Rock(e.getXPos(),e.getYPos(),e.getRotation(),e.getId());
+    } else {
+      return;
+    }
+    new Wait(e).start();
   }
 
   /**

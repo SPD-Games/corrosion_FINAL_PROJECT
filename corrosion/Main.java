@@ -4,9 +4,6 @@
   * TODO:
       REMARKS after corrosion.entity.building.Building
 
-      add spawning of rocks trees etc
-        Data File loading rocks and all that stuff DONE
-
       crate and barrel drops
 
       player random spawn
