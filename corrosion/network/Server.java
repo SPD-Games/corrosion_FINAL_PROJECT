@@ -12,12 +12,15 @@ import java.io.IOException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.Timer;
-
+import java.io.File;
+import java.util.Scanner;
 import corrosion.entity.Entity;
 import corrosion.entity.projectile.*;
 import corrosion.entity.player.*;
 import corrosion.network.protocol.*;
 import corrosion.network.Connection;
+import corrosion.entity.*;
+import java.util.Random;
 
 public class Server{
   private static Server server;
@@ -205,6 +208,7 @@ public class Server{
   public Server(int port){
     server = this;
     Protocol.init();
+    loadEntities();
     try{
       //creates a new server socket
       socket = new ServerSocket(port);
@@ -225,6 +229,63 @@ public class Server{
     Protocol.send(4, c.id, c);
     for (int iEntity = 0; iEntity < activeEntities.size(); ++iEntity){
       Protocol.send(9,activeEntities.get(iEntity),c);
+    }
+  }
+
+  public void loadEntities(){
+    try {
+      File file = new File("data/Crates.txt");
+      Scanner input = new Scanner(file);
+      double xPos, yPos;
+      while (input.hasNextLine()){
+        xPos = input.nextDouble();
+        yPos = input.nextDouble();
+        addEntity(new Crate(xPos, yPos, 0, getId()));
+      }
+      input.close();
+    } catch(Exception e){
+      if (!(e instanceof java.util.NoSuchElementException)){
+        System.out.println("Error loading crates: " + e);
+        System.exit(-1);
+      }
+    }
+    try {
+      File file = new File("data/Barrels.txt");
+      Scanner input = new Scanner(file);
+      double xPos, yPos;
+      while (input.hasNextLine()){
+        xPos = input.nextDouble();
+        yPos = input.nextDouble();
+        addEntity(new Barrel(xPos, yPos, 0, getId()));
+      }
+      input.close();
+    } catch(Exception e){
+      if (!(e instanceof java.util.NoSuchElementException)){
+        System.out.println("Error loading Barrels: " + e);
+        System.exit(-1);
+      }
+    }
+    try {
+      File file = new File("data/TreesRocks.txt");
+      Scanner input = new Scanner(file);
+      double xPos, yPos;
+      while (input.hasNextLine()){
+        xPos = input.nextDouble();
+        yPos = input.nextDouble();
+        Random rand = new Random();
+        int n = rand.nextInt(100);
+        if (n > 10){
+          addEntity(new Tree(xPos, yPos, 0, getId()));
+        } else {
+          addEntity(new Rock(xPos, yPos, 0, getId()));
+        }
+      }
+      input.close();
+    } catch(Exception e){
+      if (!(e instanceof java.util.NoSuchElementException)){
+        System.out.println("Error loading TreesRocks: " + e);
+        System.exit(-1);
+      }
     }
   }
 

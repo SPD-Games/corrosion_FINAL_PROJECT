@@ -66,7 +66,10 @@ public class Medkit extends Equippable{
     super(x,y,r,id);
     stackable = true;
   }
-
+  public Medkit(int stack){
+    this();
+    stackSize = stack;
+  }
   public void drawEquipped(Graphics g, Player player){
     transform = player.getTransform();
     transform.scale(.8,.8);

@@ -52,7 +52,10 @@ public class Bandage extends Equippable{
       System.exit(-1);
     }
   }
-
+  public Bandage(int stack){
+    this();
+    stackSize = stack;
+  }
   public Bandage(){
     this(new int[]{0,0});
   }

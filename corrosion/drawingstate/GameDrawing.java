@@ -73,7 +73,7 @@ public class GameDrawing extends DrawingState{
     Barrel.init();
     Crate.init();
     Bullet.init();
-
+    Arrow.init();
     Bandage.init();
     Medkit.init();
     Orange.init();

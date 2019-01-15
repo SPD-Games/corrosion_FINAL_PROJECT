@@ -57,6 +57,10 @@ public class Orange extends Equippable{
     this(new int[]{0,0});
   }
 
+  public Orange(int stack){
+    this();
+    stackSize = stack;
+  }
   public Orange(int[] state){
     super(new Sprite(icon, state, sprites, new int[]{0}));
     stackable = true;

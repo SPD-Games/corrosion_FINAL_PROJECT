@@ -50,7 +50,10 @@ public class Apple extends Equippable{
   public BufferedImage getIcon(){
     return icon;
   }
-
+  public Apple(int stack){
+    this();
+    stackSize = stack;
+  }
   public Apple(){
     this(new int[]{0,0});
   }
@@ -77,9 +80,9 @@ public class Apple extends Equippable{
   public void attack(Point p, Player player){
     int[] frame = sprite.getState();
     if (frame[0] == LAST_FRAME[0] && frame[1] == LAST_FRAME[1]){
-      //((MainPlayer)player).getInvetory().removeItem(new Apple());
+      sprite.setState(0,0);
+      ((MainPlayer)player).getInvetory().removeItem(new Apple());
       player.setEquipped(null);
-      System.out.println(((MainPlayer)player).getInvetory().removeItem(new Apple()));
     } else {
       sprite.nextFrame();
     }

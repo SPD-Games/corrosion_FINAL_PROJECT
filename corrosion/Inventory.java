@@ -31,18 +31,23 @@ public class Inventory{
   public Inventory(){
     hotBar[0] = new CrossBow();
     hotBar[1] = new Pistol();
-    hotBar[2] = new Orange();
     hotBar[3] = new Rifle();
     hotBar[4] = new Sniper();
     items[0][0] = new BuildingPlan();
     items[0][1] = new UpgradePlan();
-    items[0][3] = new Orange();
+    items[0][3] = new Orange(10);
     items[0][4] = new Wood(10000);
     items[0][5] = new Stone(10000);
     items[1][0] = new Metal(10000);
-    items[1][1] = new Bullet(10000);
-    items[1][2] = new Arrow(10000);
+    items[1][1] = new Bullet(1000);
+    items[1][2] = new Arrow(1000);
     items[1][3] = new Tool();
+    items[1][4] = new Shotgun();
+    items[1][5] = new Smg();
+    items[2][0] = new Apple(10);
+    items[2][1] = new Bandage(10);
+    items[2][2] = new Medkit(10);
+
 
   }
   public void setEquipped(int i){

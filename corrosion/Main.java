@@ -5,21 +5,18 @@
       REMARKS after corrosion.entity.building.Building
 
       add spawning of rocks trees etc
+        Data File loading rocks and all that stuff DONE
 
-      reloading
-        shotgun
-        smg
+      crate and barrel drops
 
       player random spawn
         remove crate that spawns at 0,0
 
-      fix buggy shotgun when player shots in middle
-      
-      corrosion.drawingstate.TextBoxG says in the top
-      corrosion.drawingstate.GameDrawing init() load all sprites
+      fix buggy shotgun when player shoots in middle
 
-      Data File loading rocks and all that stuff
-      recursion ???
+      corrosion.drawingstate.TextBoxG says in the top
+
+      recursion ??? NOT NEEDED
       create a jar file
   */
 

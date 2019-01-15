@@ -86,6 +86,7 @@ public class BulletProjectile extends Projectile{
 
       Entity e = entities.get(i);
       if (e == this){continue;}
+      else if (e instanceof Projectile){continue;}
       if (HitDetection.hit(e.getHitBox(), getHitBox())){
         if (!isHit && player != null){
           e.hit(damage);

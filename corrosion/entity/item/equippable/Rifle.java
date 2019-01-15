@@ -131,6 +131,7 @@ public class Rifle extends Equippable {
   * reloads the rifle
   */
   public void reload(){
+    if (!sprite.isState(SHOOT_READY, false)){return;}
     if(ammo != MAX_AMMO){
       reloadTo = Math.min(MainPlayer.getMainPlayer().getInvetory().getAmount(new Bullet()) + ammo, MAX_AMMO);
       MainPlayer.getMainPlayer().getInvetory().removeItem(new Bullet(reloadTo-ammo));

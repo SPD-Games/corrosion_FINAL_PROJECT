@@ -228,7 +228,7 @@ public class Client{
     for(int i = 0; i < client.entities.size(); ++i){
       Entity e = client.entities.get(i);
       //checks if that entity is in possible rendering distance
-      if ((e.getXPos() - xPos)*(e.getXPos() - xPos) + (e.getYPos() - yPos)*(e.getYPos() - yPos) < 100000000){
+      if ((e.getXPos() - xPos)*(e.getXPos() - xPos) + (e.getYPos() - yPos)*(e.getYPos() - yPos) < 16000000){
         //if so add to list
         visable.add(e);
       }
