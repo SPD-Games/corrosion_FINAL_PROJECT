@@ -28,6 +28,11 @@ import java.awt.geom.AffineTransform;
 
 
 public class Use extends Bindable{
+
+  /**
+  * ???
+  * @param e the key event
+  */
   public void pressed(KeyEvent event){
     Shape playerHitBox = new Rectangle2D.Double(MainPlayer.getMainPlayer().getXPos()-10,MainPlayer.getMainPlayer().getYPos()-150,20,150);
     AffineTransform tx = new AffineTransform();
@@ -57,6 +62,14 @@ public class Use extends Bindable{
     }
 
   }
+
+  /**
+  * method not used in this class
+  */
   public void released(KeyEvent e){}
+
+    /**
+    * method not used in this class
+    */
   public void typed(){}
 }

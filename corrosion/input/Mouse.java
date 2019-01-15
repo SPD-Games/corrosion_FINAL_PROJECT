@@ -17,9 +17,6 @@ import corrosion.entity.player.*;
 
 public class Mouse implements MouseListener, MouseWheelListener{
   private static MouseBindable binds[] = new MouseBindable[5];
-  //TODO implement MouseWheelBindable
-  //private static MouseWheelBindable mouseWheelUp = null;
-  //private static MouseWheelBindable mouseWheelDown = null;
 
   /**
   * Sets up all the mouse binds
@@ -27,7 +24,6 @@ public class Mouse implements MouseListener, MouseWheelListener{
   public static void setBinds(MouseBindable b[]){
     binds = b;
   }
-
 
   /**
   * Gets the location of the mouse relative to the JPanel
@@ -44,6 +40,7 @@ public class Mouse implements MouseListener, MouseWheelListener{
     SwingUtilities.convertPointFromScreen(p, Drawing.getPanel());
     return p;
   }
+
   /**
   * Converts a point on the screen to a point on the screen relative to the player
   */
@@ -76,8 +73,8 @@ public class Mouse implements MouseListener, MouseWheelListener{
   }
 
   /**
-  *
-  * @param e
+  * does action on mouse click
+  * @param e the event that happends to the mouse
   */
   @Override
   public void mouseClicked(MouseEvent e) {
@@ -102,8 +99,8 @@ public class Mouse implements MouseListener, MouseWheelListener{
   }
 
   /**
-  *
-  * @param e
+  * does an action on mouse relased
+  * @param e the event that happends to the mouse
   */
   @Override
   public void mouseReleased(MouseEvent e) {
@@ -120,8 +117,8 @@ public class Mouse implements MouseListener, MouseWheelListener{
   }
 
   /**
-  *
-  * @param e
+  * needed for program to fuction, but empty
+  * @param e the event that happends to the mouse
   */
   @Override
   public void mouseEntered(MouseEvent e) {
@@ -129,16 +126,16 @@ public class Mouse implements MouseListener, MouseWheelListener{
   }
 
   /**
-  *
-  * @param e
+  * needed for program to fuction, but empty
+  * @param e the event that happends to the mouse
   */
   @Override
   public void mouseExited(MouseEvent e) {
   }
 
   /**
-  *
-  * @param e
+  * allow the user to scroll to zoom in game
+  * @param e the event that happends to the mouse
   */
   public void mouseWheelMoved(MouseWheelEvent e) {
     double zoom = GameDrawing.zoom -= 0.1 * e.getWheelRotation();

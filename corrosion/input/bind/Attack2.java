@@ -20,7 +20,15 @@ public class Attack2 extends MouseBindable{
     MainPlayer.getMainPlayer().attack2(Mouse.relativeToPlayer(p));
   }
 
+  /**
+  * not used in this bind...
+  * @param p the point where the mouse clicked relative to the player
+  */
   public void released(Point p){}
 
+  /**
+  * not used in this bind...
+  * @param p the point where the mouse clicked relative to the player
+  */
   public void clicked(Point p){}
 }

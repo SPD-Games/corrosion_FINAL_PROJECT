@@ -32,10 +32,15 @@ public class LeftClickMainMenu extends MouseBindable{
         Drawing.setStateConnect();
       }
     }
-
   }
 
+  /**
+  * method not used in this class
+  */
   public void released(Point p){}
 
+  /**
+  * method not used in this class
+  */
   public void clicked(Point p){}
 }

@@ -12,14 +12,20 @@ import java.awt.event.KeyListener;
 public class Reload extends Bindable{
   /**
   * reloads the mainplayers equipped item
+  * @param e the key event
   */
   public void pressed(KeyEvent e){
     MainPlayer.getMainPlayer().reload();
   }
 
-
+  /**
+  * method not used in this class
+  */
   public void released(KeyEvent e){
   }
-
+  
+  /**
+  * method not used in this class
+  */
   public void typed(){}
 }

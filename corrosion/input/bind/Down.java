@@ -24,5 +24,8 @@ public class Down extends Bindable{
     MainPlayer.getMainPlayer().setDown(false);
   }
 
+  /**
+  * method not used in this class
+  */
   public void typed(){}
 }

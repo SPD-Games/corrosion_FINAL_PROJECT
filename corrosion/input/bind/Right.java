@@ -12,6 +12,7 @@ import java.awt.event.KeyListener;
 public class Right extends Bindable{
   /**
   * Moves the player right
+  * @param e the key event
   */
   public void pressed(KeyEvent e){
     MainPlayer.getMainPlayer().setRight(true);
@@ -19,10 +20,14 @@ public class Right extends Bindable{
   }
   /**
   * Stops the player from moving the player right
+  * @param e the key event
   */
   public void released(KeyEvent e){
     MainPlayer.getMainPlayer().setRight(false);
   }
 
+  /**
+  * method not used in this class
+  */
   public void typed(){}
 }

@@ -29,14 +29,20 @@ public class LeftClickConnectMenu extends MouseBindable{
     // check if button in connect menu is pressed
     if (xClicked > (ConnectMenuDrawing.getB()).getXBounds()[0] && xClicked < (ConnectMenuDrawing.getB()).getXBounds()[1]) {
       if (yClicked > (ConnectMenuDrawing.getB()).getYBounds()[0] && yClicked < (ConnectMenuDrawing.getB()).getYBounds()[1]) {
-        // show the user the game
+        // begin to draw the game and connect with the IP user inputted
         Drawing.setStateGame(ConnectMenuDrawing.getIP(), 1234);
       }
     }
 
   }
 
+  /**
+  * method not used in this class
+  */
   public void released(Point p){}
 
+  /**
+  * method not used in this class
+  */
   public void clicked(Point p){}
 }

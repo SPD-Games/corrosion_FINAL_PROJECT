@@ -11,6 +11,7 @@ import corrosion.input.bind.*;
 
 public class Keyboard implements KeyListener {
   private static Bindable binds[] = new Bindable[526];
+  
   /**
   * Sets up all the keyboard binds
   */
