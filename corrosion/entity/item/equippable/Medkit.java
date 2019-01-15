@@ -24,7 +24,7 @@ import corrosion.entity.player.*;
 public class Medkit extends Equippable{
   public void attackOff(Player player){}
     public void fromServer(){
-      sprite = new Sprite(icon, state, sprites, delay);
+      sprite = new Sprite(icon, new int[]{0,0}, sprites, new int[]{0});
     }
   public BufferedImage getIcon(){
     return icon;
