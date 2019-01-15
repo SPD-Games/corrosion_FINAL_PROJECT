@@ -6,11 +6,8 @@
 
       crate and barrel drops
 
-      fix buggy shotgun when player shoots in middle
-
       corrosion.drawingstate.TextBoxG says in the top
 
-      recursion ??? NOT NEEDED
       create a jar file
   */
 
