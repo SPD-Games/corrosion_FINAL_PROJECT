@@ -11,17 +11,18 @@ import corrosion.input.bind.*;
 
 public class Keyboard implements KeyListener {
   private static Bindable binds[] = new Bindable[526];
-  
+
   /**
   * Sets up all the keyboard binds
+  * @param b the bindables
   */
   public static void setBinds(Bindable b[]){
     binds = b;
   }
 
   /**
-  *
-  * @param e
+  * empty method, but needed for function
+  * @param e the key event
   */
   @Override
   public void keyTyped(KeyEvent e) {

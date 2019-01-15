@@ -20,6 +20,7 @@ public class Mouse implements MouseListener, MouseWheelListener{
 
   /**
   * Sets up all the mouse binds
+  * @param b a mouse bindable
   */
   public static void setBinds(MouseBindable b[]){
     binds = b;
@@ -35,6 +36,10 @@ public class Mouse implements MouseListener, MouseWheelListener{
     return relativeToPlayer(p);
   }
 
+  /**
+  * Gets the location of the mouse on screen
+  * @return the point of the mouse
+  */
   public static Point getOnScreen(){
     Point p = MouseInfo.getPointerInfo().getLocation();
     SwingUtilities.convertPointFromScreen(p, Drawing.getPanel());
@@ -43,6 +48,7 @@ public class Mouse implements MouseListener, MouseWheelListener{
 
   /**
   * Converts a point on the screen to a point on the screen relative to the player
+  * @param p the point
   */
   public static Point relativeToPlayer(Point p){
     p.setLocation(p.getX() - Drawing.getPanel().getWidth()/2, Drawing.getPanel().getHeight()/2 - p.getY());
@@ -51,6 +57,7 @@ public class Mouse implements MouseListener, MouseWheelListener{
 
   /**
   * Converts a point on the screen to a point on the map
+  * @return a point
   */
   public static Point getPointOnMap(){
     Point p = getPosition();
@@ -63,6 +70,8 @@ public class Mouse implements MouseListener, MouseWheelListener{
 
   /**
   * Converts a point on the screen to a point on the map
+  * @param p the point
+  * @return a point
   */
   public static Point getPointOnMap(Point p){
     p.x /= GameDrawing.getZoom();
