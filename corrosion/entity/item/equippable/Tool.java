@@ -131,7 +131,7 @@ public class Tool extends Equippable{
 
       Entity e = entities.get(i);
       if (e == this){continue;}
-      if (HitDetection.hit(e.getHitBox(), getHitBox())){
+      if (HitDetection.hit(e.getHitBox(), getSwingHitBox())){
         e.hit(damage);
         Protocol.send(8 ,new HitMarker(getXPos(),getYPos(), "-"+damage), Client.getConnection());
         hit();
@@ -142,7 +142,7 @@ public class Tool extends Equippable{
     ArrayList<Player> players = Client.getPlayers();
     for (int i = 0; i < players.size(); ++i){
       if (players.get(i).equals(player)){continue;}
-      if (HitDetection.hit(players.get(i).getHitBox(), getHitBox())){
+      if (HitDetection.hit(players.get(i).getHitBox(), getSwingHitBox())){
         ArrayList out = new ArrayList();
         out.add(players.get(i).getId());
         out.add(damage);
@@ -173,7 +173,7 @@ public class Tool extends Equippable{
     this.sprite = new Sprite(icon, new int[]{0,5}, sprites, new int[]{40});
   }
 
-  public Shape getHitBox(){
+  public Shape getSwingHitBox(){
     if (hitAnything){return null;}
     Path2D out = (Path2D)hitBoxs[sprite.getState()[1]].clone();
     out.transform(transform);

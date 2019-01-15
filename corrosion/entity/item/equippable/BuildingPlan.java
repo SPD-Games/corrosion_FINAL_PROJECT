@@ -27,6 +27,7 @@ public class BuildingPlan extends Equippable{
   public void attackOff(Player player){}
   public void fromServer(){
     sprite = new Sprite(icon, new int[]{0,0}, sprites, new int[]{0,0});
+    preview = new Square();
   }
   //TODO move all images and draw handling in Usable
   private static BufferedImage icon;
