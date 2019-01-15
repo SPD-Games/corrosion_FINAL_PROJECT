@@ -1,0 +1,11 @@
+https://www.youtube.com/watch?v=TWoEfetsHYA
+
+compile to .class files
+create manifest file
+//
+Main-Class: Main
+
+
+//
+
+jar cvfm out.jar MAINIFEST.mf *.class drawingstate/*.class ...
