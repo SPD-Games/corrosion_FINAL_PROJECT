@@ -65,8 +65,8 @@ public class Server{
       }
       public void run(){
         try{
-          //wait 10 minutes before respawning 
-          Thread.sleep(10*60*1000);
+          //wait 10 minutes before respawning
+          Thread.sleep(5*60*1000);
         } catch (Exception e){
 
         }
