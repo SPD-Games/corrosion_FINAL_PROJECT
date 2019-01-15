@@ -90,7 +90,14 @@ public class Rifle extends Equippable {
     super(new Sprite(icon, state, sprites, new int[]{60,1250}));
     stackable = false;
   }
-
+  /**
+   * Main Constructor
+   * @param p the player that has the crossbow equipped
+  */
+  public Rifle(double xPos, double yPos, double rotation, long id){
+    super(xPos,yPos,rotation, id);
+    this.sprite = new Sprite(icon, new int[]{0,4}, sprites, new int[]{60,1250});
+  }
   /**
   * Draw the item
   * @param g the graphics tool used to draw

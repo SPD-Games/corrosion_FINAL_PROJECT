@@ -84,6 +84,15 @@ public class Sniper extends Equippable implements Serializable{
   }
 
   /**
+   * Main Constructor
+   * @param p the player that has the crossbow equipped
+  */
+  public Sniper(double xPos, double yPos, double rotation, long id){
+    super(xPos,yPos,rotation, id);
+    this.sprite = new Sprite(icon, new int[]{0,2}, sprites, new int[]{50,1000});
+  }
+
+  /**
   * Draw the item
   * @param g the graphics tool used to draw
   */

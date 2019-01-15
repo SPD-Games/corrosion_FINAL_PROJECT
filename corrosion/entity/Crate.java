@@ -14,6 +14,8 @@ import corrosion.network.protocol.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.*;
+import corrosion.entity.item.equippable.*;
+import corrosion.entity.item.*;
 
 public class Crate extends Entity{
 
@@ -51,8 +53,32 @@ public class Crate extends Entity{
     ((Graphics2D)g).drawImage(icon,transform,null);
   }
 
+  /**
+  *Method to drop items after crate is broken
+  */
   public void drop(){
+    if (Math.random() < 0.3) {
+      Sniper i = new Sniper(getXPos(), getYPos(), 0, Client.getId());
+      i.sendItem();
+    }
+    if (Math.random() < 0.1) {
+      Rifle i = new Rifle(getXPos(), getYPos(), 0, Client.getId());
+      i.sendItem();
+    }
+    if (Math.random() < 0.2) {
+      Smg i = new Smg(getXPos(), getYPos(), 0, Client.getId());
+      i.sendItem();
+    }
+    Medkit i = new Medkit(getXPos(), getYPos(), 0, Client.getId());
+    i.sendItem();
 
+    Bullet j = new Bullet(getXPos(), getYPos(), 0, Client.getId());
+    j.addStack(new Bullet(100));
+    j.sendItem();
+
+    Arrow k = new Arrow(getXPos(), getYPos(), 0, Client.getId());
+    k.addStack(new Arrow(10));
+    k.sendItem();
   }
 
   public Shape getHitBox(){

@@ -11,6 +11,8 @@ import java.awt.geom.*;
 import corrosion.entity.*;
 import corrosion.network.*;
 import corrosion.network.protocol.*;
+import corrosion.entity.item.equippable.*;
+import corrosion.entity.item.*;
 
 public class Tree extends Entity{
 
@@ -58,9 +60,9 @@ public class Tree extends Entity{
       rad -= 5;
       Item i = new Wood(5);
       // give the chance for the tree to drop apples and oranges when hit
-      if(math.random() < 0.1) {
+      if(Math.random() < 0.1) {
         MainPlayer.getMainPlayer().getInvetory().addItem(new Apple());
-      } else if (math.random() > 0.9) {
+      } else if (Math.random() > 0.9) {
         MainPlayer.getMainPlayer().getInvetory().addItem(new Orange());
       }
       MainPlayer.getMainPlayer().getInvetory().addItem(i);

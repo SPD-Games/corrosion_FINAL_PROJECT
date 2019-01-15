@@ -14,6 +14,9 @@ import corrosion.network.protocol.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.*;
+import corrosion.entity.item.equippable.*;
+import corrosion.entity.item.*;
+
 
 public class Barrel extends Entity{
 
@@ -49,8 +52,40 @@ public class Barrel extends Entity{
     ((Graphics2D)g).drawImage(icon,transform,null);
   }
 
+  /**
+  *Method to drop items after barrel is broken
+  */
   public void drop(){
+    //30 Bullets, 10 arrows
+    //Possilbity of crossbow : 30%,
+    //Possilbity of shotgun : 5%,
+    //Possilbity of pistol : 10%,
+    //2 Bandages : 30%
 
+    if (Math.random() < 0.3) {
+      CrossBow i = new CrossBow(getXPos(), getYPos(), 0, Client.getId());
+      i.sendItem();
+    }
+    if (Math.random() < 0.05) {
+      Shotgun i = new Shotgun(getXPos(), getYPos(), 0, Client.getId());
+      i.sendItem();
+    }
+    if (Math.random() < 0.1) {
+      Pistol i = new Pistol(getXPos(), getYPos(), 0, Client.getId());
+      i.sendItem();
+    }
+    if (Math.random() < 0.3) {
+      Bandage i = new Bandage(getXPos(), getYPos(), 0, Client.getId());
+      i.sendItem();
+    }
+
+      Bullet i = new Bullet(getXPos(), getYPos(), 0, Client.getId());
+      i.addStack(new Bullet(30));
+      i.sendItem();
+
+      Arrow j = new Arrow(getXPos(), getYPos(), 0, Client.getId());
+      j.addStack(new Arrow(10));
+      j.sendItem();
   }
 
   public Shape getHitBox(){
