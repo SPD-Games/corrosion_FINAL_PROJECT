@@ -21,8 +21,13 @@ abstract public class Item extends Entity implements Serializable{
   protected int[] state;
   abstract public void fromServer();
   public void sendItem(){
-    state = sprite.getState();
-    delay = sprite.getDelay();
+    if (sprite != null){
+      state = sprite.getState();
+      delay = sprite.getDelay();
+    } else {
+      state = null;
+      delay = null;
+    }
     Protocol.send(8,this,Client.getConnection());
   }
   /**
