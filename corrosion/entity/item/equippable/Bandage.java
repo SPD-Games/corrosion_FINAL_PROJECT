@@ -1,10 +1,9 @@
-//Edward Pei
+//Edward Pei, Henry Lim
 //Dec 29, 2018
 //Apple class
 package corrosion.entity.item.equippable;
 
-//TODO: get apples to add health and stuff idk how to do this micheal dad help
-
+//imports
 import javax.swing.Timer;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -22,19 +21,41 @@ import corrosion.entity.Entity;
 import corrosion.entity.player.*;
 
 public class Bandage extends Equippable{
-  public void attackOff(Player player){}
-    public void fromServer(){
-      sprite = new Sprite(icon, new int[]{0,0}, sprites, new int[]{0});
-    }
-  public BufferedImage getIcon(){
-    return icon;
-  }
-  public String getInfo(){
-    return stackSize + "";
-  }
+
+  //Static variables for bandage animation (applies to all instances)
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[1][];
   private final static int[] LAST_FRAME = {0,0};
+
+  /**
+  * Method not in use for Bandage class
+  * @param player player class
+  */
+  public void attackOff(Player player){}
+
+  /**
+  *Sprite animation method for bandage
+  */
+  public void fromServer(){
+    sprite = new Sprite(icon, new int[]{0,0}, sprites, new int[]{0});
+  }
+  /**
+  * Return icon
+  */
+  public BufferedImage getIcon(){
+    return icon;
+  }
+
+  /**
+  * Return bandage stack size
+  */
+  public String getInfo(){
+    return stackSize + "";
+  }
+
+  /**
+  * 
+  */
   public static void init(){
     try{
       //loads icon

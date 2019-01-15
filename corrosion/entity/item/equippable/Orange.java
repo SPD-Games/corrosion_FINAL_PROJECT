@@ -1,6 +1,6 @@
-//Edward Pei
+//Edward Pei, Henry Lim
 //Dec 29, 2018
-//Apple class
+//Orange class
 package corrosion.entity.item.equippable;
 
 //TODO: get apples to add health and stuff idk how to do this micheal dad help
