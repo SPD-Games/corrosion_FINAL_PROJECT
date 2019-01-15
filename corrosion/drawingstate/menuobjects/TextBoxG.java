@@ -4,8 +4,6 @@
   */
 package corrosion.drawingstate.menuobjects;
 
-//TODO: when text is added, remove default text, when removed display defualy text, just add new attrubites to object "default text" and "added text" thanks eddie.
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -48,6 +46,10 @@ public class TextBoxG {
     this.c = c;
   }
 
+  /*
+  * add a text character to the text box
+  * @param c the character
+  */
   public void addChar(char c) {
     text += c;
   }
@@ -63,12 +65,16 @@ public class TextBoxG {
 
   /* *
   * Method used to get the text from the text box
-  *
+  * @return the text in the textbox
   */
   public String getText() {
     return text;
   }
 
+  /**
+  * Draws the textbox and text
+  * @param g the graphics contect
+  */
   public void draw(Graphics g) {
     // draw the rectangle
     g.setColor(c);
@@ -81,6 +87,22 @@ public class TextBoxG {
 
   }
 
+  /**
+  * returns the information about the textbox
+  * @return the information
+  */
+  public String toString() {
+    return ("xPos: " + xPos + "," +  "yPos: " + yPos);
+  }
 
+  /**
+  * check if two text boxes are equal
+  * @param t the text box
+  * @return if they are equal
+  */
+  public boolean equals(TextBoxG t){
+    if ((xBounds == b.getXBounds() && yBounds == b.getYBounds()) && text == t.getText()) return true;
+    return false;
+  }
 
 }

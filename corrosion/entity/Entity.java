@@ -149,6 +149,15 @@ abstract public class Entity implements Serializable{
     return ((Entity)o).id == id;
   }
 
+  /**
+  * returns the information of the entity
+  * @return the information
+  */
+  public String toString() {
+    return ("xPos: " + xPos + "," + "yPos: " + yPos + "," + "rotation: " +  rotation + ", zIndex: " + zIndex);
+  }
+
+
   public void fromServer(){}
   public void hit(int damage){}
   abstract public void draw(Graphics g, long t);

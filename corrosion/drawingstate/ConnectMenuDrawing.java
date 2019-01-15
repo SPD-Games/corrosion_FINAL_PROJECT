@@ -65,10 +65,17 @@ public class ConnectMenuDrawing extends DrawingState{
     return ipInput;
   }
 
+  /**
+  * gets the inputed IP
+  * @return the IP as a string
+  */
   public static String getIP() {
     return ipInput.getText();
   }
 
+    /**
+    * a method that loads the binds and imagaes
+    */
   public void init(){
     // add all the mouse binds
     MouseBindable mouseBinds[] = new MouseBindable[5];

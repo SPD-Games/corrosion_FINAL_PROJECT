@@ -74,9 +74,22 @@ public class ButtonG {
     ((Graphics2D) g).drawImage(image, transform, null);
   }
 
-
+  /**
+  * returns the information of the button
+  * @return the information
+  */
   public String toString() {
-    return ("");
+    return ("xPos: " + xPos + "," +"yPos: " + yPos);
+  }
+
+  /**
+  * check if two buttons are equal
+  * @@param b the button
+  * @return if they are equal
+  */
+  public boolean equals(ButtonG b){
+    if ((xBounds == b.getXBounds() && yBounds == b.getYBounds())) return true;
+    return false;
   }
 
 

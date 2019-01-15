@@ -255,7 +255,7 @@ public class GameDrawing extends DrawingState{
   }
 
   /**
-  * Inits the drawing of the death screen
+  * sets the time of the death screen
   */
   public void deadScreen() {
     dead = 1000;
