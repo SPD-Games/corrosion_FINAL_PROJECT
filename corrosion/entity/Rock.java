@@ -42,7 +42,7 @@ public class Rock extends Entity{
   }
 
   public void draw(Graphics g, long t) {
-    g.setColor(new Color(128,128,128));
+    g.setColor(new Color(149, 148, 139));
     g.fillOval((int)xPos-rad, (int)yPos-rad, 2*rad, 2*rad);
   }
 
@@ -55,12 +55,12 @@ public class Rock extends Entity{
   public void hit(int damage) {
     if(rad > 20) {
       // reduce the size of the rock
-      rad -= 1;
-      Item i = new Stone(1);
+      rad -= 5;
+      Item i = new Stone(5);
       MainPlayer.getMainPlayer().getInvetory().addItem(i);
       Protocol.send(8, this, Client.getConnection());
     } else {
-      Item i = new Stone(100);
+      Item i = new Stone(200);
       MainPlayer.getMainPlayer().getInvetory().addItem(i);
       Client.removeEntity(this);
       Protocol.send(12, this, Client.getConnection());

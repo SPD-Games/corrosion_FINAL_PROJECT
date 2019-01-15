@@ -55,12 +55,19 @@ public class Tree extends Entity{
   public void hit(int damage) {
     if(rad > 20) {
       // reduce the size of the Tree
-      rad -= 1;
-      Item i = new Wood(1);
+      rad -= 5;
+      Item i = new Wood(5);
+      // give the chance for the tree to drop apples and oranges when hit
+      if(math.random() < 0.1) {
+        MainPlayer.getMainPlayer().getInvetory().addItem(new Apple());
+      } else if (math.random() > 0.9) {
+        MainPlayer.getMainPlayer().getInvetory().addItem(new Orange());
+      }
       MainPlayer.getMainPlayer().getInvetory().addItem(i);
       Protocol.send(8, this, Client.getConnection());
     } else {
-      Item i = new Wood(100);
+      //drop 200 wood when the tree is broken
+      Item i = new Wood(200);
       MainPlayer.getMainPlayer().getInvetory().addItem(i);
       Client.removeEntity(this);
       Protocol.send(12, this, Client.getConnection());
