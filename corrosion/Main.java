@@ -6,9 +6,6 @@
 
       crate and barrel drops
 
-      player random spawn
-        remove crate that spawns at 0,0
-
       fix buggy shotgun when player shoots in middle
 
       corrosion.drawingstate.TextBoxG says in the top
