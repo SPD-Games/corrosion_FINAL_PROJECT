@@ -60,9 +60,9 @@ public class Tree extends Entity{
       rad -= 5;
       Item i = new Wood(5);
       // give the chance for the tree to drop apples and oranges when hit
-      if(Math.random() < 0.1) {
+      if(Math.random() < 0.02) {
         MainPlayer.getMainPlayer().getInvetory().addItem(new Apple());
-      } else if (Math.random() > 0.9) {
+      } else if (Math.random() > 0.97) {
         MainPlayer.getMainPlayer().getInvetory().addItem(new Orange());
       }
       MainPlayer.getMainPlayer().getInvetory().addItem(i);
