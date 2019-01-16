@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import corrosion.entity.Entity;
 
 public class SortingInsertion {
+
   /**
   * Variation of Bucket sort that sorts entity by zIndex
   * @param entities the arraylist to sort
@@ -23,12 +24,20 @@ public class SortingInsertion {
           entities.addAll(bucket);
         }
       }
+      // return the list of entities
       return entities;
     }
   }
 
+  /**
+  * sort the entities by z index
+  * @param entities the array list of entities
+  * @param e entity
+  * @return array list of entities by x index
+  */
   public static ArrayList<Entity> insertByZIndex(ArrayList<Entity> entities, Entity e){
     synchronized(entities){
+      // get the z index of entity
       int z = e.getZIndex();
       for (int i = 0; i < entities.size(); ++i){
         if (entities.get(i).getZIndex() >= z){
@@ -36,11 +45,10 @@ public class SortingInsertion {
           return entities;
         }
       }
+      // add the entity
       entities.add(e);
       return entities;
     }
   }
 
-  //private int searchZIndex(ArrayList<Entity> entities, int z, int low, int high){
-  //}
 }

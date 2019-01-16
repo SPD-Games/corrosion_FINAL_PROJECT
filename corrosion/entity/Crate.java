@@ -22,6 +22,10 @@ public class Crate extends Entity{
   double scaleSize = 0.5;
   private int hp = 150;
   public static BufferedImage icon;
+
+  /*
+  * load the sprites
+  */
   public static void init(){
     try{
       //loads Crate icon
@@ -44,11 +48,20 @@ public class Crate extends Entity{
     transform.setToTranslation(x-50,y-50);
     transform.scale(scaleSize,scaleSize);
   }
+
+
+  /**
+  * a Constructor of the Crate
+  */
   public Crate () {
     super();
   }
 
-
+  /**
+  * Draws the player to the Window
+  * @param g the graphics context
+  * @param t time since last frame
+  */
   public void draw(Graphics g, long t) {
     ((Graphics2D)g).drawImage(icon,transform,null);
   }
@@ -57,6 +70,7 @@ public class Crate extends Entity{
   *Method to drop items after crate is broken
   */
   public void drop(){
+    // give random chance to drop item
     if (Math.random() < 0.04) {
       Sniper i = new Sniper(getXPos(), getYPos(), 0, Client.getId());
       i.sendItem();
@@ -74,12 +88,16 @@ public class Crate extends Entity{
       i.sendItem();
     }
 
-
+    // guarentee bullet drops
     Bullet j = new Bullet(getXPos(), getYPos(), 0, Client.getId());
     j.addStack(new Bullet(30));
     j.sendItem();
   }
 
+  /**
+  * return the hitbox of
+  * @return hit box
+  */
   public Shape getHitBox(){
     return new Rectangle2D.Double(xPos-50, yPos-50,100,100);
   }
@@ -93,6 +111,7 @@ public class Crate extends Entity{
       hp -= damage;
       Protocol.send(8, this, Client.getConnection());
     } else {
+      // drop the items and remove the crate
       drop();
 
       Client.removeEntity(this);

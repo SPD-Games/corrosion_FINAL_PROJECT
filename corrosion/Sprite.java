@@ -157,6 +157,9 @@ public class Sprite{
     }
   }
 
+  /**
+  * go to next frame
+  */
   public void nextFrame(){
     synchronized (state){
       if (state[1] + 1 < sprites[state[0]].length){

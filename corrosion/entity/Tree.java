@@ -20,7 +20,7 @@ public class Tree extends Entity{
   private int rad = 75;
 
   /**
-  * Main Constructor of the Crate
+  * Main Constructor of the tree
   * @param x the x position of the Entity
   * @param y the y position of the Entity
   * @param r the rotation applied to the Entity
@@ -28,11 +28,14 @@ public class Tree extends Entity{
   public Tree (double x, double y, double r, long id) {
     super(x,y,r,id);
   }
+  /**
+  * Main Constructor of the Tree
+  */
   public Tree () {
     super();
   }
   /**
-  * Main Constructor of the Crate
+  * Main Constructor of the Tree
   * @param x the x position of the Entity
   * @param y the y position of the Entity
   * @param r the rotation applied to the Entity
@@ -43,14 +46,24 @@ public class Tree extends Entity{
     this.rad = rad;
   }
 
+  /**
+  * Draws the player to the Window
+  * @param g the graphics context
+  * @param t time since last frame
+  */
   public void draw(Graphics g, long t) {
     g.setColor(new Color(45,87,44));
     g.fillOval((int)xPos-rad, (int)yPos-rad, 2*rad, 2*rad);
   }
 
+  /**
+  * get the hit box
+  * @return the hit box
+  */
   public Shape getHitBox(){
     return new Ellipse2D.Double(xPos- rad, yPos-rad,2*rad,2*rad);
   }
+
   /**
   * if the Tree is hit, decrease its size until it is small then return resources
   */

@@ -14,7 +14,7 @@ public class Window extends JFrame {
   private static Window window;
 
   /**
-  * Gets the main Window
+  * Gets the main window
   * @return the main window
   */
   public static Window getWindow(){

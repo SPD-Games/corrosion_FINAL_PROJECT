@@ -116,8 +116,7 @@ abstract public class Entity implements Serializable{
     rotation = r;
   }
 
-  /**
-   TODO: add a lock to position
+  /*
    * Gets the y value of position
    * @return the y value of the Position
   */
@@ -133,14 +132,27 @@ abstract public class Entity implements Serializable{
     return transform;
   }
 
+  /*
+   * Gets the y value of position
+   * @param id set the id
+  */
   public void setId(int id){
     this.id = id;
   }
 
+  /*
+   * Gets the y value of position
+   * @return get the id
+  */
   public long getId(){
     return id;
   }
 
+  /*
+   * see if two entities are equal
+   * @param the entity
+   * @return if they are equal
+  */
   public boolean equals(Object o){
     if (o == null) return false;
     if (o == this) return true;
@@ -157,8 +169,21 @@ abstract public class Entity implements Serializable{
     return ("xPos: " + xPos + "," + "yPos: " + yPos + "," + "rotation: " +  rotation + ", zIndex: " + zIndex);
   }
 
-
+  /**
+  * sets state of sprite when you get sprite from server
+  */
   public void fromServer(){}
+
+  /**
+  * hit the main player
+  * @param damage the amount of damage dealt
+  */
   public void hit(int damage){}
+
+  /**
+  * Draws the player to the Window
+  * @param g the graphics context
+  * @param t time since last frame
+  */
   abstract public void draw(Graphics g, long t);
 }

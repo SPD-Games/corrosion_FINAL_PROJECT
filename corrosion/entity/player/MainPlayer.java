@@ -37,6 +37,10 @@ public class MainPlayer extends Player{
      }
    }
 
+   /**
+   * Gets the main players inventory
+   * @return the inventory of the player
+   */
     public Inventory getInvetory(){
       return inventory;
     }
@@ -49,6 +53,10 @@ public class MainPlayer extends Player{
       return mainPlayer;
     }
 
+    /**
+    * set equipped
+    * @param i the put an item in the hotbar
+    */
     public void setEquipped(int i){
       equipped = inventory.getHotBar(i);
       inventory.setEquipped(i);
@@ -64,8 +72,12 @@ public class MainPlayer extends Player{
       mainPlayer.spawn();
     }
 
+    /**
+    * spawn the player
+    */
     public void spawn(){
       hp = 50;
+      // spawn them in but only at certain locations
       int i = ThreadLocalRandom.current().nextInt(0, 2);
       if (i == 0){
         yPos = 750;
@@ -74,6 +86,7 @@ public class MainPlayer extends Player{
         xPos = 750;
         yPos = ThreadLocalRandom.current().nextInt(1800, 19300);
       }
+      // remove all their old items
       inventory = new Inventory();
     }
 
@@ -119,12 +132,15 @@ public class MainPlayer extends Player{
     	this.right = right;
     }
 
+    /**
+    * Gets the hp of main player
+    * @return the players hp
+    */
     public int getHp(){
       return hp;
     }
 
     /**
-    * TODO synchronized it
     * Uses the equipped item
     * @param p the point relative to the location of the player that was attacked (mouse input)
     */
@@ -159,6 +175,10 @@ public class MainPlayer extends Player{
       }
     }
 
+    /**
+    * hit the main player
+    * @param damage the amount of damage dealt
+    */
     public void hit(int damage){
       int tmpHp = hp - damage;
       if (tmpHp <= 0){
@@ -177,6 +197,7 @@ public class MainPlayer extends Player{
     /**
     * Draws the player to the Window
     * @param g the graphics context
+    * @param t time since last frame
     */
     public void draw(Graphics g, long t){
 
@@ -206,6 +227,7 @@ public class MainPlayer extends Player{
       xPos += xVel;
       yPos += yVel;
 
+      // check hit boxes
       ArrayList<Entity> entities = Client.getEntities();
       for (int iEntities = 0; iEntities < entities.size(); ++iEntities){
         Entity e = entities.get(iEntities);
@@ -218,6 +240,8 @@ public class MainPlayer extends Player{
           }
         }
       }
+
+      // make it so the user cant go off the map
       if (xPos < 0){xPos = 0;}
       else if(xPos > 20000){xPos = 20000;}
       if (yPos < 0){yPos = 0;}

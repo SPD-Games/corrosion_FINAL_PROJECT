@@ -22,10 +22,18 @@ public class Player extends Entity{
   private double moveToX, moveToY, xVel, yVel;
   protected Equippable equipped = null;
 
+  /**
+  * get equipped
+  * @return the equipped item
+  */
   public Equippable getEquipped(){
     return equipped;
   }
 
+  /**
+  * set equipped
+  * @param i the put an item in the hotbar
+  */
   public void setEquipped(Equippable equipped){
     this.equipped = equipped;
   }
@@ -65,6 +73,11 @@ public class Player extends Entity{
     yVel = 0;
   }
 
+  /**
+  * move player
+  * @param xPos x Position
+  * @param yPos y Position
+  */
   public void moveTo(double xPos, double yPos){
     //check if it is moving
     if (xPos != moveToX || yPos != moveToY){
@@ -114,9 +127,21 @@ public class Player extends Entity{
     }
   }
 
+  /**
+  * makes the user die, not used in this class
+  */
   public void die(){}
+
+  /**
+  * makes the user get hit, not used in this class
+  */
   public void hit(double damage){}
 
+
+  /**
+  * get hit box
+  * @return the hit box of player
+  */
   @Override
   public Shape getHitBox(){
     return new Ellipse2D.Double(xPos-50,yPos-50,100,100);

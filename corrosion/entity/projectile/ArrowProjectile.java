@@ -45,6 +45,9 @@ public class ArrowProjectile extends Projectile{
     }
   }
 
+  /**
+  * arrow constructor
+  */
   public ArrowProjectile(double xPos, double yPos, double xVel, double yVel, double r, long id){
     super(xPos,yPos,xVel,yVel,r,id);
     range = MAX_RANGE;
@@ -73,8 +76,12 @@ public class ArrowProjectile extends Projectile{
     Client.addProjectile(this);
   }
 
-  //TODO hit checking
+  /**
+  * checks if arrow hits something
+  */
   public void hitCheck(){
+
+    //check if arrow has hit an entity
     ArrayList<Entity> entities = Client.getEntities();
     for (int i = 0; i < entities.size(); ++i){
 
@@ -90,6 +97,7 @@ public class ArrowProjectile extends Projectile{
       }
     }
 
+    // check if the arrow hits a player
     ArrayList<Player> players = Client.getPlayers();
     for (int i = 0; i < players.size(); ++i){
       if (players.get(i).equals(player)){continue;}
@@ -112,18 +120,27 @@ public class ArrowProjectile extends Projectile{
     }
   }
 
+  /**
+  * the projectice is removed
+  */
   public void hit(){
     isHit = true;
     Client.removeProjetile(this);
   }
 
+  /**
+  * update the Position
+  * @param t the time passes since the last frame
+  */
   public void update(long t){
     xPos += t * xVel;
     yPos += t * yVel;
     range -= MAX_VEL*t;
+    // if reached max range, remove arrow
     if (range < 0){
       hit();
     }
+    // check if it hits anything
     hitCheck();
   }
 

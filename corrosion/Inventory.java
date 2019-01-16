@@ -25,6 +25,7 @@ public class Inventory{
   //Array for items in hotbar
   private Equippable[] hotBar = new Equippable[6];
   private int equipped = 0;
+
   /**
   *Constructor
   */

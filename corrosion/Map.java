@@ -29,7 +29,7 @@ public class Map{
   public void init(){
     BufferedImage map = null;
     try{
-      //loads Barrel icon
+      //loads map icon
       map = ImageIO.read(new File("sprites/map.png"));
     }catch(Exception e){
       //exits on error with message
@@ -38,20 +38,32 @@ public class Map{
     }
     for (int x = 0; x < 10000; x += 100){
       for (int y = 0; y < 10000; y += 100){
+        // get the sub images
         segments[x/100][y/100] = map.getSubimage(x, y, 100, 100);
       }
     }
   }
 
+  /*
+  * Constructor of the map
+  */
   public Map(){
     init();
   }
 
+  /**
+  * Draws the player to the Window
+  * @param g the graphics context
+  * @param t time since last frame
+  */
   public void draw(Graphics g, double scale){
+    // get the user position
     int xPos = (int)MainPlayer.getMainPlayer().getXPos()/200;
     int yPos = (int)MainPlayer.getMainPlayer().getYPos()/200;
+    // get window info
     int w = (int)(Drawing.width() / 400.0 / scale) + 1;
     int h = (int)(Drawing.height() / 400.0 / scale) + 1;
+    // draw the map in segments so the user lags less
     for (int x = -w; x <= w; x++){
       if (xPos+x < 0){continue;}
       if (xPos+x >= 100){break;}

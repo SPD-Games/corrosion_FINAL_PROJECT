@@ -47,6 +47,9 @@ public class BulletProjectile extends Projectile{
     }
   }
 
+  /**
+  * bullet Constructor
+  */
   public BulletProjectile(double xPos, double yPos, double xVel, double yVel, double r, long id){
     super(xPos,yPos,xVel,yVel,r,id);
     range = MAX_RANGE;
@@ -78,9 +81,13 @@ public class BulletProjectile extends Projectile{
     Client.addProjectile(this);
   }
 
-  //TODO hit checking
+
+  /**
+  * check if arrow hits anything
+  */
   public void hitCheck(){
 
+    // check if a bullet hits an entity
     ArrayList<Entity> entities = Client.getEntities();
     for (int i = 0; i < entities.size(); ++i){
 
@@ -89,6 +96,7 @@ public class BulletProjectile extends Projectile{
       else if (e instanceof Projectile){continue;}
       if (HitDetection.hit(e.getHitBox(), getHitBox())){
         if (!isHit && player != null){
+          // deal damage to the entity
           e.hit(damage);
           Protocol.send(8 ,new HitMarker(getXPos(),getYPos(), "-"+damage), Client.getConnection());
         }
@@ -96,11 +104,14 @@ public class BulletProjectile extends Projectile{
         return;
       }
     }
+
+    // check if a player is hit by a bullet
     ArrayList<Player> players = Client.getPlayers();
     for (int i = 0; i < players.size(); ++i){
       if (players.get(i).equals(player)){continue;}
       if (HitDetection.hit(players.get(i).getHitBox(), getHitBox())){
         if (!isHit && player != null){
+          // damage player that is hit
           ArrayList out = new ArrayList();
           out.add(players.get(i).getId());
           out.add(damage);
@@ -118,18 +129,29 @@ public class BulletProjectile extends Projectile{
     }
   }
 
+  /**
+  * remove bullet
+  */
   public void hit(){
     isHit = true;
     Client.removeProjetile(this);
   }
 
+
+  /**
+  * upate the position of bullet
+  * @param t the time passes since the last frame
+  */
   public void update(long t){
     xPos += t * xVel;
     yPos += t * yVel;
     range -= MAX_VEL*t;
+    // check if reached max range
     if (range < 0){
+      // remove bullet
       hit();
     }
+    // check if bullet hits anyone
     hitCheck();
   }
 
@@ -150,6 +172,10 @@ public class BulletProjectile extends Projectile{
   }
 
   @Override
+  /**
+  * get the hitbox of the bullet
+  * @return hit box
+  */
   public Shape getHitBox(){
     Path2D  p = new Path2D.Double();
     p.moveTo(xPos, yPos);

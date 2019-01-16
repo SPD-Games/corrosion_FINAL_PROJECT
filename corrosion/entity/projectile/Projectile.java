@@ -14,6 +14,9 @@ abstract public class Projectile extends Entity{
   protected Player player = null;
   protected boolean isHit = false;
 
+  /**
+  * projectile Constructor
+  */
   public Projectile(double xPos, double yPos, double xVel, double yVel, double r, long id){
     super(xPos,yPos,r,id);
     this.xVel = xVel;
@@ -23,6 +26,9 @@ abstract public class Projectile extends Entity{
     range = 1000;
   }
 
+  /**
+  * projectile Constructor
+  */
   public Projectile(){
     super();
     this.xVel = 0;
@@ -32,10 +38,18 @@ abstract public class Projectile extends Entity{
     range = 1000;
   }
 
+  /**
+  * get x velocity
+  * @return x velocity
+  */
   public double getXVel(){
     return xVel;
   }
 
+  /**
+  * get y velocity
+  * @return y velocity
+  */
   public double getYVel(){
     return yVel;
   }
@@ -49,5 +63,9 @@ abstract public class Projectile extends Entity{
   * When an object is hit
   */
   abstract public void hit();
+
+  /**
+  * update position
+  */
   abstract public void update(long t);
 }

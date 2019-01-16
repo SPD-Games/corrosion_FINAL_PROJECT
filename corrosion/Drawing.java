@@ -58,10 +58,11 @@ public class Drawing extends JPanel{
   * @param port the port
   */
   public static void setStateGame(String ip, int port) {
-      // 127.0.0.1
+      // try to join the game
       try {
       state = new GameDrawing(ip, 1234);
     } catch (Exception e){
+      // send back to main menu if entered invlaid ip
       state = new MainMenuDrawing();
     }
   }

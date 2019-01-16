@@ -18,7 +18,7 @@ public class Rock extends Entity{
   private int rad = 75;
 
   /**
-  * Main Constructor of the Crate
+  * Main Constructor of the rock
   * @param x the x position of the Entity
   * @param y the y position of the Entity
   * @param r the rotation applied to the Entity
@@ -26,11 +26,14 @@ public class Rock extends Entity{
   public Rock (double x, double y, double r, long id) {
     super(x,y,r,id);
   }
+  /**
+  * Constructor of the rock
+  */
   public Rock () {
     super();
   }
   /**
-  * Main Constructor of the Crate
+  *  Constructor of the rock
   * @param x the x position of the Entity
   * @param y the y position of the Entity
   * @param r the rotation applied to the Entity
@@ -41,14 +44,24 @@ public class Rock extends Entity{
     this.rad = rad;
   }
 
+  /**
+  * Draws the player to the Window
+  * @param g the graphics context
+  * @param t time since last frame
+  */
   public void draw(Graphics g, long t) {
     g.setColor(new Color(149, 148, 139));
     g.fillOval((int)xPos-rad, (int)yPos-rad, 2*rad, 2*rad);
   }
 
+  /**
+  * get the hit box
+  * @return the hit box
+  */
   public Shape getHitBox(){
     return new Ellipse2D.Double(xPos- rad, yPos-rad,2*rad,2*rad);
   }
+
   /**
   * if the Rock is hit, decrease its size until it is small then return resources
   */

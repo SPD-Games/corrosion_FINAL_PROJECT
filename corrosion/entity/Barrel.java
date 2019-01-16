@@ -23,6 +23,10 @@ public class Barrel extends Entity{
   private double scaleSize = 0.5;
   private static BufferedImage icon;
   private int hp = 150;
+
+  /*
+  * load the sprites
+  */
   public static void init(){
     try{
       //loads Barrel icon
@@ -33,6 +37,7 @@ public class Barrel extends Entity{
       System.exit(-1);
     }
   }
+
   /**
   * Main Constructor of the Crate
   * @param x the x position of the Entity
@@ -44,10 +49,19 @@ public class Barrel extends Entity{
     transform.setToTranslation(x-50,y-50);
     transform.scale(scaleSize,scaleSize);
   }
+
+  /**
+  * a Constructor of the barrel
+  */
   public Barrel () {
     super();
   }
 
+  /**
+  * Draws the player to the Window
+  * @param g the graphics context
+  * @param t time since last frame
+  */
   public void draw(Graphics g, long t) {
     ((Graphics2D)g).drawImage(icon,transform,null);
   }
@@ -56,12 +70,8 @@ public class Barrel extends Entity{
   *Method to drop items after barrel is broken
   */
   public void drop(){
-    //30 Bullets, 10 arrows
-    //Possilbity of crossbow : 30%,
-    //Possilbity of shotgun : 5%,
-    //Possilbity of pistol : 10%,
-    //2 Bandages : 30%
 
+    // have random chance for each item to drop
     if (Math.random() < 0.05) {
       CrossBow i = new CrossBow(getXPos(), getYPos(), 0, Client.getId());
       i.sendItem();
@@ -79,6 +89,7 @@ public class Barrel extends Entity{
       i.sendItem();
     }
 
+    // guarentee drop for bullets and arrows
       Bullet i = new Bullet(getXPos(), getYPos(), 0, Client.getId());
       i.addStack(new Bullet(10));
       i.sendItem();
@@ -88,6 +99,10 @@ public class Barrel extends Entity{
       j.sendItem();
   }
 
+  /**
+  * return the hitbox of
+  * @return hit box
+  */
   public Shape getHitBox(){
     return new Ellipse2D.Double(xPos-50, yPos-50,100,100);
   }
@@ -103,6 +118,7 @@ public class Barrel extends Entity{
       MainPlayer.getMainPlayer().getInvetory().addItem(i);
       Protocol.send(8, this, Client.getConnection());
     } else {
+      // drop the items and remove the barrel
       drop();
 
       Client.removeEntity(this);
