@@ -250,6 +250,11 @@ public class GameDrawing extends DrawingState{
       g.setColor(Color.RED);
       g.drawString("YOU DIED",40,-100);
       dead -= 2.2;
+      MainPlayer.getMainPlayer().setUp(false);
+      MainPlayer.getMainPlayer().setDown(false);
+      MainPlayer.getMainPlayer().setRight(false);
+      MainPlayer.getMainPlayer().setLeft(false);
+
     }
 
   }
