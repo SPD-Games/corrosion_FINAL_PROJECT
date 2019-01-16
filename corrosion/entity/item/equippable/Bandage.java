@@ -1,6 +1,6 @@
 //Edward Pei, Henry Lim
-//Dec 29, 2018
-//Apple class
+//Jan 15, 2019
+//Bandage class
 package corrosion.entity.item.equippable;
 
 //imports
@@ -54,7 +54,7 @@ public class Bandage extends Equippable{
   }
 
   /**
-  * 
+  *Method to initialize bandage class
   */
   public static void init(){
     try{
@@ -73,57 +73,87 @@ public class Bandage extends Equippable{
       System.exit(-1);
     }
   }
+  /**
+  * Constructor
+  * @param stack size
+  */
   public Bandage(int stack){
+    //evoke constructor
     this();
+    //Set stack size
     stackSize = stack;
   }
+  /**
+  * Constructor
+  */
   public Bandage(){
+    //evoke constructor
     this(new int[]{0,0});
   }
-
+  /**
+  * Constructor
+  * @param state state of sprite
+  */
   public Bandage(int[] state){
+    //Evoke consctructor in equippable
     super(new Sprite(icon, state, sprites, new int[]{0}));
+    //Set boolean to true
     stackable = true;
   }
-
+  /**
+  * Constuctor
+  * @param x position
+  * @param y position
+  * @param r rotation applied
+  * @param id id number associated with the Equippable
+  */
   public Bandage(double x, double y, double r, long id){
     super(x,y,r,id);
     stackable = true;
   }
 
+  /**
+  * Draw the item
+  * @param g graphics tool used to draw
+  * @param player item owner
+  */
   public void drawEquipped(Graphics g, Player player){
     transform = player.getTransform();
+    //Scale original image
     transform.scale(1.1,1.1);
+    //Shift original image
     transform.translate(-45, -150);
+    //Draw sprite
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
-
+  /**
+  * Atack method, but used as animation
+  * @param p cursor cooridinate relative to player
+  * @param player player using bandage
+  */
   public void attack(Point p, Player player){
+    //Draw bandage used
     int[] frame = sprite.getState();
     if (frame[0] == LAST_FRAME[0] && frame[1] == LAST_FRAME[1]){
+      //Remove bandage after use
       ((MainPlayer)player).getInvetory().removeItem(new Bandage());
       player.setEquipped(null);
     } else {
       sprite.nextFrame();
     }
+    //Replenish player health
     ((MainPlayer)player).hit(-25);
   }
 
   /**
-  * Reloads the weapon
+  * Unused method (bandage class cannot attack)
   * @param p the pointer position on the screen relative to the player
   */
-  public void attack2(Point p, Player player){
-
-  }
+  public void attack2(Point p, Player player){}
 
   /**
   * Does nothing, you cant reload the item
   */
-  public void reload(){
-
-  }
-
-
+  public void reload(){}
 }
