@@ -2,13 +2,10 @@
   * December 13 2018
   * Runs the game
   * TODO:
+    writing to data File?
+    recursion?
+    Encapsulate the final program to include an intro screen, application, and credits screen using the JOptionPane function or Multiple Windows.
 
-      corrosion.drawingstate.TextBoxG says in the top
-
-      create a jar file
-      arrow down for
-      ENTERCLASSHERE.class.getResourceAsStream("/sprites/upgradeplan/icon.png")
-      server.java needs comments
   */
 
 package corrosion;
