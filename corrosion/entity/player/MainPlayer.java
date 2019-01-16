@@ -73,7 +73,7 @@ public class MainPlayer extends Player{
       } else if (i == 1){
         xPos = 750;
         yPos = ThreadLocalRandom.current().nextInt(1800, 19300);
-      } 
+      }
       inventory = new Inventory();
     }
 
@@ -190,6 +190,7 @@ public class MainPlayer extends Player{
       //draws the equipped item
       drawEquipped(g);
 
+      if (GameDrawing.dead > 0){return;}
       //moves the player
       double yVel = 0;
       double xVel = 0;
