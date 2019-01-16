@@ -11,8 +11,8 @@ public class Stone extends Item{
   public static void init(){
     BufferedImage icon = null;
     try{
-      //loads Barrel icon
-      icon = ImageIO.read(new File("sprites/stone.png"));
+      //loads stone icon
+      icon = ImageIO.read(Stone.class.getResourceAsStream("/sprites/stone.png"));
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading stone Sprite: " + e);

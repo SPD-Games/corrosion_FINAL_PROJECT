@@ -143,8 +143,6 @@ public class GameDrawing extends DrawingState{
     //draws status text
     ((Graphics2D)g).setTransform(new AffineTransform());
     g.setColor(Color.black);
-    g.drawLine(0, Drawing.height()/2,Drawing.width(),Drawing.height()/2);
-    g.drawLine(Drawing.width()/2, 0, Drawing.width()/2,Drawing.height());
     g.drawString(Drawing.getFps()+ "fps. " + Client.getPing() + "ms. Pos(" + MainPlayer.getMainPlayer().getXPos() + ", " + MainPlayer.getMainPlayer().getYPos() + ")", 50, 50);
 
     //draws health bar

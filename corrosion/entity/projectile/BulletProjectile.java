@@ -39,7 +39,7 @@ public class BulletProjectile extends Projectile{
   public static void init(){
     try{
       //sets sprite image
-      img = ImageIO.read(new File("sprites/bullet.png"));
+      img = ImageIO.read(BulletProjectile.class.getResourceAsStream("/sprites/bullet.png"));
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading bullet Sprite: " + e);

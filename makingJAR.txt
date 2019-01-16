@@ -1,11 +1,12 @@
-https://www.youtube.com/watch?v=TWoEfetsHYA
+cd into root of corrosion
 
-compile to .class files
-create manifest file
-//
-Main-Class: Main
+make sure an up to date sprites and images folder are in jarBuilding
 
+javac -J-Dfile.encoding=UTF-8 -sourcepath . -d jarBuilding/ corrosion/Main.java 
 
-//
+cd jarBuilding
 
-jar cvfm out.jar MAINIFEST.mf
+jar cvfm main.jar MAINIFEST.mf corrosion/* corrosion/*/* corrosion/*/*/* corrosion/*/*/*/* data/* sprites/* sprites/*/* sprites/*/*/*
+
+jar cvfm server.jar MAINIFEST_SERVER.mf corrosion/* corrosion/*/* corrosion/*/*/* corrosion/*/*/*/* data/* sprites/* sprites/*/* sprites/*/*/*
+

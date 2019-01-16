@@ -43,14 +43,11 @@ public class Orange extends Equippable{
   public BufferedImage getIcon(){
     return icon;
   }
-<<<<<<< HEAD
 
-=======
   /**
   * Method to return stack size of orange
   * @return size of stack
   */
->>>>>>> fbb22c94b877ab6202f191c6cab99a98f709eb63
   public String getInfo(){
     return stackSize + "";
   }

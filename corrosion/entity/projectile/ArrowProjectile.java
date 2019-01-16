@@ -37,7 +37,7 @@ public class ArrowProjectile extends Projectile{
   public static void init(){
     try{
       //sets sprite image
-      img = ImageIO.read(new File("sprites/arrow.png"));
+      img = ImageIO.read(ArrowProjectile.class.getResourceAsStream("/sprites/arrow.png"));
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading Arrow Sprite: " + e);

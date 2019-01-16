@@ -30,7 +30,7 @@ public class Arrow extends Item{
   public static void init(){
     try{
       //loads icon
-      icon = ImageIO.read(new File("sprites/arrowIcon.png"));
+      icon = ImageIO.read(Arrow.class.getResourceAsStream("/sprites/arrowIcon.png"));
 
     }catch(Exception e){
       //exits on error with message

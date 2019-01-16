@@ -30,7 +30,7 @@ public class Barrel extends Entity{
   public static void init(){
     try{
       //loads Barrel icon
-      icon = ImageIO.read(new File("sprites/barrel.png"));
+      icon = ImageIO.read(Barrel.class.getResourceAsStream("/sprites/barrel.png"));
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading Barrel Sprite: " + e);

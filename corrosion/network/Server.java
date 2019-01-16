@@ -317,8 +317,7 @@ public class Server{
   public void loadEntities(){
     try {
       // load the crate data
-      File file = new File("data/Crates.txt");
-      Scanner input = new Scanner(file);
+      Scanner input = new Scanner(Server.class.getResourceAsStream("/data/Crates.txt"));
       double xPos, yPos;
       //loop through file
       while (input.hasNextLine()){
@@ -337,8 +336,7 @@ public class Server{
     }
     try {
       //load the barrel data
-      File file = new File("data/Barrels.txt");
-      Scanner input = new Scanner(file);
+      Scanner input = new Scanner(Server.class.getResourceAsStream("/data/Barrels.txt"));
       double xPos, yPos;
       //loop through file
       while (input.hasNextLine()){
@@ -357,8 +355,7 @@ public class Server{
     }
     try {
       //load the tree and rock data
-      File file = new File("data/TreesRocks.txt");
-      Scanner input = new Scanner(file);
+      Scanner input = new Scanner(Server.class.getResourceAsStream("/data/TreesRocks.txt"));
       double xPos, yPos;
       //loop through file
       while (input.hasNextLine()){

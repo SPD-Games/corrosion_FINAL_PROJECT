@@ -29,8 +29,9 @@ public class Bullet extends Item{
   private final static int[] LAST_FRAME = {0,1};
   public static void init(){
     try{
+
       //loads icon
-      icon = ImageIO.read(new File("sprites/bulletIcon.png"));
+      icon = ImageIO.read(Bullet.class.getResourceAsStream("/sprites/bulletIcon.png"));
 
     }catch(Exception e){
       //exits on error with message

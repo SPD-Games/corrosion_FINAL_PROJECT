@@ -11,8 +11,8 @@ public class Metal extends Item{
   public static void init(){
     BufferedImage icon = null;
     try{
-      //loads Barrel icon
-      icon = ImageIO.read(new File("sprites/metal.png"));
+      //loads metal icon
+      icon = ImageIO.read(Metal.class.getResourceAsStream("/sprites/metal.png"));
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading Metal Sprite: " + e);

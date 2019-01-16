@@ -29,7 +29,7 @@ public class Crate extends Entity{
   public static void init(){
     try{
       //loads Crate icon
-      icon = ImageIO.read(new File("sprites/crate.png"));
+      icon = ImageIO.read(Crate.class.getResourceAsStream("/sprites/crate.png"));
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading Crate Sprite: " + e);

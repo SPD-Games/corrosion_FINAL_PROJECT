@@ -50,10 +50,11 @@ public class Inventory{
     items[2][1] = new Bandage(10);
     items[2][2] = new Medkit(10);
     */
-
+    
     hotBar[0] = new Tool();
     hotBar[1] = new BuildingPlan();
     hotBar[2] = new UpgradePlan();
+    
   }
 
   /**

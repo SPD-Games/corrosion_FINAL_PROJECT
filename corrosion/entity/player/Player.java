@@ -44,7 +44,7 @@ public class Player extends Entity{
   public static void init(){
     try{
       //sets sprite image
-      img = ImageIO.read(new File("sprites/player.png"));
+      img = ImageIO.read(Player.class.getResourceAsStream("/sprites/player.png"));
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading Player Sprite: " + e);
@@ -52,7 +52,7 @@ public class Player extends Entity{
     }
     try{
       //sets sprite image
-      hands = ImageIO.read(new File("sprites/hands.png"));
+      hands = ImageIO.read(Player.class.getResourceAsStream("/sprites/hands.png"));
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading Player hands: " + e);

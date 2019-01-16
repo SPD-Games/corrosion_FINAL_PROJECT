@@ -110,7 +110,7 @@ public class UpgradePlan extends Equippable{
 
 
   /**
-  * Draws a crossbow equipped to the player
+  * Draws a upgrade plan equipped to the player
   * @param g the graphics context
   */
   public void drawEquipped(Graphics g, Player player){
@@ -128,20 +128,25 @@ public class UpgradePlan extends Equippable{
     p = Mouse.getPointOnMap(p);
     Ellipse2D point = new Ellipse2D.Double(p.x-2.5, p.y-2.5, 5, 5);
     ArrayList<Entity> entities = Client.getEntities();
-    //Hit detection for entities and players
+    //Hit detection for walls
     for (int i = 0; i < entities.size(); ++i){
       Entity e = entities.get(i);
+      //check if a entity was a wall
       if (e instanceof Wall){
+        //check if wall was clicked on
         if (HitDetection.hit(point, ((Wall)e).getBuildingHitBox())){
           ((Wall) e).upgrade(placeState+1);
           return;
         }
       }
     }
+      //Hit detection for Building
     for (int i = 0; i < entities.size(); ++i){
       Entity e = entities.get(i);
       if (e instanceof Building){
+        //check if building was clicked on
         if (HitDetection.hit(point, ((Building)e).getBuildingHitBox())){
+          //upgrade
           ((Building) e).upgrade(placeState+1);
           return;
         }

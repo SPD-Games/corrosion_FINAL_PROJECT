@@ -11,8 +11,8 @@ public class Wood extends Item{
   public static void init(){
     BufferedImage icon = null;
     try{
-      //loads Barrel icon
-      icon = ImageIO.read(new File("sprites/wood.png"));
+      //loads Wood icon
+      icon = ImageIO.read(Wood.class.getResourceAsStream("/sprites/wood.png"));
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading Wood Sprite: " + e);

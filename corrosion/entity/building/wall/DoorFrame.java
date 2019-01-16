@@ -42,7 +42,7 @@ public class DoorFrame extends Wall {
       sprites[1][0] = ImageIO.read(DoorFrame.class.getResourceAsStream("/sprites/doorframe/twigOpen.png"));
       sprites[1][1] = ImageIO.read(DoorFrame.class.getResourceAsStream("/sprites/doorframe/woodOpen.png"));
       sprites[1][2] = ImageIO.read(DoorFrame.class.getResourceAsStream("/sprites/doorframe/stoneOpen.png"));
-      sprites[1][3] = ImageIO.read(DoorFrame.class.getResourceAsStream("/sprites/doorframe/metalOpen.png.png"));
+      sprites[1][3] = ImageIO.read(DoorFrame.class.getResourceAsStream("/sprites/doorframe/metalOpen.png"));
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading DoorFrame Sprite: " + e);

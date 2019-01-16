@@ -30,7 +30,7 @@ public class Map{
     BufferedImage map = null;
     try{
       //loads map icon
-      map = ImageIO.read(new File("sprites/map.png"));
+      map = ImageIO.read(Map.class.getResourceAsStream("/sprites/map.png"));
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading Map Sprite: " + e);
