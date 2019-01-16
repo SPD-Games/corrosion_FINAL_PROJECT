@@ -29,7 +29,7 @@ public class Inventory{
   *Constructor
   */
   public Inventory(){
-
+    /*
     hotBar[0] = new CrossBow();
     hotBar[1] = new Pistol();
     hotBar[3] = new Rifle();
@@ -48,11 +48,11 @@ public class Inventory{
     items[2][0] = new Apple(10);
     items[2][1] = new Bandage(10);
     items[2][2] = new Medkit(10);
+    */
 
-    /*
     hotBar[0] = new Tool();
     hotBar[1] = new BuildingPlan();
-    hotBar[2] = new UpgradePlan();*/
+    hotBar[2] = new UpgradePlan();
   }
 
   /**
