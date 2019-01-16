@@ -133,10 +133,6 @@ public class Tool extends Equippable{
       if (e == this){continue;}
       if (HitDetection.hit(e.getHitBox(), getSwingHitBox())){
         Protocol.send(8 ,new HitMarker(getXPos(),getYPos(), "-"+damage), Client.getConnection());
-        ArrayList out = new ArrayList();
-        out.add(players.get(i).getId());
-        out.add(damage);
-        Protocol.send(10, out, Client.getConnection());
         hit();
         return;
       }
@@ -150,6 +146,7 @@ public class Tool extends Equippable{
         out.add(players.get(i).getId());
         out.add(damage);
         Protocol.send(8 ,new HitMarker(players.get(i).getXPos()+50,players.get(i).getYPos()+50, "-"+damage), Client.getConnection());
+        Protocol.send(10, out, Client.getConnection());
         hit();
         return;
       }
