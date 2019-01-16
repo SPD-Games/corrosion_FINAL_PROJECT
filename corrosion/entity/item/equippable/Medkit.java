@@ -1,9 +1,9 @@
 //Edward Pei
-//Dec 29, 2018
-//Apple class
+//Jan 16, 2019
+//Medkit class
 package corrosion.entity.item.equippable;
 
-//TODO: get apples to add health and stuff idk how to do this micheal dad help
+//Imports
 
 import javax.swing.Timer;
 import java.awt.Graphics;
@@ -22,19 +22,42 @@ import corrosion.entity.Entity;
 import corrosion.entity.player.*;
 
 public class Medkit extends Equippable{
-  public void attackOff(Player player){}
-    public void fromServer(){
-      sprite = new Sprite(icon, new int[]{0,0}, sprites, new int[]{0});
-    }
-  public BufferedImage getIcon(){
-    return icon;
-  }
-  public String getInfo(){
-    return stackSize + "";
-  }
+  //Static variables for medkit (applies to all instances)
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[1][];
   private final static int[] LAST_FRAME = {0,0};
+
+  /**
+  *Method not in use for Medkit class
+  *@param player player class
+  */
+  public void attackOff(Player player){}
+  /**
+  *Sprite method for medkit
+  */
+  public void fromServer(){
+    sprite = new Sprite(icon, new int[]{0,0}, sprites, new int[]{0});
+  }
+
+  /**
+  * Method to return icon
+  * @return icon
+  */
+  public BufferedImage getIcon(){
+    return icon;
+  }
+
+  /**
+  * Method to return stack size of medkit
+  * @return size of stack
+  */
+  public String getInfo(){
+    return stackSize + "";
+  }
+
+  /**
+  *Method to initialize medkit class
+  */
   public static void init(){
     try{
       //loads icon
@@ -52,45 +75,81 @@ public class Medkit extends Equippable{
     }
   }
 
+  /**
+  *Constructor
+  */
   public Medkit(){
+    //Evoke constructor
     this(new int[]{0,0});
   }
 
+  /**
+  * Constructor
+  */
   public Medkit(int[] state){
+    //Evoke constructor in Equipable
     super(new Sprite(icon, state, sprites, new int[]{0}));
+    //Set boolean to true
     stackable = true;
   }
 
+  /**
+  * Constuctor
+  */
   public Medkit(double x, double y, double r, long id){
+    //Evoke constructor in Equipable
     super(x,y,r,id);
+    //Set boolean to true
     stackable = true;
   }
+  /**
+  * constructor
+  */
   public Medkit(int stack){
+    //Evoke constructor
     this();
+    //Set stack size
     stackSize = stack;
   }
+
+  /**
+  * Draw the item
+  * @param g graphics tool used to draw
+  * @param player item owner
+  */
   public void drawEquipped(Graphics g, Player player){
     transform = player.getTransform();
+    //Scale original image
     transform.scale(.8,.8);
+    //Shift orignal image
     transform.translate(-37, -167);
+    //Draw sprite
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
-
+  /**
+  * Atack method, but used as use animation
+  * @param p cursor cooridinate relative to player
+  * @param player player using medkit
+  */
   public void attack(Point p, Player player){
     int[] frame = sprite.getState();
+    //If ready to use...
     if (frame[0] == LAST_FRAME[0] && frame[1] == LAST_FRAME[1]){
+      //Remove medkit after use
       ((MainPlayer)player).getInvetory().removeItem(new Medkit());
       player.setEquipped(null);
     } else {
       sprite.nextFrame();
     }
+    //Replensih plaer health
     ((MainPlayer)player).hit(-100);
   }
 
   /**
-  * Reloads the weapon
-  * @param p the pointer position on the screen relative to the player
+  * Does nothing, attack2 method not used by medkit class
+  * @param p pointer relative to player
+  * @param player player using medkit
   */
   public void attack2(Point p, Player player){
 

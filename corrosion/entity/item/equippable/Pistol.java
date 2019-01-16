@@ -27,10 +27,16 @@ import corrosion.network.protocol.*;
 
 
 public class Pistol extends Equippable implements Serializable{
+  /**
+  *Method not in use for pistol class
+  *@param player player class
+  */
   public void attackOff(Player player){}
-    public void fromServer(){
-      sprite = new Sprite(icon, state, sprites, delay);
-    }
+  //Sprite method for pistol
+  public void fromServer(){
+    sprite = new Sprite(icon, state, sprites, delay);
+  }
+
   // get the icons and animations for the pistol
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[2][3];
@@ -39,6 +45,11 @@ public class Pistol extends Equippable implements Serializable{
   private int reloadTo = 8;
   private static final int MAX_AMMO = 8;
   private final int[] RELOAD_DONE = {1,2};
+
+  /**
+  * Method to ammo held
+  * @return ammo held
+  */
   public String getInfo(){
     return ammo + "";
   }
@@ -75,6 +86,7 @@ public class Pistol extends Equippable implements Serializable{
 
   /**
   * constuctor for the pistol
+  * @param state of pistol
   */
   public Pistol(int[] state){
     super(new Sprite(icon, state, sprites, new int[]{50, 500}));
@@ -82,8 +94,11 @@ public class Pistol extends Equippable implements Serializable{
   }
 
   /**
-   * Main Constructor
-   * @param p the player that has the crossbow equipped
+  * Constuctor
+  * @param x position
+  * @param y position
+  * @param r rotation applied
+  * @param id id number associated with the Equippable
   */
   public Pistol(double xPos, double yPos, double rotation, long id){
     super(xPos,yPos,rotation, id);
@@ -93,18 +108,26 @@ public class Pistol extends Equippable implements Serializable{
   /**
   * Draw the item
   * @param g the graphics tool used to draw
+  * @param player using pistol
   */
   public void drawEquipped(Graphics g, Player player){
+    //If ready to use...
     if (player == null){return;}
     if (sprite.isState(RELOAD_DONE, false)){
       ammo = reloadTo;
       sprite.setState(SHOOT_READY[0], SHOOT_READY[1]);
     }
+    //Draw sprite
     transform = player.getTransform();
     transform.translate(-47, -110);
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
+  /**
+  * attack method
+  * @param p pointer relative to player
+  * @param player using pistol
+  */
   public void attack(Point p, Player player){
     if (sprite.isState(SHOOT_READY, false) && ammo > 0){
       //creates a new bullet
@@ -122,6 +145,7 @@ public class Pistol extends Equippable implements Serializable{
   */
   public void reload(){
     if (!sprite.isState(SHOOT_READY, false)){return;}
+    //If not fully loaded, reload
     if (ammo != MAX_AMMO){
       reloadTo = Math.min(MainPlayer.getMainPlayer().getInvetory().getAmount(new Bullet()) + ammo, MAX_AMMO);
       MainPlayer.getMainPlayer().getInvetory().removeItem(new Bullet(reloadTo-ammo));

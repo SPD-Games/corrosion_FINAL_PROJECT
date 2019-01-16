@@ -106,8 +106,11 @@ public class CrossBow extends Equippable{
   }
 
   /**
-   * Main Constructor
-   * @param p the player that has the crossbow equipped
+  * Constuctor
+  * @param x position
+  * @param y position
+  * @param r rotation applied
+  * @param id id number associated with the Equippable
   */
   public CrossBow(double xPos, double yPos, double rotation, long id){
     //Evoke consctructor in Equippable

@@ -27,6 +27,10 @@ import corrosion.network.protocol.*;
 
 
 public class Shotgun extends Equippable {
+  /**
+  * attack Method
+  * @param player using shotgun
+  */
   public void attackOff(Player player){}
 
   // get the icons and animations for the shotgun
@@ -61,12 +65,24 @@ public class Shotgun extends Equippable {
       System.exit(-1);
     }
   }
+  /**
+  * Method to ammo held
+  * @return ammo held
+  */
   public String getInfo(){
     return ammo + "";
   }
+  /**
+  * Sprite method for rifle
+  */
   public void fromServer(){
     sprite = new Sprite(icon, state, sprites, new int[]{50,50,1000});
   }
+
+  /**
+  * Method to return icon
+  * @return icon
+  */
   public BufferedImage getIcon(){
     return icon;
   }
@@ -79,6 +95,7 @@ public class Shotgun extends Equippable {
 
   /**
   * constuctor for the shotgun
+  * @param state of shotgun
   */
   public Shotgun(int[] state){
     super(new Sprite(icon, state, sprites, new int[]{50,50,1500}));
@@ -86,8 +103,11 @@ public class Shotgun extends Equippable {
   }
 
   /**
-   * Main Constructor
-   * @param p the player that has the crossbow equipped
+  * Constuctor
+  * @param x position
+  * @param y position
+  * @param r rotation applied
+  * @param id id number associated with the Equippable
   */
   public Shotgun(double xPos, double yPos, double rotation, long id){
     super(xPos,yPos,rotation, id);
@@ -97,6 +117,7 @@ public class Shotgun extends Equippable {
   /**
   * Draw the item
   * @param g the graphics tool used to draw
+  * @param plater using shotgun
   */
   public void drawEquipped(Graphics g, Player player){
     if (player == null){return;}
@@ -104,17 +125,18 @@ public class Shotgun extends Equippable {
       ammo = reloadTo;
       sprite.setState(SHOOT_READY[0], SHOOT_READY[1]);
     }
+    //Draw sprite
     transform = player.getTransform();
     transform.translate(-90, -190);
     transform.scale(1.4,1.4);
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
-
-
-    //+ (int)(Math.random() * 100 - 50)
-
-
+  /**
+  * attack method
+  * @param p pointer relative to player
+  * @param player using shotgun
+  */
   public void attack(Point p, Player player){
     if (sprite.isState(SHOOT_READY, false) && ammo > 0){
       //creates the bullet spread of the shotgun
@@ -124,11 +146,16 @@ public class Shotgun extends Equippable {
       BulletProjectile a4 = new BulletProjectile(player, p.getX()+ (int)(Math.random() * 100 - 50), p.getY() + (int)(Math.random() * 100 - 50) , 2,1000,16,12,150);
       BulletProjectile a5 = new BulletProjectile(player, p.getX() + (int)(Math.random() * 100 - 50), p.getY() + (int)(Math.random() * 100 - 50), 2,1000,16,12,150);
       //starts shoot animation
-
       sprite.startAnimation(-ammo+2);
       ammo--;
     }
   }
+
+  /**
+  * 2nd attack method
+  * @param p pointer relative to player
+  * @param player using shotgun
+  */
   public void attack2(Point p, Player player){}
 
   /**

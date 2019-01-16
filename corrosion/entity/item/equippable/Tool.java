@@ -1,5 +1,5 @@
 package corrosion.entity.item.equippable;
-
+//imports
 import corrosion.entity.item.equippable.Equippable;
 import java.awt.image.BufferedImage;
 import corrosion.entity.Entity;
@@ -26,6 +26,7 @@ import corrosion.HitDetection;
 import corrosion.entity.HitMarker;
 
 public class Tool extends Equippable{
+  //Sprite variables to be loaded
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[1][];;
   private final int[] USE_READY = {0,5};
@@ -42,7 +43,7 @@ public class Tool extends Equippable{
         sprites[0][i-1] = ImageIO.read(Tool.class.getResourceAsStream("/sprites/club/animation/frame" + i + ".png"));
       }
       sprites[0][5] = sprites[0][0];
-
+      //hitboxes
       hitBoxs[0] = new Path2D.Double();
       hitBoxs[0].moveTo(450,192);
       hitBoxs[0].lineTo(95,527);
@@ -79,7 +80,7 @@ public class Tool extends Equippable{
 
   /**
    * Main Constructor
-   * @param p the player that has the crossbow equipped
+   * @param state of tool
   */
   public Tool(int[] state){
     super(new Sprite(icon, state, sprites, new int[]{40}));
@@ -87,22 +88,37 @@ public class Tool extends Equippable{
   }
 
   /**
-   * Main Constructor
-   * @param p the player that has the crossbow equipped
+  * Constuctor
+  * @param x position
+  * @param y position
+  * @param r rotation applied
+  * @param id id number associated with the Equippable
   */
   public Tool(double xPos, double yPos, double rotation, long id){
     super(xPos,yPos,rotation, id);
     this.sprite = new Sprite(icon, new int[]{0,5}, sprites, new int[]{40});
   }
 
+  /**
+  *reload method
+  */
   public void reload(){
 
   }
-
+  /**
+  * attack method
+  * @param p pointer relative to player
+  * @param player using tool
+  */
   public void attack2(Point p, Player player){
 
   }
 
+  /**
+  * attack method
+  * @param p pointer relative to player
+  * @param player using tool
+  */
   public void attack(Point p, Player player){
     //checks if tool is ready for use
     if (sprite.isState(USE_READY, false)){
@@ -112,11 +128,20 @@ public class Tool extends Equippable{
     }
   }
 
+  /**
+  * attack off method
+  * @param p pointer relative to player
+  */
   public void attackOff(Player player){
 
   }
-
+  /**
+  * draw method of tool equip
+  * @param g the graphics context
+  * @param player using tool
+  */
   public void drawEquipped(Graphics g, Player player){
+    //Draw sprite
     transform = player.getTransform();
     transform.translate(0, -130);
     transform.scale(0.25,0.25);
@@ -124,9 +149,15 @@ public class Tool extends Equippable{
     update(player);
   }
 
+  /**
+  * update method, hit detection
+  * @param player using tool
+  */
   public void update(Player player){
+    //Hit detection against entitites
     if (player != MainPlayer.getMainPlayer() || sprite.isState(USE_READY, false)){return;}
     ArrayList<Entity> entities = Client.getEntities();
+    //Iterate through entities
     for (int i = 0; i < entities.size(); ++i){
 
       Entity e = entities.get(i);
@@ -138,8 +169,9 @@ public class Tool extends Equippable{
         return;
       }
     }
-
+    //hit detection against players
     ArrayList<Player> players = Client.getPlayers();
+    //Iterate though players
     for (int i = 0; i < players.size(); ++i){
       if (players.get(i).equals(player)){continue;}
       if (HitDetection.hit(players.get(i).getHitBox(), getSwingHitBox())){
@@ -154,33 +186,57 @@ public class Tool extends Equippable{
     }
   }
 
+  /**
+  *return x position
+  * @return x position
+  */
   public double getXPos(){
     Point2D p = transform.transform(new Point2D.Double(),null);
     return p.getX();
   }
+  /**
+  *return y position
+  * @return y position
+  */
   public double getYPos(){
     Point2D p = transform.transform(new Point2D.Double(),null);
     return p.getY();
   }
+
+  /**
+  *return info method
+  * @return info
+  */
   public String getInfo(){
     return "";
   }
-
+  /**
+  * method to return icon
+  * @return icon
+  */
   public BufferedImage getIcon(){
     return icon;
   }
 
+  /**
+  *Sprite method for tool
+  */
   public void fromServer(){
     this.sprite = new Sprite(icon, new int[]{0,5}, sprites, new int[]{40});
   }
-
+  /**
+  * Hit box detection
+  * @return shape hb for tool
+  */
   public Shape getSwingHitBox(){
     if (hitAnything){return null;}
     Path2D out = (Path2D)hitBoxs[sprite.getState()[1]].clone();
     out.transform(transform);
     return out;
   }
-
+  /**
+  *hit method
+  */
   private void hit(){
     hitAnything = true;
   }

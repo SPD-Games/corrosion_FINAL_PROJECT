@@ -30,9 +30,17 @@ import corrosion.network.protocol.*;
 
 public class Smg extends Equippable implements Serializable{
   public boolean shooting = false;
+  /**
+  * Sprite method for rifle
+  */
   public void fromServer(){
     sprite = new Sprite(icon, state, sprites, delay);
   }
+
+  /**
+  * attack Method
+  * @param player using shotgun
+  */
   public void attackOff(Player player){
     shooting = false;
   }
@@ -46,6 +54,10 @@ public class Smg extends Equippable implements Serializable{
   private static final int[] RELOAD_DONE = {1,2};
   public int reloadTo = 30;
 
+  /**
+  * Method to ammo held
+  * @return ammo held
+  */
   public String getInfo(){
     return ammo + "";
   }
@@ -73,18 +85,23 @@ public class Smg extends Equippable implements Serializable{
         System.exit(-1);
       }
     }
+    /**
+    * Method to return icon
+    * @return Icon
+    */
     public BufferedImage getIcon(){
       return icon;
     }
   /**
-  * constuctor for the rifle
+  * constuctor for the smg
   */
   public Smg(){
     this(new int[]{0,4});
   }
 
   /**
-  * constuctor for the rifle
+  * constuctor for the smg
+  * @param state of smg
   */
   public Smg(int[] state){
     super(new Sprite(icon, state, sprites, new int[]{25,1000}));
@@ -92,8 +109,11 @@ public class Smg extends Equippable implements Serializable{
   }
 
   /**
-   * Main Constructor
-   * @param p the player that has the crossbow equipped
+  * Constuctor
+  * @param x position
+  * @param y position
+  * @param r rotation applied
+  * @param id id number associated with the Equippable
   */
   public Smg(double xPos, double yPos, double rotation, long id){
     super(xPos,yPos,rotation, id);
@@ -102,6 +122,7 @@ public class Smg extends Equippable implements Serializable{
   /**
   * Draw the item
   * @param g the graphics tool used to draw
+  * @param player using smg
   */
   public void drawEquipped(Graphics g, Player player){
     if (player == null){return;}
@@ -113,13 +134,16 @@ public class Smg extends Equippable implements Serializable{
       ammo = reloadTo;
       sprite.setState(SHOOT_READY[0], SHOOT_READY[1]);
     }
+    //Draw sprite
     transform = player.getTransform();
     transform.translate(-50, -140);
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
 
-
+  /**
+  * Shoot method
+  */
   public void shoot(){
     Point p = Mouse.getPosition();
     Player player = MainPlayer.getMainPlayer();
@@ -129,10 +153,19 @@ public class Smg extends Equippable implements Serializable{
     ammo--;
     sprite.startAnimation(0);
   }
-
+  /**
+  * Allow shooting to true
+  * @param p pointer relative to player
+  * @param player using smg
+  */
   public void attack(Point p, Player player){
     shooting = true;
   }
+  /**
+  * 2nd shooting method
+  * @param p pointer relative to player
+  * @param player using rifle
+  */
   public void attack2(Point p, Player player){}
 
   /**
