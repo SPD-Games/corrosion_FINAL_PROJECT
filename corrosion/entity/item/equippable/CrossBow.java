@@ -1,10 +1,10 @@
-/** Micheal Metzinger, Edward Pei
-  * December 13 2018
-  * gets the image for the crossbow, and draws it and allows it to shoot
-  */
+//Micheal Metzinger, Edward Pei, Henry Lim
+//Jan 15, 2019
+//CrossBow class
 
 package corrosion.entity.item.equippable;
 
+//Imports
 import javax.swing.Timer;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -24,20 +24,37 @@ import corrosion.entity.player.*;
 import corrosion.entity.item.Arrow;
 
 public class CrossBow extends Equippable{
-  public void attackOff(Player player){}
-  public void fromServer(){
-    sprite = new Sprite(icon, state, sprites, delay);
-  }
-  //TODO move all images and draw handling in Usable
+
+  //Image array vriables for animation
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[2][];;
   private final int[] SHOOT_READY = {0,3};
   private final int[] RELOAD_READY = {1,2};
 
+ /**
+ * Method not used for crossbow class
+ * @param player player using crossbow
+ */
+  public void attackOff(Player player){}
+
+  /**
+  *Sprite method for crossbow
+  */
+  public void fromServer(){
+    sprite = new Sprite(icon, state, sprites, delay);
+  }
+
+  /**
+  *Method to return icon
+  */
   public BufferedImage getIcon(){
     return icon;
   }
 
+  /**
+  * Method to check if state matches (reloaded)
+  * @return 1 or 0
+  */
   public String getInfo(){
     if (sprite.isState(SHOOT_READY, false)){
       return "1";
@@ -82,7 +99,9 @@ public class CrossBow extends Equippable{
    * @param p the player that has the crossbow equipped
   */
   public CrossBow(int[] state){
+    //Evoke consctructor in Equippable
     super(new Sprite(icon, state, sprites, new int[]{500,50}));
+    //Set boolean to false
     stackable = false;
   }
 
@@ -91,7 +110,9 @@ public class CrossBow extends Equippable{
    * @param p the player that has the crossbow equipped
   */
   public CrossBow(double xPos, double yPos, double rotation, long id){
+    //Evoke consctructor in Equippable
     super(xPos,yPos,rotation, id);
+    //Instantiate
     this.sprite = new Sprite(icon, new int[]{1,2}, sprites, new int[]{500,50});
   }
 
@@ -101,7 +122,9 @@ public class CrossBow extends Equippable{
   */
   public void drawEquipped(Graphics g, Player player){
     transform = player.getTransform();
+    //Shift original image
     transform.translate(-18, -110);
+    //Draw crossbow
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
@@ -124,6 +147,7 @@ public class CrossBow extends Equippable{
   * @param p the pointer position on the screen relative to the player
   */
   public void attack2(Point p, Player player){
+    //Evoke reload method
     reload();
   }
 

@@ -1,9 +1,9 @@
 //Edward Pei, Henry Lim
-//Dec 29, 2018
+//Jan 15, 2019
 //Orange class
 package corrosion.entity.item.equippable;
 
-//TODO: get apples to add health and stuff idk how to do this micheal dad help
+//imports
 
 import javax.swing.Timer;
 import java.awt.Graphics;
@@ -23,12 +23,15 @@ import corrosion.entity.player.*;
 
 public class Orange extends Equippable{
   public void attackOff(Player player){}
-    public void fromServer(){
-      sprite = new Sprite(icon, state, sprites, delay);
-    }
+
+  public void fromServer(){
+    sprite = new Sprite(icon, state, sprites, delay);
+  }
+
   public BufferedImage getIcon(){
     return icon;
   }
+  
   public String getInfo(){
     return stackSize + "";
   }
