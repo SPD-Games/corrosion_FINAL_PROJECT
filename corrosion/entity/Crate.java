@@ -57,11 +57,11 @@ public class Crate extends Entity{
   *Method to drop items after crate is broken
   */
   public void drop(){
-    if (Math.random() < 0.025) {
+    if (Math.random() < 0.04) {
       Sniper i = new Sniper(getXPos(), getYPos(), 0, Client.getId());
       i.sendItem();
     }
-    if (Math.random() < 0.03) {
+    if (Math.random() < 0.045) {
       Rifle i = new Rifle(getXPos(), getYPos(), 0, Client.getId());
       i.sendItem();
     }
@@ -78,10 +78,6 @@ public class Crate extends Entity{
     Bullet j = new Bullet(getXPos(), getYPos(), 0, Client.getId());
     j.addStack(new Bullet(30));
     j.sendItem();
-
-    Arrow k = new Arrow(getXPos(), getYPos(), 0, Client.getId());
-    k.addStack(new Arrow(5));
-    k.sendItem();
   }
 
   public Shape getHitBox(){

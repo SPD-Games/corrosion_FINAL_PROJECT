@@ -74,7 +74,7 @@ public class Barrel extends Entity{
       Pistol i = new Pistol(getXPos(), getYPos(), 0, Client.getId());
       i.sendItem();
     }
-    if (Math.random() < 0.3) {
+    if (Math.random() < 0.33) {
       Bandage i = new Bandage(getXPos(), getYPos(), 0, Client.getId());
       i.sendItem();
     }
