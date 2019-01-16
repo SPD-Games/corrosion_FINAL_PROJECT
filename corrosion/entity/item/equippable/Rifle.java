@@ -29,10 +29,18 @@ import corrosion.network.protocol.*;
 
 
 public class Rifle extends Equippable {
+  //boolean
   public boolean shooting = false;
+  /**
+  * Sprite method for rifle
+  */
   public void fromServer(){
     sprite = new Sprite(icon, state, sprites, delay);
   }
+  /**
+  * method for boolean shooting
+  * @param player using rifle
+  */
   public void attackOff(Player player){
     shooting = false;
   }
@@ -46,6 +54,10 @@ public class Rifle extends Equippable {
   private static final int[] RELOAD_DONE = {1,2};
   private int reloadTo = 30;
 
+  /**
+  * Method to ammo held
+  * @return ammo held
+  */
   public String getInfo(){
     return ammo + "";
   }
@@ -85,14 +97,18 @@ public class Rifle extends Equippable {
 
   /**
   * constuctor for the rifle
+  * @param state of sprite
   */
   public Rifle(int[] state){
     super(new Sprite(icon, state, sprites, new int[]{60,1250}));
     stackable = false;
   }
   /**
-   * Main Constructor
-   * @param p the player that has the crossbow equipped
+  * Constuctor
+  * @param x position
+  * @param y position
+  * @param r rotation applied
+  * @param id id number associated with the Equippable
   */
   public Rifle(double xPos, double yPos, double rotation, long id){
     super(xPos,yPos,rotation, id);
@@ -101,8 +117,10 @@ public class Rifle extends Equippable {
   /**
   * Draw the item
   * @param g the graphics tool used to draw
+  * @param player tusing rifle
   */
   public void drawEquipped(Graphics g, Player player){
+    //If ready for use
     if (player == null){return;}
     if (sprite.isState(SHOOT_READY, false)){
       if(shooting && ammo > 0){
@@ -112,13 +130,16 @@ public class Rifle extends Equippable {
       ammo = reloadTo;
       sprite.setState(SHOOT_READY[0], SHOOT_READY[1]);
     }
+    //Draw sprite
     transform = player.getTransform();
     transform.translate(-50, -140);
     ((Graphics2D)(g)).drawImage(sprite.getFrame(), transform, null);
   }
 
 
-
+  /**
+  * Shoot method
+  */
   public void shoot(){
     Point p = Mouse.getPosition();
     Player player = MainPlayer.getMainPlayer();
@@ -128,10 +149,20 @@ public class Rifle extends Equippable {
     ammo--;
     sprite.startAnimation(0);
   }
-
+  /**
+  * Allow shooting to true
+  * @param p pointer relative to player
+  * @param player using rifle
+  */
   public void attack(Point p, Player player){
     shooting = true;
   }
+
+  /**
+  * 2nd attack method
+  * @param p pointer relative to player
+  * @param player using rifle
+  */
   public void attack2(Point p, Player player){}
 
   /**
@@ -139,6 +170,7 @@ public class Rifle extends Equippable {
   */
   public void reload(){
     if (!sprite.isState(SHOOT_READY, false)){return;}
+    //If ammo not fully full
     if(ammo != MAX_AMMO){
       reloadTo = Math.min(MainPlayer.getMainPlayer().getInvetory().getAmount(new Bullet()) + ammo, MAX_AMMO);
       MainPlayer.getMainPlayer().getInvetory().removeItem(new Bullet(reloadTo-ammo));

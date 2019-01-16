@@ -16,7 +16,7 @@ import corrosion.Sprite;
 abstract public class Equippable extends Item implements Serializable{
   /**
    * Main Constructor
-   * @param p the player that has the equipable equipped
+   * @param s the player that has the equipable equipped
   */
   public Equippable(Sprite s){
     //Evoke constructor
@@ -25,7 +25,7 @@ abstract public class Equippable extends Item implements Serializable{
   }
   /**
    * Constructor
-   * @param p the player that has the equipable equipped
+   * @param state state of Equippable
   */
   public Equippable(int[] state){
     //Evoke constructor
@@ -49,12 +49,14 @@ abstract public class Equippable extends Item implements Serializable{
   /**
   * Draws the useable equipped to the player
   * @param g the graphics context
+  * @param player using equippable
   */
   abstract public void drawEquipped(Graphics g, Player player);
 
   /**
   * Uses the useable
   * @param p the point relative to the player the user clicked
+  * @param player using equippable
   */
   abstract public void attack(Point p, Player player);
 
@@ -67,12 +69,12 @@ abstract public class Equippable extends Item implements Serializable{
   /**
   * Uses the second function useable
   * @param p the point relative to the player the user clicked
+  * @param player using equippable
   */
   abstract public void attack2(Point p, Player player);
 
   /**
   * Reloads the usable
-  * @param p the point relative to the player the user clicked
   */
   abstract public void reload();
 }

@@ -4,6 +4,7 @@
 
 package corrosion.entity.item.equippable;
 
+//Imports
 import javax.swing.Timer;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -29,11 +30,20 @@ import corrosion.HitDetection;
 
 
 public class UpgradePlan extends Equippable{
+  /**
+  * attack Method
+  * @param player using upgrade plan
+  */
   public void attackOff(Player player){}
+
+  /**
+  * sprite method for upgrade plan
+  */
   public void fromServer(){
     sprite = new Sprite(icon, state, sprites, new int[]{0});
   }
-  //TODO move all images and draw handling in Usable
+
+  //sprite variables
   private static BufferedImage icon;
   private static BufferedImage[][] sprites = new BufferedImage[1][3];
   private static final int WOOD = 1;
@@ -56,9 +66,18 @@ public class UpgradePlan extends Equippable{
       System.exit(-1);
     }
   }
+  /**
+  * Method to return icon
+  * @return icon icon
+  */
   public BufferedImage getIcon(){
     return icon;
   }
+
+  /**
+  * return info Method
+  * @return info
+  */
   public String getInfo(){
     return "";
   }  /**
@@ -69,8 +88,8 @@ public class UpgradePlan extends Equippable{
   }
 
   /**
-   * Main Constructor
-   * @param p the player that has the crossbow equipped
+  * constuctor
+  * @param state of plan
   */
   public UpgradePlan(int[] state){
     super(new Sprite(icon, state, sprites, new int[]{0,0}));
@@ -78,8 +97,11 @@ public class UpgradePlan extends Equippable{
   }
 
   /**
-   * Main Constructor
-   * @param p the player that has the crossbow equipped
+  * Constuctor
+  * @param x position
+  * @param y position
+  * @param r rotation applied
+  * @param id id number associated with the Equippable
   */
   public UpgradePlan(double xPos, double yPos, double rotation, long id){
     super(xPos,yPos,rotation, id);
@@ -98,13 +120,15 @@ public class UpgradePlan extends Equippable{
   }
 
   /**
-  *
+  * attack method
   * @param p the pointer position on the screen relative to the player
+  * @param player using plan
   */
   public void attack(Point p, Player player){
     p = Mouse.getPointOnMap(p);
     Ellipse2D point = new Ellipse2D.Double(p.x-2.5, p.y-2.5, 5, 5);
     ArrayList<Entity> entities = Client.getEntities();
+    //Hit detection for entities and players
     for (int i = 0; i < entities.size(); ++i){
       Entity e = entities.get(i);
       if (e instanceof Wall){
@@ -114,7 +138,6 @@ public class UpgradePlan extends Equippable{
         }
       }
     }
-
     for (int i = 0; i < entities.size(); ++i){
       Entity e = entities.get(i);
       if (e instanceof Building){
@@ -127,8 +150,9 @@ public class UpgradePlan extends Equippable{
   }
 
   /**
-  *
+  * Attack method number 2
   * @param p the pointer position on the screen relative to the player
+  * @param player using plan
   */
   public void attack2(Point p, Player player){
     placeState = (placeState + 1) % 3;
@@ -136,7 +160,7 @@ public class UpgradePlan extends Equippable{
   }
 
   /**
-  *
+  *reload method
   */
   public void reload(){
     return;

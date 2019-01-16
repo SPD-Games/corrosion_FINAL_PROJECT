@@ -27,7 +27,14 @@ import corrosion.network.protocol.*;
 
 
 public class Sniper extends Equippable implements Serializable{
+  /**
+  * attack Method
+  * @param player using shotgun
+  */
   public void attackOff(Player player){}
+    /**
+    * Sprite method for rifle
+    */
     public void fromServer(){
       sprite = new Sprite(icon, state, sprites, delay);
     }
@@ -37,6 +44,10 @@ public class Sniper extends Equippable implements Serializable{
   private final int[] SHOOT_READY = {1,2};
   private final int[] RELOAD_READY = {0,2};
 
+  /**
+  * Return shooting state info
+  * @return String of state
+  */
   @Override
   public String getInfo(){
     if(sprite.isState(SHOOT_READY, false)){
@@ -67,16 +78,21 @@ public class Sniper extends Equippable implements Serializable{
     }
 
   /**
-  * constuctor for the rifle
+  * constuctor for the sniper
   */
   public Sniper(){
     this(new int[]{0,2});
   }
+  /**
+  * method to return icon
+  * @return icon
+  */
   public BufferedImage getIcon(){
     return icon;
   }
   /**
   * constuctor for the rifle
+  * @param state of sniper
   */
   public Sniper(int[] state){
     super(new Sprite(icon, state, sprites, new int[]{50, 1000}));
@@ -84,8 +100,11 @@ public class Sniper extends Equippable implements Serializable{
   }
 
   /**
-   * Main Constructor
-   * @param p the player that has the crossbow equipped
+  * Constuctor
+  * @param x position
+  * @param y position
+  * @param r rotation applied
+  * @param id id number associated with the Equippable
   */
   public Sniper(double xPos, double yPos, double rotation, long id){
     super(xPos,yPos,rotation, id);
@@ -95,6 +114,7 @@ public class Sniper extends Equippable implements Serializable{
   /**
   * Draw the item
   * @param g the graphics tool used to draw
+  * @param player using sniper
   */
   public void drawEquipped(Graphics g, Player player){
     if (player == null){return;}
@@ -105,7 +125,11 @@ public class Sniper extends Equippable implements Serializable{
 
 
 
-
+  /**
+  * method shooting
+  * @param p pointer relative to player
+  * @param player using sniper
+  */
   public void attack(Point p, Player player){
     if (sprite.isState(SHOOT_READY, false)){
       //creates a new bullet
@@ -114,6 +138,12 @@ public class Sniper extends Equippable implements Serializable{
       sprite.startAnimation(0);
     }
   }
+
+  /**
+  * reload method
+  * @param p pointer relative to player
+  * @param player using sniper
+  */
   public void attack2(Point p, Player player){
     reload();
   }

@@ -134,6 +134,7 @@ public class BuildingPlan extends Equippable{
   /**
   * Draws a BuildPlan equipped to the player
   * @param g the graphics context
+  * @param player using plan
   */
   public void drawEquipped(Graphics g, Player player){
     transform = player.getTransform();
@@ -175,6 +176,7 @@ public class BuildingPlan extends Equippable{
 
   /**
   * Reload method
+  * @return
   */
   public void reload(){
     return;

@@ -149,6 +149,7 @@ public class Bandage extends Equippable{
   /**
   * Unused method (bandage class cannot attack)
   * @param p the pointer position on the screen relative to the player
+  * @param player using bandage
   */
   public void attack2(Point p, Player player){}
 
