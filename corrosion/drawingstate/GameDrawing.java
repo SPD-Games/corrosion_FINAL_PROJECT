@@ -254,7 +254,6 @@ public class GameDrawing extends DrawingState{
       MainPlayer.getMainPlayer().setDown(false);
       MainPlayer.getMainPlayer().setRight(false);
       MainPlayer.getMainPlayer().setLeft(false);
-
     }
 
   }
