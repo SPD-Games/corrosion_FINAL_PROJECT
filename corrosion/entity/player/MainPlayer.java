@@ -66,20 +66,14 @@ public class MainPlayer extends Player{
 
     public void spawn(){
       hp = 50;
-      int i = ThreadLocalRandom.current().nextInt(0, 4);
+      int i = ThreadLocalRandom.current().nextInt(0, 2);
       if (i == 0){
         yPos = 750;
         xPos = ThreadLocalRandom.current().nextInt(1500, 18200);
       } else if (i == 1){
-        yPos = 19300;
-        xPos = ThreadLocalRandom.current().nextInt(1000, 19100);
-      } else if (i == 2){
         xPos = 750;
         yPos = ThreadLocalRandom.current().nextInt(1800, 19300);
-      } else if (i == 3){
-        xPos = 19300;
-        yPos = ThreadLocalRandom.current().nextInt(2200, 18600);
-      }
+      } 
       inventory = new Inventory();
     }
 
