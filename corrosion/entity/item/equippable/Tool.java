@@ -132,6 +132,7 @@ public class Tool extends Equippable{
       Entity e = entities.get(i);
       if (e == this){continue;}
       if (HitDetection.hit(e.getHitBox(), getSwingHitBox())){
+        e.hit(damage);
         Protocol.send(8 ,new HitMarker(getXPos(),getYPos(), "-"+damage), Client.getConnection());
         hit();
         return;
