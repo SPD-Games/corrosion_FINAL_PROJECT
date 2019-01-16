@@ -37,10 +37,10 @@ public class Triangle extends Building {
   */
   public static void init(){
     try{
-      sprites[0][0] = ImageIO.read(new File("sprites/triangle/twigTriangle.png"));
-      sprites[0][1] = ImageIO.read(new File("sprites/triangle/woodTriangle.png"));
-      sprites[0][2] = ImageIO.read(new File("sprites/triangle/stoneTriangle.png"));
-      sprites[0][3] = ImageIO.read(new File("sprites/triangle/metalTriangle.png"));
+      sprites[0][0] = ImageIO.read(Triangle.class.getResourceAsStream("/sprites/triangle/twigTriangle.png"));
+      sprites[0][1] = ImageIO.read(Triangle.class.getResourceAsStream("/sprites/triangle/woodTriangle.png"));
+      sprites[0][2] = ImageIO.read(Triangle.class.getResourceAsStream("/sprites/triangle/stoneTriangle.png"));
+      sprites[0][3] = ImageIO.read(Triangle.class.getResourceAsStream("/sprites/triangle/metalTriangle.png"));
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading triangle Sprite: " + e);

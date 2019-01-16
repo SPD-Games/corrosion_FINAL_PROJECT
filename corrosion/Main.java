@@ -6,7 +6,8 @@
       corrosion.drawingstate.TextBoxG says in the top
 
       create a jar file
-
+      arrow down for
+      ENTERCLASSHERE.class.getResourceAsStream("/sprites/upgradeplan/icon.png")
       server.java needs comments
   */
 

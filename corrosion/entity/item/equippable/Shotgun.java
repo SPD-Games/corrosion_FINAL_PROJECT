@@ -45,12 +45,12 @@ public class Shotgun extends Equippable {
 
     try{
       //loads icon
-      icon = ImageIO.read(new File("sprites/shotgun/icon.png"));
-      sprites[0][1] = ImageIO.read(new File("sprites/shotgun/animation/frame" + 2 + ".png"));
-      sprites[0][2] = ImageIO.read(new File("sprites/shotgun/animation/frame" + 1 + ".png"));
+      icon = ImageIO.read(Shotgun.class.getResourceAsStream("/sprites/shotgun/icon.png"));
+      sprites[0][1] = ImageIO.read(Shotgun.class.getResourceAsStream("/sprites/shotgun/animation/frame" + 2 + ".png"));
+      sprites[0][2] = ImageIO.read(Shotgun.class.getResourceAsStream("/sprites/shotgun/animation/frame" + 1 + ".png"));
       sprites[0][0] = sprites[0][2];
       sprites[1][0] = sprites[0][2];
-      sprites[1][1] = ImageIO.read(new File("sprites/shotgun/animation/frame" + 3 + ".png"));
+      sprites[1][1] = ImageIO.read(Shotgun.class.getResourceAsStream("/sprites/shotgun/animation/frame" + 3 + ".png"));
       sprites[1][2] = sprites[0][2];
       for (int i = 0; i < 3; ++i){
         sprites[2][i] = sprites[0][2];

@@ -51,9 +51,9 @@ public class Sniper extends Equippable implements Serializable{
 
       try{
         //loads icon
-        icon = ImageIO.read(new File("sprites/sniper/icon.png"));
-        sprites[0][1] = ImageIO.read(new File("sprites/sniper/animation/frame" + 2 + ".png"));
-        sprites[0][2] = ImageIO.read(new File("sprites/sniper/animation/frame" + 1 + ".png"));
+        icon = ImageIO.read(Sniper.class.getResourceAsStream("/sprites/sniper/icon.png"));
+        sprites[0][1] = ImageIO.read(Sniper.class.getResourceAsStream("/sprites/sniper/animation/frame" + 2 + ".png"));
+        sprites[0][2] = ImageIO.read(Sniper.class.getResourceAsStream("/sprites/sniper/animation/frame" + 1 + ".png"));
         sprites[0][0] = sprites[0][2];
 
         sprites[1][0] = sprites[0][2];

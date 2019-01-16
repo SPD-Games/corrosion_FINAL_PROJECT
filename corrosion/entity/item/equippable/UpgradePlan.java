@@ -46,10 +46,10 @@ public class UpgradePlan extends Equippable{
   */
   public static void init(){
     try{
-      sprites[0][0] = ImageIO.read(new File("sprites/upgradeplan/upgradePlan" + 1 + ".png"));
-      sprites[0][1] = ImageIO.read(new File("sprites/upgradeplan/upgradePlan" + 2 + ".png"));
-      sprites[0][2] = ImageIO.read(new File("sprites/upgradeplan/upgradePlan" + 3 + ".png"));
-      icon = ImageIO.read(new File("sprites/upgradeplan/icon.png"));
+      for (int i = 0; i < 3; ++i){
+        sprites[0][i] = ImageIO.read(UpgradePlan.class.getResourceAsStream("/sprites/upgradeplan/upgradePlan" + (i+1) + ".png"));
+      }
+      icon = ImageIO.read(UpgradePlan.class.getResourceAsStream("/sprites/upgradeplan/icon.png"));
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading UpgradePlan Sprite: " + e);

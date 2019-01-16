@@ -44,11 +44,11 @@ public class Apple extends Equippable{
   public static void init(){
     try{
       //loads icon
-      icon = ImageIO.read(new File("sprites/apple/icon.png"));
+      icon = ImageIO.read(Apple.class.getResourceAsStream("/sprites/apple/icon.png"));
       //loads eating animations
       sprites[0] = new BufferedImage[4];
       for (int i = 1; i <= 4; ++i){
-        sprites[0][i-1] = ImageIO.read(new File("sprites/apple/animation/frame" + i + ".png"));
+        sprites[0][i-1] = ImageIO.read(Apple.class.getResourceAsStream("/sprites/apple/animation/frame" + i + ".png"));
       }
     }catch(Exception e){
       //exits on error with message

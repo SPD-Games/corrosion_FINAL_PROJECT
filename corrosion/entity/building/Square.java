@@ -35,10 +35,10 @@ public class Square extends Building {
   */
   public static void init(){
     try{
-      sprites[0][0] = ImageIO.read(new File("sprites/square/twigSquare.png"));
-      sprites[0][1] = ImageIO.read(new File("sprites/square/woodSquare.png"));
-      sprites[0][2] = ImageIO.read(new File("sprites/square/stoneSquare.png"));
-      sprites[0][3] = ImageIO.read(new File("sprites/square/metalSquare.png"));
+      sprites[0][0] = ImageIO.read(Square.class.getResourceAsStream("/sprites/square/twigSquare.png"));
+      sprites[0][1] = ImageIO.read(Square.class.getResourceAsStream("/sprites/square/woodSquare.png"));
+      sprites[0][2] = ImageIO.read(Square.class.getResourceAsStream("/sprites/square/stoneSquare.png"));
+      sprites[0][3] = ImageIO.read(Square.class.getResourceAsStream("/sprites/square/metalSquare.png"));
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading square Sprite: " + e);

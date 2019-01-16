@@ -58,12 +58,12 @@ public class BuildingPlan extends Equippable{
   public static void init(){
     try{
       //Image for the four types of build shape modes
-      sprites[0][0] = ImageIO.read(new File("sprites/buildingplan/BuildingPlan" + 1 + ".png"));
-      sprites[0][1] = ImageIO.read(new File("sprites/buildingplan/BuildingPlan" + 2 + ".png"));
-      sprites[0][2] = ImageIO.read(new File("sprites/buildingplan/BuildingPlan" + 3 + ".png"));
-      sprites[0][3] = ImageIO.read(new File("sprites/buildingplan/BuildingPlan" + 4 + ".png"));
+      for (int i = 0; i < 4;++i){
+        sprites[0][i] = ImageIO.read(BuildingPlan.class.getResourceAsStream("/sprites/buildingplan/BuildingPlan" + (i+1) + ".png"));
+      }
+
       //Load icon image
-      icon =  ImageIO.read(new File("sprites/buildingplan/icon.png"));
+      icon =  ImageIO.read(BuildingPlan.class.getResourceAsStream("/sprites/buildingplan/icon.png"));
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading BuildingPlan Sprite: " + e);

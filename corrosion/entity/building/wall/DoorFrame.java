@@ -35,15 +35,14 @@ public class DoorFrame extends Wall {
   */
   public static void init(){
     try{
-      sprites[0][0] = ImageIO.read(new File("sprites/doorframe/twigFrame.png"));
-      sprites[0][1] = ImageIO.read(new File("sprites/doorframe/woodFrame.png"));
-      sprites[0][2] = ImageIO.read(new File("sprites/doorframe/stoneFrame.png"));
-      sprites[0][3] = ImageIO.read(new File("sprites/doorframe/metalFrame.png"));
-
-      sprites[1][0] = ImageIO.read(new File("sprites/doorframe/twigOpen.png"));
-      sprites[1][1] = ImageIO.read(new File("sprites/doorframe/woodOpen.png"));
-      sprites[1][2] = ImageIO.read(new File("sprites/doorframe/stoneOpen.png"));
-      sprites[1][3] = ImageIO.read(new File("sprites/doorframe/metalOpen.png"));
+      sprites[0][0] = ImageIO.read(DoorFrame.class.getResourceAsStream("/sprites/doorframe/metalFrame.png"));
+      sprites[0][1] = ImageIO.read(DoorFrame.class.getResourceAsStream("/sprites/doorframe/woodFrame.png"));
+      sprites[0][2] = ImageIO.read(DoorFrame.class.getResourceAsStream("/sprites/doorframe/stoneFrame.png"));
+      sprites[0][3] = ImageIO.read(DoorFrame.class.getResourceAsStream("/sprites/doorframe/metalFrame.png"));
+      sprites[1][0] = ImageIO.read(DoorFrame.class.getResourceAsStream("/sprites/doorframe/twigOpen.png"));
+      sprites[1][1] = ImageIO.read(DoorFrame.class.getResourceAsStream("/sprites/doorframe/woodOpen.png"));
+      sprites[1][2] = ImageIO.read(DoorFrame.class.getResourceAsStream("/sprites/doorframe/stoneOpen.png"));
+      sprites[1][3] = ImageIO.read(DoorFrame.class.getResourceAsStream("/sprites/doorframe/metalOpen.png.png"));
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading DoorFrame Sprite: " + e);

@@ -31,7 +31,7 @@ public class Orange extends Equippable{
   public BufferedImage getIcon(){
     return icon;
   }
-  
+
   public String getInfo(){
     return stackSize + "";
   }
@@ -41,13 +41,12 @@ public class Orange extends Equippable{
   public static void init(){
     try{
       //loads icon
-
-      icon = ImageIO.read(new File("sprites/orange/icon.png"));
+      icon = ImageIO.read(Orange.class.getResourceAsStream("/sprites/orange/icon.png"));
 
       //loads eating animations
       sprites[0] = new BufferedImage[2];
       for (int i = 1; i <= 2; ++i){
-        sprites[0][i-1] = ImageIO.read(new File("sprites/orange/animation/frame" + i + ".png"));
+        sprites[0][i-1] = ImageIO.read(Orange.class.getResourceAsStream("/sprites/orange/animation/frame" + i + ".png"));
       }
     }catch(Exception e){
       //exits on error with message

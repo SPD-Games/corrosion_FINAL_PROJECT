@@ -38,13 +38,12 @@ public class Medkit extends Equippable{
   public static void init(){
     try{
       //loads icon
-
-      icon = ImageIO.read(new File("sprites/medkit/icon.png"));
+      icon = ImageIO.read(Medkit.class.getResourceAsStream("/sprites/medkit/icon.png"));
 
       //loads eating animations
       sprites[0] = new BufferedImage[2];
       for (int i = 1; i <= 1; ++i){
-        sprites[0][i-1] = ImageIO.read(new File("sprites/medkit/animation/frame" + i + ".png"));
+        sprites[0][i-1] = ImageIO.read(Medkit.class.getResourceAsStream("/sprites/medkit/animation/frame" + i + ".png"));
       }
     }catch(Exception e){
       //exits on error with message

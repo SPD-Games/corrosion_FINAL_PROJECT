@@ -56,10 +56,11 @@ public class Rifle extends Equippable {
 
       try{
         //loads icon
-        icon = ImageIO.read(new File("sprites/rifle/icon.png"));
+
+        icon = ImageIO.read(Rifle.class.getResourceAsStream("/sprites/rifle/icon.png"));
         sprites[0] = new BufferedImage[5];
-        sprites[0][1] = ImageIO.read(new File("sprites/rifle/animation/frame" + 2 + ".png"));
-        sprites[0][2] = ImageIO.read(new File("sprites/rifle/animation/frame" + 1 + ".png"));
+        sprites[0][1] = ImageIO.read(Rifle.class.getResourceAsStream("/sprites/rifle/animation/frame" + 2 + ".png"));
+        sprites[0][2] = ImageIO.read(Rifle.class.getResourceAsStream("/sprites/rifle/animation/frame" + 1 + ".png"));
         sprites[0][0] = sprites[0][2];
         sprites[0][3] = sprites[0][2];
         sprites[0][4] = sprites[0][2];

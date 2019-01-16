@@ -37,10 +37,10 @@ public class Wall extends Building {
   */
   public static void init(){
     try{
-      sprites[0][0] = ImageIO.read(new File("sprites/wall/twigWall.png"));
-      sprites[0][1] = ImageIO.read(new File("sprites/wall/woodWall.png"));
-      sprites[0][2] = ImageIO.read(new File("sprites/wall/stoneWall.png"));
-      sprites[0][3] = ImageIO.read(new File("sprites/wall/metalWall.png"));
+      sprites[0][0] = ImageIO.read(Wall.class.getResourceAsStream("/sprites/wall/twigWall.png"));
+      sprites[0][1] = ImageIO.read(Wall.class.getResourceAsStream("/sprites/wall/woodWall.png"));
+      sprites[0][2] = ImageIO.read(Wall.class.getResourceAsStream("/sprites/wall/stoneWall.png"));
+      sprites[0][3] = ImageIO.read(Wall.class.getResourceAsStream("/sprites/wall/metalWall.png"));
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading wall Sprite: " + e);

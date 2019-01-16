@@ -35,11 +35,11 @@ public class Tool extends Equippable{
   public static void init(){
     try{
       //loads icon
-      icon = ImageIO.read(new File("sprites/club/icon.png"));
+      icon = ImageIO.read(Tool.class.getResourceAsStream("/sprites/club/icon.png"));
       //loads relaod animations
       sprites[0] = new BufferedImage[6];
       for (int i = 1; i <= 5; ++i){
-        sprites[0][i-1] = ImageIO.read(new File("sprites/club/animation/frame" + i + ".png"));
+        sprites[0][i-1] = ImageIO.read(Tool.class.getResourceAsStream("/sprites/club/animation/frame" + i + ".png"));
       }
       sprites[0][5] = sprites[0][0];
 

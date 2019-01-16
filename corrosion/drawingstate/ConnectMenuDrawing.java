@@ -92,10 +92,9 @@ public class ConnectMenuDrawing extends DrawingState{
 
       try {
             //sets sprite image
-            connectImage = ImageIO.read(new File("sprites/menuicons/ConnectBtn.png"));
-            backImg = ImageIO.read(new File("sprites/menuicons/MenuBackgrounds.jpg"));
-            logoImg = ImageIO.read(new File("sprites/menuicons/logoV1.png"));
-
+            connectImage = ImageIO.read(ConnectMenuDrawing.class.getResourceAsStream("/sprites/menuicons/ConnectBtn.png"));
+            backImg = ImageIO.read(ConnectMenuDrawing.class.getResourceAsStream("/sprites/menuicons/MenuBackgrounds.jpg"));
+            logoImg = ImageIO.read(ConnectMenuDrawing.class.getResourceAsStream("/sprites/menuicons/logoV1.png"));
           } catch(Exception e) {
             //exits on error with message
             System.out.println("Logo load error: " + e);

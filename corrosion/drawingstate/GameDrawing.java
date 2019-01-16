@@ -89,7 +89,7 @@ public class GameDrawing extends DrawingState{
     //load deathScreen image
     try{
       //sets sprite image
-      img = ImageIO.read(new File("sprites/deathScreen.png"));
+      img = ImageIO.read(GameDrawing.class.getResourceAsStream("/sprites/deathScreen.png"));
     }catch(Exception e){
       //exits on error with message
       System.out.println("Reading error: " + e);

@@ -56,10 +56,10 @@ public class Smg extends Equippable implements Serializable{
 
       try{
         //loads icon
-        icon = ImageIO.read(new File("sprites/smg/icon.png"));
+        icon = ImageIO.read(Smg.class.getResourceAsStream("/sprites/smg/icon.png"));
         sprites[0] = new BufferedImage[5];
-        sprites[0][1] = ImageIO.read(new File("sprites/smg/animation/frame" + 2 + ".png"));
-        sprites[0][2] = ImageIO.read(new File("sprites/smg/animation/frame" + 1 + ".png"));
+        sprites[0][1] = ImageIO.read(Smg.class.getResourceAsStream("/sprites/smg/animation/frame" + 2 + ".png"));
+        sprites[0][2] = ImageIO.read(Smg.class.getResourceAsStream("/sprites/smg/animation/frame" + 1 + ".png"));
         sprites[0][0] = sprites[0][2];
         sprites[0][3] = sprites[0][2];
         sprites[0][4] = sprites[0][2];
@@ -69,7 +69,7 @@ public class Smg extends Equippable implements Serializable{
         sprites[1][2] = sprites[0][2];
       }catch(Exception e){
         //exits on error with message
-        System.out.println("Reading rifle Sprite: " + e);
+        System.out.println("Reading smg Sprite: " + e);
         System.exit(-1);
       }
     }

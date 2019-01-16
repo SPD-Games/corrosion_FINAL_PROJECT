@@ -8,4 +8,4 @@ Main-Class: Main
 
 //
 
-jar cvfm out.jar MAINIFEST.mf *.class drawingstate/*.class ...
+jar cvfm out.jar MAINIFEST.mf

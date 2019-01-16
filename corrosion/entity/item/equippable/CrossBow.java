@@ -68,11 +68,11 @@ public class CrossBow extends Equippable{
   public static void init(){
     try{
       //loads icon
-      icon = ImageIO.read(new File("sprites/crossbow/icon.png"));
+      icon = ImageIO.read(CrossBow.class.getResourceAsStream("/sprites/crossbow/icon.png"));
       //loads relaod animations
       sprites[0] = new BufferedImage[4];
       for (int i = 1; i <= 4; ++i){
-        sprites[0][i-1] = ImageIO.read(new File("sprites/crossbow/animation/frame" + i + ".png"));
+        sprites[0][i-1] = ImageIO.read(CrossBow.class.getResourceAsStream("/sprites/crossbow/animation/frame" + i + ".png"));
       }
 
       //loads shooting animations

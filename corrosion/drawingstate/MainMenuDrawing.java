@@ -68,10 +68,9 @@ public class MainMenuDrawing extends DrawingState{
 
       try {
         //sets sprite image
-        logoImg = ImageIO.read(new File("sprites/menuicons/logoV1.png"));
-        PlayBtnImage = ImageIO.read(new File("sprites/menuicons/PlayBtn.png"));
-        backImg = ImageIO.read(new File("sprites/menuicons/MenuBackgrounds.jpg"));
-
+	      logoImg = ImageIO.read(MainMenuDrawing.class.getResourceAsStream("/sprites/menuicons/logoV1.png"));
+        PlayBtnImage = ImageIO.read(MainMenuDrawing.class.getResourceAsStream("/sprites/menuicons/PlayBtn.png"));
+	      backImg = ImageIO.read(MainMenuDrawing.class.getResourceAsStream("/sprites/menuicons/MenuBackgrounds.jpg"));
       } catch(Exception e) {
         //exits on error with message
         System.out.println("Image load error: " + e);

@@ -59,13 +59,12 @@ public class Bandage extends Equippable{
   public static void init(){
     try{
       //loads icon
-
-      icon = ImageIO.read(new File("sprites/bandage/icon.png"));
+      icon = ImageIO.read(Bandage.class.getResourceAsStream("/sprites/bandage/icon.png"));
 
       //loads eating animations
       sprites[0] = new BufferedImage[2];
       for (int i = 1; i <= 1; ++i){
-        sprites[0][i-1] = ImageIO.read(new File("sprites/bandage/animation/frame" + i + ".png"));
+        sprites[0][i-1] = ImageIO.read(Bandage.class.getResourceAsStream("/sprites/bandage/animation/frame" + i + ".png"));
       }
     }catch(Exception e){
       //exits on error with message
