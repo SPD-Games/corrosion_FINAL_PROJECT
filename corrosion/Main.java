@@ -4,13 +4,12 @@
   * TODO:
       REMARKS after corrosion.entity.item
 
-      fix medkits and bandages drops
-
       corrosion.drawingstate.TextBoxG says in the top
 
       create a jar file
 
       bind/use.java needs comments ... idk what the heck it does
+      server.java needs comments
   */
 
 package corrosion;

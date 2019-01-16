@@ -36,6 +36,10 @@ public class Server{
   private long nextPlayerId = 1000000000000l;
   private final Object nextPlayerIdLock = new Object();
 
+  /**
+  * add an entity
+  * @param e the entity to add
+  */
   public static void addEntity(Entity e){
     server.newEntities.add(e);
     synchronized (server.activeEntities){
@@ -48,6 +52,10 @@ public class Server{
     }
   }
 
+  /**
+  * remove an entity
+  * @param e the entity to add
+  */
   public static void removeEntity(Entity e){
     synchronized(server.newEntities){
       server.newEntities.remove(e);
@@ -110,6 +118,11 @@ public class Server{
     }
   }
 
+  /**
+  * hit the player
+  * @param id the id of player/item
+  * @param damage the damage that is dealt
+  */
   public static void hitPlayer(long id, int damage){
     ArrayList out = new ArrayList();
     for (int iClient = 0; iClient < server.clients.size(); ++iClient){
@@ -166,6 +179,11 @@ public class Server{
   //sends new data to clients 64 times a second
   private Timer sendTimer = new Timer(1000/64, sendLoopListener);
 
+  /**
+  * hit the player
+  * @param p the id of player/item
+  * @param from the damage that is dealt
+  */
   public static void forwardProjectiles(Projectile p, Connection from){
     for (int i = 0; i < server.clients.size(); ++i){
       Connection c = server.clients.get(i);
@@ -260,8 +278,12 @@ public class Server{
     }
   }
 
+  /**
+  * load entities like crates and barrels trees/rocks
+  */
   public void loadEntities(){
     try {
+      // load the crate data
       File file = new File("data/Crates.txt");
       Scanner input = new Scanner(file);
       double xPos, yPos;
@@ -278,6 +300,7 @@ public class Server{
       }
     }
     try {
+      //load the barrel data
       File file = new File("data/Barrels.txt");
       Scanner input = new Scanner(file);
       double xPos, yPos;
@@ -294,6 +317,7 @@ public class Server{
       }
     }
     try {
+      //load the tree and rock data
       File file = new File("data/TreesRocks.txt");
       Scanner input = new Scanner(file);
       double xPos, yPos;
