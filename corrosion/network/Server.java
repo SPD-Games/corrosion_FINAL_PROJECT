@@ -41,12 +41,17 @@ public class Server{
   * @param e the entity to add
   */
   public static void addEntity(Entity e){
+    //add a  entity that needs to be sent to other players
     server.newEntities.add(e);
     synchronized (server.activeEntities){
+      //add to active entities
       int i = server.activeEntities.indexOf(e);
+      //checks if entity is not already in the list
       if (i == -1){
+        //add the entity
         server.activeEntities.add(e);
       } else {
+        //change the active entity
         server.activeEntities.set(i, e);
       }
     }
@@ -57,31 +62,42 @@ public class Server{
   * @param e the entity to add
   */
   public static void removeEntity(Entity e){
+    //removes the entity from new entities
     synchronized(server.newEntities){
       server.newEntities.remove(e);
     }
+    //removes the entity from active entities
     synchronized(server.activeEntities){
       server.activeEntities.remove(e);
     }
+    //add the entity to be in the list that send out to all clients informing the removal of the entity
     synchronized(server.disposeEntities){
       server.disposeEntities.add(e);
     }
     class Wait extends Thread{
       Entity entity;
+      /**
+      * Main Constructor
+      */
       public Wait(Entity entity){
         this.entity = entity;
       }
+      /**
+      * Waits for 5 minutes then respawns
+      */
       public void run(){
         try{
-          //wait 10 minutes before respawning
+          //wait 5 minutes
           Thread.sleep(5*60*1000);
         } catch (Exception e){
 
         }
+        //respawn
         addEntity(entity);
       }
     }
 
+    //checks if the entity being removed is a respawnable item
     if (e instanceof Barrel){
       e = new Barrel(e.getXPos(),e.getYPos(),e.getRotation(),e.getId());
     } else if (e instanceof Crate){
@@ -93,6 +109,7 @@ public class Server{
     } else {
       return;
     }
+    //respawns the entity in 5 minutes
     new Wait(e).start();
   }
 
@@ -125,9 +142,12 @@ public class Server{
   */
   public static void hitPlayer(long id, int damage){
     ArrayList out = new ArrayList();
+    //iterates through all players
     for (int iClient = 0; iClient < server.clients.size(); ++iClient){
       Connection c = server.clients.get(iClient);
+      //checks if the id of the damaged player is the same as the client
       if (c.id == id){
+        //send to client
         Protocol.send(11, damage, c);
         return;
       }
@@ -142,20 +162,28 @@ public class Server{
     * Send all new data to the server
     */
     public void actionPerformed(ActionEvent arg0) {
+      //iterates through all new intities
       while (newEntities.size() != 0){
+        //iterates through all clients
           for (int iClient = 0; iClient < clients.size(); ++ iClient){
+            //send data to client
             Connection c = clients.get(iClient);
             Entity e = newEntities.get(0);
             Protocol.send(9, e, c);
         }
+        //remove entity from list
         newEntities.remove(0);
       }
+      //iterates through all entities
       while (disposeEntities.size() != 0){
+          //iterates through all clients
           for (int iClient = 0; iClient < clients.size(); ++ iClient){
+            //sends data to all clients
             Connection c = clients.get(iClient);
             Entity e = disposeEntities.get(0);
             Protocol.send(13, e, c);
           }
+          //remove entity from list
           disposeEntities.remove(0);
         }
 
@@ -185,9 +213,12 @@ public class Server{
   * @param from the damage that is dealt
   */
   public static void forwardProjectiles(Projectile p, Connection from){
+    //iterates through all clients
     for (int i = 0; i < server.clients.size(); ++i){
       Connection c = server.clients.get(i);
+      //check if the client isnt the one originaly sending the projectile
       if (c.id != from.id){
+        //sent the projectile
         Protocol.send(7,p,c);
       }
     }
@@ -272,7 +303,9 @@ public class Server{
   * @param c the connection to send the data to
   */
   public void newClient(Connection c){
+    //send client their id
     Protocol.send(4, c.id, c);
+    //send client all the active entities
     for (int iEntity = 0; iEntity < activeEntities.size(); ++iEntity){
       Protocol.send(9,activeEntities.get(iEntity),c);
     }
@@ -287,9 +320,12 @@ public class Server{
       File file = new File("data/Crates.txt");
       Scanner input = new Scanner(file);
       double xPos, yPos;
+      //loop through file
       while (input.hasNextLine()){
+        //read input
         xPos = input.nextDouble();
         yPos = input.nextDouble();
+        //create new crate
         addEntity(new Crate(xPos, yPos, 0, getId()));
       }
       input.close();
@@ -304,9 +340,12 @@ public class Server{
       File file = new File("data/Barrels.txt");
       Scanner input = new Scanner(file);
       double xPos, yPos;
+      //loop through file
       while (input.hasNextLine()){
+        //read data
         xPos = input.nextDouble();
         yPos = input.nextDouble();
+        //create new barrel
         addEntity(new Barrel(xPos, yPos, 0, getId()));
       }
       input.close();
@@ -321,14 +360,19 @@ public class Server{
       File file = new File("data/TreesRocks.txt");
       Scanner input = new Scanner(file);
       double xPos, yPos;
+      //loop through file
       while (input.hasNextLine()){
+        //read data
         xPos = input.nextDouble();
         yPos = input.nextDouble();
+        //determine if it sould be a rock or a tree (10% rock, 90% tree)
         Random rand = new Random();
         int n = rand.nextInt(100);
         if (n > 10){
+          //add new tree
           addEntity(new Tree(xPos, yPos, 0, getId()));
         } else {
+          //add new rock
           addEntity(new Rock(xPos, yPos, 0, getId()));
         }
       }
