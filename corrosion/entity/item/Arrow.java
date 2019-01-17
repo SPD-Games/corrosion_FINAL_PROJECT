@@ -93,4 +93,3 @@ public class Arrow extends Item{
     sprite = new Sprite(icon, null, null, null);
   }
 }
-*

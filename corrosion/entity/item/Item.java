@@ -72,7 +72,6 @@ abstract public class Item extends Entity implements Serializable{
   * Method to add to stack
   * @param i
   */
-  }
   public void addStack(Item i){
     stackSize += i.getStackSize();
   }

@@ -1,22 +1,18 @@
 /** Micheal Metzinger
   * December 13 2018
   * Runs the game
-  * TODO:
-    writing to data File?
-    recursion?
-    Encapsulate the final program to include an intro screen, application, and credits screen using the JOptionPane function or Multiple Windows.
-
   */
 
 package corrosion;
 
 import corrosion.Window;
-
+import javax.swing.JOptionPane;
 public class Main {
   /**
   * Initializes the graphic settings
   */
   public static void init() {
+    JOptionPane.showMessageDialog(null, "Corrosion - Made by Michael Metzinger, Eddie Pei, and Henry Lim");
     System.setProperty("sun.java2d.opengl", "true");
   }
 
