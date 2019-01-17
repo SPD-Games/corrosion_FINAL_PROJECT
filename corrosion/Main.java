@@ -3,6 +3,8 @@
   * Runs the game
   */
 
+// GAME REQUIRES JDK V.11
+
 package corrosion;
 
 import corrosion.Window;
