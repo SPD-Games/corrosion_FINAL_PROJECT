@@ -13,7 +13,7 @@ public class Main {
   */
   public static void init() {
     JOptionPane.showMessageDialog(null, "Corrosion - Made by Michael Metzinger, Eddie Pei, and Henry Lim");
-    System.setProperty("sun.java2d.opengl", "true");
+    //System.setProperty("sun.java2d.opengl", "true");
   }
 
   /**
